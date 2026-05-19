@@ -37,6 +37,8 @@ const copy = {
     language: 'EN',
     nav: ['Tổng quan', 'Hệ sinh thái', 'Open source', 'Tải ISO'],
     heroBadge: 'Open Beta 1.0.1 · Linux Mint 22.3 Cinnamon · GPL-3.0',
+    seoTitle: 'CaramOS — bản phân phối Linux cho người dùng Việt Nam',
+    seoDescription: 'CaramOS là bản phân phối Linux dựa trên Linux Mint 22.3 Cinnamon và Ubuntu 24.04 LTS, tập trung vào cấu hình tiếng Việt, bộ gõ, ứng dụng địa phương và quy trình build ISO công khai.',
     heroTitle: 'CaramOS — bản phân phối Linux cho người dùng Việt Nam',
     heroLead:
       'CaramOS là bản phân phối dựa trên Linux Mint 22.3 Cinnamon và Ubuntu 24.04 LTS. Dự án tập trung vào cấu hình tiếng Việt mặc định, bộ gõ, bộ ứng dụng phổ biến tại Việt Nam và quy trình build ISO công khai.',
@@ -93,6 +95,8 @@ const copy = {
     language: 'VI',
     nav: ['Overview', 'Ecosystem', 'Open source', 'Download'],
     heroBadge: 'Open Beta 1.0.1 · Linux Mint 22.3 Cinnamon · GPL-3.0',
+    seoTitle: 'CaramOS — Linux distribution for Vietnamese users',
+    seoDescription: 'CaramOS is a Linux distribution for Vietnamese users, based on Linux Mint 22.3 Cinnamon and Ubuntu 24.04 LTS, with Vietnamese defaults, input method setup, local applications, and a public ISO build process.',
     heroTitle: 'CaramOS — a Linux distribution for Vietnamese users',
     heroLead:
       'CaramOS is based on Linux Mint 22.3 Cinnamon and Ubuntu 24.04 LTS. The project focuses on Vietnamese defaults, input method setup, commonly used local applications, and a public ISO build process.',
@@ -163,9 +167,18 @@ function App() {
   ], [lang, repo]);
 
   useEffect(() => {
-    document.documentElement.lang = lang;
-    document.title = t.heroTitle;
-    document.querySelector('meta[name="description"]')?.setAttribute('content', t.heroLead);
+    const canonicalUrl = lang === 'vi' ? 'https://caramos.vietnamlinuxfamily.net/' : 'https://caramos.vietnamlinuxfamily.net/?lang=en';
+
+    document.documentElement.lang = lang === 'vi' ? 'vi' : 'en';
+    document.title = t.seoTitle;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', t.seoDescription);
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', t.seoTitle);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', t.seoDescription);
+    document.querySelector('meta[property="og:url"]')?.setAttribute('content', canonicalUrl);
+    document.querySelector('meta[property="og:locale"]')?.setAttribute('content', lang === 'vi' ? 'vi_VN' : 'en_US');
+    document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', t.seoTitle);
+    document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', t.seoDescription);
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', canonicalUrl);
     localStorage.setItem('caramos-language', lang);
   }, [lang, t]);
 
