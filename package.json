@@ -1,0 +1,29 @@
+{
+  "name": "caramos-landing",
+  "version": "1.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Bilingual Vite + React landing page for CaramOS.",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "start": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "CaramOS",
+    "Linux",
+    "Vietnam",
+    "React",
+    "Vite",
+    "Cloudflare Pages"
+  ],
+  "license": "GPL-3.0"
+}
