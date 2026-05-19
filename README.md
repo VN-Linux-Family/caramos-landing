@@ -46,11 +46,3 @@ Recommended Pages settings:
 yarn build
 npx wrangler pages deploy dist --project-name caramos-landing
 ```
-
-If using this folder directly from the CaramOS workspace, the folder is also mapped at:
-
-```text
-/home/dungleviet/Documents/CaramOS/landing
-```
-# caramos-landing
-# caramos-landing
