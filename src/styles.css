@@ -131,6 +131,16 @@ h3, p { margin-top: 0; }
 .build-section pre { margin: 0; overflow: auto; padding: 18px; border-radius: 18px; background: #173823; color: #f5ffe9; line-height: 1.7; font-size: 13px; }
 .screenshots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding-bottom: 50px; }
 .screenshots img { height: 220px; width: 100%; object-fit: cover; border-radius: 18px; border: 1px solid var(--line); box-shadow: 0 10px 26px rgba(31,79,50,.08); }
+.support-section { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; gap: 24px; align-items: center; margin: 0 0 54px; padding: 26px; overflow: hidden; border: 1px solid #d8d1bd; border-radius: 28px; background: radial-gradient(circle at 15% 10%, rgba(245,159,34,.22), transparent 28%), linear-gradient(135deg, #fffdf7 0%, #eef6eb 58%, #fff5dc 100%); box-shadow: var(--shadow); }
+.support-section::after { content: '👏'; position: absolute; right: 28px; top: 12px; font-size: 84px; opacity: .10; transform: rotate(-10deg); pointer-events: none; }
+.support-copy { position: relative; z-index: 1; }
+.support-copy p:not(.badge) { color: var(--muted); line-height: 1.75; font-size: 16px; }
+.support-copy .button { margin-top: 8px; }
+.unikorn-badges { position: relative; z-index: 1; display: grid; gap: 12px; justify-items: start; padding: 18px; border: 1px solid rgba(47,112,72,.12); border-radius: 22px; background: rgba(255,253,247,.72); box-shadow: inset 0 1px 0 rgba(255,255,255,.8), 0 14px 34px rgba(31,79,50,.08); backdrop-filter: blur(10px); }
+.unikorn-badges a { display: inline-flex; width: fit-content; border-radius: 14px; transition: transform .18s ease, filter .18s ease; }
+.unikorn-badges a:hover { transform: translateY(-3px) scale(1.015); filter: saturate(1.08); }
+.unikorn-badges img { width: auto; height: 64px; border-radius: 10px; }
+.unikorn-badges span { color: var(--green-700); font-size: 12px; font-weight: 900; line-height: 1.55; }
 .download { display: grid; grid-template-columns: .95fr 1.05fr; gap: 28px; align-items: center; margin-bottom: 64px; padding: 20px; border-radius: 26px; background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow); }
 .download img { border-radius: 18px; }
 .download h2 { margin-bottom: 12px; }
@@ -141,7 +151,7 @@ footer p { margin: 0; }
 footer a { color: #fff; font-weight: 900; }
 
 @media (max-width: 960px) {
-  .hero, .build-section, .download { grid-template-columns: 1fr; }
+  .hero, .build-section, .download, .support-section { grid-template-columns: 1fr; }
   .app-grid, .repo-grid, .ecosystem-grid { grid-template-columns: repeat(2, 1fr); }
   .info-grid, .screenshots { grid-template-columns: 1fr; }
   .contributors-grid { grid-template-columns: repeat(3, 1fr); }

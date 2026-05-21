@@ -13,6 +13,7 @@ const links = {
   issues: 'https://github.com/VN-Linux-Family/CaramOS/issues',
   appExplorer: 'https://github.com/VN-Linux-Family/apps-vietnamlinuxfamily',
   mirror: 'https://github.com/VN-Linux-Family/mirror',
+  unikorn: 'https://unikorn.vn/p/caramos?ref=embed-caramos',
 };
 
 const githubApi = {
@@ -63,6 +64,11 @@ const copy = {
     downloadTitle: 'Tải CaramOS Open Beta',
     downloadLead:
       'ISO phát hành trên GitHub Releases. Người dùng nên kiểm tra checksum, thử live session trong máy ảo hoặc USB trước khi cài đặt lên máy thật.',
+    supportTitle: 'Ủng hộ CaramOS trên Unikorn',
+    supportLead:
+      'Nếu bạn thấy CaramOS hữu ích, hãy clap trên Unikorn để tiếp thêm động lực cho team và giúp dự án tiếp cận nhiều người dùng Việt Nam hơn.',
+    supportAction: 'Clap cho CaramOS',
+    supportMeta: 'Mỗi lượt clap là một tín hiệu ủng hộ cộng đồng mã nguồn mở Việt Nam.',
     footer: 'CaramOS là dự án thuộc hệ sinh thái Vietnam Linux Family.',
     features: [
       ['locale', 'Vietnamese locale', 'Thiết lập ngôn ngữ, timezone Asia/Ho_Chi_Minh và font tiếng Việt mặc định.', 'Config'],
@@ -121,6 +127,11 @@ const copy = {
     downloadTitle: 'Download CaramOS Open Beta',
     downloadLead:
       'ISO images are published on GitHub Releases. Users should verify checksums and test the live session in a VM or USB environment before installing on hardware.',
+    supportTitle: 'Support CaramOS on Unikorn',
+    supportLead:
+      'If CaramOS is useful to you, clap for the project on Unikorn to encourage the team and help it reach more Vietnamese Linux users.',
+    supportAction: 'Clap for CaramOS',
+    supportMeta: 'Every clap is a signal of support for the Vietnamese open-source community.',
     footer: 'CaramOS is part of the Vietnam Linux Family ecosystem.',
     features: [
       ['locale', 'Vietnamese locale', 'Default Vietnamese language, Asia/Ho_Chi_Minh timezone, and Vietnamese font configuration.', 'Config'],
@@ -227,6 +238,24 @@ function App() {
             <div className="stats">{liveStats.map((value, i) => <div key={t.statLabels[i]}><strong>{value}</strong><span>{t.statLabels[i]}</span></div>)}</div>
           </div>
           <div className="hero-shot"><img src="/assets/screenshots/03-desktop.png" alt="CaramOS desktop" /></div>
+        </section>
+
+        <section className="support-section" id="support">
+          <div className="support-copy">
+            <p className="badge">Unikorn · clap support</p>
+            <h2>{t.supportTitle}</h2>
+            <p>{t.supportLead}</p>
+            <a className="button primary" href={links.unikorn} target="_blank" rel="noopener noreferrer">{t.supportAction}</a>
+          </div>
+          <div className="unikorn-badges" aria-label="CaramOS Unikorn badges">
+            <a href={links.unikorn} target="_blank" rel="noopener noreferrer">
+              <img src="https://unikorn.vn/api/widgets/badge/caramos?theme=light" alt="CaramOS trên Unikorn.vn" width="256" height="64" loading="lazy" />
+            </a>
+            <a href={links.unikorn} target="_blank" rel="noopener noreferrer">
+              <img src="https://unikorn.vn/api/widgets/badge/caramos/rank?theme=light&type=daily" alt="CaramOS - Hàng ngày" width="250" height="64" loading="lazy" />
+            </a>
+            <span>{t.supportMeta}</span>
+          </div>
         </section>
 
         <CardSection title={t.sectionOverview} lead={t.overviewLead} items={t.features} />
