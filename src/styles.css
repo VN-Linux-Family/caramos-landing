@@ -41,9 +41,11 @@ body::before {
   align-items: center;
   justify-content: space-between;
   padding: 0 max(22px, calc((100vw - 1120px) / 2));
-  background: var(--green-900);
+  background: linear-gradient(90deg, rgba(122,78,42,.82), rgba(31,79,50,.82));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: #fffaf0;
-  box-shadow: 0 10px 30px rgba(31,79,50,.18);
+  box-shadow: 0 10px 30px rgba(31,79,50,.14);
 }
 .brand, .topbar nav { display: flex; align-items: center; gap: 10px; }
 .brand img { width: 30px; height: 30px; }
@@ -178,7 +180,7 @@ h3, p { margin-top: 0; }
 .download { display: grid; grid-template-columns: .95fr 1.05fr; gap: 28px; align-items: center; margin-bottom: 64px; padding: 20px; border-radius: 26px; background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow); }
 .download img { border-radius: 18px; }
 .download h2 { margin-bottom: 12px; }
-footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 28px max(22px, calc((100vw - 1120px) / 2)); background: var(--green-900); color: rgba(255,250,240,.82); }
+footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 28px max(22px, calc((100vw - 1120px) / 2)); background: linear-gradient(90deg, #7a4e2a, var(--green-900)); color: rgba(255,250,240,.82); }
 footer div { display: flex; align-items: center; gap: 10px; color: #fff; }
 footer img { width: 32px; height: 32px; }
 footer p { margin: 0; }
