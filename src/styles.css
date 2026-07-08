@@ -50,6 +50,8 @@ body::before {
 .brand span { font-weight: 900; letter-spacing: -.03em; }
 .topbar nav { gap: 18px; font-size: 13px; font-weight: 700; color: rgba(255,250,240,.82); }
 .topbar nav a:hover { color: #fff; }
+.nav-support { padding: 7px 12px; border: 1px solid rgba(255,250,240,.34); border-radius: 999px; background: rgba(255,250,240,.13); color: #fffaf0 !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.16); }
+.nav-support:hover { background: rgba(255,250,240,.22); transform: translateY(-1px); }
 .topbar button {
   border: 1px solid rgba(255,255,255,.28);
   background: rgba(255,255,255,.12);
@@ -73,6 +75,7 @@ h3, p { margin-top: 0; }
 .button { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 15px; border-radius: 12px; border: 1px solid var(--line); background: var(--paper); color: var(--green-900); font-weight: 900; box-shadow: 0 8px 20px rgba(31,79,50,.06); transition: transform .18s ease, box-shadow .18s ease; }
 .button:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
 .button.primary { border-color: var(--green-700); color: #fff; background: linear-gradient(135deg, var(--green-800), var(--green-700)); }
+.button.support-button { border-color: rgba(245,159,34,.38); background: linear-gradient(135deg, #fff8e7, #fffdf7); color: var(--green-800); }
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
 .stats div { padding: 13px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,253,247,.78); }
 .stats strong { display: block; color: var(--green-900); }
@@ -178,6 +181,38 @@ h3, p { margin-top: 0; }
 .download { display: grid; grid-template-columns: .95fr 1.05fr; gap: 28px; align-items: center; margin-bottom: 64px; padding: 20px; border-radius: 26px; background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow); }
 .download img { border-radius: 18px; }
 .download h2 { margin-bottom: 12px; }
+.support-page { min-height: 100vh; background: radial-gradient(circle at 12% 0%, rgba(245,159,34,.16), transparent 30%), radial-gradient(circle at 88% 4%, rgba(38,112,232,.10), transparent 28%), var(--cream); }
+.support-page-nav { display: flex; align-items: center; justify-content: space-between; width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0; }
+.support-page-main { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 18px 0 72px; }
+.support-page-hero { max-width: 760px; margin: 16px auto 36px; text-align: center; }
+.support-page-hero .badge { margin-inline: auto; }
+.support-page-hero h1 { margin-bottom: 16px; font-size: clamp(44px, 7vw, 82px); line-height: .92; }
+.support-page-hero p { color: var(--muted); font-size: 18px; font-weight: 650; line-height: 1.72; }
+.donation-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 22px; }
+.donation-card, .featured-donation, .support-thanks { border: 1px solid rgba(216,209,189,.95); border-radius: 26px; background: rgba(255,253,247,.86); box-shadow: 0 16px 42px rgba(31,79,50,.08); }
+.donation-card { display: grid; gap: 18px; padding: 24px; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.donation-card:hover, .featured-donation:hover { transform: translateY(-4px); border-color: #b9caaa; box-shadow: var(--shadow); }
+.donation-icon-row { display: flex; align-items: center; gap: 14px; }
+.donation-icon-row h2 { margin: 0; color: var(--green-900); font-size: 23px; letter-spacing: -.045em; }
+.donation-icon-row p { margin: 3px 0 0; color: var(--muted); font-size: 13px; font-weight: 900; }
+.donation-icon { flex: 0 0 auto; width: 36px; height: 36px; border-radius: 8px; }
+.donation-link { margin: 0; padding: 13px 14px; overflow: auto; border: 1px solid rgba(31,79,50,.10); border-radius: 14px; background: rgba(232,241,232,.52); }
+.donation-link code, .crypto-address code { color: var(--green-900); font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size: 13px; font-weight: 900; }
+.donation-card-btn { display: inline-flex; align-items: center; justify-content: center; width: fit-content; min-height: 42px; padding: 0 16px; border-radius: 13px; background: linear-gradient(135deg, var(--green-800), var(--green-700)); color: #fff; font-weight: 1000; box-shadow: 0 10px 22px rgba(31,79,50,.14); transition: transform .18s ease, box-shadow .18s ease; }
+.donation-card-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.featured-donation { display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 22px; align-items: center; margin-top: 22px; padding: 28px; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.featured-info { display: grid; gap: 18px; }
+.crypto-address { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: stretch; max-width: 680px; padding: 10px; border: 1px solid rgba(31,79,50,.10); border-radius: 16px; background: rgba(232,241,232,.56); }
+.crypto-address code { overflow: auto; align-self: center; white-space: nowrap; }
+.crypto-address button { border: 0; border-radius: 12px; padding: 0 14px; background: var(--green-900); color: #fff; font-weight: 1000; cursor: pointer; }
+.donation-qr-box { display: grid; justify-items: center; gap: 10px; padding: 16px; border: 1px solid rgba(31,79,50,.10); border-radius: 22px; background: #fffdf7; }
+.donation-qr-box img { width: 180px; height: 180px; border-radius: 14px; }
+.donation-qr-box span { color: var(--muted); text-align: center; font-size: 12px; font-weight: 900; }
+.featured-recipient { margin: 0; color: var(--muted); font-weight: 850; }
+.momo-donation { background: linear-gradient(135deg, rgba(255,253,247,.9), rgba(255,238,247,.84)); }
+.support-thanks { margin-top: 34px; padding: 34px; text-align: center; background: linear-gradient(135deg, #fffdf7, #eef6eb); }
+.support-thanks h2 { margin-bottom: 12px; }
+.support-thanks p { max-width: 680px; margin: 0 auto 22px; color: var(--muted); font-size: 16px; font-weight: 700; line-height: 1.7; }
 footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 28px max(22px, calc((100vw - 1120px) / 2)); background: var(--green-900); color: rgba(255,250,240,.82); }
 footer div { display: flex; align-items: center; gap: 10px; color: #fff; }
 footer img { width: 32px; height: 32px; }
@@ -185,7 +220,7 @@ footer p { margin: 0; }
 footer a { color: #fff; font-weight: 900; }
 
 @media (max-width: 960px) {
-  .hero, .build-section, .download, .support-section, .ota-section { grid-template-columns: 1fr; }
+  .hero, .build-section, .download, .support-section, .donation-grid, .featured-donation, .ota-section { grid-template-columns: 1fr; }
   .app-grid, .repo-grid, .ecosystem-grid { grid-template-columns: repeat(2, 1fr); }
   .ota-steps { grid-template-columns: 1fr; }
   .info-grid, .screenshots { grid-template-columns: 1fr; }

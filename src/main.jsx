@@ -40,16 +40,17 @@ const copy = {
   vi: {
     language: 'EN',
     nav: ['Tổng quan', 'Nâng cấp CaramOS', 'Release note', 'Hệ sinh thái', 'Open source', 'Tải ISO'],
-    heroBadge: 'Open Beta 1.0.10 · Linux Mint 22.3 Cinnamon · GPL-3.0',
+    heroBadge: 'Open Beta 1.0.12 · Linux Mint 22.3 Cinnamon · GPL-3.0',
     upgradeNotice: 'Nâng cấp CaramOS từ 1.0.1',
-    seoTitle: 'CaramOS 1.0.10 Open Beta — bản phân phối Linux cho người dùng Việt Nam',
-    seoDescription: 'CaramOS 1.0.10 Open Beta là bản phân phối Linux dựa trên Linux Mint 22.3 Cinnamon, cấu hình tiếng Việt mặc định, bộ gõ Fcitx5 + Lotus, ứng dụng phổ biến tại Việt Nam và quy trình build ISO công khai.',
+    seoTitle: 'CaramOS 1.0.12 Open Beta — bản phân phối Linux cho người dùng Việt Nam',
+    seoDescription: 'CaramOS 1.0.12 Open Beta là bản phân phối Linux dựa trên Linux Mint 22.3 Cinnamon, cấu hình tiếng Việt mặc định, bộ gõ Fcitx5 + Lotus, ứng dụng phổ biến tại Việt Nam và quy trình build ISO công khai.',
     heroTitle: 'CaramOS — bản phân phối Linux cho người dùng Việt Nam',
     heroLead:
       'CaramOS là bản phân phối dựa trên Linux Mint 22.3 Cinnamon và Ubuntu 24.04 LTS. Dự án tập trung vào cấu hình tiếng Việt mặc định, bộ gõ, bộ ứng dụng phổ biến tại Việt Nam và quy trình build ISO công khai.',
     download: 'Tải ISO',
     source: 'Mã nguồn',
     community: 'Cộng đồng',
+    supportPage: 'Ủng hộ',
     statLabels: ['Stars', 'Forks', 'Issues', 'License'],
     contributorsTitle: 'Contributors',
     contributorsLead: 'Danh sách contributors được lấy trực tiếp từ GitHub repository của CaramOS.',
@@ -79,9 +80,11 @@ const copy = {
     ],
     releaseNotesTitle: 'Release note CaramOS Open Beta',
     releaseNotesLead:
-      'Beta 1.0.1 là bản phát hành đầu tiên của CaramOS. Các mốc sau đây ghi lại những thay đổi đã được đưa vào chuỗi cập nhật từ 1.0.2 đến 1.0.10.',
+      'Beta 1.0.1 là bản phát hành đầu tiên của CaramOS. Các mốc sau đây ghi lại những thay đổi đã được đưa vào chuỗi cập nhật từ 1.0.2 đến 1.0.12.',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
+      ['1.0.12', 'Sửa lỗi hỏi mật khẩu khi đăng nhập', ['Gỡ lệnh enable system service khỏi helper autostart của desktop user để tránh prompt systemd/polkit khi login.', 'Chuyển bước bật fcitx5-lotus-server@USER.service sang root oneshot service.', 'Giữ cấu hình Fcitx5 Lotus, Telex và Preedit trong helper đăng nhập ở mức user.']],
+      ['1.0.11', 'Sửa OTA cho user tuỳ chỉnh', ['Phát hành lại OTA để máy đang ở 1.0.10 nhận bản cập nhật mới.', 'Sửa các migration cũ để tự nhận diện user desktop thật thay vì hardcode user caram hoặc mint.', 'Dùng home directory thật khi áp dụng cấu hình Cinnamon, launcher Desktop, Fcitx5 và kích thước icon panel.']],
       ['1.0.10', 'Cập nhật kích thước icon panel Cinnamon', ['Áp dụng thay đổi kích thước icon panel từ PR #62.', 'Đặt icon bên phải panel Cinnamon về 18px trong dconf defaults.', 'Đồng bộ caramos-theme-apply và giữ lại tùy chỉnh kích thước icon của người dùng khi migration.']],
       ['1.0.9', 'Ổn định bộ gõ tiếng Việt Fcitx5 Lotus', ['Thêm cấu hình mặc định ổn định cho Fcitx5 Lotus.', 'Giữ English và Lotus trong menu Fcitx với Ctrl+Shift để chuyển bộ gõ.', 'Đưa Start menu Cinnamon qua Fcitx và khởi động lại Fcitx sau khi áp dụng defaults.']],
       ['1.0.8', 'Ghim Software Manager', ['Áp dụng cập nhật pin Software Manager từ PR #54.', 'Ghim Software Manager vào grouped-window-list mặc định của Cinnamon.', 'Thêm launcher Software Manager ra Desktop cho default user và live user.']],
@@ -90,10 +93,10 @@ const copy = {
       ['1.0.5.2', 'Chuỗi migration đến CaramOS 1.0.5', ['Phát hành chuỗi OTA migration qua CaramOS 1.0.5.', 'Thêm migration cho MintWelcome branding, ZRAM mặc định, MintReport branding và metadata codename.', 'Gộp release notes nhiều bước, cập nhật dung lượng trong notifier và sửa codename cho add-apt-repository.']],
       ['1.0.2', 'Gói cập nhật CaramOS OTA đầu tiên', ['Thêm package CaramOS OTA updater ban đầu.', 'CLI hỗ trợ check, upgrade, status, repair, rollback và dry-run.', 'Có systemd timer kiểm tra hằng ngày, notifier GTK3 tiếng Việt, pkexec/polkit, transaction state, rollback best-effort và logrotate.']],
     ],
-    downloadTitle: 'Tải CaramOS Open Beta 1.0.10',
+    downloadTitle: 'Tải CaramOS Open Beta 1.0.12',
     downloadLead:
-      'ISO phát hành trên GitHub Releases. Người dùng nên kiểm tra checksum, thử live session trong máy ảo hoặc USB trước khi cài đặt lên máy thật. Máy đã cài có thể dùng OTA để lên 1.0.10.',
-    supportTitle: 'Ủng hộ CaramOS trên Unikorn',
+      'ISO phát hành trên GitHub Releases. Người dùng nên kiểm tra checksum, thử live session trong máy ảo hoặc USB trước khi cài đặt lên máy thật. Máy đã cài có thể dùng OTA để lên 1.0.12.',
+    supportTitle: 'CaramOS trên Unikorn',
     supportLead:
       'Nếu bạn thấy CaramOS hữu ích, hãy clap trên Unikorn để tiếp thêm động lực cho team và giúp dự án tiếp cận nhiều người dùng Việt Nam hơn.',
     supportAction: 'Clap cho CaramOS',
@@ -129,16 +132,17 @@ const copy = {
   en: {
     language: 'VI',
     nav: ['Overview', 'Upgrade CaramOS', 'Release notes', 'Ecosystem', 'Open source', 'Download'],
-    heroBadge: 'Open Beta 1.0.10 · Linux Mint 22.3 Cinnamon · GPL-3.0',
+    heroBadge: 'Open Beta 1.0.12 · Linux Mint 22.3 Cinnamon · GPL-3.0',
     upgradeNotice: 'Upgrade CaramOS from 1.0.1',
-    seoTitle: 'CaramOS 1.0.10 Open Beta — Linux distribution for Vietnamese users',
-    seoDescription: 'CaramOS 1.0.10 Open Beta is a Linux Mint 22.3 Cinnamon based distribution with Vietnamese defaults, Fcitx5 + Lotus input, daily-use applications for Vietnam, and a public ISO remaster workflow.',
+    seoTitle: 'CaramOS 1.0.12 Open Beta — Linux distribution for Vietnamese users',
+    seoDescription: 'CaramOS 1.0.12 Open Beta is a Linux Mint 22.3 Cinnamon based distribution with Vietnamese defaults, Fcitx5 + Lotus input, daily-use applications for Vietnam, and a public ISO remaster workflow.',
     heroTitle: 'CaramOS — a Linux distribution for Vietnamese users',
     heroLead:
       'CaramOS is based on Linux Mint 22.3 Cinnamon and Ubuntu 24.04 LTS. The project focuses on Vietnamese defaults, input methods, practical daily-use applications in Vietnam, and a public ISO build workflow.',
     download: 'Download ISO',
     source: 'Source code',
     community: 'Community',
+    supportPage: 'Support',
     statLabels: ['Stars', 'Forks', 'Issues', 'License'],
     contributorsTitle: 'Contributors',
     contributorsLead: 'The contributor list is loaded directly from the CaramOS GitHub repository.',
@@ -168,9 +172,11 @@ const copy = {
     ],
     releaseNotesTitle: 'CaramOS Open Beta release notes',
     releaseNotesLead:
-      'Beta 1.0.1 was the first CaramOS release. The milestones below summarize the update chain from 1.0.2 to 1.0.10.',
+      'Beta 1.0.1 was the first CaramOS release. The milestones below summarize the update chain from 1.0.2 to 1.0.12.',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
+      ['1.0.12', 'Login password prompt fix', ['Removed system service enablement from the desktop user autostart helper to avoid systemd/polkit prompts at login.', 'Moved fcitx5-lotus-server@USER.service enablement into a root oneshot service.', 'Kept Fcitx5 Lotus, Telex, and Preedit configuration in the user-level login helper.']],
+      ['1.0.11', 'OTA fix for custom usernames', ['Published a new OTA target so systems already on 1.0.10 can receive the fix.', 'Updated earlier migrations to discover real desktop users instead of hardcoding caram or mint.', 'Used each user’s real home directory when applying Cinnamon, Desktop launcher, Fcitx5, and panel icon-size settings.']],
       ['1.0.10', 'Cinnamon panel icon size update', ['Applied the panel icon size update from PR #62.', 'Set right-side Cinnamon panel icons to 18px in dconf defaults.', 'Aligned caramos-theme-apply and preserved user-customized panel icon sizes during migration.']],
       ['1.0.9', 'Stable Vietnamese input defaults', ['Added stable Fcitx5 Lotus defaults for Vietnamese input.', 'Kept English and Lotus in the Fcitx menu with Ctrl+Shift switching.', 'Routed Cinnamon Start menu search through Fcitx and restarted Fcitx after applying defaults.']],
       ['1.0.8', 'Software Manager pinning', ['Applied the Software Manager pinning update from PR #54.', 'Pinned Software Manager to Cinnamon grouped-window-list defaults.', 'Added a Software Manager launcher to the default and live user Desktop.']],
@@ -179,10 +185,10 @@ const copy = {
       ['1.0.5.2', 'Migration chain through 1.0.5', ['Released the OTA migration chain through CaramOS 1.0.5.', 'Added migrations for MintWelcome branding, default ZRAM, MintReport branding, and codename metadata.', 'Aggregated multi-step release notes, updated notifier size, and fixed codename compatibility for add-apt-repository.']],
       ['1.0.2', 'Initial OTA updater package', ['Introduced the first CaramOS OTA updater package.', 'Added CLI commands for check, upgrade, status, repair, rollback, and dry-run.', 'Included daily systemd checks, GTK3 Vietnamese notifier, pkexec/polkit, transaction state, best-effort rollback, and logrotate.']],
     ],
-    downloadTitle: 'Download CaramOS Open Beta 1.0.10',
+    downloadTitle: 'Download CaramOS Open Beta 1.0.12',
     downloadLead:
-      'ISO images are published on GitHub Releases. Users should verify checksums and test the live session in a VM or USB environment before installing. Existing installs can use OTA to reach 1.0.10.',
-    supportTitle: 'Support CaramOS on Unikorn',
+      'ISO images are published on GitHub Releases. Users should verify checksums and test the live session in a VM or USB environment before installing. Existing installs can use OTA to reach 1.0.12.',
+    supportTitle: 'CaramOS on Unikorn',
     supportLead:
       'If CaramOS is useful to you, clap for the project on Unikorn to encourage the team and help it reach more Vietnamese Linux users.',
     supportAction: 'Clap for CaramOS',
@@ -220,11 +226,13 @@ const copy = {
 
 
 function App() {
+  const isSupportPage = window.location.pathname.replace(/\/$/, '') === '/support';
   const [lang, setLang] = useState(() => localStorage.getItem('caramos-language') || 'vi');
   const [repo, setRepo] = useState(fallbackRepo);
   const [contributors, setContributors] = useState([]);
   const [githubError, setGithubError] = useState(false);
   const [copiedCommand, setCopiedCommand] = useState(false);
+  const [copiedWallet, setCopiedWallet] = useState(false);
   const t = useMemo(() => copy[lang], [lang]);
   const liveStats = useMemo(() => [
     `${compactNumber(repo.stargazers_count)} stars`,
@@ -308,6 +316,41 @@ function App() {
     }
   };
 
+  const handleCopyWallet = async (value) => {
+    let didCopy = false;
+
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+        didCopy = true;
+      }
+    } catch {
+      didCopy = false;
+    }
+
+    if (!didCopy) {
+      const textarea = document.createElement('textarea');
+      textarea.value = value;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.left = '-9999px';
+      textarea.style.top = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      didCopy = document.execCommand('copy');
+      document.body.removeChild(textarea);
+    }
+
+    if (didCopy) {
+      setCopiedWallet(true);
+      window.setTimeout(() => setCopiedWallet(false), 1800);
+    }
+  };
+
+  if (isSupportPage) {
+    return <SupportPage onCopyWallet={handleCopyWallet} copiedWallet={copiedWallet} />;
+  }
+
   return (
     <>
       <Header t={t} onToggle={() => setLang(lang === 'vi' ? 'en' : 'vi')} />
@@ -322,6 +365,7 @@ function App() {
               <a className="button primary" href={links.release}>{t.download}</a>
               <a className="button" href={links.repo}>{t.source}</a>
               <a className="button" href={links.facebook}>{t.community}</a>
+              <a className="button support-button" href="/support">{t.supportPage}</a>
             </div>
             <div className="stats">{liveStats.map((value, i) => <div key={t.statLabels[i]}><strong>{value}</strong><span>{t.statLabels[i]}</span></div>)}</div>
           </div>
@@ -428,8 +472,96 @@ function App() {
   );
 }
 
+function SupportPage({ onCopyWallet, copiedWallet }) {
+  const usdtWallet = 'TCUujuiz26P26oAbuECvqpHUnd2sWudv2G';
+
+  useEffect(() => {
+    document.documentElement.lang = 'vi';
+    document.title = 'Ủng hộ CaramOS — Vietnam Linux Family';
+    document.querySelector('meta[name="description"]')?.setAttribute('content', 'Ủng hộ CaramOS qua PayPal, Ko-fi, Buy Me a Coffee, USDT TRC20, MoMo hoặc tham gia cộng đồng Vietnam Linux Family.');
+  }, []);
+
+  const donationCards = [
+    ['paypal', 'PayPal', '', 'paypal.me/mrd900', 'Donate via PayPal', 'https://paypal.me/mrd900'],
+    ['kofi', 'Ko-fi', '0% fee', 'ko-fi.com/mrd900', 'Support on Ko-fi', 'https://ko-fi.com/mrd900'],
+    ['coffee', 'Buy Me a Coffee', '', 'buymeacoffee.com/mrd900', 'Buy a Coffee', 'https://buymeacoffee.com/mrd900'],
+  ];
+
+  return <div className="support-page">
+    <header className="support-page-nav">
+      <a className="brand" href="/"><img src="/assets/CaramOS_logo.png" alt="CaramOS" /><span>CaramOS</span></a>
+      <a className="button" href="/">Về trang chủ</a>
+    </header>
+    <main className="support-page-main">
+      <section className="support-page-hero">
+        <span className="badge">Support Us</span>
+        <h1>Fund the Future of CaramOS</h1>
+        <p>CaramOS miễn phí và luôn hướng đến cộng đồng. Sự ủng hộ của bạn giúp chúng tôi duy trì hạ tầng, thử nghiệm ISO, cải thiện tính năng, viết tài liệu và giữ dự án sống lâu dài. Dù nhỏ hay lớn, mọi đóng góp đều rất đáng quý!</p>
+      </section>
+
+      <section className="donation-grid" aria-label="Online donation methods">
+        {donationCards.map(([icon, title, fee, address, action, url]) => <article className="donation-card" key={title}>
+          <div className="donation-icon-row">
+            <DonationIcon name={icon} />
+            <div><h2>{title}</h2>{fee && <p>{fee}</p>}</div>
+          </div>
+          <p className="donation-link"><code>{address}</code></p>
+          <a className="donation-card-btn" href={url} target="_blank" rel="noopener noreferrer">{action}</a>
+        </article>)}
+      </section>
+
+      <section className="featured-donation">
+        <div className="featured-info">
+          <div className="donation-icon-row">
+            <DonationIcon name="usdt" />
+            <div><h2>USDT (TRC20)</h2><p>Network: Tron TRC20</p></div>
+          </div>
+          <div className="crypto-address"><code>{usdtWallet}</code><button type="button" onClick={() => onCopyWallet(usdtWallet)}>{copiedWallet ? 'Copied' : 'Copy'}</button></div>
+        </div>
+        <div className="donation-qr-box">
+          <img src="/assets/support/usdt-trc20-qr.png" alt="USDT TRC20 Wallet QR Code" width="180" height="180" loading="lazy" />
+          <span>Scan with your crypto wallet</span>
+        </div>
+      </section>
+
+      <section className="featured-donation momo-donation">
+        <div className="featured-info">
+          <div className="donation-icon-row">
+            <DonationIcon name="momo" />
+            <div><h2>MoMo</h2><p>Accepts transfers from <strong>all Vietnamese banks</strong></p></div>
+          </div>
+          <p className="featured-recipient">Recipient: <strong>Lê Viết Dũng</strong></p>
+          <a className="donation-card-btn" href="https://nhantien.momo.vn/0947287893" target="_blank" rel="noopener noreferrer">♥ Donate via MoMo</a>
+        </div>
+        <div className="donation-qr-box">
+          <img src="/assets/support/momo-qr.png" alt="MoMo QR Code" width="180" height="180" loading="lazy" />
+          <span>Scan with MoMo or any banking app</span>
+        </div>
+      </section>
+
+      <section className="support-thanks">
+        <h2>Cảm ơn bạn đã ủng hộ!</h2>
+        <p>Dù bạn donate, chia sẻ dự án hay tham gia hỗ trợ người dùng mới, sự đồng hành của bạn đều giúp CaramOS và cộng đồng VNLF phát triển tốt hơn.</p>
+        <a className="button primary" href={links.discord} target="_blank" rel="noopener noreferrer">Tham gia Discord Community</a>
+      </section>
+    </main>
+  </div>;
+}
+
+function DonationIcon({ name }) {
+  const icons = {
+    paypal: <><rect width="36" height="36" rx="8" fill="#003087" /><path d="M14 10H20C22.5 10 24 11.5 24 14C24 16.5 22.5 18 20 18H17L16 26H12L14 10Z" fill="#fff" /><path d="M16 12H21C23 12 24.5 13.2 24.5 15.5C24.5 17.8 23 19 21 19H18.5L17.5 26" stroke="#009cde" strokeWidth="1.5" fill="none" /></>,
+    kofi: <><rect width="36" height="36" rx="8" fill="#72B3EB" /><rect x="7" y="12" width="17" height="14" rx="4" fill="white" stroke="#1A1A1A" strokeWidth="2" /><path d="M24 15H26C27.7 15 29 16.3 29 18C29 19.7 27.7 21 26 21H24" stroke="#1A1A1A" strokeWidth="2" fill="white" /><path d="M18.5 16.3C18.1 15.7 17.4 15.3 16.6 15.3C15.3 15.3 14.2 16.4 14.2 17.7C14.2 20.3 15.5 21 15.5 21L18.5 23.5L21.5 21C21.5 21 22.8 20.3 22.8 17.7C22.8 16.4 21.7 15.3 20.4 15.3C19.6 15.3 18.9 15.7 18.5 16.3Z" fill="#EF5A29" /></>,
+    coffee: <><rect width="36" height="36" rx="8" fill="#FFDD00" /><ellipse cx="18" cy="10" rx="6" ry="2" stroke="#0D1117" strokeWidth="2.2" fill="none" /><path d="M14 10C14 8 16 7 18 8C20 9 22 8 22 10" stroke="#0D1117" strokeWidth="2.2" strokeLinecap="round" fill="none" /><path d="M12 13L13.5 28H22.5L24 13" stroke="#0D1117" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" /><path d="M14 19L14.5 27H21.5L22 19C20 18 16 18 14 19Z" fill="white" /></>,
+    usdt: <><rect width="36" height="36" rx="8" fill="#26A17B" /><path d="M11 12H25" stroke="white" strokeWidth="2.5" strokeLinecap="round" /><path d="M18 12V27" stroke="white" strokeWidth="2.5" strokeLinecap="round" /><ellipse cx="18" cy="18" rx="6" ry="2" stroke="white" strokeWidth="1.5" fill="none" /></>,
+    momo: <><rect width="36" height="36" rx="8" fill="#A50064" /><path d="M5 17V12C5 9.5 6.5 8 8.2 8C9.9 8 10.5 9.5 10.5 11V17" stroke="white" strokeWidth="2.2" strokeLinecap="round" fill="none" /><path d="M10.5 17V12C10.5 9.5 12 8 13.7 8C15.4 8 16 9.5 16 11V17" stroke="white" strokeWidth="2.2" strokeLinecap="round" fill="none" /><circle cx="24" cy="12.5" r="4.5" stroke="white" strokeWidth="2.2" fill="none" /><path d="M5 29V24C5 21.5 6.5 20 8.2 20C9.9 20 10.5 21.5 10.5 23V29" stroke="white" strokeWidth="2.2" strokeLinecap="round" fill="none" /><path d="M10.5 29V24C10.5 21.5 12 8 13.7 20C15.4 20 16 21.5 16 23V29" stroke="white" strokeWidth="2.2" strokeLinecap="round" fill="none" /><circle cx="24" cy="24.5" r="4.5" stroke="white" strokeWidth="2.2" fill="none" /></>,
+  };
+
+  return <svg className="donation-icon" viewBox="0 0 36 36" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">{icons[name]}</svg>;
+}
+
 function Header({ t, onToggle }) {
-  return <header className="topbar"><a className="brand" href="#overview"><img src="/assets/CaramOS_logo.png" alt="CaramOS" /><span>CaramOS</span></a><nav>{t.nav.map((item, i) => <a key={item} href={['#overview', '#ota', '#release-notes', '#ecosystem', '#opensource', '#download'][i]}>{item}</a>)}</nav><button onClick={onToggle}>{t.language}</button></header>;
+  return <header className="topbar"><a className="brand" href="#overview"><img src="/assets/CaramOS_logo.png" alt="CaramOS" /><span>CaramOS</span></a><nav>{t.nav.map((item, i) => <a key={item} href={['#overview', '#ota', '#release-notes', '#ecosystem', '#opensource', '#download'][i]}>{item}</a>)}<a className="nav-support" href="/support">{t.supportPage}</a></nav><button onClick={onToggle}>{t.language}</button></header>;
 }
 
 function ReleaseNotesSection({ t }) {
@@ -481,6 +613,7 @@ function SvgIcon({ name }) {
     facebook: <><path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v5h4v-5h3l1-4h-4V9c0-.6.4-1 1-1z" /></>,
     apps: <><rect x="4" y="4" width="6" height="6" rx="1.5" /><rect x="14" y="4" width="6" height="6" rx="1.5" /><rect x="4" y="14" width="6" height="6" rx="1.5" /><rect x="14" y="14" width="6" height="6" rx="1.5" /></>,
     mirror: <><path d="M8 5h8v14H8z" /><path d="M5 8h3M16 8h3M5 16h3M16 16h3" /></>,
+    github: <><path d="M12 2.8a9.2 9.2 0 0 0-2.9 17.9c.46.08.63-.2.63-.44v-1.55c-2.56.56-3.1-1.1-3.1-1.1-.42-1.06-1.02-1.34-1.02-1.34-.84-.57.06-.56.06-.56.93.07 1.42.96 1.42.96.82 1.4 2.15 1 2.68.76.08-.6.32-1 .58-1.23-2.04-.23-4.18-1.02-4.18-4.53 0-1 .36-1.82.95-2.46-.1-.23-.41-1.17.09-2.43 0 0 .78-.25 2.53.94A8.7 8.7 0 0 1 12 6.46c.78 0 1.56.1 2.29.31 1.75-1.19 2.52-.94 2.52-.94.5 1.26.19 2.2.1 2.43.59.64.94 1.46.94 2.46 0 3.52-2.15 4.3-4.2 4.52.33.28.62.84.62 1.7v2.52c0 .24.17.52.64.43A9.2 9.2 0 0 0 12 2.8z" /></>,
   };
 
   return <svg className="svg-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{paths[name]}</svg>;
