@@ -3,7 +3,9 @@ import { createRoot } from 'react-dom/client';
 import './styles.css';
 
 const links = {
-  release: 'https://github.com/VN-Linux-Family/CaramOS/releases',
+  download: 'https://sourceforge.net/projects/caramos/files/v1.0.16/CaramOS-1.0.16-cinnamon-amd64.iso/download',
+  release: 'https://github.com/VN-Linux-Family/CaramOS/releases/tag/v1.0.16',
+  checksums: 'https://github.com/VN-Linux-Family/CaramOS/releases/download/v1.0.16/SHA256SUMS',
   repo: 'https://github.com/VN-Linux-Family/CaramOS',
   org: 'https://github.com/VN-Linux-Family',
   vnlf: 'https://vietnamlinuxfamily.net',
@@ -18,6 +20,12 @@ const links = {
 };
 
 const installCommand = 'curl -fsSL https://caramos.vietnamlinuxfamily.net/install-caramos-ota.sh | sudo bash';
+const upgradeCommand = 'sudo caramos-ota --upgrade --yes';
+
+const banners = [
+  ['/assets/banner-1.jpg', 'bannerOneAlt'],
+  ['/assets/banner-2.jpg', 'bannerTwoAlt'],
+];
 
 const githubApi = {
   repo: 'https://api.github.com/repos/VN-Linux-Family/CaramOS',
@@ -40,14 +48,23 @@ const copy = {
   vi: {
     language: 'EN',
     nav: ['Tổng quan', 'Nâng cấp CaramOS', 'Release note', 'Hệ sinh thái', 'Open source', 'Tải ISO'],
-    heroBadge: 'Open Beta 1.0.12 · Linux Mint 22.3 Cinnamon · GPL-3.0',
-    upgradeNotice: 'Nâng cấp CaramOS từ 1.0.1',
-    seoTitle: 'CaramOS 1.0.12 Open Beta — bản phân phối Linux cho người dùng Việt Nam',
-    seoDescription: 'CaramOS 1.0.12 Open Beta là bản phân phối Linux dựa trên Linux Mint 22.3 Cinnamon, cấu hình tiếng Việt mặc định, bộ gõ Fcitx5 + Lotus, ứng dụng phổ biến tại Việt Nam và quy trình build ISO công khai.',
+    heroBadge: 'Open Beta 1.0.16 · Linux Mint 22.3 Cinnamon · GPL-3.0',
+    upgradeNotice: 'Nâng cấp CaramOS lên 1.0.16',
+    seoTitle: 'CaramOS — bản phân phối Linux cho người dùng Việt Nam',
+    seoDescription: 'CaramOS là bản phân phối Linux dựa trên Linux Mint 22.3 Cinnamon và Ubuntu 24.04 LTS, có mặc định tiếng Việt, Fcitx5/Lotus, cập nhật OTA và quy trình build ISO mã nguồn mở.',
     heroTitle: 'CaramOS — bản phân phối Linux cho người dùng Việt Nam',
     heroLead:
-      'CaramOS là bản phân phối dựa trên Linux Mint 22.3 Cinnamon và Ubuntu 24.04 LTS. Dự án tập trung vào cấu hình tiếng Việt mặc định, bộ gõ, bộ ứng dụng phổ biến tại Việt Nam và quy trình build ISO công khai.',
+      'CaramOS dựa trên Linux Mint 22.3 Cinnamon và Ubuntu 24.04 LTS, được tinh chỉnh cho người dùng Việt với mặc định tiếng Việt, bộ gõ Fcitx5/Lotus, cập nhật OTA và quy trình build ISO công khai.',
     download: 'Tải ISO',
+    checksums: 'Kiểm tra SHA256',
+    releaseDetails: 'Chi tiết phát hành',
+    bannerOneAlt: 'Desktop CaramOS với ứng dụng Hình nền và Control Center',
+    bannerTwoAlt: 'Desktop CaramOS với Terminal hiển thị thông tin hệ thống',
+    bannerStackLabel: 'Đổi giữa hai ảnh chụp desktop CaramOS',
+    otaBadge: 'Trung tâm cập nhật CaramOS',
+    otaVisualAlt: 'Giao diện Trung tâm cập nhật CaramOS',
+    otaMenuVisualAlt: 'Tìm Trung tâm cập nhật CaramOS từ Start Menu',
+    otaMenuVisualHint: 'Tìm “Trung tâm cập nhật CaramOS” từ Start Menu sau khi cài.',
     source: 'Mã nguồn',
     community: 'Cộng đồng',
     supportPage: 'Ủng hộ',
@@ -55,8 +72,8 @@ const copy = {
     contributorsTitle: 'Contributors',
     contributorsLead: 'Danh sách contributors được lấy trực tiếp từ GitHub repository của CaramOS.',
     contributorsFallback: 'Không tải được dữ liệu contributors từ GitHub. Vui lòng xem danh sách mới nhất trên GitHub.',
-    sectionOverview: 'Thành phần chính',
-    overviewLead: 'Các thay đổi tập trung vào trải nghiệm desktop, bản địa hóa, OTA migration và khả năng build lại ISO.',
+    sectionOverview: 'Trải nghiệm chính',
+    overviewLead: 'CaramOS tập trung vào trải nghiệm Linux thân thiện cho người Việt: nền tảng Mint/Cinnamon ổn định, bản địa hóa tiếng Việt, bộ gõ sẵn sàng, cập nhật OTA và phát triển mã nguồn mở.',
     ecosystemTitle: 'Hệ sinh thái VNLF',
     ecosystemLead:
       'Các kênh và tài nguyên chính thức của Vietnam Linux Family phục vụ trao đổi cộng đồng, phân phối nội dung và phát triển dự án.',
@@ -68,21 +85,29 @@ const copy = {
       'Build flow sử dụng phương pháp ISO remaster: giải nén ISO gốc, tùy biến root filesystem bằng packages, overlay và hooks, sau đó đóng gói lại bằng squashfs và xorriso.',
     otaTitle: 'Nâng cấp CaramOS không cần cài lại ISO',
     otaLead:
-      'Bạn có thể nâng cấp CaramOS lên phiên bản mới nhất mà không cần tải ISO mới hay cài lại máy. Chỉ cần cài Trung tâm cập nhật CaramOS, sau đó mở ứng dụng này để kiểm tra và nâng cấp hệ thống.',
-    otaInstallLabel: 'Nếu bạn đang ở CaramOS 1.0.1, hãy chạy lệnh sau trong Terminal:',
-    otaCopyHint: 'Sau khi cài xong, bạn có thể tìm “Trung tâm cập nhật CaramOS” từ Start Menu để mở lại bất cứ lúc nào.',
+      'Máy đang ở CaramOS 1.0.1 cần chạy installer một lần để cài Trung tâm cập nhật và nguồn OTA. Máy đã cài Trung tâm cập nhật có thể chờ tác vụ hằng ngày chạy vào ngày hôm sau, hoặc dùng lệnh bên dưới để nâng cấp ngay.',
+    otaInstallLabel: 'Máy CaramOS 1.0.1 hoặc chưa có Trung tâm cập nhật:',
+    otaInstallHint: 'Chạy installer một lần. Sau đó bạn có thể mở “Trung tâm cập nhật CaramOS” từ Start Menu.',
+    otaUpgradeLabel: 'Máy đã cài Trung tâm cập nhật và muốn nâng cấp ngay:',
+    otaUpgradeHint: 'Nếu không cần cập nhật ngay, hãy chờ tác vụ hằng ngày chạy vào ngày hôm sau.',
     otaCopy: 'Copy lệnh',
+    otaCopyInstallLabel: 'Copy lệnh cài Trung tâm cập nhật',
+    otaCopyUpgradeLabel: 'Copy lệnh nâng cấp ngay',
     otaCopied: 'Đã copy',
     otaSteps: [
-      ['Cài Trung tâm cập nhật', 'Chạy một lệnh duy nhất để thêm nguồn cập nhật và cài ứng dụng cập nhật của CaramOS.'],
-      ['Mở từ Start Menu', 'Tìm “Trung tâm cập nhật CaramOS” trong menu ứng dụng để kiểm tra bản mới.'],
-      ['Nâng cấp hệ thống', 'Ứng dụng sẽ hiển thị bản cập nhật mới nhất và hướng dẫn bạn nâng cấp an toàn.'],
+      ['Máy 1.0.1 chạy installer', 'Cài Trung tâm cập nhật và nguồn OTA bằng lệnh installer một lần duy nhất.'],
+      ['Máy đã cài có thể chờ', 'Tác vụ hằng ngày sẽ kiểm tra bản mới vào ngày hôm sau.'],
+      ['Nâng cấp ngay nếu cần', 'Chạy sudo caramos-ota --upgrade --yes trong Terminal để cập nhật ngay.'],
     ],
     releaseNotesTitle: 'Release note CaramOS Open Beta',
     releaseNotesLead:
-      'Beta 1.0.1 là bản phát hành đầu tiên của CaramOS. Các mốc sau đây ghi lại những thay đổi đã được đưa vào chuỗi cập nhật từ 1.0.2 đến 1.0.12.',
+      'Beta 1.0.1 là bản phát hành đầu tiên của CaramOS. Các mốc sau đây ghi lại những thay đổi đáng chú ý trong chuỗi cập nhật đến 1.0.16.',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
+      ['1.0.16', 'Ghim ứng dụng và dọn Desktop CaramOS', ['Ghim Zalo và Trình quản lý phần mềm vào taskbar Cinnamon khi ứng dụng đã được cài.', 'Giữ WPS Office trên taskbar.', 'Gỡ shortcut mặc định của WPS Office, Zalo và Trình quản lý phần mềm khỏi Desktop nhưng giữ file đã được người dùng tùy chỉnh.']],
+      ['1.0.15', 'Bộ hình nền CaramOS mới', ['Cài năm hình nền CaramOS độ phân giải 2048×1152.', 'Buộc Sage Mist làm hình nền cho mọi desktop user và màn hình đăng nhập qua đường dẫn ổn định default.png.', 'Thay bộ sưu tập Linux Mint trong Cinnamon Backgrounds bằng bộ sưu tập CaramOS.']],
+      ['1.0.14', 'Taskbar ba dock cho CaramOS', ['Tách taskbar dưới màn hình thành ba dock trái, giữa và phải với khoảng cách đồng đều.', 'Đưa Start Menu CaramOS sang dock trái, ứng dụng ghim/đang chạy sang dock giữa và applet trạng thái sang dock phải.', 'Hiển thị chấm màu CaramOS dưới icon của ứng dụng đang chạy.']],
+      ['1.0.13', 'Thêm Trung tâm điều khiển CaramOS', ['Thêm applet caramos-control-center@caramos cho Cinnamon panel.', 'Bật applet Control Center trên panel cho các user desktop đang có phiên đăng nhập.', 'Bỏ các applet mạng, âm thanh và pin mặc định đã được Control Center thay thế; giữ nguyên mọi applet khác và vị trí hiện có.']],
       ['1.0.12', 'Sửa lỗi hỏi mật khẩu khi đăng nhập', ['Gỡ lệnh enable system service khỏi helper autostart của desktop user để tránh prompt systemd/polkit khi login.', 'Chuyển bước bật fcitx5-lotus-server@USER.service sang root oneshot service.', 'Giữ cấu hình Fcitx5 Lotus, Telex và Preedit trong helper đăng nhập ở mức user.']],
       ['1.0.11', 'Sửa OTA cho user tuỳ chỉnh', ['Phát hành lại OTA để máy đang ở 1.0.10 nhận bản cập nhật mới.', 'Sửa các migration cũ để tự nhận diện user desktop thật thay vì hardcode user caram hoặc mint.', 'Dùng home directory thật khi áp dụng cấu hình Cinnamon, launcher Desktop, Fcitx5 và kích thước icon panel.']],
       ['1.0.10', 'Cập nhật kích thước icon panel Cinnamon', ['Áp dụng thay đổi kích thước icon panel từ PR #62.', 'Đặt icon bên phải panel Cinnamon về 18px trong dconf defaults.', 'Đồng bộ caramos-theme-apply và giữ lại tùy chỉnh kích thước icon của người dùng khi migration.']],
@@ -93,9 +118,9 @@ const copy = {
       ['1.0.5.2', 'Chuỗi migration đến CaramOS 1.0.5', ['Phát hành chuỗi OTA migration qua CaramOS 1.0.5.', 'Thêm migration cho MintWelcome branding, ZRAM mặc định, MintReport branding và metadata codename.', 'Gộp release notes nhiều bước, cập nhật dung lượng trong notifier và sửa codename cho add-apt-repository.']],
       ['1.0.2', 'Gói cập nhật CaramOS OTA đầu tiên', ['Thêm package CaramOS OTA updater ban đầu.', 'CLI hỗ trợ check, upgrade, status, repair, rollback và dry-run.', 'Có systemd timer kiểm tra hằng ngày, notifier GTK3 tiếng Việt, pkexec/polkit, transaction state, rollback best-effort và logrotate.']],
     ],
-    downloadTitle: 'Tải CaramOS Open Beta 1.0.12',
+    downloadTitle: 'Tải CaramOS Open Beta 1.0.16',
     downloadLead:
-      'ISO phát hành trên GitHub Releases. Người dùng nên kiểm tra checksum, thử live session trong máy ảo hoặc USB trước khi cài đặt lên máy thật. Máy đã cài có thể dùng OTA để lên 1.0.12.',
+      'ISO 1.0.16 được phát hành trên SourceForge. GitHub Release cung cấp SHA256SUMS để kiểm tra checksum. Hãy thử live session trong máy ảo hoặc USB trước khi cài lên máy thật; máy đã cài có thể dùng OTA để lên 1.0.16.',
     supportTitle: 'CaramOS trên Unikorn',
     supportLead:
       'Nếu bạn thấy CaramOS hữu ích, hãy clap trên Unikorn để tiếp thêm động lực cho team và giúp dự án tiếp cận nhiều người dùng Việt Nam hơn.',
@@ -103,13 +128,13 @@ const copy = {
     supportMeta: 'Mỗi lượt clap và badge xếp hạng giúp CaramOS nổi bật hơn trong cộng đồng mã nguồn mở Việt Nam.',
     footer: 'CaramOS là dự án thuộc hệ sinh thái Vietnam Linux Family.',
     features: [
+      ['control', 'Control Center', 'Trung tâm thao tác nhanh thay thế applet mạng, âm thanh và pin mặc định trên panel Cinnamon.', 'Desktop'],
+      ['dock', 'Taskbar ba dock', 'Start Menu ở dock trái, ứng dụng ghim/đang chạy ở giữa và applet trạng thái ở dock phải.', 'Desktop'],
+      ['palette', 'Bộ hình nền CaramOS', 'Năm hình nền 2048×1152 với Sage Mist làm mặc định cho desktop và màn hình đăng nhập.', 'Branding'],
+      ['cleanup', 'Migration an toàn', 'Dọn shortcut mặc định khỏi Desktop nhưng giữ nguyên file đã được người dùng tùy chỉnh.', 'OTA'],
       ['locale', 'Vietnamese locale', 'Thiết lập ngôn ngữ, timezone Asia/Ho_Chi_Minh và font tiếng Việt mặc định.', 'Config'],
       ['keyboard', 'Input method', 'Fcitx5 và Lotus được đưa vào ISO để hỗ trợ nhập liệu tiếng Việt.', 'Package'],
-      ['browser', 'Browser', 'Google Chrome được cài sẵn cho nhu cầu web phổ biến.', 'Package'],
-      ['document', 'Office suite', 'WPS Office được bổ sung để hỗ trợ xử lý tài liệu văn phòng.', 'Package'],
-      ['chat', 'Local apps', 'Zalo AppImage và shortcut desktop được thêm vào overlay.', 'Overlay'],
-      ['palette', 'Branding', 'Boot menu, Plymouth, wallpaper, theme, icon và cursor được tùy biến theo nhận diện CaramOS.', 'Overlay'],
-      ['terminal', 'Build tooling', 'Makefile, Bash scripts, Docker builder và GitHub Actions phục vụ build/test ISO.', 'Tooling'],
+      ['chat', 'Ứng dụng phổ biến', 'Zalo, WPS Office và Trình quản lý phần mềm được ghim vào taskbar khi đã cài.', 'Desktop'],
       ['shield', 'Base system', 'Nền tảng Linux Mint 22.3 Cinnamon trên Ubuntu 24.04 LTS.', 'Base'],
     ],
     ecosystem: [
@@ -132,14 +157,23 @@ const copy = {
   en: {
     language: 'VI',
     nav: ['Overview', 'Upgrade CaramOS', 'Release notes', 'Ecosystem', 'Open source', 'Download'],
-    heroBadge: 'Open Beta 1.0.12 · Linux Mint 22.3 Cinnamon · GPL-3.0',
-    upgradeNotice: 'Upgrade CaramOS from 1.0.1',
-    seoTitle: 'CaramOS 1.0.12 Open Beta — Linux distribution for Vietnamese users',
-    seoDescription: 'CaramOS 1.0.12 Open Beta is a Linux Mint 22.3 Cinnamon based distribution with Vietnamese defaults, Fcitx5 + Lotus input, daily-use applications for Vietnam, and a public ISO remaster workflow.',
+    heroBadge: 'Open Beta 1.0.16 · Linux Mint 22.3 Cinnamon · GPL-3.0',
+    upgradeNotice: 'Upgrade CaramOS to 1.0.16',
+    seoTitle: 'CaramOS — Linux distribution for Vietnamese users',
+    seoDescription: 'CaramOS is a Linux distribution based on Linux Mint 22.3 Cinnamon and Ubuntu 24.04 LTS, with Vietnamese defaults, Fcitx5/Lotus input, OTA updates, and an open-source ISO build workflow.',
     heroTitle: 'CaramOS — a Linux distribution for Vietnamese users',
     heroLead:
-      'CaramOS is based on Linux Mint 22.3 Cinnamon and Ubuntu 24.04 LTS. The project focuses on Vietnamese defaults, input methods, practical daily-use applications in Vietnam, and a public ISO build workflow.',
+      'CaramOS is based on Linux Mint 22.3 Cinnamon and Ubuntu 24.04 LTS, tuned for Vietnamese users with Vietnamese defaults, Fcitx5/Lotus input, OTA updates, and a public ISO build workflow.',
     download: 'Download ISO',
+    checksums: 'Verify SHA256',
+    releaseDetails: 'Release details',
+    bannerOneAlt: 'CaramOS desktop with Wallpapers and Control Center',
+    bannerTwoAlt: 'CaramOS desktop with Terminal showing system information',
+    bannerStackLabel: 'Switch between two CaramOS desktop screenshots',
+    otaBadge: 'CaramOS Update Center',
+    otaVisualAlt: 'CaramOS Update Center interface',
+    otaMenuVisualAlt: 'Finding CaramOS Update Center from the Start Menu',
+    otaMenuVisualHint: 'Find “CaramOS Update Center” from the Start Menu after installation.',
     source: 'Source code',
     community: 'Community',
     supportPage: 'Support',
@@ -147,8 +181,8 @@ const copy = {
     contributorsTitle: 'Contributors',
     contributorsLead: 'The contributor list is loaded directly from the CaramOS GitHub repository.',
     contributorsFallback: 'Could not load contributor data from GitHub. Please view the latest list on GitHub.',
-    sectionOverview: 'Core components',
-    overviewLead: 'Changes are focused on desktop experience, localization, OTA migrations, and reproducible ISO customization.',
+    sectionOverview: 'Core experience',
+    overviewLead: 'CaramOS focuses on a practical Linux experience for Vietnamese users: a stable Mint/Cinnamon base, Vietnamese localization, ready-to-use input methods, OTA updates, and open-source development.',
     ecosystemTitle: 'VNLF ecosystem',
     ecosystemLead:
       'Official Vietnam Linux Family channels and resources for community discussion, content distribution, and project development.',
@@ -160,21 +194,29 @@ const copy = {
       'The build flow uses an ISO remaster method: extract the upstream ISO, customize the root filesystem with packages, overlays, and hooks, then repack it with squashfs and xorriso.',
     otaTitle: 'Upgrade CaramOS without reinstalling the ISO',
     otaLead:
-      'You can upgrade CaramOS to the latest version without downloading a new ISO or reinstalling your machine. Install the CaramOS Update Center, then open it to check and upgrade the system.',
-    otaInstallLabel: 'If you are on CaramOS 1.0.1, run this command in Terminal:',
-    otaCopyHint: 'After installation, search for “CaramOS Update Center” from the Start Menu to open it again anytime.',
+      'Machines on CaramOS 1.0.1 should run the installer once to add CaramOS Update Center and the OTA source. Machines that already have Update Center can wait for the daily task on the next day, or use the command below to upgrade immediately.',
+    otaInstallLabel: 'CaramOS 1.0.1 or a machine without Update Center:',
+    otaInstallHint: 'Run the installer once. You can then open “CaramOS Update Center” from the Start Menu.',
+    otaUpgradeLabel: 'Already has Update Center and wants to upgrade now:',
+    otaUpgradeHint: 'If an immediate update is not needed, wait for the daily task to run on the next day.',
     otaCopy: 'Copy command',
+    otaCopyInstallLabel: 'Copy Update Center installer command',
+    otaCopyUpgradeLabel: 'Copy immediate upgrade command',
     otaCopied: 'Copied',
     otaSteps: [
-      ['Install Update Center', 'Run one command to add the update source and install the CaramOS update application.'],
-      ['Open from Start Menu', 'Search for “CaramOS Update Center” in the application menu to check for new versions.'],
-      ['Upgrade the system', 'The app shows the latest update and guides you through a safe upgrade.'],
+      ['Run installer on 1.0.1', 'Install CaramOS Update Center and the OTA source once with the installer command.'],
+      ['Installed machines can wait', 'The daily task will check for a new release on the next day.'],
+      ['Upgrade immediately', 'Run sudo caramos-ota --upgrade --yes in Terminal to update now.'],
     ],
     releaseNotesTitle: 'CaramOS Open Beta release notes',
     releaseNotesLead:
-      'Beta 1.0.1 was the first CaramOS release. The milestones below summarize the update chain from 1.0.2 to 1.0.12.',
+      'Beta 1.0.1 was the first CaramOS release. The milestones below summarize notable changes through 1.0.16.',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
+      ['1.0.16', 'Taskbar pins and desktop cleanup', ['Pin Zalo and Software Manager to the Cinnamon taskbar when installed.', 'Keep WPS Office pinned to the taskbar.', 'Remove stock WPS Office, Zalo, and Software Manager shortcuts from the desktop while preserving user-modified files.']],
+      ['1.0.15', 'New CaramOS wallpapers', ['Install five 2048×1152 CaramOS wallpapers.', 'Force Sage Mist as the wallpaper for every desktop user and the login screen through the stable default.png path.', 'Replace the Linux Mint collection in Cinnamon Backgrounds with the CaramOS collection.']],
+      ['1.0.14', 'Three-dock taskbar for CaramOS', ['Split the bottom Cinnamon taskbar into evenly spaced left, center, and right docks.', 'Place the CaramOS Start Menu on the left, pinned/running apps in the center, and status applets on the right.', 'Show a CaramOS-colored dot below running application icons.']],
+      ['1.0.13', 'Add CaramOS Control Center', ['Add the caramos-control-center@caramos applet to the Cinnamon panel.', 'Enable Control Center for desktop users with an active session.', 'Remove stock network, sound, and power applets replaced by Control Center while preserving every other applet and its existing position.']],
       ['1.0.12', 'Login password prompt fix', ['Removed system service enablement from the desktop user autostart helper to avoid systemd/polkit prompts at login.', 'Moved fcitx5-lotus-server@USER.service enablement into a root oneshot service.', 'Kept Fcitx5 Lotus, Telex, and Preedit configuration in the user-level login helper.']],
       ['1.0.11', 'OTA fix for custom usernames', ['Published a new OTA target so systems already on 1.0.10 can receive the fix.', 'Updated earlier migrations to discover real desktop users instead of hardcoding caram or mint.', 'Used each user’s real home directory when applying Cinnamon, Desktop launcher, Fcitx5, and panel icon-size settings.']],
       ['1.0.10', 'Cinnamon panel icon size update', ['Applied the panel icon size update from PR #62.', 'Set right-side Cinnamon panel icons to 18px in dconf defaults.', 'Aligned caramos-theme-apply and preserved user-customized panel icon sizes during migration.']],
@@ -185,9 +227,9 @@ const copy = {
       ['1.0.5.2', 'Migration chain through 1.0.5', ['Released the OTA migration chain through CaramOS 1.0.5.', 'Added migrations for MintWelcome branding, default ZRAM, MintReport branding, and codename metadata.', 'Aggregated multi-step release notes, updated notifier size, and fixed codename compatibility for add-apt-repository.']],
       ['1.0.2', 'Initial OTA updater package', ['Introduced the first CaramOS OTA updater package.', 'Added CLI commands for check, upgrade, status, repair, rollback, and dry-run.', 'Included daily systemd checks, GTK3 Vietnamese notifier, pkexec/polkit, transaction state, best-effort rollback, and logrotate.']],
     ],
-    downloadTitle: 'Download CaramOS Open Beta 1.0.12',
+    downloadTitle: 'Download CaramOS Open Beta 1.0.16',
     downloadLead:
-      'ISO images are published on GitHub Releases. Users should verify checksums and test the live session in a VM or USB environment before installing. Existing installs can use OTA to reach 1.0.12.',
+      'The 1.0.16 ISO is published on SourceForge. GitHub Release provides SHA256SUMS for checksum verification. Test the live session in a VM or from USB before installing; existing systems can use OTA to reach 1.0.16.',
     supportTitle: 'CaramOS on Unikorn',
     supportLead:
       'If CaramOS is useful to you, clap for the project on Unikorn to encourage the team and help it reach more Vietnamese Linux users.',
@@ -195,13 +237,13 @@ const copy = {
     supportMeta: 'Every clap and ranking badge helps CaramOS stand out in the Vietnamese open-source community.',
     footer: 'CaramOS is part of the Vietnam Linux Family ecosystem.',
     features: [
+      ['control', 'Control Center', 'Quick controls replace the stock network, sound, and power applets on the Cinnamon panel.', 'Desktop'],
+      ['dock', 'Three-dock taskbar', 'Start Menu sits on the left, pinned/running apps in the center, and status applets on the right.', 'Desktop'],
+      ['palette', 'CaramOS wallpapers', 'Five 2048×1152 wallpapers with Sage Mist as the desktop and login-screen default.', 'Branding'],
+      ['cleanup', 'Safe migration', 'Stock Desktop shortcuts are removed while user-modified files remain untouched.', 'OTA'],
       ['locale', 'Vietnamese locale', 'Default Vietnamese language, Asia/Ho_Chi_Minh timezone, and Vietnamese font configuration.', 'Config'],
       ['keyboard', 'Input method', 'Fcitx5 and Lotus are included in the ISO for Vietnamese text input.', 'Package'],
-      ['browser', 'Browser', 'Google Chrome is included for common web usage requirements.', 'Package'],
-      ['document', 'Office suite', 'WPS Office is added for document and office-file workflows.', 'Package'],
-      ['chat', 'Local apps', 'Zalo AppImage and desktop shortcuts are provided through the overlay.', 'Overlay'],
-      ['palette', 'Branding', 'Boot menu, Plymouth, wallpaper, theme, icons, and cursor are customized for CaramOS identity.', 'Overlay'],
-      ['terminal', 'Build tooling', 'Makefile, Bash scripts, Docker builder, and GitHub Actions support ISO build and testing.', 'Tooling'],
+      ['chat', 'Popular applications', 'Zalo, WPS Office, and Software Manager are pinned to the taskbar when installed.', 'Desktop'],
       ['shield', 'Base system', 'Linux Mint 22.3 Cinnamon based on Ubuntu 24.04 LTS.', 'Base'],
     ],
     ecosystem: [
@@ -285,12 +327,12 @@ function App() {
     return () => controller.abort();
   }, []);
 
-  const handleCopyInstallCommand = async () => {
+  const handleCopyCommand = async (command) => {
     let didCopy = false;
 
     try {
       if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(installCommand);
+        await navigator.clipboard.writeText(command);
         didCopy = true;
       }
     } catch {
@@ -299,7 +341,7 @@ function App() {
 
     if (!didCopy) {
       const textarea = document.createElement('textarea');
-      textarea.value = installCommand;
+      textarea.value = command;
       textarea.setAttribute('readonly', '');
       textarea.style.position = 'fixed';
       textarea.style.left = '-9999px';
@@ -362,14 +404,14 @@ function App() {
             <h1>{t.heroTitle}</h1>
             <p className="hero-lead">{t.heroLead}</p>
             <div className="actions">
-              <a className="button primary" href={links.release}>{t.download}</a>
+              <a className="button primary" href={links.download} target="_blank" rel="noopener noreferrer">{t.download}</a>
               <a className="button" href={links.repo}>{t.source}</a>
               <a className="button" href={links.facebook}>{t.community}</a>
               <a className="button support-button" href="/support">{t.supportPage}</a>
             </div>
             <div className="stats">{liveStats.map((value, i) => <div key={t.statLabels[i]}><strong>{value}</strong><span>{t.statLabels[i]}</span></div>)}</div>
           </div>
-          <div className="hero-shot"><img src="/assets/screenshots/03-desktop.png" alt="CaramOS desktop" /></div>
+          <BannerStack t={t} variant="hero" />
         </section>
 
         <section className="support-section" id="support">
@@ -399,24 +441,34 @@ function App() {
         <section className="ota-section" id="ota">
           <div className="ota-visual-stack">
             <div className="ota-visual">
-              <img src="/assets/caram-os-ota.png" alt="Trung tâm cập nhật CaramOS" loading="lazy" />
+              <img src="/assets/caram-os-ota.png" alt={t.otaVisualAlt} loading="lazy" decoding="async" />
             </div>
             <div className="ota-menu-visual">
-              <img src="/assets/caramos-ota-from-start-menu.png" alt="Tìm Trung tâm cập nhật CaramOS từ Start Menu" loading="lazy" />
-              <span>{t.otaCopyHint}</span>
+              <img src="/assets/caramos-ota-from-start-menu.png" alt={t.otaMenuVisualAlt} loading="lazy" decoding="async" />
+              <span>{t.otaMenuVisualHint}</span>
             </div>
           </div>
           <div className="ota-copy">
-            <p className="badge">Trung tâm cập nhật CaramOS</p>
+            <p className="badge">{t.otaBadge}</p>
             <h2>{t.otaTitle}</h2>
             <p>{t.otaLead}</p>
-            <div className="install-command-card">
-              <strong>{t.otaInstallLabel}</strong>
-              <div className="command-row">
-                <code>{installCommand}</code>
-                <button type="button" onClick={handleCopyInstallCommand}>{t.otaCopy}</button>
+            <div className="ota-command-grid">
+              <div className="install-command-card">
+                <strong>{t.otaInstallLabel}</strong>
+                <div className="command-row">
+                  <code>{installCommand}</code>
+                  <button type="button" onClick={() => handleCopyCommand(installCommand)} aria-label={t.otaCopyInstallLabel}>{t.otaCopy}</button>
+                </div>
+                <small>{t.otaInstallHint}</small>
               </div>
-              <small>{t.otaCopyHint}</small>
+              <div className="install-command-card upgrade-command-card">
+                <strong>{t.otaUpgradeLabel}</strong>
+                <div className="command-row">
+                  <code>{upgradeCommand}</code>
+                  <button type="button" onClick={() => handleCopyCommand(upgradeCommand)} aria-label={t.otaCopyUpgradeLabel}>{t.otaCopy}</button>
+                </div>
+                <small>{t.otaUpgradeHint}</small>
+              </div>
             </div>
             <div className="ota-steps">
               {t.otaSteps.map(([title, text], index) => <article key={title}><span>{String(index + 1).padStart(2, '0')}</span><strong>{title}</strong><p>{text}</p></article>)}
@@ -425,7 +477,7 @@ function App() {
           </div>
         </section>
 
-        {copiedCommand && <div className="copy-toast" role="status">✓ {t.otaCopied}</div>}
+        {copiedCommand && <div className="copy-toast" role="status" aria-live="polite">✓ {t.otaCopied}</div>}
 
         <ReleaseNotesSection t={t} />
 
@@ -459,17 +511,46 @@ function App() {
         <section className="screenshots">
           <img src="/assets/screenshots/01-grub-menu.png" alt="GRUB boot menu" />
           <img src="/assets/screenshots/02-startup-loading.png" alt="Startup screen" />
-          <img src="/assets/screenshots/04-neofetch.png" alt="Neofetch" />
+          <BannerStack t={t} variant="gallery" />
         </section>
 
         <section className="download" id="download">
-          <img src="/assets/caramos_vietnam_banner.png" alt="CaramOS banner" />
-          <div><h2>{t.downloadTitle}</h2><p>{t.downloadLead}</p><a className="button primary" href={links.release}>{t.download}</a></div>
+          <BannerStack t={t} variant="download" />
+          <div>
+            <h2>{t.downloadTitle}</h2>
+            <p>{t.downloadLead}</p>
+            <div className="actions download-actions">
+              <a className="button primary" href={links.download} target="_blank" rel="noopener noreferrer">{t.download}</a>
+              <a className="button" href={links.checksums} target="_blank" rel="noopener noreferrer">{t.checksums}</a>
+              <a className="button" href={links.release} target="_blank" rel="noopener noreferrer">{t.releaseDetails}</a>
+            </div>
+          </div>
         </section>
       </main>
       <footer><div><img src="/assets/CaramOS_logo.png" alt="" /><strong>CaramOS</strong></div><p>{t.footer}</p><a href={links.vnlf}>vietnamlinuxfamily.net</a></footer>
     </>
   );
+}
+
+function BannerStack({ t, variant }) {
+  const [reversed, setReversed] = useState(false);
+
+  return <button
+    type="button"
+    className={`banner-stack banner-stack-${variant}${reversed ? ' is-reversed' : ''}`}
+    onClick={() => setReversed((current) => !current)}
+    aria-label={t.bannerStackLabel}
+    aria-pressed={reversed}
+  >
+    {banners.map(([src, altKey], index) => <img
+      key={src}
+      className={`banner-image banner-image-${index + 1}`}
+      src={src}
+      alt={t[altKey]}
+      loading={variant === 'hero' && index === 0 ? 'eager' : 'lazy'}
+      decoding="async"
+    />)}
+  </button>;
 }
 
 function SupportPage({ onCopyWallet, copiedWallet }) {
@@ -605,6 +686,9 @@ function SvgIcon({ name }) {
     document: <><path d="M7 3h7l4 4v14H7z" /><path d="M14 3v5h5M9 13h6M9 17h6" /></>,
     chat: <><path d="M5 6h14v9H9l-4 4z" /><path d="M8 10h8M8 13h5" /></>,
     palette: <><path d="M12 3a9 9 0 0 0 0 18h1.2a1.8 1.8 0 0 0 1.2-3.1 1.7 1.7 0 0 1 1.1-2.9H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8z" /><path d="M7.5 10h.01M10 7h.01M14 7h.01M16.5 10h.01" /></>,
+    control: <><rect x="4" y="5" width="16" height="14" rx="3" /><path d="M8 9h8M8 15h8M11 7v4M15 13v4" /></>,
+    dock: <><rect x="3" y="7" width="18" height="10" rx="3" /><path d="M8 11h.01M12 11h.01M16 11h.01M10 15h4" /></>,
+    cleanup: <><path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13" /><path d="M10 11v5M14 11v5" /></>,
     terminal: <><rect x="4" y="5" width="16" height="14" rx="2" /><path d="m8 10 3 2-3 2M13 15h4" /></>,
     shield: <><path d="M12 3 5 6v5c0 4.5 3 8.4 7 10 4-1.6 7-5.5 7-10V6z" /><path d="m9 12 2 2 4-5" /></>,
     website: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" /></>,
