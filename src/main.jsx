@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './styles.css';
 
 const links = {
-  download: 'https://sourceforge.net/projects/caramos/files/v1.0.16/CaramOS-1.0.16-cinnamon-amd64.iso/download',
+  download: 'https://github.com/VN-Linux-Family/CaramOS/releases',
   release: 'https://github.com/VN-Linux-Family/CaramOS/releases/tag/v1.0.16',
   checksums: 'https://github.com/VN-Linux-Family/CaramOS/releases/download/v1.0.16/SHA256SUMS',
   repo: 'https://github.com/VN-Linux-Family/CaramOS',
@@ -67,7 +67,7 @@ const copy = {
     otaMenuVisualHint: 'Tìm “Trung tâm cập nhật CaramOS” từ Start Menu sau khi cài.',
     source: 'Mã nguồn',
     community: 'Cộng đồng',
-    supportPage: 'Ủng hộ',
+    supportPage: 'Donate',
     statLabels: ['Stars', 'Forks', 'Issues', 'License'],
     contributorsTitle: 'Contributors',
     contributorsLead: 'Danh sách contributors được lấy trực tiếp từ GitHub repository của CaramOS.',
@@ -120,7 +120,7 @@ const copy = {
     ],
     downloadTitle: 'Tải CaramOS Open Beta 1.0.16',
     downloadLead:
-      'ISO 1.0.16 được phát hành trên SourceForge. GitHub Release cung cấp SHA256SUMS để kiểm tra checksum. Hãy thử live session trong máy ảo hoặc USB trước khi cài lên máy thật; máy đã cài có thể dùng OTA để lên 1.0.16.',
+      'ISO 1.0.16 và SHA256SUMS được cung cấp qua GitHub Releases. Hãy kiểm tra checksum và thử live session trong máy ảo hoặc USB trước khi cài lên máy thật; máy đã cài có thể dùng OTA để lên 1.0.16.',
     supportTitle: 'CaramOS trên Unikorn',
     supportLead:
       'Nếu bạn thấy CaramOS hữu ích, hãy clap trên Unikorn để tiếp thêm động lực cho team và giúp dự án tiếp cận nhiều người dùng Việt Nam hơn.',
@@ -176,7 +176,7 @@ const copy = {
     otaMenuVisualHint: 'Find “CaramOS Update Center” from the Start Menu after installation.',
     source: 'Source code',
     community: 'Community',
-    supportPage: 'Support',
+    supportPage: 'Donate',
     statLabels: ['Stars', 'Forks', 'Issues', 'License'],
     contributorsTitle: 'Contributors',
     contributorsLead: 'The contributor list is loaded directly from the CaramOS GitHub repository.',
@@ -229,7 +229,7 @@ const copy = {
     ],
     downloadTitle: 'Download CaramOS Open Beta 1.0.16',
     downloadLead:
-      'The 1.0.16 ISO is published on SourceForge. GitHub Release provides SHA256SUMS for checksum verification. Test the live session in a VM or from USB before installing; existing systems can use OTA to reach 1.0.16.',
+      'The 1.0.16 ISO and SHA256SUMS are available through GitHub Releases. Verify the checksum and test the live session in a VM or from USB before installing; existing systems can use OTA to reach 1.0.16.',
     supportTitle: 'CaramOS on Unikorn',
     supportLead:
       'If CaramOS is useful to you, clap for the project on Unikorn to encourage the team and help it reach more Vietnamese Linux users.',
@@ -558,8 +558,8 @@ function SupportPage({ onCopyWallet, copiedWallet }) {
 
   useEffect(() => {
     document.documentElement.lang = 'vi';
-    document.title = 'Ủng hộ CaramOS — Vietnam Linux Family';
-    document.querySelector('meta[name="description"]')?.setAttribute('content', 'Ủng hộ CaramOS qua PayPal, Ko-fi, Buy Me a Coffee, USDT TRC20, MoMo hoặc tham gia cộng đồng Vietnam Linux Family.');
+    document.title = 'Donate cho CaramOS — Vietnam Linux Family';
+    document.querySelector('meta[name="description"]')?.setAttribute('content', 'Donate cho CaramOS qua PayPal, Ko-fi, Buy Me a Coffee, USDT TRC20 hoặc MoMo.');
   }, []);
 
   const donationCards = [
@@ -575,7 +575,7 @@ function SupportPage({ onCopyWallet, copiedWallet }) {
     </header>
     <main className="support-page-main">
       <section className="support-page-hero">
-        <span className="badge">Support Us</span>
+        <span className="badge">Donate</span>
         <h1>Fund the Future of CaramOS</h1>
         <p>CaramOS miễn phí và luôn hướng đến cộng đồng. Sự ủng hộ của bạn giúp chúng tôi duy trì hạ tầng, thử nghiệm ISO, cải thiện tính năng, viết tài liệu và giữ dự án sống lâu dài. Dù nhỏ hay lớn, mọi đóng góp đều rất đáng quý!</p>
       </section>
