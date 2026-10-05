@@ -4,8 +4,8 @@ import './styles.css';
 
 const links = {
   download: 'https://github.com/VN-Linux-Family/CaramOS/releases',
-  release: 'https://github.com/VN-Linux-Family/CaramOS/releases/tag/v1.0.16',
-  checksums: 'https://github.com/VN-Linux-Family/CaramOS/releases/download/v1.0.16/SHA256SUMS',
+  release: 'https://github.com/VN-Linux-Family/CaramOS/releases/tag/v1.0.18',
+  checksums: 'https://github.com/VN-Linux-Family/CaramOS/releases/download/v1.0.18/SHA256SUMS',
   repo: 'https://github.com/VN-Linux-Family/CaramOS',
   org: 'https://github.com/VN-Linux-Family',
   vnlf: 'https://vietnamlinuxfamily.net',
@@ -48,8 +48,8 @@ const copy = {
   vi: {
     language: 'EN',
     nav: ['Tổng quan', 'Nâng cấp CaramOS', 'Release note', 'Hệ sinh thái', 'Open source', 'Tải ISO'],
-    heroBadge: 'Open Beta 1.0.16 · Linux Mint 22.3 Cinnamon · GPL-3.0',
-    upgradeNotice: 'Nâng cấp CaramOS lên 1.0.16',
+    heroBadge: 'Open Beta 1.0.18 · Linux Mint 22.3 Cinnamon · GPL-3.0',
+    upgradeNotice: 'Nâng cấp CaramOS lên 1.0.18',
     seoTitle: 'CaramOS — bản phân phối Linux cho người dùng Việt Nam',
     seoDescription: 'CaramOS là bản phân phối Linux dựa trên Linux Mint 22.3 Cinnamon và Ubuntu 24.04 LTS, có mặc định tiếng Việt, Fcitx5/Lotus, cập nhật OTA và quy trình build ISO mã nguồn mở.',
     heroTitle: 'CaramOS — bản phân phối Linux cho người dùng Việt Nam',
@@ -101,9 +101,10 @@ const copy = {
     ],
     releaseNotesTitle: 'Release note CaramOS Open Beta',
     releaseNotesLead:
-      'Beta 1.0.1 là bản phát hành đầu tiên của CaramOS. Các mốc sau đây ghi lại những thay đổi đáng chú ý trong chuỗi cập nhật đến 1.0.16.',
+      'Beta 1.0.1 là bản phát hành đầu tiên của CaramOS. Các mốc sau đây ghi lại những thay đổi đáng chú ý trong chuỗi cập nhật đến 1.0.18.',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
+      ['1.0.18', 'Chế độ tối, Chế độ nguồn và Zalo mới', ['Thêm ô Chế độ tối vào Control Center: chuyển cả hệ thống sang giao diện tối Cinnamon-Delight-Dark cùng tông màu CaramOS; hình nền mặc định tự đổi giữa Sage Mist và Indigo Night.', 'Thay TLP bằng power-profiles-daemon và thêm ô Chế độ nguồn với ba mức Hiệu năng, Cân bằng và Tiết kiệm pin.', 'Cập nhật Zalo lên 26.10.10 từ kho VN-Linux-Family/zalo-for-linux; máy đã cài được thay Zalo qua OTA, giữ nguyên dữ liệu người dùng.', 'Trả quyền root cho các file hệ thống trong /etc và /usr bị gán cho tài khoản người dùng, và sửa thông báo mời nâng cấp Linux Mint sai trong Báo cáo hệ thống.']],
       ['1.0.16', 'Ghim ứng dụng và dọn Desktop CaramOS', ['Ghim Zalo và Trình quản lý phần mềm vào taskbar Cinnamon khi ứng dụng đã được cài.', 'Giữ WPS Office trên taskbar.', 'Gỡ shortcut mặc định của WPS Office, Zalo và Trình quản lý phần mềm khỏi Desktop nhưng giữ file đã được người dùng tùy chỉnh.']],
       ['1.0.15', 'Bộ hình nền CaramOS mới', ['Cài năm hình nền CaramOS độ phân giải 2048×1152.', 'Buộc Sage Mist làm hình nền cho mọi desktop user và màn hình đăng nhập qua đường dẫn ổn định default.png.', 'Thay bộ sưu tập Linux Mint trong Cinnamon Backgrounds bằng bộ sưu tập CaramOS.']],
       ['1.0.14', 'Taskbar ba dock cho CaramOS', ['Tách taskbar dưới màn hình thành ba dock trái, giữa và phải với khoảng cách đồng đều.', 'Đưa Start Menu CaramOS sang dock trái, ứng dụng ghim/đang chạy sang dock giữa và applet trạng thái sang dock phải.', 'Hiển thị chấm màu CaramOS dưới icon của ứng dụng đang chạy.']],
@@ -118,9 +119,9 @@ const copy = {
       ['1.0.5.2', 'Chuỗi migration đến CaramOS 1.0.5', ['Phát hành chuỗi OTA migration qua CaramOS 1.0.5.', 'Thêm migration cho MintWelcome branding, ZRAM mặc định, MintReport branding và metadata codename.', 'Gộp release notes nhiều bước, cập nhật dung lượng trong notifier và sửa codename cho add-apt-repository.']],
       ['1.0.2', 'Gói cập nhật CaramOS OTA đầu tiên', ['Thêm package CaramOS OTA updater ban đầu.', 'CLI hỗ trợ check, upgrade, status, repair, rollback và dry-run.', 'Có systemd timer kiểm tra hằng ngày, notifier GTK3 tiếng Việt, pkexec/polkit, transaction state, rollback best-effort và logrotate.']],
     ],
-    downloadTitle: 'Tải CaramOS Open Beta 1.0.16',
+    downloadTitle: 'Tải CaramOS Open Beta 1.0.18',
     downloadLead:
-      'ISO 1.0.16 và SHA256SUMS được cung cấp qua GitHub Releases. Hãy kiểm tra checksum và thử live session trong máy ảo hoặc USB trước khi cài lên máy thật; máy đã cài có thể dùng OTA để lên 1.0.16.',
+      'ISO 1.0.18 và SHA256SUMS được cung cấp qua GitHub Releases. Hãy kiểm tra checksum và thử live session trong máy ảo hoặc USB trước khi cài lên máy thật; máy đã cài có thể dùng OTA để lên 1.0.18.',
     supportTitle: 'CaramOS trên Unikorn',
     supportLead:
       'Nếu bạn thấy CaramOS hữu ích, hãy clap trên Unikorn để tiếp thêm động lực cho team và giúp dự án tiếp cận nhiều người dùng Việt Nam hơn.',
@@ -128,9 +129,9 @@ const copy = {
     supportMeta: 'Mỗi lượt clap và badge xếp hạng giúp CaramOS nổi bật hơn trong cộng đồng mã nguồn mở Việt Nam.',
     footer: 'CaramOS là dự án thuộc hệ sinh thái Vietnam Linux Family.',
     features: [
-      ['control', 'Control Center', 'Trung tâm thao tác nhanh thay thế applet mạng, âm thanh và pin mặc định trên panel Cinnamon.', 'Desktop'],
+      ['control', 'Control Center', 'Trung tâm thao tác nhanh thay applet mạng, âm thanh và pin mặc định, có thêm Chế độ tối và Chế độ nguồn.', 'Desktop'],
       ['dock', 'Taskbar ba dock', 'Start Menu ở dock trái, ứng dụng ghim/đang chạy ở giữa và applet trạng thái ở dock phải.', 'Desktop'],
-      ['palette', 'Bộ hình nền CaramOS', 'Năm hình nền 2048×1152 với Sage Mist làm mặc định cho desktop và màn hình đăng nhập.', 'Branding'],
+      ['palette', 'Bộ hình nền CaramOS', 'Năm hình nền 2048×1152: Sage Mist là mặc định, Indigo Night dùng khi bật Chế độ tối.', 'Branding'],
       ['cleanup', 'Migration an toàn', 'Dọn shortcut mặc định khỏi Desktop nhưng giữ nguyên file đã được người dùng tùy chỉnh.', 'OTA'],
       ['locale', 'Vietnamese locale', 'Thiết lập ngôn ngữ, timezone Asia/Ho_Chi_Minh và font tiếng Việt mặc định.', 'Config'],
       ['keyboard', 'Input method', 'Fcitx5 và Lotus được đưa vào ISO để hỗ trợ nhập liệu tiếng Việt.', 'Package'],
@@ -157,8 +158,8 @@ const copy = {
   en: {
     language: 'VI',
     nav: ['Overview', 'Upgrade CaramOS', 'Release notes', 'Ecosystem', 'Open source', 'Download'],
-    heroBadge: 'Open Beta 1.0.16 · Linux Mint 22.3 Cinnamon · GPL-3.0',
-    upgradeNotice: 'Upgrade CaramOS to 1.0.16',
+    heroBadge: 'Open Beta 1.0.18 · Linux Mint 22.3 Cinnamon · GPL-3.0',
+    upgradeNotice: 'Upgrade CaramOS to 1.0.18',
     seoTitle: 'CaramOS — Linux distribution for Vietnamese users',
     seoDescription: 'CaramOS is a Linux distribution based on Linux Mint 22.3 Cinnamon and Ubuntu 24.04 LTS, with Vietnamese defaults, Fcitx5/Lotus input, OTA updates, and an open-source ISO build workflow.',
     heroTitle: 'CaramOS — a Linux distribution for Vietnamese users',
@@ -210,9 +211,10 @@ const copy = {
     ],
     releaseNotesTitle: 'CaramOS Open Beta release notes',
     releaseNotesLead:
-      'Beta 1.0.1 was the first CaramOS release. The milestones below summarize notable changes through 1.0.16.',
+      'Beta 1.0.1 was the first CaramOS release. The milestones below summarize notable changes through 1.0.18.',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
+      ['1.0.18', 'Dark mode, power mode, and a new Zalo', ['Add a Dark mode tile to Control Center: switch the whole system to the Cinnamon-Delight-Dark theme in CaramOS colours; the default wallpaper follows between Sage Mist and Indigo Night.', 'Replace TLP with power-profiles-daemon and add a Power mode tile with Performance, Balanced, and Power saver.', 'Update Zalo to 26.10.10 from the VN-Linux-Family/zalo-for-linux repository; installed systems get the new Zalo through OTA with user data kept.', 'Return system files in /etc and /usr that were owned by a user account to root, and stop System Reports from offering a wrong Linux Mint upgrade.']],
       ['1.0.16', 'Taskbar pins and desktop cleanup', ['Pin Zalo and Software Manager to the Cinnamon taskbar when installed.', 'Keep WPS Office pinned to the taskbar.', 'Remove stock WPS Office, Zalo, and Software Manager shortcuts from the desktop while preserving user-modified files.']],
       ['1.0.15', 'New CaramOS wallpapers', ['Install five 2048×1152 CaramOS wallpapers.', 'Force Sage Mist as the wallpaper for every desktop user and the login screen through the stable default.png path.', 'Replace the Linux Mint collection in Cinnamon Backgrounds with the CaramOS collection.']],
       ['1.0.14', 'Three-dock taskbar for CaramOS', ['Split the bottom Cinnamon taskbar into evenly spaced left, center, and right docks.', 'Place the CaramOS Start Menu on the left, pinned/running apps in the center, and status applets on the right.', 'Show a CaramOS-colored dot below running application icons.']],
@@ -227,9 +229,9 @@ const copy = {
       ['1.0.5.2', 'Migration chain through 1.0.5', ['Released the OTA migration chain through CaramOS 1.0.5.', 'Added migrations for MintWelcome branding, default ZRAM, MintReport branding, and codename metadata.', 'Aggregated multi-step release notes, updated notifier size, and fixed codename compatibility for add-apt-repository.']],
       ['1.0.2', 'Initial OTA updater package', ['Introduced the first CaramOS OTA updater package.', 'Added CLI commands for check, upgrade, status, repair, rollback, and dry-run.', 'Included daily systemd checks, GTK3 Vietnamese notifier, pkexec/polkit, transaction state, best-effort rollback, and logrotate.']],
     ],
-    downloadTitle: 'Download CaramOS Open Beta 1.0.16',
+    downloadTitle: 'Download CaramOS Open Beta 1.0.18',
     downloadLead:
-      'The 1.0.16 ISO and SHA256SUMS are available through GitHub Releases. Verify the checksum and test the live session in a VM or from USB before installing; existing systems can use OTA to reach 1.0.16.',
+      'The 1.0.18 ISO and SHA256SUMS are available through GitHub Releases. Verify the checksum and test the live session in a VM or from USB before installing; existing systems can use OTA to reach 1.0.18.',
     supportTitle: 'CaramOS on Unikorn',
     supportLead:
       'If CaramOS is useful to you, clap for the project on Unikorn to encourage the team and help it reach more Vietnamese Linux users.',
@@ -237,9 +239,9 @@ const copy = {
     supportMeta: 'Every clap and ranking badge helps CaramOS stand out in the Vietnamese open-source community.',
     footer: 'CaramOS is part of the Vietnam Linux Family ecosystem.',
     features: [
-      ['control', 'Control Center', 'Quick controls replace the stock network, sound, and power applets on the Cinnamon panel.', 'Desktop'],
+      ['control', 'Control Center', 'Quick controls replace the stock network, sound, and power applets, with Dark mode and Power mode built in.', 'Desktop'],
       ['dock', 'Three-dock taskbar', 'Start Menu sits on the left, pinned/running apps in the center, and status applets on the right.', 'Desktop'],
-      ['palette', 'CaramOS wallpapers', 'Five 2048×1152 wallpapers with Sage Mist as the desktop and login-screen default.', 'Branding'],
+      ['palette', 'CaramOS wallpapers', 'Five 2048×1152 wallpapers: Sage Mist by default, Indigo Night in Dark mode.', 'Branding'],
       ['cleanup', 'Safe migration', 'Stock Desktop shortcuts are removed while user-modified files remain untouched.', 'OTA'],
       ['locale', 'Vietnamese locale', 'Default Vietnamese language, Asia/Ho_Chi_Minh timezone, and Vietnamese font configuration.', 'Config'],
       ['keyboard', 'Input method', 'Fcitx5 and Lotus are included in the ISO for Vietnamese text input.', 'Package'],
