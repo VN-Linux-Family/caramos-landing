@@ -561,7 +561,7 @@ function SupportPage({ onCopyWallet, copiedWallet }) {
   useEffect(() => {
     document.documentElement.lang = 'vi';
     document.title = 'Donate cho CaramOS — Vietnam Linux Family';
-    document.querySelector('meta[name="description"]')?.setAttribute('content', 'Donate cho CaramOS qua PayPal, Ko-fi, Buy Me a Coffee, USDT TRC20 hoặc MoMo.');
+    document.querySelector('meta[name="description"]')?.setAttribute('content', 'Donate cho CaramOS qua MoMo, PayPal, Ko-fi, Buy Me a Coffee hoặc USDT TRC20.');
   }, []);
 
   const donationCards = [
@@ -580,6 +580,21 @@ function SupportPage({ onCopyWallet, copiedWallet }) {
         <span className="badge">Donate</span>
         <h1>Fund the Future of CaramOS</h1>
         <p>CaramOS miễn phí và luôn hướng đến cộng đồng. Sự ủng hộ của bạn giúp chúng tôi duy trì hạ tầng, thử nghiệm ISO, cải thiện tính năng, viết tài liệu và giữ dự án sống lâu dài. Dù nhỏ hay lớn, mọi đóng góp đều rất đáng quý!</p>
+      </section>
+
+      <section className="featured-donation momo-donation">
+        <div className="featured-info">
+          <div className="donation-icon-row">
+            <DonationIcon name="momo" />
+            <div><h2>MoMo</h2><p>Accepts transfers from <strong>all Vietnamese banks</strong></p></div>
+          </div>
+          <p className="featured-recipient">Recipient: <strong>Lê Viết Dũng</strong></p>
+          <a className="donation-card-btn" href="https://nhantien.momo.vn/0947287893" target="_blank" rel="noopener noreferrer">♥ Donate via MoMo</a>
+        </div>
+        <div className="donation-qr-box">
+          <img src="/assets/support/momo-vietqr.png" alt="MoMo VietQR Code" width="180" height="191" loading="lazy" />
+          <span>Scan with MoMo or any banking app</span>
+        </div>
       </section>
 
       <section className="donation-grid" aria-label="Online donation methods">
@@ -604,21 +619,6 @@ function SupportPage({ onCopyWallet, copiedWallet }) {
         <div className="donation-qr-box">
           <img src="/assets/support/usdt-trc20-qr.png" alt="USDT TRC20 Wallet QR Code" width="180" height="180" loading="lazy" />
           <span>Scan with your crypto wallet</span>
-        </div>
-      </section>
-
-      <section className="featured-donation momo-donation">
-        <div className="featured-info">
-          <div className="donation-icon-row">
-            <DonationIcon name="momo" />
-            <div><h2>MoMo</h2><p>Accepts transfers from <strong>all Vietnamese banks</strong></p></div>
-          </div>
-          <p className="featured-recipient">Recipient: <strong>Lê Viết Dũng</strong></p>
-          <a className="donation-card-btn" href="https://nhantien.momo.vn/0947287893" target="_blank" rel="noopener noreferrer">♥ Donate via MoMo</a>
-        </div>
-        <div className="donation-qr-box">
-          <img src="/assets/support/momo-qr.png" alt="MoMo QR Code" width="180" height="180" loading="lazy" />
-          <span>Scan with MoMo or any banking app</span>
         </div>
       </section>
 
