@@ -1,7 +1,7 @@
 {
   "name": "CaramOS",
   "short_name": "CaramOS",
-  "description": "CaramOS is a Linux distribution for Vietnamese users, based on Linux Mint 22.3 Cinnamon and Ubuntu 24.04 LTS, with Vietnamese defaults, Fcitx5/Lotus, OTA updates, and open-source ISO builds.",
+  "description": "CaramOS là hệ điều hành Linux cho người Việt, dựa trên Linux Mint 22.3 Cinnamon và Ubuntu 24.04 LTS: tiếng Việt và bộ gõ Lotus có sẵn, App Center, Kiểm tra driver và cập nhật OTA.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
