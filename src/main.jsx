@@ -70,7 +70,7 @@ const copy = {
     otaBadge: 'Trung tâm cập nhật CaramOS',
     otaFlowLabel: 'Ba bước nâng cấp trong Trung tâm cập nhật',
     otaFlow: [
-      [`${shots}/update-available.webp`, 'Trung tâm cập nhật báo có bản 1.3.0', 'Trung tâm cập nhật tự báo khi có bản mới.'],
+      [`${shots}/update-available-131.webp`, 'Trung tâm cập nhật báo có bản 1.3.1', 'Trung tâm cập nhật tự báo khi có bản mới.'],
       [`${shots}/update-progress.webp`, 'Trung tâm cập nhật đang cập nhật CaramOS', 'Bấm Cập nhật ngay, nhập mật khẩu: CaramOS tự làm từng bước.'],
       [`${shots}/update-done.webp`, 'Cập nhật CaramOS thành công', 'Xong là dùng tiếp: không cài lại, không mất dữ liệu.'],
     ],
@@ -118,7 +118,7 @@ const copy = {
           'Không có gì tự cài khi bạn chưa đồng ý: Cập nhật ngay, hoặc Để sau.',
           'Thứ bạn đã tự chỉnh được giữ nguyên: hình nền bạn chọn, bộ màu biểu tượng, applet bạn đã gỡ.',
         ],
-        media: { type: 'single', main: [`${shots}/update-center.webp`, 'Trung tâm cập nhật CaramOS: từ 1.0.20 lên 1.3.0'] },
+        media: { type: 'single', main: [`${shots}/update-center-131.webp`, 'Trung tâm cập nhật CaramOS: từ 1.0.20 lên 1.3.1'] },
         link: ['Hướng dẫn nâng cấp', '#ota'],
       },
       {
@@ -267,9 +267,9 @@ const copy = {
     ],
     galleryTitle: 'Từ menu khởi động đến màn hình chính',
     gallery: [
-      [`${shots}/boot-menu.webp`, 'Menu khởi động CaramOS', 'Menu khởi động: chạy thử hoặc cài CaramOS.'],
+      [`${shots}/boot-menu-131.webp`, 'Menu khởi động CaramOS', 'Menu khởi động: chạy thử hoặc cài CaramOS.'],
       [`${shots}/installer-apps.webp`, 'Trình cài đặt CaramOS', 'Trình cài đặt giới thiệu App Center, bộ gõ và cộng đồng.'],
-      [`${shots}/start-menu.webp`, 'Start Menu CaramOS', 'Start Menu: tìm ứng dụng bằng tiếng Việt, gõ không dấu cũng ra.'],
+      [`${shots}/start-menu-131.webp`, 'Start Menu CaramOS', 'Start Menu: tìm ứng dụng bằng tiếng Việt, gõ không dấu cũng ra.'],
     ],
     downloadTitle: `Tải CaramOS ${VERSION}`,
     downloadLead:
@@ -318,7 +318,7 @@ const copy = {
     otaBadge: 'CaramOS Update Center',
     otaFlowLabel: 'The three steps of an upgrade in the Update Center',
     otaFlow: [
-      [`${shots}/update-available.webp`, 'The Update Center offers 1.3.0', 'The Update Center tells you when a new release is out.'],
+      [`${shots}/update-available-131.webp`, 'The Update Center offers 1.3.1', 'The Update Center tells you when a new release is out.'],
       [`${shots}/update-progress.webp`, 'The Update Center updating CaramOS', 'Click Update now and enter your password: CaramOS does each step.'],
       [`${shots}/update-done.webp`, 'CaramOS updated successfully', 'Done, keep working: no reinstall, no lost data.'],
     ],
@@ -366,7 +366,7 @@ const copy = {
           'Nothing is installed until you agree: Update now, or Later.',
           'What you changed yourself stays: the wallpaper you picked, your icon colour, applets you removed.',
         ],
-        media: { type: 'single', main: [`${shots}/update-center.webp`, 'CaramOS Update Center: from 1.0.20 to 1.3.0'] },
+        media: { type: 'single', main: [`${shots}/update-center-131.webp`, 'CaramOS Update Center: from 1.0.20 to 1.3.1'] },
         link: ['How to upgrade', '#ota'],
       },
       {
@@ -515,9 +515,9 @@ const copy = {
     ],
     galleryTitle: 'From the boot menu to the desktop',
     gallery: [
-      [`${shots}/boot-menu.webp`, 'The CaramOS boot menu', 'Boot menu: try CaramOS or install it.'],
+      [`${shots}/boot-menu-131.webp`, 'The CaramOS boot menu', 'Boot menu: try CaramOS or install it.'],
       [`${shots}/installer-apps.webp`, 'The CaramOS installer', 'The installer introduces the App Center, typing and the community.'],
-      [`${shots}/start-menu.webp`, 'The CaramOS Start Menu', 'Start Menu: finds apps in Vietnamese, even typed without accents.'],
+      [`${shots}/start-menu-131.webp`, 'The CaramOS Start Menu', 'Start Menu: finds apps in Vietnamese, even typed without accents.'],
     ],
     downloadTitle: `Download CaramOS ${VERSION}`,
     downloadLead:
