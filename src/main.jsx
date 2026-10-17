@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-const VERSION = '1.3.0';
+const VERSION = '1.3.1';
 
 const links = {
   download: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-cinnamon-amd64.iso/download`,
@@ -64,13 +64,13 @@ const copy = {
     featuresCta: 'Xem tính năng',
     checksums: 'Kiểm tra SHA256',
     releaseDetails: 'Chi tiết phát hành',
-    heroLightAlt: `CaramOS ${VERSION} ở lần đăng nhập đầu tiên: App Center và Kiểm tra driver`,
-    heroDarkAlt: `CaramOS ${VERSION} ở chế độ tối, mở Control Center`,
-    bannerStackLabel: `Đổi giữa hai ảnh chụp CaramOS ${VERSION}`,
+    heroLightAlt: 'CaramOS ở lần đăng nhập đầu tiên: App Center và Kiểm tra driver',
+    heroDarkAlt: 'CaramOS ở chế độ tối, mở Control Center',
+    bannerStackLabel: 'Đổi giữa hai ảnh chụp CaramOS',
     otaBadge: 'Trung tâm cập nhật CaramOS',
     otaFlowLabel: 'Ba bước nâng cấp trong Trung tâm cập nhật',
     otaFlow: [
-      [`${shots}/update-available.webp`, `Trung tâm cập nhật báo có bản ${VERSION}`, `Trung tâm cập nhật tự báo khi có bản ${VERSION}.`],
+      [`${shots}/update-available.webp`, 'Trung tâm cập nhật báo có bản 1.3.0', 'Trung tâm cập nhật tự báo khi có bản mới.'],
       [`${shots}/update-progress.webp`, 'Trung tâm cập nhật đang cập nhật CaramOS', 'Bấm Cập nhật ngay, nhập mật khẩu: CaramOS tự làm từng bước.'],
       [`${shots}/update-done.webp`, 'Cập nhật CaramOS thành công', 'Xong là dùng tiếp: không cài lại, không mất dữ liệu.'],
     ],
@@ -85,7 +85,7 @@ const copy = {
     featuresLead: 'Những việc người mới dùng Linux hay phải tra cứu đều có sẵn trên màn hình: cài ứng dụng, cài driver, đổi thiết lập, cập nhật máy và hỏi cộng đồng, không cần mở Terminal.',
     features: [
       {
-        id: 'app-center', tag: `Mới trong ${VERSION}`,
+        id: 'app-center', tag: 'Mới trong 1.3.0',
         title: 'App Center — chọn ứng dụng, CaramOS cài giúp',
         lead: 'Lần đăng nhập đầu tiên, App Center mở ra với bộ ứng dụng đề xuất đã chọn sẵn. Bấm Cài một lần rồi dùng máy bình thường trong lúc CaramOS tải và cài.',
         points: [
@@ -98,7 +98,7 @@ const copy = {
         link: ['Kho ứng dụng VNLF', links.apps],
       },
       {
-        id: 'driver-check', tag: `Mới trong ${VERSION}`,
+        id: 'driver-check', tag: 'Mới trong 1.3.0',
         title: 'Kiểm tra driver — biết ngay máy còn thiếu gì',
         lead: 'Chạy thử CaramOS từ USB là biết máy có hợp không, trước cả khi cài. Sau khi cài, Kiểm tra driver chạy lại ở lần đăng nhập đầu tiên rồi chỉ lên tiếng khi có vấn đề mới.',
         points: [
@@ -118,7 +118,7 @@ const copy = {
           'Không có gì tự cài khi bạn chưa đồng ý: Cập nhật ngay, hoặc Để sau.',
           'Thứ bạn đã tự chỉnh được giữ nguyên: hình nền bạn chọn, bộ màu biểu tượng, applet bạn đã gỡ.',
         ],
-        media: { type: 'single', main: [`${shots}/update-center.webp`, `Trung tâm cập nhật CaramOS: từ 1.0.20 lên ${VERSION}`] },
+        media: { type: 'single', main: [`${shots}/update-center.webp`, 'Trung tâm cập nhật CaramOS: từ 1.0.20 lên 1.3.0'] },
         link: ['Hướng dẫn nâng cấp', '#ota'],
       },
       {
@@ -134,7 +134,7 @@ const copy = {
         media: { type: 'pair', main: [`${shots}/control-center-light.webp`, 'Control Center giao diện sáng'], second: [`${shots}/control-center-dark.webp`, 'Control Center giao diện tối'] },
       },
       {
-        id: 'help', tag: `Mới trong ${VERSION}`,
+        id: 'help', tag: 'Mới trong 1.3.0',
         title: 'Góp ý & hỗ trợ — cộng đồng VNLF ngay trên thanh tác vụ',
         lead: 'Dấu hỏi ở góc phải thanh tác vụ: nhờ giúp đỡ, báo lỗi hay góp ý cho CaramOS, gửi thẳng tới cộng đồng Vietnam Linux Family.',
         points: [
@@ -222,13 +222,18 @@ const copy = {
     ],
     releaseNotesTitle: 'Release note',
     releaseNotesLead:
-      `${VERSION} là bản phát hành chính thức đầu tiên của CaramOS; các bản 1.0.x trước đó là Open Beta. Cuộn danh sách để xem những thay đổi đáng chú ý của từng bản.`,
+      `${VERSION} là bản mới nhất. 1.3.0 là bản phát hành chính thức đầu tiên của CaramOS; các bản 1.0.x trước đó là Open Beta. Cuộn danh sách để xem những thay đổi đáng chú ý của từng bản.`,
     releaseListLabel: 'Danh sách các bản phát hành, cuộn để xem thêm',
-    releaseCurrent: 'Bản chính thức',
+    releaseCurrent: 'Mới nhất',
     releaseScrollHint: 'Cuộn để xem các bản trước ↓',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
-      [VERSION, 'Bản phát hành chính thức: App Center, Kiểm tra driver, Góp ý & hỗ trợ', [
+      [VERSION, 'Start Menu và Trung tâm cập nhật toàn tiếng Việt', [
+        'Start Menu hiện “Tất cả ứng dụng”, “Biểu tượng cảm xúc” thay cho chữ tiếng Anh; applet thời tiết và các tiện ích mở rộng đi kèm cũng theo ngôn ngữ của máy.',
+        'Trung tâm cập nhật: dòng dung lượng của bản cập nhật không còn lẫn chữ tiếng Anh.',
+        'App Center 0.2.1: Zalo cho Linux hiện nhãn “Gói cộng đồng”, vì do cộng đồng đóng gói chứ không phải của Zalo.',
+      ]],
+      ['1.3.0', 'Bản phát hành chính thức đầu tiên: App Center, Kiểm tra driver, Góp ý & hỗ trợ', [
         'App Center: lần đăng nhập đầu tiên chọn bộ văn phòng, trình duyệt, ứng dụng liên lạc và tiện ích, CaramOS tải và cài giúp; gỡ ứng dụng ngay trên thẻ của nó.',
         'Kiểm tra driver: kiểm tra Wi-Fi, mạng dây, đồ họa, âm thanh, Bluetooth, webcam, vân tay; cài driver NVIDIA và Wi-Fi Broadcom bằng một nút; tự mở ở lần đăng nhập đầu tiên và khi chạy thử từ USB.',
         'Góp ý & hỗ trợ: dấu hỏi trên thanh tác vụ để nhờ giúp đỡ, báo lỗi, góp ý kèm ảnh hoặc video tới cộng đồng VNLF; theo dõi tình trạng và nhận thông báo khi có câu trả lời.',
@@ -262,7 +267,7 @@ const copy = {
     ],
     galleryTitle: 'Từ menu khởi động đến màn hình chính',
     gallery: [
-      [`${shots}/boot-menu.webp`, `Menu khởi động CaramOS ${VERSION}`, 'Menu khởi động: chạy thử hoặc cài CaramOS.'],
+      [`${shots}/boot-menu.webp`, 'Menu khởi động CaramOS', 'Menu khởi động: chạy thử hoặc cài CaramOS.'],
       [`${shots}/installer-apps.webp`, 'Trình cài đặt CaramOS', 'Trình cài đặt giới thiệu App Center, bộ gõ và cộng đồng.'],
       [`${shots}/start-menu.webp`, 'Start Menu CaramOS', 'Start Menu: tìm ứng dụng bằng tiếng Việt, gõ không dấu cũng ra.'],
     ],
@@ -307,13 +312,13 @@ const copy = {
     featuresCta: 'See the features',
     checksums: 'Verify SHA256',
     releaseDetails: 'Release details',
-    heroLightAlt: `CaramOS ${VERSION} at the first login: the App Center and Driver Check`,
-    heroDarkAlt: `CaramOS ${VERSION} in dark mode, with the Control Center open`,
-    bannerStackLabel: `Switch between two CaramOS ${VERSION} screenshots`,
+    heroLightAlt: 'CaramOS at the first login: the App Center and Driver Check',
+    heroDarkAlt: 'CaramOS in dark mode, with the Control Center open',
+    bannerStackLabel: 'Switch between two CaramOS screenshots',
     otaBadge: 'CaramOS Update Center',
     otaFlowLabel: 'The three steps of an upgrade in the Update Center',
     otaFlow: [
-      [`${shots}/update-available.webp`, `The Update Center offers ${VERSION}`, `The Update Center tells you when ${VERSION} is out.`],
+      [`${shots}/update-available.webp`, 'The Update Center offers 1.3.0', 'The Update Center tells you when a new release is out.'],
       [`${shots}/update-progress.webp`, 'The Update Center updating CaramOS', 'Click Update now and enter your password: CaramOS does each step.'],
       [`${shots}/update-done.webp`, 'CaramOS updated successfully', 'Done, keep working: no reinstall, no lost data.'],
     ],
@@ -328,7 +333,7 @@ const copy = {
     featuresLead: 'What newcomers to Linux usually have to look up is right on the screen: installing apps and drivers, changing settings, updating and asking the community, without opening a terminal.',
     features: [
       {
-        id: 'app-center', tag: `New in ${VERSION}`,
+        id: 'app-center', tag: 'New in 1.3.0',
         title: 'App Center — pick your apps, CaramOS installs them',
         lead: 'At the first login the App Center opens with a recommended set already selected. Click Install once and keep using the computer while CaramOS downloads and installs.',
         points: [
@@ -341,7 +346,7 @@ const copy = {
         link: ['VNLF app directory', links.apps],
       },
       {
-        id: 'driver-check', tag: `New in ${VERSION}`,
+        id: 'driver-check', tag: 'New in 1.3.0',
         title: 'Driver Check — know what your computer is missing',
         lead: 'Try CaramOS from the USB stick and you know whether the computer works well with it, before installing. Afterwards it runs again at the first login, then only speaks up about new problems.',
         points: [
@@ -361,7 +366,7 @@ const copy = {
           'Nothing is installed until you agree: Update now, or Later.',
           'What you changed yourself stays: the wallpaper you picked, your icon colour, applets you removed.',
         ],
-        media: { type: 'single', main: [`${shots}/update-center.webp`, `CaramOS Update Center: from 1.0.20 to ${VERSION}`] },
+        media: { type: 'single', main: [`${shots}/update-center.webp`, 'CaramOS Update Center: from 1.0.20 to 1.3.0'] },
         link: ['How to upgrade', '#ota'],
       },
       {
@@ -377,7 +382,7 @@ const copy = {
         media: { type: 'pair', main: [`${shots}/control-center-light.webp`, 'Control Center, light'], second: [`${shots}/control-center-dark.webp`, 'Control Center, dark'] },
       },
       {
-        id: 'help', tag: `New in ${VERSION}`,
+        id: 'help', tag: 'New in 1.3.0',
         title: 'Feedback & Help — the VNLF community on your taskbar',
         lead: 'The question mark at the right end of the taskbar: ask for help, report a bug or send feedback straight to the Vietnam Linux Family community.',
         points: [
@@ -465,13 +470,18 @@ const copy = {
     ],
     releaseNotesTitle: 'Release notes',
     releaseNotesLead:
-      `${VERSION} is the first official CaramOS release; the 1.0.x releases before it were Open Beta. Scroll the list for the notable changes of each release.`,
+      `${VERSION} is the latest release. 1.3.0 was the first official CaramOS release; the 1.0.x releases before it were Open Beta. Scroll the list for the notable changes of each release.`,
     releaseListLabel: 'Releases, scroll for more',
-    releaseCurrent: 'Official release',
+    releaseCurrent: 'Latest',
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
-      [VERSION, 'Official release: App Center, Driver Check, Feedback & Help', [
+      [VERSION, 'A Start Menu and Update Center in one language', [
+        'In Vietnamese the Start Menu shows “Tất cả ứng dụng” and “Biểu tượng cảm xúc” instead of English words; the weather applet and the bundled extensions follow the system language too.',
+        'Update Center: the size line of an update no longer mixes in English.',
+        'App Center 0.2.1: Zalo for Linux is labelled “Community package”, since the community packages it, not Zalo.',
+      ]],
+      ['1.3.0', 'The first official release: App Center, Driver Check, Feedback & Help', [
         'App Center: at the first login pick an office suite, browsers, chat apps and everyday tools, and CaramOS installs them; remove an app right from its card.',
         'Driver Check: checks Wi-Fi, wired network, graphics, sound, Bluetooth, webcam and fingerprint reader; installs NVIDIA and Broadcom Wi-Fi drivers with one click; opens at the first login and in the live USB session.',
         'Feedback & Help: a question mark on the taskbar to ask for help, report a bug or send feedback with pictures or videos to the VNLF community; follow requests and get notified of answers.',
@@ -505,7 +515,7 @@ const copy = {
     ],
     galleryTitle: 'From the boot menu to the desktop',
     gallery: [
-      [`${shots}/boot-menu.webp`, `The CaramOS ${VERSION} boot menu`, 'Boot menu: try CaramOS or install it.'],
+      [`${shots}/boot-menu.webp`, 'The CaramOS boot menu', 'Boot menu: try CaramOS or install it.'],
       [`${shots}/installer-apps.webp`, 'The CaramOS installer', 'The installer introduces the App Center, typing and the community.'],
       [`${shots}/start-menu.webp`, 'The CaramOS Start Menu', 'Start Menu: finds apps in Vietnamese, even typed without accents.'],
     ],
