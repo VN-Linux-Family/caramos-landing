@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-const VERSION = '1.3.1';
+const VERSION = '1.3.2';
 
 const links = {
   download: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-cinnamon-amd64.iso/download`,
@@ -228,7 +228,14 @@ const copy = {
     releaseScrollHint: 'Cuộn để xem các bản trước ↓',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
-      [VERSION, 'Start Menu và Trung tâm cập nhật toàn tiếng Việt', [
+      [VERSION, 'Cài được Zalo trở lại, thanh tác vụ gọn lại, báo lỗi kèm nhật ký', [
+        'Zalo cho Linux bản mới gọi thoại, gọi video ngay trên Linux, không cần Wine nên mở nhanh hơn. App Center 0.2.2 cài bản này; máy đã có Zalo được Trung tâm cập nhật đổi sang, tải ngầm và tự thử lại mỗi ngày nếu mạng chập chờn.',
+        'Biểu tượng giữa thanh tác vụ nằm gọn trong khung sau bản cập nhật Cinnamon 6.6.9; từ nay CaramOS tự sửa lại mỗi khi Cinnamon được cập nhật.',
+        'Kiểm tra driver không còn làm đứng máy cũ khi chạy thử từ USB, và nói rõ vì sao loa, micro, camera chưa chạy trên máy tính bảng chip Intel Atom như Lenovo Yoga Book.',
+        'App Center hay Trung tâm cập nhật cài không được thì nút Nhờ giúp đỡ gửi yêu cầu kèm nhật ký lỗi; chỉ đội VNLF xem được nhật ký, thông tin cá nhân đã được xoá trước khi gửi.',
+        'Trình cài đặt không còn dừng ngay khi mở, và không còn khoá việc cài phần mềm khác trong phiên chạy thử.',
+      ]],
+      ['1.3.1', 'Start Menu và Trung tâm cập nhật toàn tiếng Việt', [
         'Start Menu hiện “Tất cả ứng dụng”, “Biểu tượng cảm xúc” thay cho chữ tiếng Anh; applet thời tiết và các tiện ích mở rộng đi kèm cũng theo ngôn ngữ của máy.',
         'Trung tâm cập nhật: dòng dung lượng của bản cập nhật không còn lẫn chữ tiếng Anh.',
         'App Center 0.2.1: Zalo cho Linux hiện nhãn “Gói cộng đồng”, vì do cộng đồng đóng gói chứ không phải của Zalo.',
@@ -476,7 +483,14 @@ const copy = {
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
-      [VERSION, 'A Start Menu and Update Center in one language', [
+      [VERSION, 'Zalo installs again, a tidy taskbar, error reports with logs', [
+        'The new Zalo for Linux makes voice and video calls natively, without Wine, so it opens faster. App Center 0.2.2 installs it; the Update Center moves an installed Zalo to it, downloading in the background and trying again every day on a flaky connection.',
+        'Taskbar icons fit their dock again after the Cinnamon 6.6.9 update; CaramOS now puts its changes back after every Cinnamon update.',
+        'Driver Check no longer freezes old computers in the live session, and explains why speakers, microphone and cameras do not work yet on Intel Atom tablets such as the Lenovo Yoga Book.',
+        'When the App Center or the Update Center fails, Ask for help sends a request with the error log; only the VNLF team sees the logs, and personal data is taken out before sending.',
+        'The installer no longer stops right after opening or blocks installing other software in the live session.',
+      ]],
+      ['1.3.1', 'A Start Menu and Update Center in one language', [
         'In Vietnamese the Start Menu shows “Tất cả ứng dụng” and “Biểu tượng cảm xúc” instead of English words; the weather applet and the bundled extensions follow the system language too.',
         'Update Center: the size line of an update no longer mixes in English.',
         'App Center 0.2.1: Zalo for Linux is labelled “Community package”, since the community packages it, not Zalo.',
