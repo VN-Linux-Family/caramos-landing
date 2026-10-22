@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-const VERSION = '1.3.2';
+const VERSION = '1.3.3';
 
 const links = {
   download: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-cinnamon-amd64.iso/download`,
@@ -228,7 +228,11 @@ const copy = {
     releaseScrollHint: 'Cuộn để xem các bản trước ↓',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
-      [VERSION, 'Cài được Zalo trở lại, thanh tác vụ gọn lại, báo lỗi kèm nhật ký', [
+      [VERSION, 'Gõ được tiếng Việt ngay khi đăng nhập', [
+        'Trên một số máy mới cài CaramOS 1.3 và khi chạy thử từ USB, bộ gõ Lotus không tự chạy nên gõ chỉ ra chữ không dấu. Giờ bộ gõ tự chạy mỗi lần đăng nhập.',
+        'Máy đang bị lỗi chỉ cần bấm Cập nhật ngay trong Trung tâm cập nhật là gõ được liền, không cần đăng nhập lại.',
+      ]],
+      ['1.3.2', 'Cài được Zalo trở lại, thanh tác vụ gọn lại, báo lỗi kèm nhật ký', [
         'Zalo cho Linux bản mới gọi thoại, gọi video ngay trên Linux, không cần Wine nên mở nhanh hơn. App Center 0.2.2 cài bản này; máy đã có Zalo được Trung tâm cập nhật đổi sang, tải ngầm và tự thử lại mỗi ngày nếu mạng chập chờn.',
         'Biểu tượng giữa thanh tác vụ nằm gọn trong khung sau bản cập nhật Cinnamon 6.6.9; từ nay CaramOS tự sửa lại mỗi khi Cinnamon được cập nhật.',
         'Kiểm tra driver không còn làm đứng máy cũ khi chạy thử từ USB, và nói rõ vì sao loa, micro, camera chưa chạy trên máy tính bảng chip Intel Atom như Lenovo Yoga Book.',
@@ -483,7 +487,11 @@ const copy = {
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
-      [VERSION, 'Zalo installs again, a tidy taskbar, error reports with logs', [
+      [VERSION, 'Vietnamese typing works at every login', [
+        'On some new installs of CaramOS 1.3, and in the live session from USB, the Lotus input method did not start, so typing gave letters without accents. It now starts at every login.',
+        'On an affected computer, clicking Update now in the Update Center makes typing work right away, without logging in again.',
+      ]],
+      ['1.3.2', 'Zalo installs again, a tidy taskbar, error reports with logs', [
         'The new Zalo for Linux makes voice and video calls natively, without Wine, so it opens faster. App Center 0.2.2 installs it; the Update Center moves an installed Zalo to it, downloading in the background and trying again every day on a flaky connection.',
         'Taskbar icons fit their dock again after the Cinnamon 6.6.9 update; CaramOS now puts its changes back after every Cinnamon update.',
         'Driver Check no longer freezes old computers in the live session, and explains why speakers, microphone and cameras do not work yet on Intel Atom tablets such as the Lenovo Yoga Book.',
