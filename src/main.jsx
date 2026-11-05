@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-const VERSION = '1.3.3';
+const VERSION = '1.3.4';
 
 const links = {
   download: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-cinnamon-amd64.iso/download`,
@@ -228,7 +228,14 @@ const copy = {
     releaseScrollHint: 'Cuộn để xem các bản trước ↓',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
-      [VERSION, 'Gõ được tiếng Việt ngay khi đăng nhập', [
+      [VERSION, 'Bộ gõ giữ cài đặt, Start Menu nhanh hơn, cập nhật không bị chặn', [
+        'Cài đặt bộ gõ Lotus bạn chọn (Telex hay VNI, chế độ, kiểm tra chính tả, phím tắt) không còn bị đặt lại mỗi lần đăng nhập, và mỗi phiên bắt đầu ở tiếng Việt (V); bấm Ctrl+Shift để chuyển sang tiếng Anh.',
+        'Start Menu ra kết quả ngay khi đang gõ tiếng Việt, và không còn làm đơ máy khi tìm tệp, kể cả trên ổ cứng HDD hay khi có Google Drive gắn trong thư mục Home.',
+        'Trung tâm cập nhật không còn bị chặn bởi một nguồn phần mềm hỏng do chương trình khác thêm vào, hay một gói cài dở như Lotus 3.5.6 lỗi hoặc driver NVIDIA 470.',
+        'Kiểm tra driver đề xuất driver NVIDIA 580 thay cho 470 (không chạy được trên nhân Linux 6.14 trở lên), và nói rõ khi driver đồ hoạ bị tắt bởi nomodeset hay blacklist.',
+        'App Center 0.2.3 cài được ứng dụng khi máy còn gói cài dở, chờ trình cài CaramOS khi chạy thử từ USB, và tải tiếp WPS Office khi máy chủ ngắt giữa chừng.',
+      ]],
+      ['1.3.3', 'Gõ được tiếng Việt ngay khi đăng nhập', [
         'Trên một số máy mới cài CaramOS 1.3 và khi chạy thử từ USB, bộ gõ Lotus không tự chạy nên gõ chỉ ra chữ không dấu. Giờ bộ gõ tự chạy mỗi lần đăng nhập.',
         'Máy đang bị lỗi chỉ cần bấm Cập nhật ngay trong Trung tâm cập nhật là gõ được liền, không cần đăng nhập lại.',
       ]],
@@ -487,7 +494,14 @@ const copy = {
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
-      [VERSION, 'Vietnamese typing works at every login', [
+      [VERSION, 'The input method keeps your settings, a faster Start Menu, updates that get through', [
+        'The Lotus settings you choose (Telex or VNI, the mode, spell checking, shortcuts) are no longer reset at every login, and every session starts typing Vietnamese (V); press Ctrl+Shift to switch to English.',
+        'The Start Menu shows results while you type Vietnamese, and no longer freezes the computer while searching files, also on a hard disk or with Google Drive mounted in the home folder.',
+        'The Update Center is no longer blocked by a broken software source another program added, or by a package left half installed, such as the faulty Lotus 3.5.6 or an NVIDIA 470 driver.',
+        'Driver Check offers the NVIDIA 580 driver instead of 470, which does not work on Linux 6.14 and later, and says so when the graphics driver is turned off by nomodeset or a blacklist.',
+        'App Center 0.2.3 installs apps while another package is half installed, waits for the CaramOS installer in the live session from USB, and resumes WPS Office downloads the server cuts off.',
+      ]],
+      ['1.3.3', 'Vietnamese typing works at every login', [
         'On some new installs of CaramOS 1.3, and in the live session from USB, the Lotus input method did not start, so typing gave letters without accents. It now starts at every login.',
         'On an affected computer, clicking Update now in the Update Center makes typing work right away, without logging in again.',
       ]],
