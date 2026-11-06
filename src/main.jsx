@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-const VERSION = '1.3.4';
+const VERSION = '1.3.5';
 
 const links = {
   download: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-cinnamon-amd64.iso/download`,
@@ -228,7 +228,12 @@ const copy = {
     releaseScrollHint: 'Cuộn để xem các bản trước ↓',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
-      [VERSION, 'Bộ gõ giữ cài đặt, Start Menu nhanh hơn, cập nhật không bị chặn', [
+      [VERSION, 'Cài driver NVIDIA bằng Kiểm tra driver chạy được trở lại', [
+        'Từ 1.3.0, Kiểm tra driver làm lần cài driver NVIDIA dừng giữa chừng, nên sau khi khởi động lại máy không có driver đồ hoạ và màn hình chỉ còn 1024×768. Bản 1.3.5 sửa lỗi này.',
+        'Máy đã bị như vậy: mở Terminal chạy sudo dpkg --configure -a rồi khởi động lại. Bản cập nhật 1.3.5 cũng tự sửa lỗi này.',
+        'Kiểm tra driver xem ổ đĩa còn đủ chỗ trước khi cài, và nói rõ cần dọn bao nhiêu, ở đâu. Driver NVIDIA có thể kéo theo nhân Linux mới, khi đó phải tải về tới khoảng 1 GB.',
+      ]],
+      ['1.3.4', 'Bộ gõ giữ cài đặt, Start Menu nhanh hơn, cập nhật không bị chặn', [
         'Cài đặt bộ gõ Lotus bạn chọn (Telex hay VNI, chế độ, kiểm tra chính tả, phím tắt) không còn bị đặt lại mỗi lần đăng nhập, và mỗi phiên bắt đầu ở tiếng Việt (V); bấm Ctrl+Shift để chuyển sang tiếng Anh.',
         'Start Menu ra kết quả ngay khi đang gõ tiếng Việt, và không còn làm đơ máy khi tìm tệp, kể cả trên ổ cứng HDD hay khi có Google Drive gắn trong thư mục Home.',
         'Trung tâm cập nhật không còn bị chặn bởi một nguồn phần mềm hỏng do chương trình khác thêm vào, hay một gói cài dở như Lotus 3.5.6 lỗi hoặc driver NVIDIA 470.',
@@ -494,7 +499,12 @@ const copy = {
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
-      [VERSION, 'The input method keeps your settings, a faster Start Menu, updates that get through', [
+      [VERSION, 'Installing the NVIDIA driver from Driver Check works again', [
+        'Since 1.3.0, Driver Check stopped NVIDIA driver installs halfway, so after a restart the computer had no graphics driver and a 1024×768 screen. 1.3.5 fixes this.',
+        'On a computer left like this, open a Terminal, run sudo dpkg --configure -a and restart. The update to 1.3.5 repairs it too.',
+        'Driver Check checks the free disk space before installing, and says how much to free and where. The NVIDIA driver can bring a newer Linux kernel with it, and then the download is up to about 1 GB.',
+      ]],
+      ['1.3.4', 'The input method keeps your settings, a faster Start Menu, updates that get through', [
         'The Lotus settings you choose (Telex or VNI, the mode, spell checking, shortcuts) are no longer reset at every login, and every session starts typing Vietnamese (V); press Ctrl+Shift to switch to English.',
         'The Start Menu shows results while you type Vietnamese, and no longer freezes the computer while searching files, also on a hard disk or with Google Drive mounted in the home folder.',
         'The Update Center is no longer blocked by a broken software source another program added, or by a package left half installed, such as the faulty Lotus 3.5.6 or an NVIDIA 470 driver.',
