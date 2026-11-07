@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-const VERSION = '1.3.5';
+const VERSION = '1.3.6';
 
 const links = {
   download: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-cinnamon-amd64.iso/download`,
@@ -228,7 +228,12 @@ const copy = {
     releaseScrollHint: 'Cuộn để xem các bản trước ↓',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
-      [VERSION, 'Cài driver NVIDIA bằng Kiểm tra driver chạy được trở lại', [
+      [VERSION, 'Trung tâm cập nhật không còn đứng hình khi cập nhật dài', [
+        'Lần cập nhật hoàn tất một driver NVIDIA bị cài dở in ra khoảng 49.000 dòng, và cửa sổ Trung tâm cập nhật từng đứng hơn 15 phút. Giờ chừng đó dòng hiện ra trong chưa tới một giây.',
+        'Khung nhật ký luôn cuộn tới dòng mới nhất, còn trang kết quả vẫn có đủ nhật ký.',
+        'Lần cập nhật lên 1.3.6 vẫn chạy trong cửa sổ của bản đang dùng. Máy có driver NVIDIA cài dở nên chạy sudo dpkg --configure -a trước khi cập nhật; nếu cửa sổ đứng thì cứ để nó chạy xong, đừng tắt máy.',
+      ]],
+      ['1.3.5', 'Cài driver NVIDIA bằng Kiểm tra driver chạy được trở lại', [
         'Từ 1.3.0, Kiểm tra driver làm lần cài driver NVIDIA dừng giữa chừng, nên sau khi khởi động lại máy không có driver đồ hoạ và màn hình chỉ còn 1024×768. Bản 1.3.5 sửa lỗi này.',
         'Máy đã bị như vậy: mở Terminal chạy sudo dpkg --configure -a rồi khởi động lại. Bản cập nhật 1.3.5 cũng tự sửa lỗi này.',
         'Kiểm tra driver xem ổ đĩa còn đủ chỗ trước khi cài, và nói rõ cần dọn bao nhiêu, ở đâu. Driver NVIDIA có thể kéo theo nhân Linux mới, khi đó phải tải về tới khoảng 1 GB.',
@@ -499,7 +504,12 @@ const copy = {
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
-      [VERSION, 'Installing the NVIDIA driver from Driver Check works again', [
+      [VERSION, 'The Update Center no longer freezes on a long update', [
+        'The update that finishes an NVIDIA driver left half installed prints about 49,000 lines, and the Update Center window used to stop responding for more than 15 minutes. Those lines now show up in less than a second.',
+        'The log always scrolls to its latest line, and the result page still has the whole log.',
+        'The update to 1.3.6 still runs in the window of the version you have. On a computer with an NVIDIA driver left half installed, run sudo dpkg --configure -a before updating; if the window freezes, let it finish and do not turn the computer off.',
+      ]],
+      ['1.3.5', 'Installing the NVIDIA driver from Driver Check works again', [
         'Since 1.3.0, Driver Check stopped NVIDIA driver installs halfway, so after a restart the computer had no graphics driver and a 1024×768 screen. 1.3.5 fixes this.',
         'On a computer left like this, open a Terminal, run sudo dpkg --configure -a and restart. The update to 1.3.5 repairs it too.',
         'Driver Check checks the free disk space before installing, and says how much to free and where. The NVIDIA driver can bring a newer Linux kernel with it, and then the download is up to about 1 GB.',
