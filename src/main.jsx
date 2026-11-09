@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-const VERSION = '1.3.6';
+const VERSION = '1.3.7';
 
 const links = {
   download: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-cinnamon-amd64.iso/download`,
@@ -102,8 +102,8 @@ const copy = {
         title: 'Kiểm tra driver — biết ngay máy còn thiếu gì',
         lead: 'Chạy thử CaramOS từ USB là biết máy có hợp không, trước cả khi cài. Sau khi cài, Kiểm tra driver chạy lại ở lần đăng nhập đầu tiên rồi chỉ lên tiếng khi có vấn đề mới.',
         points: [
-          'Kiểm tra Wi-Fi, mạng dây, đồ họa, âm thanh, Bluetooth, webcam và đầu đọc vân tay.',
-          'Cài driver NVIDIA và Wi-Fi Broadcom bằng một nút, đúng bản Ubuntu khuyên dùng cho máy.',
+          'Kiểm tra Wi-Fi, mạng dây, đồ họa, âm thanh, Bluetooth, webcam, đầu đọc vân tay và máy in Canon LBP2900.',
+          'Cài driver NVIDIA và Wi-Fi Broadcom bằng một nút, đúng bản Ubuntu khuyên dùng cho máy. Máy in Canon LBP2900 cũng cài bằng một nút.',
           'Thiếu driver mạng? Chỉ cách vào mạng bằng dây LAN, điện thoại qua USB, hoặc cài thẳng từ USB CaramOS.',
           'Nút Nhờ giúp đỡ gửi lời nhắn kèm hồ sơ phần cứng tới cộng đồng VNLF.',
         ],
@@ -228,7 +228,13 @@ const copy = {
     releaseScrollHint: 'Cuộn để xem các bản trước ↓',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
-      [VERSION, 'Trung tâm cập nhật không còn đứng hình khi cập nhật dài', [
+      [VERSION, 'Máy in Canon LBP2900 cài được bằng một nút', [
+        'Cắm máy in vào là có thông báo "Máy in chưa có driver". Bấm Xem chi tiết rồi Cài driver máy in, máy in sẽ tự được thiết lập. Trước đây hệ thống gán cho các máy in Canon dùng CAPT một driver PostScript không hợp: lệnh in báo xong mà máy không ra giấy.',
+        'Driver là captdriver, mã nguồn mở. Theo captdriver, LBP2900/LBP2900B và LBP3010/LBP3018/LBP3050 chạy được, còn LBP3000, LBP3100 và LBP6000 mới ở mức thử nghiệm. Các máy CAPT khác chỉ chạy với driver của Canon.',
+        'Cài driver không được thì màn hình báo lỗi có nút Nhờ giúp đỡ, kèm nhật ký cài đặt. Máy có máy in thì mọi yêu cầu giúp đỡ tự kèm nhật ký máy in, đã bỏ số serial và tên tài liệu.',
+        'Rút máy in hay USB Wi-Fi ra không còn bị báo nhầm "Đã xử lý xong vấn đề phần cứng".',
+      ]],
+      ['1.3.6', 'Trung tâm cập nhật không còn đứng hình khi cập nhật dài', [
         'Lần cập nhật hoàn tất một driver NVIDIA bị cài dở in ra khoảng 49.000 dòng, và cửa sổ Trung tâm cập nhật từng đứng hơn 15 phút. Giờ chừng đó dòng hiện ra trong chưa tới một giây.',
         'Khung nhật ký luôn cuộn tới dòng mới nhất, còn trang kết quả vẫn có đủ nhật ký.',
         'Lần cập nhật lên 1.3.6 vẫn chạy trong cửa sổ của bản đang dùng. Máy có driver NVIDIA cài dở nên chạy sudo dpkg --configure -a trước khi cập nhật; nếu cửa sổ đứng thì cứ để nó chạy xong, đừng tắt máy.',
@@ -263,7 +269,7 @@ const copy = {
       ]],
       ['1.3.0', 'Bản phát hành chính thức đầu tiên: App Center, Kiểm tra driver, Góp ý & hỗ trợ', [
         'App Center: lần đăng nhập đầu tiên chọn bộ văn phòng, trình duyệt, ứng dụng liên lạc và tiện ích, CaramOS tải và cài giúp; gỡ ứng dụng ngay trên thẻ của nó.',
-        'Kiểm tra driver: kiểm tra Wi-Fi, mạng dây, đồ họa, âm thanh, Bluetooth, webcam, vân tay; cài driver NVIDIA và Wi-Fi Broadcom bằng một nút; tự mở ở lần đăng nhập đầu tiên và khi chạy thử từ USB.',
+        'Kiểm tra driver: kiểm tra Wi-Fi, mạng dây, đồ họa, âm thanh, Bluetooth, webcam, vân tay, máy in Canon LBP2900; cài driver NVIDIA, Wi-Fi Broadcom và máy in Canon LBP2900 bằng một nút; tự mở ở lần đăng nhập đầu tiên và khi chạy thử từ USB, báo ngay khi cắm máy in cần driver.',
         'Góp ý & hỗ trợ: dấu hỏi trên thanh tác vụ để nhờ giúp đỡ, báo lỗi, góp ý kèm ảnh hoặc video tới cộng đồng VNLF; theo dõi tình trạng và nhận thông báo khi có câu trả lời.',
         'Trung tâm cập nhật thiết kế lại theo màu VNLF, nút Cập nhật ngay luôn ở đáy cửa sổ.',
         'Nhẹ hơn Linux Mint 22.3 gốc: ít dịch vụ nền và ít RAM hơn; earlyoom đóng ứng dụng tốn RAM nhất thay vì để máy đơ; ISO còn 2,8 GB.',
@@ -378,8 +384,8 @@ const copy = {
         title: 'Driver Check — know what your computer is missing',
         lead: 'Try CaramOS from the USB stick and you know whether the computer works well with it, before installing. Afterwards it runs again at the first login, then only speaks up about new problems.',
         points: [
-          'Checks Wi-Fi, wired network, graphics, sound, Bluetooth, webcam and fingerprint reader.',
-          'Installs the NVIDIA and Broadcom Wi-Fi drivers Ubuntu recommends, with one click.',
+          'Checks Wi-Fi, wired network, graphics, sound, Bluetooth, webcam, fingerprint reader and Canon LBP2900 printers.',
+          'Installs the NVIDIA and Broadcom Wi-Fi drivers Ubuntu recommends, with one click. Canon LBP2900 printers also install with one click.',
           'No network driver? It explains how to get online with a cable or a phone over USB, or installs from the CaramOS USB stick.',
           'Ask for help sends a message with the hardware profile to the VNLF community.',
         ],
@@ -504,7 +510,13 @@ const copy = {
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
-      [VERSION, 'The Update Center no longer freezes on a long update', [
+      [VERSION, 'Canon LBP2900 printers install with one click', [
+        'Plug the printer in and a "The printer has no driver" notification comes up. Click View details, then Install the printer driver, and the printer sets itself up. Before, the system gave Canon\'s CAPT printers an unsuitable PostScript driver: jobs were reported as printed while nothing came out.',
+        'The driver is the open-source captdriver. According to captdriver, the LBP2900/LBP2900B and LBP3010/LBP3018/LBP3050 work, and the LBP3000, LBP3100 and LBP6000 are experimental. Other CAPT printers only work with Canon\'s driver.',
+        'When a driver install fails, the error page has an Ask for help button, and the request carries the install log. On a computer with a printer, every help request carries a printer log, without serial numbers or document names.',
+        'Unplugging a printer or a USB Wi-Fi adapter no longer shows "Hardware problem solved".',
+      ]],
+      ['1.3.6', 'The Update Center no longer freezes on a long update', [
         'The update that finishes an NVIDIA driver left half installed prints about 49,000 lines, and the Update Center window used to stop responding for more than 15 minutes. Those lines now show up in less than a second.',
         'The log always scrolls to its latest line, and the result page still has the whole log.',
         'The update to 1.3.6 still runs in the window of the version you have. On a computer with an NVIDIA driver left half installed, run sudo dpkg --configure -a before updating; if the window freezes, let it finish and do not turn the computer off.',
@@ -539,7 +551,7 @@ const copy = {
       ]],
       ['1.3.0', 'The first official release: App Center, Driver Check, Feedback & Help', [
         'App Center: at the first login pick an office suite, browsers, chat apps and everyday tools, and CaramOS installs them; remove an app right from its card.',
-        'Driver Check: checks Wi-Fi, wired network, graphics, sound, Bluetooth, webcam and fingerprint reader; installs NVIDIA and Broadcom Wi-Fi drivers with one click; opens at the first login and in the live USB session.',
+        'Driver Check: checks Wi-Fi, wired network, graphics, sound, Bluetooth, webcam, fingerprint reader and Canon LBP2900 printers; installs NVIDIA and Broadcom Wi-Fi drivers and Canon LBP2900 printers with one click; opens at the first login and in the live USB session, and speaks up when a printer that needs a driver is plugged in.',
         'Feedback & Help: a question mark on the taskbar to ask for help, report a bug or send feedback with pictures or videos to the VNLF community; follow requests and get notified of answers.',
         'The Update Center is redesigned in the VNLF colours, with Update now always at the bottom of the window.',
         'Lighter than stock Linux Mint 22.3: fewer background services and less RAM; earlyoom closes the hungriest app instead of letting the machine freeze; a 2.8 GB ISO.',
