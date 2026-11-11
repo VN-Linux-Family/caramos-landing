@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-const VERSION = '1.3.7';
+const VERSION = '1.3.8';
 
 const links = {
   download: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-cinnamon-amd64.iso/download`,
@@ -150,7 +150,7 @@ const copy = {
         title: 'Island Dock — thanh tác vụ ba đảo',
         lead: 'Thanh tác vụ tách thành ba đảo nổi bo tròn: gọn mắt, mà vẫn quen tay như trên Windows.',
         points: [
-          'Đảo trái: Start Menu, tìm ứng dụng bằng tiếng Việt, gõ không dấu vẫn ra.',
+          'Đảo trái: Start Menu, tìm ứng dụng bằng tiếng Việt, gõ không dấu vẫn ra; giữ Ctrl rồi lăn chuột để phóng to, thu nhỏ icon.',
           'Đảo giữa: ứng dụng ghim và đang chạy, có chấm nhỏ dưới ứng dụng đang mở.',
           'Đảo phải: khay hệ thống, bộ gõ, đồng hồ, Control Center và Góp ý & hỗ trợ.',
         ],
@@ -228,7 +228,12 @@ const copy = {
     releaseScrollHint: 'Cuộn để xem các bản trước ↓',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
-      [VERSION, 'Máy in Canon LBP2900 cài được bằng một nút', [
+      [VERSION, 'Phóng to, thu nhỏ icon Start Menu bằng Ctrl + lăn chuột', [
+        'Như trên Windows: mở Start Menu, giữ Ctrl rồi lăn chuột trên danh sách ứng dụng. Lăn lên thì icon to dần, lăn xuống thì nhỏ dần, mỗi nấc một chút.',
+        'Icon nhỏ thì mỗi hàng xếp được nhiều ứng dụng hơn (tới 7), icon to thì ít hơn. Cỡ mặc định trông như cũ.',
+        'Start Menu vẫn mở, giữ nguyên mục hay kết quả tìm kiếm đang xem, và nhớ cỡ đã chọn cho lần sau.',
+      ]],
+      ['1.3.7', 'Máy in Canon LBP2900 cài được bằng một nút', [
         'Cắm máy in vào là có thông báo "Máy in chưa có driver". Bấm Xem chi tiết rồi Cài driver máy in, máy in sẽ tự được thiết lập. Trước đây hệ thống gán cho các máy in Canon dùng CAPT một driver PostScript không hợp: lệnh in báo xong mà máy không ra giấy.',
         'Driver là captdriver, mã nguồn mở. Theo captdriver, LBP2900/LBP2900B và LBP3010/LBP3018/LBP3050 chạy được, còn LBP3000, LBP3100 và LBP6000 mới ở mức thử nghiệm. Các máy CAPT khác chỉ chạy với driver của Canon.',
         'Cài driver không được thì màn hình báo lỗi có nút Nhờ giúp đỡ, kèm nhật ký cài đặt. Máy có máy in thì mọi yêu cầu giúp đỡ tự kèm nhật ký máy in, đã bỏ số serial và tên tài liệu.',
@@ -432,7 +437,7 @@ const copy = {
         title: 'Island Dock — a taskbar of three islands',
         lead: 'The taskbar is split into three rounded, floating islands: clean to look at, and as familiar as Windows.',
         points: [
-          'Left island: the Start Menu, which finds apps in Vietnamese even typed without accents.',
+          'Left island: the Start Menu, which finds apps in Vietnamese even typed without accents; hold Ctrl and roll the mouse wheel to resize its icons.',
           'Center island: pinned and running apps, with a small dot under the open ones.',
           'Right island: system tray, input method, clock, Control Center and Feedback & Help.',
         ],
@@ -510,7 +515,12 @@ const copy = {
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
-      [VERSION, 'Canon LBP2900 printers install with one click', [
+      [VERSION, 'Resize the Start Menu icons with Ctrl + mouse wheel', [
+        'As on Windows: open the Start Menu, hold Ctrl and roll the mouse wheel over the apps. Up makes the icons grow, down makes them shrink, a little with every notch.',
+        'Smaller icons fit more apps in a row (up to 7), bigger ones fewer. The default size looks as before.',
+        'The Start Menu stays open on the category or search it shows, and keeps the size for next time.',
+      ]],
+      ['1.3.7', 'Canon LBP2900 printers install with one click', [
         'Plug the printer in and a "The printer has no driver" notification comes up. Click View details, then Install the printer driver, and the printer sets itself up. Before, the system gave Canon\'s CAPT printers an unsuitable PostScript driver: jobs were reported as printed while nothing came out.',
         'The driver is the open-source captdriver. According to captdriver, the LBP2900/LBP2900B and LBP3010/LBP3018/LBP3050 work, and the LBP3000, LBP3100 and LBP6000 are experimental. Other CAPT printers only work with Canon\'s driver.',
         'When a driver install fails, the error page has an Ask for help button, and the request carries the install log. On a computer with a printer, every help request carries a printer log, without serial numbers or document names.',
