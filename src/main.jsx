@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-const VERSION = '1.3.8';
+const VERSION = '1.3.9';
 
 const links = {
   download: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-cinnamon-amd64.iso/download`,
@@ -102,8 +102,8 @@ const copy = {
         title: 'Kiểm tra driver — biết ngay máy còn thiếu gì',
         lead: 'Chạy thử CaramOS từ USB là biết máy có hợp không, trước cả khi cài. Sau khi cài, Kiểm tra driver chạy lại ở lần đăng nhập đầu tiên rồi chỉ lên tiếng khi có vấn đề mới.',
         points: [
-          'Kiểm tra Wi-Fi, mạng dây, đồ họa, âm thanh, Bluetooth, webcam, đầu đọc vân tay và máy in Canon LBP2900.',
-          'Cài driver NVIDIA và Wi-Fi Broadcom bằng một nút, đúng bản Ubuntu khuyên dùng cho máy. Máy in Canon LBP2900 cũng cài bằng một nút.',
+          'Kiểm tra Wi-Fi, mạng dây, đồ họa, âm thanh, Bluetooth, webcam, đầu đọc vân tay và máy in Canon dùng CAPT (LBP2900, LBP6300dn…).',
+          'Cài driver NVIDIA và Wi-Fi Broadcom bằng một nút, đúng bản Ubuntu khuyên dùng cho máy. Máy in Canon cũng vậy: LBP2900 với captdriver mã nguồn mở, LBP6300dn và các máy CAPT khác với driver chính hãng của Canon, kể cả máy in qua mạng LAN.',
           'Thiếu driver mạng? Chỉ cách vào mạng bằng dây LAN, điện thoại qua USB, hoặc cài thẳng từ USB CaramOS.',
           'Nút Nhờ giúp đỡ gửi lời nhắn kèm hồ sơ phần cứng tới cộng đồng VNLF.',
         ],
@@ -228,7 +228,13 @@ const copy = {
     releaseScrollHint: 'Cuộn để xem các bản trước ↓',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
-      [VERSION, 'Phóng to, thu nhỏ icon Start Menu bằng Ctrl + lăn chuột', [
+      [VERSION, 'Driver máy in Canon chính hãng cho LBP6300dn và các máy CAPT khác, phím PrtSc chụp màn hình', [
+        'Kiểm tra driver cài driver chính hãng của Canon cho các máy Canon dùng CAPT mà captdriver chưa chạy được, như LBP6300dn, LBP3300, LBP5000, LBP6200, LBP7200C. Máy cắm USB: cắm vào là có thông báo, bấm Cài driver của Canon, đồng ý điều khoản của Canon, khoảng một phút sau máy in đã sẵn sàng (22 dòng máy).',
+        'Máy in qua mạng LAN (13 dòng có cổng mạng): trong Kiểm tra driver bấm Thêm máy in…, chọn mẫu máy và nhập địa chỉ IP.',
+        'Driver được tải thẳng từ máy chủ của Canon và kiểm tra trước khi cài; CaramOS lo hàng đợi in, dịch vụ in tự chạy khi bật máy, rút ra cắm lại vẫn in được, và chặn máy khác trong mạng kết nối vào dịch vụ in. Điều khoản của Canon cho phép dùng cho mục đích cá nhân, phi thương mại.',
+        'Bấm PrtSc hoặc Win+Shift+S để chụp màn hình (trước đây hai phím này không có tác dụng): kéo chọn vùng, Ctrl+C để chép ảnh dán vào Zalo hay Messenger, Ctrl+S để lưu vào thư mục Ảnh.',
+      ]],
+      ['1.3.8', 'Phóng to, thu nhỏ icon Start Menu bằng Ctrl + lăn chuột', [
         'Như trên Windows: mở Start Menu, giữ Ctrl rồi lăn chuột trên danh sách ứng dụng. Lăn lên thì icon to dần, lăn xuống thì nhỏ dần, mỗi nấc một chút.',
         'Icon nhỏ thì mỗi hàng xếp được nhiều ứng dụng hơn (tới 7), icon to thì ít hơn. Cỡ mặc định trông như cũ.',
         'Start Menu vẫn mở, giữ nguyên mục hay kết quả tìm kiếm đang xem, và nhớ cỡ đã chọn cho lần sau.',
@@ -389,8 +395,8 @@ const copy = {
         title: 'Driver Check — know what your computer is missing',
         lead: 'Try CaramOS from the USB stick and you know whether the computer works well with it, before installing. Afterwards it runs again at the first login, then only speaks up about new problems.',
         points: [
-          'Checks Wi-Fi, wired network, graphics, sound, Bluetooth, webcam, fingerprint reader and Canon LBP2900 printers.',
-          'Installs the NVIDIA and Broadcom Wi-Fi drivers Ubuntu recommends, with one click. Canon LBP2900 printers also install with one click.',
+          'Checks Wi-Fi, wired network, graphics, sound, Bluetooth, webcam, fingerprint reader and Canon CAPT printers (LBP2900, LBP6300dn…).',
+          'Installs the NVIDIA and Broadcom Wi-Fi drivers Ubuntu recommends, with one click. Canon printers too: the LBP2900 with the open-source captdriver, the LBP6300dn and the other CAPT printers with Canon\'s own driver, network printers included.',
           'No network driver? It explains how to get online with a cable or a phone over USB, or installs from the CaramOS USB stick.',
           'Ask for help sends a message with the hardware profile to the VNLF community.',
         ],
@@ -515,7 +521,13 @@ const copy = {
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
-      [VERSION, 'Resize the Start Menu icons with Ctrl + mouse wheel', [
+      [VERSION, 'Canon\'s own printer driver for the LBP6300dn and other CAPT printers, PrtSc takes screenshots', [
+        'Driver Check installs Canon\'s own driver for the Canon CAPT printers captdriver cannot drive yet, such as the LBP6300dn, LBP3300, LBP5000, LBP6200 and LBP7200C. Over USB: plug it in, click Install Canon\'s driver, agree to Canon\'s terms, and about a minute later the printer is ready (22 models).',
+        'Network printers (the 13 models with a network port): in Driver Check click Add printer…, pick the model and type its IP address.',
+        'The driver comes straight from Canon\'s server and is checked before it is installed; CaramOS sets up the print queue, a print service that starts at boot, printing again after a replug, and keeps other computers on the network away from that service. Canon\'s terms allow it for personal, non-commercial use.',
+        'Press PrtSc or Win+Shift+S to take a screenshot (both keys did nothing before): drag over an area, Ctrl+C to copy it into Zalo or Messenger, Ctrl+S to save it in the Pictures folder.',
+      ]],
+      ['1.3.8', 'Resize the Start Menu icons with Ctrl + mouse wheel', [
         'As on Windows: open the Start Menu, hold Ctrl and roll the mouse wheel over the apps. Up makes the icons grow, down makes them shrink, a little with every notch.',
         'Smaller icons fit more apps in a row (up to 7), bigger ones fewer. The default size looks as before.',
         'The Start Menu stays open on the category or search it shows, and keeps the size for next time.',
