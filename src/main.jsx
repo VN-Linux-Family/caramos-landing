@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
@@ -26,6 +26,16 @@ const installCommand = 'curl -fsSL https://caramos.vietnamlinuxfamily.net/instal
 const upgradeCommand = 'sudo caramos-ota --upgrade --yes';
 const shots = '/assets/screenshots';
 
+// The Canon CAPT printers Driver Check sets up, as in its tables (caramos-ota: canon_capt.USB_MODELS and MODELS,
+// knowledge.CAPTDRIVER_MODELS and CAPTDRIVER_WORKS). [name, experimental]
+const canonUsbPrinters = ['LBP-1120', 'LBP-1210', 'LBP3200', 'LBP3210', 'LBP3300', 'LBP3310', 'LBP3500', 'LBP5000',
+  'LBP5050', 'LBP5100', 'LBP5300', 'LBP6020', 'LBP6200', 'LBP6300dn', 'LBP7010C/LBP7018C', 'LBP7200C/LBP7200Cdn',
+  'LBP9100Cdn'].map((name) => [name, false]);
+const captdriverPrinters = [['LBP2900/LBP2900B', false], ['LBP3000', true], ['LBP3010/LBP3018/LBP3050', false],
+  ['LBP3100/LBP3108/LBP3150', true], ['LBP6000/LBP6018', true]];
+const networkPrinters = ['LBP3300', 'LBP3310', 'LBP3500', 'LBP5000', 'LBP5050', 'LBP5300', 'LBP6300dn', 'LBP6300n',
+  'LBP6310dn', 'LBP7200C/LBP7200Cdn', 'LBP7210Cdn', 'LBP9100Cdn', 'LBP9200C'].map((name) => [name, false]);
+
 const banners = [
   [`${shots}/first-login.webp`, 'heroLightAlt'],
   [`${shots}/desktop-dark.webp`, 'heroDarkAlt'],
@@ -48,12 +58,12 @@ function compactNumber(value) {
   return new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(value);
 }
 
-const navTargets = ['#overview', '#features', '#ota', '#release-notes', '#ecosystem', '#download'];
+const navTargets = ['#overview', '#features', '#printers', '#ota', '#release-notes', '#ecosystem', '#download'];
 
 const copy = {
   vi: {
     language: 'EN',
-    nav: ['Tổng quan', 'Tính năng', 'Nâng cấp', 'Release note', 'Hệ sinh thái', 'Tải ISO'],
+    nav: ['Tổng quan', 'Tính năng', 'Máy in', 'Nâng cấp', 'Release note', 'Hệ sinh thái', 'Tải ISO'],
     heroBadge: `Bản chính thức ${VERSION} · Linux Mint 22.3 Cinnamon · GPL-3.0`,
     upgradeNotice: `Đang dùng CaramOS? Lên ${VERSION} không cần cài lại`,
     seoTitle: `CaramOS ${VERSION} — hệ điều hành Linux cho người Việt`,
@@ -180,6 +190,28 @@ const copy = {
         media: { type: 'single', main: [`${shots}/installer-lotus.webp`, 'Bộ gõ Fcitx5 Lotus trong trình cài đặt CaramOS'] },
       },
     ],
+    printers: {
+      tag: 'Mới trong 1.3.9',
+      title: 'Máy in Canon: cắm vào là\u00a0in',
+      lead: 'Máy in laser Canon dùng CAPT như LBP2900, LBP3300 hay LBP6300dn vốn nổi tiếng khó cài trên Linux. Trên CaramOS, Kiểm tra driver tự nhận ra máy in, cài đúng driver và tạo hàng đợi in, không phải gõ lệnh gì.',
+      steps: [
+        ['Cắm máy in', 'Có ngay thông báo “Máy in chưa có driver”.'],
+        ['Bấm cài driver', 'Bấm nút cài trong Kiểm tra driver rồi nhập mật khẩu. Driver của Canon cần bạn đồng ý điều khoản của Canon trước.'],
+        ['In', 'Khi in, chọn máy in vừa cài. Rút ra cắm lại hay khởi động lại máy vẫn in được.'],
+      ],
+      image: [`${shots}/printer-canon-driver-check.webp`, 'Kiểm tra driver báo máy in Canon LBP6300 chưa có driver, với nút Cài driver của Canon'],
+      models: 'dòng máy',
+      usbTitle: 'Cắm cáp USB',
+      usbHow: 'Kiểm tra driver tự nhận ra máy in ngay khi cắm vào.',
+      canonGroup: 'Driver chính hãng của Canon',
+      newLabel: 'Mới',
+      captGroup: 'Driver mã nguồn mở captdriver',
+      captSince: 'có từ bản 1.3.7',
+      experimental: 'thử nghiệm',
+      networkTitle: 'Máy in qua mạng LAN',
+      networkHow: 'Mở Kiểm tra driver, bấm “Thêm máy in…”, chọn mẫu máy rồi nhập địa chỉ IP của máy in.',
+      note: 'Chưa hỗ trợ: LBP810, LBP3600, LBP5200. Driver của Canon được tải thẳng từ máy chủ của Canon và kiểm tra trước khi cài; điều khoản của Canon cho phép dùng cho mục đích cá nhân, phi thương mại.',
+    },
     statsTitle: 'Nhẹ hơn Linux Mint gốc, không đơ khi hết RAM',
     statsLead: 'Đo trên cùng một máy ảo (4 nhân, 6 GB RAM) với Linux Mint 22.3 Cinnamon gốc; RAM đo 5 phút sau khi khởi động.',
     stats: [
@@ -346,7 +378,7 @@ const copy = {
   },
   en: {
     language: 'VI',
-    nav: ['Overview', 'Features', 'Upgrade', 'Release notes', 'Ecosystem', 'Download'],
+    nav: ['Overview', 'Features', 'Printers', 'Upgrade', 'Release notes', 'Ecosystem', 'Download'],
     heroBadge: `Official release ${VERSION} · Linux Mint 22.3 Cinnamon · GPL-3.0`,
     upgradeNotice: `On CaramOS already? Get ${VERSION} without reinstalling`,
     seoTitle: `CaramOS ${VERSION} — a Linux distribution for Vietnamese users`,
@@ -473,6 +505,28 @@ const copy = {
         media: { type: 'single', main: [`${shots}/installer-lotus.webp`, 'The Fcitx5 Lotus input method in the CaramOS installer'] },
       },
     ],
+    printers: {
+      tag: 'New in 1.3.9',
+      title: 'Canon printers: plug in and print',
+      lead: 'Canon CAPT laser printers such as the LBP2900, LBP3300 and LBP6300dn are notoriously hard to set up on Linux. On CaramOS, Driver Check recognises the printer, installs the right driver and creates the print queue, with no commands to type.',
+      steps: [
+        ['Plug in the printer', 'A “The printer has no driver” notification comes up right away.'],
+        ['Click install', 'Click the install button in Driver Check and type your password. Canon\'s driver asks you to accept Canon\'s terms first.'],
+        ['Print', 'Pick the new printer when you print. It keeps working after a replug or a restart.'],
+      ],
+      image: [`${shots}/printer-canon-driver-check.webp`, 'Driver Check reports that the Canon LBP6300 printer has no driver, with an Install Canon\'s driver button'],
+      models: 'models',
+      usbTitle: 'Over USB',
+      usbHow: 'Driver Check recognises the printer as soon as it is plugged in.',
+      canonGroup: 'Canon\'s own driver',
+      newLabel: 'New',
+      captGroup: 'Open-source captdriver',
+      captSince: 'since 1.3.7',
+      experimental: 'experimental',
+      networkTitle: 'On the office network',
+      networkHow: 'Open Driver Check, click “Add printer…”, pick the model and type the printer\'s IP address.',
+      note: 'Not supported yet: LBP810, LBP3600, LBP5200. Canon\'s driver is downloaded straight from Canon\'s server and checked before it is installed; Canon\'s terms allow it for personal, non-commercial use.',
+    },
     statsTitle: 'Lighter than stock Linux Mint, no freeze when RAM runs out',
     statsLead: 'Measured on the same virtual machine (4 cores, 6 GB of RAM) as stock Linux Mint 22.3 Cinnamon; RAM 5 minutes after boot.',
     stats: [
@@ -777,6 +831,8 @@ function App() {
 
         <FeatureSection t={t} />
 
+        <PrinterSection t={t} />
+
         <StatsSection t={t} />
 
         <CardSection title={t.extrasTitle} items={t.extras} />
@@ -1050,6 +1106,49 @@ function FeatureMedia({ media }) {
     {media.phone ? <picture><source media="(max-width: 620px)" srcSet={media.phone} />{main}</picture> : main}
     {media.overlay && <img className="media-overlay" src={media.overlay[0]} alt={media.overlay[1]} loading="lazy" decoding="async" />}
   </div>;
+}
+
+function PrinterSection({ t }) {
+  const p = t.printers;
+  return <section className="printer-section" id="printers" aria-labelledby="printers-title">
+    <div className="printer-intro">
+      <div className="printer-copy">
+        <p className="feature-tag">{p.tag}</p>
+        <h2 id="printers-title">{p.title}</h2>
+        <p className="printer-lead">{p.lead}</p>
+        <ol className="printer-steps">
+          {p.steps.map(([title, text], index) => <li key={title}><span>{index + 1}</span><strong>{title}</strong><p>{text}</p></li>)}
+        </ol>
+      </div>
+      <img className="printer-shot" src={p.image[0]} alt={p.image[1]} width="1000" height="540" loading="lazy" decoding="async" />
+    </div>
+    <div className="printer-models">
+      <article className="printer-card">
+        <div className="printer-card-head"><h3>{p.usbTitle}</h3><span className="printer-count">{canonUsbPrinters.length + captdriverPrinters.length} {p.models}</span></div>
+        <p className="printer-how">{p.usbHow}</p>
+        <h4>{p.canonGroup}<span className="printer-new">{p.newLabel}</span></h4>
+        <ModelList models={canonUsbPrinters} />
+        <h4>{p.captGroup}<small>{p.captSince}</small></h4>
+        <ModelList models={captdriverPrinters} note={p.experimental} />
+      </article>
+      <article className="printer-card">
+        <div className="printer-card-head"><h3>{p.networkTitle}</h3><span className="printer-new">{p.newLabel}</span><span className="printer-count">{networkPrinters.length} {p.models}</span></div>
+        <p className="printer-how">{p.networkHow}</p>
+        <ModelList models={networkPrinters} />
+      </article>
+    </div>
+    <p className="printer-note">{p.note}</p>
+  </section>;
+}
+
+function ModelList({ models, note }) {
+  // A break opportunity after each slash: LBP3010/LBP3018/LBP3050 wraps on a phone instead of overflowing.
+  return <ul className="model-list">
+    {models.map(([name, experimental]) => <li key={name}>
+      {name.split('/').map((part, index) => <Fragment key={part}>{index > 0 && <>/<wbr /></>}{part}</Fragment>)}
+      {experimental && <small>{note}</small>}
+    </li>)}
+  </ul>;
 }
 
 function StatsSection({ t }) {
