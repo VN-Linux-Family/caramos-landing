@@ -1,0 +1,185 @@
+{
+ "comment": "Ảnh cho Hình nền Việt Nam mỗi ngày của CaramOS, theo thứ tự các ngày. Sửa danh sách này, chạy `python3 scripts/wallpapers.py` rồi `yarn deploy`: máy CaramOS nhận danh sách mới từ hôm sau. Ảnh Wikimedia Commons: {\"commons\": \"File:...\", \"title\": \"...\"}. Ảnh của nhóm hay cộng đồng (có quyền chia sẻ): đặt file vào public/wallpapers/ rồi thêm {\"file\": \"ten-anh.jpg\", \"title\": \"...\", \"author\": \"...\", \"license\": \"CC BY 4.0\", \"source\": \"https://...\"}. Chọn ảnh phong cảnh, công trình xưa, không lấy người làm chủ thể, cờ, bản đồ, chiến tranh, và không lấy ảnh công trình hiện đại chụp từ 2023 (luật quyền tác giả Việt Nam).",
+ "photos": [
+  {
+   "commons": "File:Sông Nho Quế 2022 - NKS.jpg",
+   "title": "Hẻm sông Nho Quế, Hà Giang"
+  },
+  {
+   "commons": "File:Sunset at Halong Bay.jpg",
+   "title": "Hoàng hôn tím trên vịnh Hạ Long"
+  },
+  {
+   "commons": "File:Hội An lantern festival (45536262991).jpg",
+   "title": "Phố đèn lồng Hội An"
+  },
+  {
+   "commons": "File:A Beam Through the Darkness - Son Doong Cave.jpg",
+   "title": "Tia nắng trong hang Sơn Đoòng"
+  },
+  {
+   "commons": "File:Mui Ne sand dunes 1.jpg",
+   "title": "Vân cát đồi Mũi Né"
+  },
+  {
+   "commons": "File:Terraced paddy fields, Ha Giang, Vietnam.jpg",
+   "title": "Ruộng bậc thang mùa nước đổ, Hà Giang"
+  },
+  {
+   "commons": "File:EnchantedBridge.jpg",
+   "title": "Cầu Thê Húc về đêm, hồ Hoàn Kiếm"
+  },
+  {
+   "commons": "File:Ban Gioc (31073305668).jpg",
+   "title": "Thác Bản Giốc, Cao Bằng"
+  },
+  {
+   "commons": "File:Ly Son Islands (14981477146).jpg",
+   "title": "Biển ngọc đảo Lý Sơn"
+  },
+  {
+   "commons": "File:Mã Pí Lèng, Vietnam.jpg",
+   "title": "Hoàng hôn đèo Mã Pí Lèng"
+  },
+  {
+   "commons": "File:Hội An - Japanische Brücke (8688805519).jpg",
+   "title": "Chùa Cầu về đêm, Hội An"
+  },
+  {
+   "commons": "File:Halong Bay (5706250291).jpg",
+   "title": "Thuyền buồm đỏ giữa vịnh Hạ Long"
+  },
+  {
+   "commons": "File:Ruộng bậc thang ở Hoàng Su Phì.jpg",
+   "title": "Ruộng bậc thang Hoàng Su Phì"
+  },
+  {
+   "commons": "File:SaiGon my home town (15036485488).jpg",
+   "title": "Sài Gòn về đêm bên sông"
+  },
+  {
+   "commons": "File:Hang Én Cave - 201505 - JB.jpg",
+   "title": "Cửa hang Én, Phong Nha – Kẻ Bàng"
+  },
+  {
+   "commons": "File:Palmyra palms in An Giang, Vietnam 2014 (37703474982).jpg",
+   "title": "Hàng thốt nốt soi bóng, Tịnh Biên"
+  },
+  {
+   "commons": "File:Ha Giang - 2012 - 166 (10056929673).jpg",
+   "title": "Biển mây trên ruộng bậc thang Hà Giang"
+  },
+  {
+   "commons": "File:I had to much to drink, the lights are changing, Hue, Vietnam2.jpg",
+   "title": "Cầu Trường Tiền về đêm, Huế"
+  },
+  {
+   "commons": "File:Quay Son River (49309114521).jpg",
+   "title": "Sông Quây Sơn xanh ngọc, Cao Bằng"
+  },
+  {
+   "commons": "File:Hoàng hôn Phú Quốc.jpg",
+   "title": "Hoàng hôn rẻ quạt trên biển Phú Quốc"
+  },
+  {
+   "commons": "File:Son Doong Cave DB (3).jpg",
+   "title": "Hố sụt và rừng trong hang Sơn Đoòng"
+  },
+  {
+   "commons": "File:Aerial view of My Son Group B-C-D, Cham Hindu temples complex, Vietnam 012.jpg",
+   "title": "Thánh địa Mỹ Sơn nhìn từ trên cao"
+  },
+  {
+   "commons": "File:Phu Thap Village (47255521051).jpg",
+   "title": "Hoàng hôn rực lửa vùng núi đá Đông Bắc"
+  },
+  {
+   "commons": "File:Old pier - Cần Giờ dawn's early light. (13911315895).jpg",
+   "title": "Bình minh bên cầu gỗ Cần Giờ"
+  },
+  {
+   "commons": "File:Night lights (16512194756).jpg",
+   "title": "Tháp Rùa về đêm, hồ Hoàn Kiếm"
+  },
+  {
+   "commons": "File:Terraced paddy fields, Vietnam - 30743148897.jpg",
+   "title": "Ruộng bậc thang mùa nước đổ, Lào Cai"
+  },
+  {
+   "commons": "File:Halong Bay (5678906677).jpg",
+   "title": "Đảo đá soi bóng vịnh Hạ Long"
+  },
+  {
+   "commons": "File:Không ảnh núi Viên Nam.jpg",
+   "title": "Biển mây trên núi Viên Nam"
+  },
+  {
+   "commons": "File:Beautiful Sunrise in Da Nang.jpg",
+   "title": "Bình minh trên biển Đà Nẵng"
+  },
+  {
+   "commons": "File:Ba Be Lake Morning (40116008593).jpg",
+   "title": "Bình minh hồ Ba Bể"
+  },
+  {
+   "commons": "File:Nhat Tan Bridge at night 2016.jpg",
+   "title": "Cầu Nhật Tân rực sáng, Hà Nội"
+  },
+  {
+   "commons": "File:Rice terraces in Ha Giang, Vietnam - 2012 - 121 (10062070653).jpg",
+   "title": "Ruộng bậc thang mùa lúa chín, Hà Giang"
+  },
+  {
+   "commons": "File:Halong Bay junk.jpg",
+   "title": "Thuyền buồm trong sương vịnh Hạ Long"
+  },
+  {
+   "commons": "File:Mountain-3001218.jpg",
+   "title": "Núi Mắt Thần soi bóng, Cao Bằng"
+  },
+  {
+   "commons": "File:Vietnam, Mui Ne sand dune.jpg",
+   "title": "Sóng cát Mũi Né"
+  },
+  {
+   "commons": "File:Hồ Tây hoàng hôn - NKS.jpg",
+   "title": "Chùa Trấn Quốc lúc chạng vạng, Hồ Tây"
+  },
+  {
+   "commons": "File:Sapa Clouds (32331255838).jpg",
+   "title": "Mây cuộn trên núi rừng Sa Pa"
+  },
+  {
+   "commons": "File:Dau Go cave, Hạ Long Bay, Vietnam (54146979492).jpg",
+   "title": "Nắng rọi hang Đầu Gỗ, vịnh Hạ Long"
+  },
+  {
+   "commons": "File:Trang An, Ninh Binh (24089563857).jpg",
+   "title": "Đầm cỏ vàng giữa núi đá Tràng An"
+  },
+  {
+   "commons": "File:Ray over terrace rice field in Sapa - Trung Chải..jpg",
+   "title": "Nắng xuyên mây ruộng bậc thang Sa Pa"
+  },
+  {
+   "commons": "File:Sunset on Dong Quan lake.jpg",
+   "title": "Hoàng hôn tím hồ Đồng Quan, Sóc Sơn"
+  },
+  {
+   "commons": "File:Orange sunset in Vietnam - Jan 2015.jpg",
+   "title": "Thuyền buồm nắng chiều vịnh Hạ Long"
+  },
+  {
+   "commons": "File:Phu Thap (47696039162).jpg",
+   "title": "Đồng lúa núi đá chạng vạng, Đông Bắc"
+  },
+  {
+   "commons": "File:Hoàng hôn trên dòng Hiếu Giang.JPG",
+   "title": "Hoàng hôn trên sông Hiếu, Đông Hà"
+  },
+  {
+   "commons": "File:Vườn chim Thung Nham một buổi hoàng hôn.jpg",
+   "title": "Hoàng hôn vườn chim Thung Nham"
+  }
+ ]
+}
