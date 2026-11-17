@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-const VERSION = '1.3.10';
+const VERSION = '1.3.11';
 
 const links = {
   download: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-cinnamon-amd64.iso/download`,
@@ -262,7 +262,14 @@ const copy = {
     releaseScrollHint: 'Cuộn để xem các bản trước ↓',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
-      [VERSION, 'Trung tâm cập nhật báo đúng lý do, Kiểm tra driver bớt báo nhầm', [
+      [VERSION, 'Hình nền Việt Nam mỗi ngày, chọn màu cho Control Center', [
+        'Hình nền Việt Nam mỗi ngày: mở Cài đặt hệ thống > Hình nền, bấm thư mục Việt Nam mỗi ngày rồi chọn một ảnh. Từ đó mỗi ngày hình nền là một ảnh mới về thiên nhiên, cảnh đẹp, công trình của Việt Nam (45 ảnh từ Wikimedia Commons, có ghi tác giả). Chọn hình nền khác là tắt.',
+        'Control Center có ô Màu nhấn: 8 màu có sẵn, theo chủ đề hệ thống, hoặc bấm Màu khác… để tự chọn màu bất kỳ. Máy cập nhật lên 1.3.11 thấy ô này từ lần đăng nhập sau.',
+        'Máy khởi động mà không vào được màn hình làm việc (màn hình đen, đứng máy) thì lần bật sau menu khởi động tự hiện 30 giây, có mục Advanced options để vào chế độ khôi phục.',
+        'Tệp: bấm chuột phải có thêm Sao chép đường dẫn vào clipboard và Tạo lối tắt trên màn hình; ảnh thu nhỏ hiện cả trên điện thoại, ổ mạng và Google Drive.',
+        'USB cài đặt: menu khởi động đếm ngược 10 giây, chữ to hơn, hướng dẫn phím bằng tiếng Việt (máy bật Secure Boot vẫn dùng chữ nhỏ mặc định). Lệnh sudo apt update không còn hiện dòng báo i386 của bộ gõ Lotus.',
+      ]],
+      ['1.3.10', 'Trung tâm cập nhật báo đúng lý do, Kiểm tra driver bớt báo nhầm', [
         'Lỡ đóng ô nhập mật khẩu khi cập nhật, Trung tâm cập nhật không còn báo "Cập nhật thất bại" mà báo "Chưa cập nhật", kèm nút Thử lại.',
         'Bấm cập nhật khi máy đang tự cập nhật, hay khi đang mở một cửa sổ cập nhật khác, sẽ có thông báo "Đang có một lần cập nhật khác": đợi lần đó xong rồi bấm Thử lại.',
         'Máy in Canon cắm USB mà máy tính không giao tiếp được (cáp lỏng, cổng USB hỏng, cắm qua hub) được báo "Máy in chưa kết nối được" kèm cách đổi cổng, đổi cáp, thay vì đề xuất một driver rồi cài không được.',
@@ -585,7 +592,14 @@ const copy = {
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
-      [VERSION, 'The Update Center says why nothing was updated, fewer false alarms in Driver Check', [
+      [VERSION, 'A photo of Vietnam a day, an accent colour for the Control Center', [
+        'A photo of Vietnam a day: open System Settings > Backgrounds, click the Việt Nam mỗi ngày folder and pick a photo. From then on, the wallpaper is a new photo of Vietnam\'s nature, landscapes and buildings every day (45 photos from Wikimedia Commons, with credits). Picking another wallpaper turns it off.',
+        'The Control Center has an Accent colour tile: 8 presets, the theme\'s colour, or any colour you pick (Other colour…). A computer updated to 1.3.11 shows the tile from the next login.',
+        'After a start that never reached the desktop (a black screen, a hang), the boot menu shows for 30 seconds at the next start, with Advanced options for the recovery mode.',
+        'Files: the right-click menu now has Copy path to clipboard and Create a desktop shortcut, and picture thumbnails show on phones, network shares and Google Drive too.',
+        'Install USB: the boot menu counts down 10 seconds, with larger text and Vietnamese key help (computers with Secure Boot keep the small default font). sudo apt update no longer prints the Lotus input method\'s i386 notice.',
+      ]],
+      ['1.3.10', 'The Update Center says why nothing was updated, fewer false alarms in Driver Check', [
         'Closing the password window during an update no longer ends on "Update failed": the Update Center says "Not updated yet" and offers Try again.',
         'Starting an update while the computer is already updating, or while another Update Center window is open, shows "Another update is running": wait for it to finish, then click Try again.',
         'A Canon printer plugged in over USB that the computer cannot talk to (a loose cable, a bad USB port, a hub) is reported as "The printer is not connected properly", with advice to try another port or cable, instead of offering a driver that then fails to install.',
