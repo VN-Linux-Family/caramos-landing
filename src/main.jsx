@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-const VERSION = '1.3.9';
+const VERSION = '1.3.10';
 
 const links = {
   download: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-cinnamon-amd64.iso/download`,
@@ -192,7 +192,7 @@ const copy = {
     ],
     printers: {
       tag: 'Mới trong 1.3.9',
-      title: 'Máy in Canon: cắm vào là\u00a0in',
+      title: 'Máy in laser Canon: cắm vào là\u00a0in',
       lead: 'Máy in laser Canon dùng CAPT như LBP2900, LBP3300 hay LBP6300dn vốn nổi tiếng khó cài trên Linux. Trên CaramOS, Kiểm tra driver tự nhận ra máy in, cài đúng driver và tạo hàng đợi in, không phải gõ lệnh gì.',
       steps: [
         ['Cắm máy in', 'Có ngay thông báo “Máy in chưa có driver”.'],
@@ -210,6 +210,8 @@ const copy = {
       experimental: 'thử nghiệm',
       networkTitle: 'Máy in qua mạng LAN',
       networkHow: 'Mở Kiểm tra driver, bấm “Thêm máy in…”, chọn mẫu máy rồi nhập địa chỉ IP của máy in.',
+      otherTitle: 'Máy in phun Canon PIXMA hay máy in hãng khác?',
+      other: 'Các máy này dùng driver có sẵn trong CaramOS, không nằm trong danh sách trên. Mở Máy in trong menu để thêm máy, rồi chọn hãng và mẫu máy, ví dụ Canon PIXMA MG8120 hay PIXMA iP8720.',
       note: 'Chưa hỗ trợ: LBP810, LBP3600, LBP5200. Driver của Canon được tải thẳng từ máy chủ của Canon và kiểm tra trước khi cài; điều khoản của Canon cho phép dùng cho mục đích cá nhân, phi thương mại.',
     },
     statsTitle: 'Nhẹ hơn Linux Mint gốc, không đơ khi hết RAM',
@@ -260,7 +262,13 @@ const copy = {
     releaseScrollHint: 'Cuộn để xem các bản trước ↓',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
-      [VERSION, 'Driver máy in Canon chính hãng cho LBP6300dn và các máy CAPT khác, phím PrtSc chụp màn hình', [
+      [VERSION, 'Trung tâm cập nhật báo đúng lý do, Kiểm tra driver bớt báo nhầm', [
+        'Lỡ đóng ô nhập mật khẩu khi cập nhật, Trung tâm cập nhật không còn báo "Cập nhật thất bại" mà báo "Chưa cập nhật", kèm nút Thử lại.',
+        'Bấm cập nhật khi máy đang tự cập nhật, hay khi đang mở một cửa sổ cập nhật khác, sẽ có thông báo "Đang có một lần cập nhật khác": đợi lần đó xong rồi bấm Thử lại.',
+        'Máy in Canon cắm USB mà máy tính không giao tiếp được (cáp lỏng, cổng USB hỏng, cắm qua hub) được báo "Máy in chưa kết nối được" kèm cách đổi cổng, đổi cáp, thay vì đề xuất một driver rồi cài không được.',
+        'Laptop dùng card đồ họa Intel GM45 (Mobile 4 Series) không còn bị báo nhầm là card đồ họa chưa có driver.',
+      ]],
+      ['1.3.9', 'Driver máy in Canon chính hãng cho LBP6300dn và các máy CAPT khác, phím PrtSc chụp màn hình', [
         'Kiểm tra driver cài driver chính hãng của Canon cho các máy Canon dùng CAPT mà captdriver chưa chạy được, như LBP6300dn, LBP3300, LBP5000, LBP6200, LBP7200C. Máy cắm USB: cắm vào là có thông báo, bấm Cài driver của Canon, đồng ý điều khoản của Canon, khoảng một phút sau máy in đã sẵn sàng (22 dòng máy).',
         'Máy in qua mạng LAN (13 dòng có cổng mạng): trong Kiểm tra driver bấm Thêm máy in…, chọn mẫu máy và nhập địa chỉ IP.',
         'Driver được tải thẳng từ máy chủ của Canon và kiểm tra trước khi cài; CaramOS lo hàng đợi in, dịch vụ in tự chạy khi bật máy, rút ra cắm lại vẫn in được, và chặn máy khác trong mạng kết nối vào dịch vụ in. Điều khoản của Canon cho phép dùng cho mục đích cá nhân, phi thương mại.',
@@ -507,7 +515,7 @@ const copy = {
     ],
     printers: {
       tag: 'New in 1.3.9',
-      title: 'Canon printers: plug in and print',
+      title: 'Canon laser printers: plug in and print',
       lead: 'Canon CAPT laser printers such as the LBP2900, LBP3300 and LBP6300dn are notoriously hard to set up on Linux. On CaramOS, Driver Check recognises the printer, installs the right driver and creates the print queue, with no commands to type.',
       steps: [
         ['Plug in the printer', 'A “The printer has no driver” notification comes up right away.'],
@@ -525,6 +533,8 @@ const copy = {
       experimental: 'experimental',
       networkTitle: 'On the office network',
       networkHow: 'Open Driver Check, click “Add printer…”, pick the model and type the printer\'s IP address.',
+      otherTitle: 'A Canon PIXMA inkjet or another brand?',
+      other: 'These printers use drivers that come with CaramOS and are not in the lists above. Open Printers from the menu to add the printer, then pick the make and model, for example Canon PIXMA MG8120 or PIXMA iP8720.',
       note: 'Not supported yet: LBP810, LBP3600, LBP5200. Canon\'s driver is downloaded straight from Canon\'s server and checked before it is installed; Canon\'s terms allow it for personal, non-commercial use.',
     },
     statsTitle: 'Lighter than stock Linux Mint, no freeze when RAM runs out',
@@ -575,7 +585,13 @@ const copy = {
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
-      [VERSION, 'Canon\'s own printer driver for the LBP6300dn and other CAPT printers, PrtSc takes screenshots', [
+      [VERSION, 'The Update Center says why nothing was updated, fewer false alarms in Driver Check', [
+        'Closing the password window during an update no longer ends on "Update failed": the Update Center says "Not updated yet" and offers Try again.',
+        'Starting an update while the computer is already updating, or while another Update Center window is open, shows "Another update is running": wait for it to finish, then click Try again.',
+        'A Canon printer plugged in over USB that the computer cannot talk to (a loose cable, a bad USB port, a hub) is reported as "The printer is not connected properly", with advice to try another port or cable, instead of offering a driver that then fails to install.',
+        'Laptops with Intel GM45 (Mobile 4 Series) graphics no longer get a false "no driver" warning for their graphics card.',
+      ]],
+      ['1.3.9', 'Canon\'s own printer driver for the LBP6300dn and other CAPT printers, PrtSc takes screenshots', [
         'Driver Check installs Canon\'s own driver for the Canon CAPT printers captdriver cannot drive yet, such as the LBP6300dn, LBP3300, LBP5000, LBP6200 and LBP7200C. Over USB: plug it in, click Install Canon\'s driver, agree to Canon\'s terms, and about a minute later the printer is ready (22 models).',
         'Network printers (the 13 models with a network port): in Driver Check click Add printer…, pick the model and type its IP address.',
         'The driver comes straight from Canon\'s server and is checked before it is installed; CaramOS sets up the print queue, a print service that starts at boot, printing again after a replug, and keeps other computers on the network away from that service. Canon\'s terms allow it for personal, non-commercial use.',
@@ -1137,6 +1153,7 @@ function PrinterSection({ t }) {
         <ModelList models={networkPrinters} />
       </article>
     </div>
+    <p className="printer-other"><strong>{p.otherTitle}</strong> {p.other}</p>
     <p className="printer-note">{p.note}</p>
   </section>;
 }
