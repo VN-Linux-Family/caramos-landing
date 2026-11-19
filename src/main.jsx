@@ -66,7 +66,7 @@ const copy = {
   vi: {
     language: 'EN',
     nav: ['Tổng quan', 'Tính năng', 'Máy in', 'Nâng cấp', 'Release note', 'Hệ sinh thái', 'Tải ISO'],
-    heroBadge: `Bản chính thức ${VERSION} · Linux Mint 22.3 Cinnamon · GPL-3.0`,
+    heroBadge: `Bản chính thức ${VERSION} · Linux Mint 22.3 Cinnamon và Xfce · GPL-3.0`,
     upgradeNotice: `Đang dùng CaramOS? Lên ${VERSION} không cần cài lại`,
     seoTitle: `CaramOS ${VERSION} — hệ điều hành Linux cho người Việt`,
     seoDescription: `CaramOS ${VERSION}, bản phát hành chính thức dựa trên Linux Mint 22.3 Cinnamon: tiếng Việt và bộ gõ Lotus có sẵn, App Center cài ứng dụng bằng một nút, Kiểm tra driver, Control Center, Góp ý & hỗ trợ và cập nhật OTA.`,
@@ -406,7 +406,7 @@ const copy = {
   en: {
     language: 'VI',
     nav: ['Overview', 'Features', 'Printers', 'Upgrade', 'Release notes', 'Ecosystem', 'Download'],
-    heroBadge: `Official release ${VERSION} · Linux Mint 22.3 Cinnamon · GPL-3.0`,
+    heroBadge: `Official release ${VERSION} · Linux Mint 22.3 Cinnamon and Xfce · GPL-3.0`,
     upgradeNotice: `On CaramOS already? Get ${VERSION} without reinstalling`,
     seoTitle: `CaramOS ${VERSION} — a Linux distribution for Vietnamese users`,
     seoDescription: `CaramOS ${VERSION}, the official release based on Linux Mint 22.3 Cinnamon: Vietnamese and the Lotus input method out of the box, a one-click App Center, Driver Check, Control Center, Feedback & Help and OTA updates.`,
