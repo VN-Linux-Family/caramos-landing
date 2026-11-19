@@ -2,12 +2,14 @@ import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-const VERSION = '1.3.11';
+const VERSION = '1.4.0';
 
 const links = {
   download: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-cinnamon-amd64.iso/download`,
   release: `https://github.com/VN-Linux-Family/CaramOS/releases/tag/v${VERSION}`,
   checksums: `https://github.com/VN-Linux-Family/CaramOS/releases/download/v${VERSION}/SHA256SUMS`,
+  downloadXfce: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-xfce-amd64.iso/download`,
+  checksumsXfce: `https://github.com/VN-Linux-Family/CaramOS/releases/download/v${VERSION}/SHA256SUMS-xfce`,
   repo: 'https://github.com/VN-Linux-Family/CaramOS',
   org: 'https://github.com/VN-Linux-Family',
   vnlf: 'https://vietnamlinuxfamily.net',
@@ -262,7 +264,15 @@ const copy = {
     releaseScrollHint: 'Cuộn để xem các bản trước ↓',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
-      [VERSION, 'Hình nền Việt Nam mỗi ngày, chọn màu cho Control Center', [
+      [VERSION, 'Bản Xfce cho máy 2 GB và phòng máy ở trường học', [
+        'Có thêm bản Xfce, nhẹ hơn, cho máy 2 GB và phòng máy: vừa bật máy, Task Manager báo khoảng 610 MB RAM trên máy 2 GB. Vẫn có thanh tác vụ ba đảo, Control Center, App Center, Kiểm tra driver và bộ gõ tiếng Việt. Giao diện mặc định là tiếng Anh cho khớp với sách Tin học; chọn tiếng Việt lúc cài thì có tiếng Việt.',
+        'Tệp: bấm chuột phải chọn Mới ▸ Thư mục (bản Xfce: New ▸ Folder) như Windows và sách giáo khoa, có sẵn mẫu Word, Excel, PowerPoint. Máy cài mới có cây thư mục ở khung bên trái như Windows Explorer.',
+        'Phòng máy (Computer Lab): tự cài và thiết lập Veyon hoặc Epoptes để giáo viên xem và điều khiển máy học sinh. Máy giáo viên hiện một mã 6 số; máy học sinh tìm máy giáo viên trong mạng của trường, nhập mã là xong.',
+        'App Center có mục Giáo dục: GCompris, Tux Paint, Klavaro, KTurtle, Thonny, Stellarium, TurboWarp (Scratch 3) và GeoGebra 6.',
+        'Mở tệp Word, Excel, PowerPoint khi máy chưa có bộ ứng dụng văn phòng: CaramOS gợi ý cài ONLYOFFICE, WPS Office hoặc LibreOffice từ App Center, thay vì chỉ mở thư mục chứa tệp. Tệp .zip mở bằng trình giải nén.',
+        'Thanh trượt trong Control Center dài hơn, rãnh của nó hiện rõ ở giao diện tối.',
+      ]],
+      ['1.3.11', 'Hình nền Việt Nam mỗi ngày, chọn màu cho Control Center', [
         'Hình nền Việt Nam mỗi ngày: mở Cài đặt hệ thống > Hình nền, bấm thư mục Việt Nam mỗi ngày rồi chọn một ảnh. Từ đó mỗi ngày hình nền là một ảnh mới về thiên nhiên, cảnh đẹp, công trình của Việt Nam (45 ảnh từ Wikimedia Commons, có ghi tác giả). Chọn hình nền khác là tắt.',
         'Control Center có ô Màu nhấn: 8 màu có sẵn, theo chủ đề hệ thống, hoặc bấm Màu khác… để tự chọn màu bất kỳ. Máy cập nhật lên 1.3.11 thấy ô này từ lần đăng nhập sau.',
         'Máy khởi động mà không vào được màn hình làm việc (màn hình đen, đứng máy) thì lần bật sau menu khởi động tự hiện 30 giây, có mục Advanced options để vào chế độ khôi phục.',
@@ -365,9 +375,11 @@ const copy = {
     ],
     downloadTitle: `Tải CaramOS ${VERSION}`,
     downloadLead:
-      'ISO 2,8 GB được lưu trên SourceForge vì GitHub giới hạn dung lượng mỗi tệp. Kiểm tra SHA256 sau khi tải, chạy thử từ USB để Kiểm tra driver xem máy có hợp không, rồi cài từ biểu tượng Cài đặt CaramOS trên Desktop.',
+      'ISO 2,8 GB được lưu trên SourceForge vì GitHub giới hạn dung lượng mỗi tệp. Máy 2 GB và phòng máy ở trường học nên dùng bản Xfce (2,7 GB). Kiểm tra SHA256 sau khi tải, chạy thử từ USB để Kiểm tra driver xem máy có hợp không, rồi cài từ biểu tượng Cài đặt CaramOS trên Desktop.',
     downloadButton: 'Tải ISO (2,8 GB)',
-    requirements: ['Máy 64-bit, UEFI hoặc BIOS', 'RAM từ 2 GB, khuyên dùng 4 GB', 'Ổ đĩa trống từ 20 GB', 'USB từ 4 GB'],
+    downloadXfceButton: 'Bản Xfce cho máy 2 GB (2,7 GB)',
+    checksumsXfce: 'SHA256 bản Xfce',
+    requirements: ['Máy 64-bit, UEFI hoặc BIOS', 'RAM từ 2 GB (bản Xfce), khuyên dùng 4 GB', 'Ổ đĩa trống từ 20 GB', 'USB từ 4 GB'],
     supportTitle: 'CaramOS trên Unikorn',
     supportLead:
       'Nếu bạn thấy CaramOS hữu ích, hãy clap trên Unikorn để tiếp thêm động lực cho team và giúp dự án tiếp cận nhiều người dùng Việt Nam hơn.',
@@ -592,7 +604,15 @@ const copy = {
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
-      [VERSION, 'A photo of Vietnam a day, an accent colour for the Control Center', [
+      [VERSION, 'An Xfce edition for 2 GB computers and school computer labs', [
+        'A new, lighter Xfce edition for 2 GB computers and school labs: right after boot, Task Manager shows about 610 MB of RAM on a 2 GB computer. It keeps the three-island taskbar, the Control Center, the App Center, Driver Check and Vietnamese typing. Its interface is English by default, to match the Tin học textbooks; choosing Vietnamese at install gives Vietnamese.',
+        'Files: right-click and choose New ▸ Folder (Mới ▸ Thư mục on the Cinnamon edition), as in Windows and the textbooks, with Word, Excel and PowerPoint templates. New installs show a folder tree in the left pane, like Windows Explorer.',
+        'Computer Lab: installs and sets up Veyon or Epoptes, so the teacher can watch and control the students\' computers. The teacher\'s computer shows a 6-digit code; a student\'s computer finds it on the school network, and entering the code is all it takes.',
+        'The App Center has an Education category: GCompris, Tux Paint, Klavaro, KTurtle, Thonny, Stellarium, TurboWarp (Scratch 3) and GeoGebra 6.',
+        'Opening a Word, Excel or PowerPoint file without an office suite now offers ONLYOFFICE, WPS Office or LibreOffice from the App Center, instead of only showing the file\'s folder. .zip files open in the archive manager.',
+        'The Control Center\'s sliders are longer, and their track shows in dark mode.',
+      ]],
+      ['1.3.11', 'A photo of Vietnam a day, an accent colour for the Control Center', [
         'A photo of Vietnam a day: open System Settings > Backgrounds, click the Việt Nam mỗi ngày folder and pick a photo. From then on, the wallpaper is a new photo of Vietnam\'s nature, landscapes and buildings every day (45 photos from Wikimedia Commons, with credits). Picking another wallpaper turns it off.',
         'The Control Center has an Accent colour tile: 8 presets, the theme\'s colour, or any colour you pick (Other colour…). A computer updated to 1.3.11 shows the tile from the next login.',
         'After a start that never reached the desktop (a black screen, a hang), the boot menu shows for 30 seconds at the next start, with Advanced options for the recovery mode.',
@@ -695,9 +715,11 @@ const copy = {
     ],
     downloadTitle: `Download CaramOS ${VERSION}`,
     downloadLead:
-      'The 2.8 GB ISO is hosted on SourceForge because GitHub limits the size of each release file. Verify the SHA256 after downloading, try it from a USB stick so Driver Check can tell whether the computer suits CaramOS, then install from the Install CaramOS icon on the Desktop.',
+      'The 2.8 GB ISO is hosted on SourceForge because GitHub limits the size of each release file. 2 GB computers and school computer labs should use the Xfce edition (2.7 GB). Verify the SHA256 after downloading, try it from a USB stick so Driver Check can tell whether the computer suits CaramOS, then install from the Install CaramOS icon on the Desktop.',
     downloadButton: 'Download ISO (2.8 GB)',
-    requirements: ['64-bit computer, UEFI or BIOS', '2 GB of RAM, 4 GB recommended', '20 GB of free disk space', 'A USB stick of 4 GB or more'],
+    downloadXfceButton: 'Xfce edition for 2 GB (2.7 GB)',
+    checksumsXfce: 'Xfce SHA256',
+    requirements: ['64-bit computer, UEFI or BIOS', '2 GB of RAM (Xfce edition), 4 GB recommended', '20 GB of free disk space', 'A USB stick of 4 GB or more'],
     supportTitle: 'CaramOS on Unikorn',
     supportLead:
       'If CaramOS is useful to you, clap for the project on Unikorn to encourage the team and help it reach more Vietnamese Linux users.',
@@ -971,7 +993,9 @@ function App() {
             <ul className="requirements">{t.requirements.map((item) => <li key={item}>{item}</li>)}</ul>
             <div className="actions download-actions">
               <a className="button primary" href={links.download} target="_blank" rel="noopener noreferrer">{t.downloadButton}</a>
+              <a className="button" href={links.downloadXfce} target="_blank" rel="noopener noreferrer">{t.downloadXfceButton}</a>
               <a className="button" href={links.checksums} target="_blank" rel="noopener noreferrer">{t.checksums}</a>
+              <a className="button" href={links.checksumsXfce} target="_blank" rel="noopener noreferrer">{t.checksumsXfce}</a>
               <a className="button" href={links.release} target="_blank" rel="noopener noreferrer">{t.releaseDetails}</a>
             </div>
           </div>
