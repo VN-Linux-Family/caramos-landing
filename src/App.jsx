@@ -55,6 +55,7 @@ function Landing({ lang }) {
     <Header t={t} />
     <main id="main">
       <Hero t={t} />
+      <Backing t={t} />
       <Editions t={t} />
       <School t={t} />
       <Features t={t} />
@@ -77,7 +78,7 @@ function Logo() {
 }
 
 function Header({ t }) {
-  const [label, href, hreflang] = t.otherLanguage;
+  const [label, href, hreflang, short] = t.otherLanguage;
   return <header className="site-header">
     <div className="site-header-inner">
       <a className="brand" href="#main" translate="no"><Logo /><span>CaramOS</span></a>
@@ -85,7 +86,8 @@ function Header({ t }) {
         {t.menu.map(([text, target]) => <a key={target} href={target}>{text}</a>)}
       </nav>
       <div className="site-header-end">
-        <a className="lang-link" href={href} hrefLang={hreflang} lang={hreflang}>{label}</a>
+        <a className="lang-link" href={href} hrefLang={hreflang} lang={hreflang} aria-label={label}><span className="long">{label}</span><span className="short" aria-hidden="true">{short}</span></a>
+        <a className="btn btn-outline btn-small donate-link" href="/support/">{t.supportPage}</a>
         <a className="btn btn-amber btn-small" href="#download">{t.menuDownload}</a>
       </div>
     </div>
@@ -139,7 +141,7 @@ function Hero({ t }) {
           <span>{t.downloadXfce}</span><small>{t.downloadXfceNote}</small>
         </a>
       </div>
-      <p className="hero-upgrade"><a href="#ota">{t.heroUpgrade}</a></p>
+      <p className="hero-links"><a href="#ota">{t.heroUpgrade}</a><a href="/support/">{t.heroDonate}</a></p>
     </div>
     <figure className="hero-shot">
       <img src={`${shots}/first-login.webp`} srcSet={srcSetOf(`${shots}/first-login.webp`)} sizes="(max-width: 960px) 100vw, 60vw" alt={t.heroShotAlt} width="1600" height="1000" fetchPriority="high" />
@@ -147,6 +149,32 @@ function Hero({ t }) {
     <dl className="hero-facts">
       {t.heroFacts.map(([term, detail]) => <div key={term}><dt>{term}</dt><dd>{detail}</dd></div>)}
     </dl>
+  </section>;
+}
+
+// Right under the hero: the Unikorn badges (the product, and its daily, weekly and monthly ranks), the clap, and Donate.
+const unikornBadges = [
+  ['https://unikorn.vn/api/widgets/badge/caramos?theme=light', 256],
+  ['https://unikorn.vn/api/widgets/badge/caramos/rank?theme=light&type=daily', 250],
+  ['https://unikorn.vn/api/widgets/badge/caramos/rank?theme=light&type=weekly', 250],
+  ['https://unikorn.vn/api/widgets/badge/caramos/rank?theme=light&type=monthly', 250],
+];
+
+function Backing({ t }) {
+  return <section className="backing" id="support" aria-labelledby="backing-title">
+    <div className="backing-text">
+      <h2 id="backing-title">{t.supportTitle}</h2>
+      <p>{t.supportLead} {t.backing.donateLine}</p>
+      <div className="backing-actions">
+        <a className="btn btn-green" href={links.unikorn} {...newTab}>{t.supportAction}</a>
+        <a className="btn btn-outline" id="donate" href="/support/">{t.heroDonate}</a>
+      </div>
+    </div>
+    <ul className="unikorn-badges">
+      {unikornBadges.map(([src, width], index) => <li key={src}>
+        <a href={links.unikorn} {...newTab}><img src={src} alt={t.backing.badges[index]} width={width} height="64" loading="lazy" /></a>
+      </li>)}
+    </ul>
   </section>;
 }
 
@@ -261,7 +289,7 @@ function FeatureMedia({ media }) {
   }
   const main = <img className="media-main" src={src} alt={alt} {...sizeOf(src)} loading="lazy" decoding="async" />;
   return <div className={`feature-media is-${media.type}`}>
-    {media.phone ? <picture><source media="(max-width: 620px)" srcSet={media.phone} />{main}</picture> : main}
+    {media.phone ? <picture><source media="(max-width: 620px)" srcSet={media.phone} width="400" height="498" />{main}</picture> : main}
     {media.overlay && <img className="media-overlay" src={media.overlay[0]} alt={media.overlay[1]} {...sizeOf(media.overlay[0])} loading="lazy" decoding="async" />}
   </div>;
 }
@@ -455,16 +483,6 @@ function Community({ t, repo, contributors, githubError }) {
         <p className="muted">{t.buildLead}</p>
         <pre className="code-block" translate="no">{`make build                      # dev ISO, lz4\nmake release VERSION=x.y.z      # release ISO, xz\nmake docker-build               # containerized build\nmake debug-iso                  # boot branding diagnostics`}</pre>
       </div>
-    </div>
-    <div className="unikorn" id="support">
-      <div>
-        <h3>{t.supportTitle}</h3>
-        <p className="muted">{t.supportLead}</p>
-        <a className="text-link" href={links.unikorn} {...newTab}>{t.supportAction}</a>
-      </div>
-      <a className="unikorn-badge" href={links.unikorn} {...newTab}>
-        <img src="https://unikorn.vn/api/widgets/badge/caramos?theme=light" alt="CaramOS trên Unikorn.vn" width="256" height="64" loading="lazy" />
-      </a>
     </div>
   </section>;
 }
