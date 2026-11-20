@@ -60,21 +60,24 @@ function compactNumber(value) {
   return new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(value);
 }
 
-const navTargets = ['#overview', '#features', '#printers', '#ota', '#release-notes', '#ecosystem', '#download'];
+const navTargets = ['#overview', '#xfce', '#features', '#printers', '#ota', '#release-notes', '#ecosystem', '#download'];
 
 const copy = {
   vi: {
     language: 'EN',
-    nav: ['Tổng quan', 'Tính năng', 'Máy in', 'Nâng cấp', 'Release note', 'Hệ sinh thái', 'Tải ISO'],
+    nav: ['Tổng quan', 'Bản Xfce', 'Tính năng', 'Máy in', 'Nâng cấp', 'Release note', 'Hệ sinh thái', 'Tải ISO'],
     heroBadge: `Bản chính thức ${VERSION} · Linux Mint 22.3 Cinnamon và Xfce · GPL-3.0`,
     upgradeNotice: `Đang dùng CaramOS? Lên ${VERSION} không cần cài lại`,
     seoTitle: `CaramOS ${VERSION} — hệ điều hành Linux cho người Việt`,
-    seoDescription: `CaramOS ${VERSION}, bản phát hành chính thức dựa trên Linux Mint 22.3 Cinnamon: tiếng Việt và bộ gõ Lotus có sẵn, App Center cài ứng dụng bằng một nút, Kiểm tra driver, Control Center, Góp ý & hỗ trợ và cập nhật OTA.`,
+    seoDescription: `CaramOS ${VERSION}, bản phát hành chính thức dựa trên Linux Mint 22.3 Cinnamon và Ubuntu 24.04 LTS, có thêm bản Xfce cho máy 2 GB và phòng máy ở trường học: tiếng Việt và bộ gõ Lotus có sẵn, App Center cài ứng dụng bằng một nút, Kiểm tra driver, Control Center, Góp ý & hỗ trợ và cập nhật OTA không cần cài lại.`,
     heroTitle: 'CaramOS — bản phân phối Linux cho người dùng Việt Nam',
-    heroLead: `Bản phát hành chính thức ${VERSION} trên nền Linux Mint 22.3 Cinnamon và Ubuntu 24.04 LTS: tiếng Việt và bộ gõ Lotus có sẵn, App Center cài ứng dụng bằng một nút, Kiểm tra driver báo ngay máy còn thiếu gì, và cộng đồng Vietnam Linux Family ở ngay trên thanh tác vụ.`,
-    download: `Tải ISO ${VERSION}`,
+    heroLead: `Bản phát hành chính thức ${VERSION} trên nền Linux Mint 22.3 và Ubuntu 24.04 LTS, có hai bản: Cinnamon cho máy từ 4 GB RAM, và Xfce nhẹ hơn cho máy 2 GB và phòng máy ở trường. Tiếng Việt và bộ gõ Lotus có sẵn, App Center cài ứng dụng bằng một nút, Kiểm tra driver báo ngay máy còn thiếu gì, và cộng đồng Vietnam Linux Family ở ngay trên thanh tác vụ.`,
+    downloadCinnamon: 'Tải bản Cinnamon',
+    downloadCinnamonNote: '2,8 GB · máy từ 4 GB RAM',
+    downloadXfce: 'Tải bản Xfce',
+    downloadXfceNote: '2,7 GB · máy 2 GB, phòng máy',
     featuresCta: 'Xem tính năng',
-    checksums: 'Kiểm tra SHA256',
+    checksums: 'SHA256 bản Cinnamon',
     releaseDetails: 'Chi tiết phát hành',
     heroLightAlt: 'CaramOS ở lần đăng nhập đầu tiên: App Center và Kiểm tra driver',
     heroDarkAlt: 'CaramOS ở chế độ tối, mở Control Center',
@@ -93,6 +96,38 @@ const copy = {
     contributorsTitle: 'Contributors',
     contributorsLead: 'Danh sách contributors được lấy trực tiếp từ GitHub repository của CaramOS.',
     contributorsFallback: 'Không tải được dữ liệu contributors từ GitHub. Vui lòng xem danh sách mới nhất trên GitHub.',
+    xfce: {
+      tag: 'Mới trong 1.4.0',
+      title: 'CaramOS Xfce: nhẹ cho máy 2 GB và phòng máy ở trường',
+      lead: 'Bản mới dành cho máy 2 GB RAM, máy cũ và phòng máy ở trường học. Nhẹ hơn bản Cinnamon mà vẫn đủ những thứ quen thuộc của CaramOS.',
+      points: [
+        'Vừa bật máy, Task Manager báo khoảng 610 MB RAM trên máy 2 GB; bản Cinnamon đo cùng cách khoảng 780 MB.',
+        'Vẫn có thanh tác vụ ba đảo, Control Center, App Center, Kiểm tra driver, Góp ý & hỗ trợ, bộ gõ tiếng Việt và Trung tâm cập nhật.',
+        'Giao diện mặc định là tiếng Anh, đúng chữ trong sách Tin học (New, Folder, Copy, Paste…), học sinh nhìn sách là làm theo được. Chọn tiếng Việt lúc cài thì có giao diện tiếng Việt; gõ tiếng Việt vẫn như bình thường.',
+        'Tệp: bấm chuột phải chọn New ▸ Folder, có sẵn mẫu Word, Excel, PowerPoint; khung bên trái là cây thư mục như Windows Explorer.',
+      ],
+      download: 'Tải bản Xfce (2,7 GB)',
+      checksums: 'SHA256 bản Xfce',
+      stackLabel: 'Đổi giữa hai ảnh chụp bản Xfce',
+      images: [
+        [`${shots}/xfce-desktop-140.webp`, 'CaramOS Xfce với Control Center mở ở góc phải thanh tác vụ'],
+        [`${shots}/xfce-files-140.webp`, 'Tệp trên bản Xfce: chuột phải chọn New ▸ Folder, khung trái là cây thư mục'],
+      ],
+      cards: [
+        {
+          title: 'Phòng máy: quản lý lớp học bằng vài cú bấm',
+          text: 'Công cụ Phòng máy tự cài và thiết lập Veyon (hoặc Epoptes, nhẹ hơn) để giáo viên xem màn hình, gửi tin nhắn và điều khiển máy học sinh. Máy giáo viên hiện một mã 6 số; máy học sinh tự tìm máy giáo viên trong mạng của trường, nhập mã là vào lớp.',
+          image: [`${shots}/lab-veyon-140.webp`, 'Veyon Master trên máy giáo viên thấy màn hình của máy học sinh'],
+          overlay: [`${shots}/lab-code-140.webp`, 'Mã ghép nối 6 số trên máy giáo viên'],
+        },
+        {
+          title: 'Phần mềm học tập trong App Center',
+          text: 'Mục Học tập và dạy học có GCompris, Tux Paint, Klavaro (luyện gõ phím), KTurtle, Thonny (học Python), Stellarium, TurboWarp (Scratch 3) và GeoGebra 6. Không có gì chọn sẵn, nên máy ở nhà không phải tải về nếu không cần.',
+          image: [`${shots}/app-center-edu-140.webp`, 'App Center, mục Học tập và dạy học'],
+        },
+      ],
+      note: 'Phòng máy, phần mềm học tập, Mới ▸ Thư mục và cây thư mục có trên cả hai bản. Máy đang chạy bản Cinnamon không tự chuyển sang Xfce; muốn dùng bản Xfce thì cài mới từ ISO Xfce.',
+    },
     featuresTitle: 'Tính năng nổi bật',
     featuresLead: 'Những việc người mới dùng Linux hay phải tra cứu đều có sẵn trên màn hình: cài ứng dụng, cài driver, đổi thiết lập, cập nhật máy và hỏi cộng đồng, không cần mở Terminal.',
     features: [
@@ -375,8 +410,8 @@ const copy = {
     ],
     downloadTitle: `Tải CaramOS ${VERSION}`,
     downloadLead:
-      'ISO 2,8 GB được lưu trên SourceForge vì GitHub giới hạn dung lượng mỗi tệp. Máy 2 GB và phòng máy ở trường học nên dùng bản Xfce (2,7 GB). Kiểm tra SHA256 sau khi tải, chạy thử từ USB để Kiểm tra driver xem máy có hợp không, rồi cài từ biểu tượng Cài đặt CaramOS trên Desktop.',
-    downloadButton: 'Tải ISO (2,8 GB)',
+      'CaramOS có hai bản: Cinnamon (2,8 GB) cho máy từ 4 GB RAM, Xfce (2,7 GB) nhẹ hơn cho máy 2 GB và phòng máy ở trường học. ISO được lưu trên SourceForge vì GitHub giới hạn dung lượng mỗi tệp. Kiểm tra SHA256 sau khi tải, chạy thử từ USB để Kiểm tra driver xem máy có hợp không, rồi cài từ biểu tượng Cài đặt CaramOS trên Desktop.',
+    downloadButton: 'Bản Cinnamon (2,8 GB)',
     downloadXfceButton: 'Bản Xfce cho máy 2 GB (2,7 GB)',
     checksumsXfce: 'SHA256 bản Xfce',
     requirements: ['Máy 64-bit, UEFI hoặc BIOS', 'RAM từ 2 GB (bản Xfce), khuyên dùng 4 GB', 'Ổ đĩa trống từ 20 GB', 'USB từ 4 GB'],
@@ -405,16 +440,19 @@ const copy = {
   },
   en: {
     language: 'VI',
-    nav: ['Overview', 'Features', 'Printers', 'Upgrade', 'Release notes', 'Ecosystem', 'Download'],
+    nav: ['Overview', 'Xfce', 'Features', 'Printers', 'Upgrade', 'Release notes', 'Ecosystem', 'Download'],
     heroBadge: `Official release ${VERSION} · Linux Mint 22.3 Cinnamon and Xfce · GPL-3.0`,
     upgradeNotice: `On CaramOS already? Get ${VERSION} without reinstalling`,
     seoTitle: `CaramOS ${VERSION} — a Linux distribution for Vietnamese users`,
-    seoDescription: `CaramOS ${VERSION}, the official release based on Linux Mint 22.3 Cinnamon: Vietnamese and the Lotus input method out of the box, a one-click App Center, Driver Check, Control Center, Feedback & Help and OTA updates.`,
+    seoDescription: `CaramOS ${VERSION}, the official release based on Linux Mint 22.3 Cinnamon and Ubuntu 24.04 LTS, with a new Xfce edition for 2 GB computers and school labs: Vietnamese and the Lotus input method out of the box, a one-click App Center, Driver Check, Control Center, Feedback & Help and OTA updates.`,
     heroTitle: 'CaramOS — a Linux distribution for Vietnamese users',
-    heroLead: `The official ${VERSION} release, built on Linux Mint 22.3 Cinnamon and Ubuntu 24.04 LTS: Vietnamese and the Lotus input method out of the box, an App Center that installs apps with one click, Driver Check that tells you what the computer is missing, and the Vietnam Linux Family community right on the taskbar.`,
-    download: `Download ISO ${VERSION}`,
+    heroLead: `The official ${VERSION} release, built on Linux Mint 22.3 and Ubuntu 24.04 LTS, in two editions: Cinnamon for computers with 4 GB of RAM or more, and the lighter Xfce for 2 GB computers and school labs. Vietnamese and the Lotus input method out of the box, an App Center that installs apps with one click, Driver Check that tells you what the computer is missing, and the Vietnam Linux Family community right on the taskbar.`,
+    downloadCinnamon: 'Download Cinnamon',
+    downloadCinnamonNote: '2.8 GB · 4 GB of RAM or more',
+    downloadXfce: 'Download Xfce',
+    downloadXfceNote: '2.7 GB · 2 GB computers, school labs',
     featuresCta: 'See the features',
-    checksums: 'Verify SHA256',
+    checksums: 'Cinnamon SHA256',
     releaseDetails: 'Release details',
     heroLightAlt: 'CaramOS at the first login: the App Center and Driver Check',
     heroDarkAlt: 'CaramOS in dark mode, with the Control Center open',
@@ -433,6 +471,38 @@ const copy = {
     contributorsTitle: 'Contributors',
     contributorsLead: 'The contributor list is loaded directly from the CaramOS GitHub repository.',
     contributorsFallback: 'Could not load contributor data from GitHub. Please view the latest list on GitHub.',
+    xfce: {
+      tag: 'New in 1.4.0',
+      title: 'CaramOS Xfce: light enough for 2 GB computers and school labs',
+      lead: 'A new edition for computers with 2 GB of RAM, older machines and school computer labs. It is lighter than the Cinnamon edition and keeps everything CaramOS users know.',
+      points: [
+        'Right after boot, Task Manager shows about 610 MB of RAM on a 2 GB computer; the Cinnamon edition, measured the same way, about 780 MB.',
+        'The three-island taskbar, Control Center, App Center, Driver Check, Feedback & Help, Vietnamese typing and the Update Center are all there.',
+        'The interface is English by default, with the same words as the Tin học textbooks (New, Folder, Copy, Paste…), so pupils can follow the book. Choosing Vietnamese at install gives a Vietnamese interface; Vietnamese typing works as usual.',
+        'Files: right-click and choose New ▸ Folder, with Word, Excel and PowerPoint templates; the left pane is a folder tree like Windows Explorer.',
+      ],
+      download: 'Download Xfce (2.7 GB)',
+      checksums: 'Xfce SHA256',
+      stackLabel: 'Switch between the two Xfce screenshots',
+      images: [
+        [`${shots}/xfce-desktop-140.webp`, 'CaramOS Xfce with the Control Center open at the right of the taskbar'],
+        [`${shots}/xfce-files-140.webp`, 'Files on the Xfce edition: right-click New ▸ Folder, with the folder tree on the left'],
+      ],
+      cards: [
+        {
+          title: 'Computer Lab: run a class in a few clicks',
+          text: 'The Computer Lab tool installs and sets up Veyon (or the lighter Epoptes) so the teacher can watch screens, send messages and control the pupils\' computers. The teacher\'s computer shows a 6-digit code; each pupil\'s computer finds the teacher\'s on the school network, and typing the code is all it takes to join.',
+          image: [`${shots}/lab-veyon-140.webp`, 'Veyon Master on the teacher\'s computer showing a pupil\'s screen'],
+          overlay: [`${shots}/lab-code-140.webp`, 'The 6-digit pairing code on the teacher\'s computer'],
+        },
+        {
+          title: 'Learning apps in the App Center',
+          text: 'The Learning and teaching section has GCompris, Tux Paint, Klavaro (typing practice), KTurtle, Thonny (Python), Stellarium, TurboWarp (Scratch 3) and GeoGebra 6. Nothing is selected in advance, so home computers download only what they need.',
+          image: [`${shots}/app-center-edu-140.webp`, 'The App Center\'s Learning and teaching section'],
+        },
+      ],
+      note: 'The Computer Lab, the learning apps, New ▸ Folder and the folder tree are in both editions. A computer running the Cinnamon edition does not switch to Xfce by itself; to use Xfce, install it fresh from the Xfce ISO.',
+    },
     featuresTitle: 'Highlights',
     featuresLead: 'What newcomers to Linux usually have to look up is right on the screen: installing apps and drivers, changing settings, updating and asking the community, without opening a terminal.',
     features: [
@@ -715,8 +785,8 @@ const copy = {
     ],
     downloadTitle: `Download CaramOS ${VERSION}`,
     downloadLead:
-      'The 2.8 GB ISO is hosted on SourceForge because GitHub limits the size of each release file. 2 GB computers and school computer labs should use the Xfce edition (2.7 GB). Verify the SHA256 after downloading, try it from a USB stick so Driver Check can tell whether the computer suits CaramOS, then install from the Install CaramOS icon on the Desktop.',
-    downloadButton: 'Download ISO (2.8 GB)',
+      'CaramOS comes in two editions: Cinnamon (2.8 GB) for computers with 4 GB of RAM or more, and the lighter Xfce (2.7 GB) for 2 GB computers and school computer labs. The ISOs are hosted on SourceForge because GitHub limits the size of each release file. Verify the SHA256 after downloading, try it from a USB stick so Driver Check can tell whether the computer suits CaramOS, then install from the Install CaramOS icon on the Desktop.',
+    downloadButton: 'Cinnamon edition (2.8 GB)',
     downloadXfceButton: 'Xfce edition for 2 GB (2.7 GB)',
     checksumsXfce: 'Xfce SHA256',
     requirements: ['64-bit computer, UEFI or BIOS', '2 GB of RAM (Xfce edition), 4 GB recommended', '20 GB of free disk space', 'A USB stick of 4 GB or more'],
@@ -869,8 +939,11 @@ function App() {
             <p className="badge">{t.heroBadge}</p>
             <h1>{t.heroTitle}</h1>
             <p className="hero-lead">{t.heroLead}</p>
-            <div className="actions">
-              <a className="button primary" href={links.download} target="_blank" rel="noopener noreferrer">{t.download}</a>
+            <div className="actions hero-downloads">
+              <a className="button primary download-choice" href={links.download} target="_blank" rel="noopener noreferrer"><span>{t.downloadCinnamon}</span><small>{t.downloadCinnamonNote}</small></a>
+              <a className="button primary download-choice" href={links.downloadXfce} target="_blank" rel="noopener noreferrer"><span>{t.downloadXfce}</span><small>{t.downloadXfceNote}</small></a>
+            </div>
+            <div className="actions hero-links">
               <a className="button" href="#features">{t.featuresCta}</a>
               <a className="button" href={links.repo}>{t.source}</a>
               <a className="button" href={links.facebook}>{t.community}</a>
@@ -880,6 +953,8 @@ function App() {
           </div>
           <BannerStack t={t} variant="hero" />
         </section>
+
+        <XfceSection t={t} />
 
         <FeatureSection t={t} />
 
@@ -993,7 +1068,7 @@ function App() {
             <ul className="requirements">{t.requirements.map((item) => <li key={item}>{item}</li>)}</ul>
             <div className="actions download-actions">
               <a className="button primary" href={links.download} target="_blank" rel="noopener noreferrer">{t.downloadButton}</a>
-              <a className="button" href={links.downloadXfce} target="_blank" rel="noopener noreferrer">{t.downloadXfceButton}</a>
+              <a className="button primary" href={links.downloadXfce} target="_blank" rel="noopener noreferrer">{t.downloadXfceButton}</a>
               <a className="button" href={links.checksums} target="_blank" rel="noopener noreferrer">{t.checksums}</a>
               <a className="button" href={links.checksumsXfce} target="_blank" rel="noopener noreferrer">{t.checksumsXfce}</a>
               <a className="button" href={links.release} target="_blank" rel="noopener noreferrer">{t.releaseDetails}</a>
@@ -1006,21 +1081,22 @@ function App() {
   );
 }
 
-function BannerStack({ t, variant }) {
+function BannerStack({ t, variant, images, label }) {
   const [reversed, setReversed] = useState(false);
+  const shown = images || banners.map(([src, altKey]) => [src, t[altKey]]);
 
   return <button
     type="button"
     className={`banner-stack banner-stack-${variant}${reversed ? ' is-reversed' : ''}`}
     onClick={() => setReversed((current) => !current)}
-    aria-label={t.bannerStackLabel}
+    aria-label={label || t.bannerStackLabel}
     aria-pressed={reversed}
   >
-    {banners.map(([src, altKey], index) => <img
+    {shown.map(([src, alt], index) => <img
       key={src}
       className={`banner-image banner-image-${index + 1}`}
       src={src}
-      alt={t[altKey]}
+      alt={alt}
       width="1600"
       height="1000"
       loading={variant === 'hero' && index === 0 ? 'eager' : 'lazy'}
@@ -1119,6 +1195,36 @@ function DonationIcon({ name }) {
 
 function Header({ t, onToggle }) {
   return <header className="topbar"><a className="brand" href="#overview"><img src="/assets/CaramOS_logo.png" alt="CaramOS" /><span>CaramOS</span></a><nav>{t.nav.map((item, i) => <a key={item} href={navTargets[i]}>{item}</a>)}<a className="nav-support" href="/support">{t.supportPage}</a></nav><button onClick={onToggle}>{t.language}</button></header>;
+}
+
+function XfceSection({ t }) {
+  const x = t.xfce;
+  return <section className="edition-section" id="xfce" aria-labelledby="xfce-title">
+    <div className="edition-intro">
+      <div className="edition-copy">
+        <p className="feature-tag">{x.tag}</p>
+        <h2 id="xfce-title">{x.title}</h2>
+        <p className="edition-lead">{x.lead}</p>
+        <ul className="feature-points">{x.points.map((point) => <li key={point}>{point}</li>)}</ul>
+        <div className="actions">
+          <a className="button primary" href={links.downloadXfce} target="_blank" rel="noopener noreferrer">{x.download}</a>
+          <a className="button" href={links.checksumsXfce} target="_blank" rel="noopener noreferrer">{x.checksums}</a>
+        </div>
+      </div>
+      <BannerStack t={t} variant="edition" images={x.images} label={x.stackLabel} />
+    </div>
+    <div className="school-grid">
+      {x.cards.map(({ title, text, image, overlay }) => <article className="school-card" key={title}>
+        <div className="school-media">
+          <img className="school-shot" src={image[0]} alt={image[1]} width="1072" height="670" loading="lazy" decoding="async" />
+          {overlay && <img className="school-overlay" src={overlay[0]} alt={overlay[1]} width="620" height="433" loading="lazy" decoding="async" />}
+        </div>
+        <h3>{title}</h3>
+        <p>{text}</p>
+      </article>)}
+    </div>
+    <p className="edition-note">{x.note}</p>
+  </section>;
 }
 
 function FeatureSection({ t }) {

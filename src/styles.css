@@ -319,6 +319,41 @@ footer a { color: #fff; font-weight: 900; }
   .printer-card { padding: 16px; }
 }
 
+/* Two download buttons at the top, one per edition, each with a line saying who it is for. */
+.hero-downloads { margin: 26px 0 10px; }
+.hero-links { margin: 0 0 26px; }
+.download-choice { flex: 1 1 220px; flex-direction: column; align-items: flex-start; gap: 2px; min-height: 58px; padding: 8px 18px; text-align: left; }
+.download-choice span { font-size: 15px; line-height: 1.25; }
+.download-choice small { color: rgba(255,255,255,.84); font-size: 12px; font-weight: 700; line-height: 1.3; }
+
+/* The Xfce edition, right after the hero. */
+.edition-section { padding: 30px 0 8px; scroll-margin-top: 70px; }
+.edition-intro { display: grid; grid-template-columns: minmax(0, .96fr) minmax(0, 1.04fr); gap: 34px; align-items: center; padding: 30px; border: 1px solid var(--line); border-radius: 30px; background: radial-gradient(circle at 100% 0%, rgba(245,159,34,.12), transparent 34%), linear-gradient(135deg, #fffdf7 0%, #fffdf7 56%, #eef6eb 100%); box-shadow: 0 14px 34px rgba(31,79,50,.07); }
+.edition-copy h2 { margin-bottom: 14px; color: var(--green-900); font-size: clamp(28px, 3.6vw, 42px); text-wrap: balance; }
+.edition-lead { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.75; }
+.edition-copy .feature-points { margin-top: 16px; }
+.edition-copy .actions { margin: 22px 0 0; }
+.banner-stack-edition { width: calc(100% - 20px); margin: 0 20px 20px 0; }
+.school-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+.school-card { padding: 18px 18px 22px; border: 1px solid var(--line); border-radius: 24px; background: var(--paper); box-shadow: 0 10px 26px rgba(31,79,50,.055); }
+/* Every card keeps room for an overlay, so both screenshots are the same size and the headings line up. */
+.school-media { position: relative; margin-bottom: 18px; padding: 0 16px 22px 0; }
+.school-shot { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: left top; border: 1px solid rgba(31,79,50,.12); border-radius: 16px; background: #fff; box-shadow: 0 14px 32px rgba(31,79,50,.12); }
+.school-overlay { position: absolute; right: 0; bottom: 0; width: 42%; height: auto; border: 1px solid rgba(31,79,50,.14); border-radius: 14px; box-shadow: 0 20px 40px rgba(31,79,50,.26); transform: rotate(1.2deg); }
+.school-card h3 { margin: 0 0 8px; color: var(--green-900); font-size: 20px; line-height: 1.2; letter-spacing: -.035em; }
+.school-card p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
+.edition-note { margin: 16px 0 0; padding: 14px 18px; border: 1px solid var(--line); border-left: 4px solid var(--orange); border-radius: 16px; background: var(--paper); color: var(--ink); font-size: 15px; line-height: 1.6; }
+@media (max-width: 960px) {
+  .edition-intro { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .school-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 620px) {
+  .edition-intro { padding: 18px; border-radius: 22px; }
+  .school-card { padding: 14px 14px 18px; }
+}
+
 @media (max-width: 960px) {
   .hero, .build-section, .download, .support-section, .donation-grid, .featured-donation, .ota-section { grid-template-columns: 1fr; }
   .feature-row, .feature-row.is-reverse, .feature-row.is-wide .feature-copy { grid-template-columns: 1fr; }
