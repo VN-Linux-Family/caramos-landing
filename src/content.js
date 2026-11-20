@@ -1,10 +1,8 @@
-import React, { Fragment, useEffect, useMemo, useState } from 'react';
-import { createRoot } from 'react-dom/client';
-import './styles.css';
+// Every word and fact on the page, in Vietnamese and English. The page components are in App.jsx.
 
-const VERSION = '1.4.0';
+export const VERSION = '1.4.0';
 
-const links = {
+export const links = {
   download: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-cinnamon-amd64.iso/download`,
   release: `https://github.com/VN-Linux-Family/CaramOS/releases/tag/v${VERSION}`,
   checksums: `https://github.com/VN-Linux-Family/CaramOS/releases/download/v${VERSION}/SHA256SUMS`,
@@ -24,45 +22,45 @@ const links = {
   installer: '/install-caramos-ota.sh',
 };
 
-const installCommand = 'curl -fsSL https://caramos.vietnamlinuxfamily.net/install-caramos-ota.sh | sudo bash';
-const upgradeCommand = 'sudo caramos-ota --upgrade --yes';
-const shots = '/assets/screenshots';
+export const installCommand = 'curl -fsSL https://caramos.vietnamlinuxfamily.net/install-caramos-ota.sh | sudo bash';
+export const upgradeCommand = 'sudo caramos-ota --upgrade --yes';
+export const shots = '/assets/screenshots';
 
 // The Canon CAPT printers Driver Check sets up, as in its tables (caramos-ota: canon_capt.USB_MODELS and MODELS,
 // knowledge.CAPTDRIVER_MODELS and CAPTDRIVER_WORKS). [name, experimental]
-const canonUsbPrinters = ['LBP-1120', 'LBP-1210', 'LBP3200', 'LBP3210', 'LBP3300', 'LBP3310', 'LBP3500', 'LBP5000',
+export const canonUsbPrinters = ['LBP-1120', 'LBP-1210', 'LBP3200', 'LBP3210', 'LBP3300', 'LBP3310', 'LBP3500', 'LBP5000',
   'LBP5050', 'LBP5100', 'LBP5300', 'LBP6020', 'LBP6200', 'LBP6300dn', 'LBP7010C/LBP7018C', 'LBP7200C/LBP7200Cdn',
   'LBP9100Cdn'].map((name) => [name, false]);
-const captdriverPrinters = [['LBP2900/LBP2900B', false], ['LBP3000', true], ['LBP3010/LBP3018/LBP3050', false],
+export const captdriverPrinters = [['LBP2900/LBP2900B', false], ['LBP3000', true], ['LBP3010/LBP3018/LBP3050', false],
   ['LBP3100/LBP3108/LBP3150', true], ['LBP6000/LBP6018', true]];
-const networkPrinters = ['LBP3300', 'LBP3310', 'LBP3500', 'LBP5000', 'LBP5050', 'LBP5300', 'LBP6300dn', 'LBP6300n',
+export const networkPrinters = ['LBP3300', 'LBP3310', 'LBP3500', 'LBP5000', 'LBP5050', 'LBP5300', 'LBP6300dn', 'LBP6300n',
   'LBP6310dn', 'LBP7200C/LBP7200Cdn', 'LBP7210Cdn', 'LBP9100Cdn', 'LBP9200C'].map((name) => [name, false]);
 
-const banners = [
+export const banners = [
   [`${shots}/first-login.webp`, 'heroLightAlt'],
   [`${shots}/desktop-dark.webp`, 'heroDarkAlt'],
 ];
 
-const githubApi = {
+export const githubApi = {
   repo: 'https://api.github.com/repos/VN-Linux-Family/CaramOS',
   contributors: 'https://api.github.com/repos/VN-Linux-Family/CaramOS/contributors?per_page=12',
 };
 
-const fallbackRepo = {
+export const fallbackRepo = {
   stargazers_count: '—',
   forks_count: '—',
   open_issues_count: '—',
   license: { spdx_id: 'GPL-3.0' },
 };
 
-function compactNumber(value) {
+export function compactNumber(value) {
   if (typeof value !== 'number') return value;
   return new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(value);
 }
 
-const navTargets = ['#overview', '#xfce', '#features', '#printers', '#ota', '#release-notes', '#ecosystem', '#download'];
 
-const copy = {
+
+export const copy = {
   vi: {
     language: 'EN',
     nav: ['Tổng quan', 'Bản Xfce', 'Tính năng', 'Máy in', 'Nâng cấp', 'Release note', 'Hệ sinh thái', 'Tải ISO'],
@@ -283,8 +281,8 @@ const copy = {
     otaUpgradeLabel: 'Muốn nâng cấp ngay, không chờ thông báo:',
     otaUpgradeHint: 'Không vội thì bỏ qua bước này: Trung tâm cập nhật sẽ tự báo trong ngày.',
     otaCopy: 'Copy lệnh',
-    otaCopyInstallLabel: 'Copy lệnh cài Trung tâm cập nhật',
-    otaCopyUpgradeLabel: 'Copy lệnh nâng cấp ngay',
+    otaCopyInstallLabel: 'Chép lệnh cài Trung tâm cập nhật',
+    otaCopyUpgradeLabel: 'Chép lệnh nâng cấp ngay',
     otaCopied: 'Đã copy',
     otaSteps: [
       ['Máy 1.0.2 trở lên', 'Chờ thông báo của Trung tâm cập nhật rồi bấm Cập nhật ngay.'],
@@ -817,577 +815,272 @@ const copy = {
 
 
 
-function App() {
-  const isSupportPage = window.location.pathname.replace(/\/$/, '') === '/support';
-  const [lang, setLang] = useState(() => {
-    const asked = new URLSearchParams(window.location.search).get('lang');
-    if (asked === 'en' || asked === 'vi') return asked;
-    try {
-      return localStorage.getItem('caramos-language') || 'vi';
-    } catch {
-      return 'vi';
-    }
-  });
-  const [repo, setRepo] = useState(fallbackRepo);
-  const [contributors, setContributors] = useState([]);
-  const [githubError, setGithubError] = useState(false);
-  const [copiedCommand, setCopiedCommand] = useState(false);
-  const [copiedWallet, setCopiedWallet] = useState(false);
-  const t = useMemo(() => copy[lang], [lang]);
-  const liveStats = useMemo(() => [
-    `${compactNumber(repo.stargazers_count)} stars`,
-    `${compactNumber(repo.forks_count)} forks`,
-    lang === 'vi' ? `${compactNumber(repo.open_issues_count)} issues mở` : `${compactNumber(repo.open_issues_count)} open issues`,
-    repo.license?.spdx_id || 'GPL-3.0',
-  ], [lang, repo]);
+export const SITE = 'https://caramos.vietnamlinuxfamily.net';
+export const RELEASE_DATE = '2026-11-19';
+export const photos = '/assets/photos';
 
-  useEffect(() => {
-    const canonicalUrl = lang === 'vi' ? 'https://caramos.vietnamlinuxfamily.net/' : 'https://caramos.vietnamlinuxfamily.net/?lang=en';
+// The photo shown for "Việt Nam mỗi ngày": one of the 45 daily wallpapers (public/wallpapers/photos.json).
+export const dailyPhoto = {
+  src: `${photos}/ruong-bac-thang-ha-giang-1440w.webp`,
+  srcSmall: `${photos}/ruong-bac-thang-ha-giang-760w.webp`,
+  width: 1440,
+  height: 600,
+  author: 'minhphuc_99kdd',
+  license: 'Public domain',
+  source: 'https://commons.wikimedia.org/wiki/File:Rice_terraces_in_Ha_Giang,_Vietnam_-_2012_-_121_(10062070653).jpg',
+};
 
-    document.documentElement.lang = lang === 'vi' ? 'vi' : 'en';
-    document.title = t.seoTitle;
-    document.querySelector('meta[name="description"]')?.setAttribute('content', t.seoDescription);
-    document.querySelector('meta[property="og:title"]')?.setAttribute('content', t.seoTitle);
-    document.querySelector('meta[property="og:description"]')?.setAttribute('content', t.seoDescription);
-    document.querySelector('meta[property="og:url"]')?.setAttribute('content', canonicalUrl);
-    document.querySelector('meta[property="og:locale"]')?.setAttribute('content', lang === 'vi' ? 'vi_VN' : 'en_US');
-    document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', t.seoTitle);
-    document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', t.seoDescription);
-    document.querySelector('link[rel="canonical"]')?.setAttribute('href', canonicalUrl);
-    try {
-      localStorage.setItem('caramos-language', lang);
-    } catch {
-      // Private windows may refuse storage; the page works without it.
-    }
-  }, [lang, t]);
+// What Lotus does while someone types Telex: [key, text on screen after that key].
+const telexVi = [['n', 'n'], ['g', 'ng'], ['u', 'ngu'], ['o', 'nguo'], ['w', 'ngươ'], ['i', 'ngươi'], ['f', 'người'], [' ', 'người '],
+  ['V', 'người V'], ['i', 'người Vi'], ['e', 'người Vie'], ['e', 'người Viê'], ['t', 'người Viêt'], ['j', 'người Việt']];
+const telexEn = [['t', 't'], ['i', 'ti'], ['e', 'tie'], ['e', 'tiê'], ['s', 'tiế'], ['n', 'tiến'], ['g', 'tiếng'], [' ', 'tiếng '],
+  ['V', 'tiếng V'], ['i', 'tiếng Vi'], ['e', 'tiếng Vie'], ['e', 'tiếng Viê'], ['t', 'tiếng Viêt'], ['j', 'tiếng Việt']];
 
-  useEffect(() => {
-    const controller = new AbortController();
+Object.assign(copy.vi, {
+  seo: {
+    title: `CaramOS ${VERSION}: hệ điều hành Linux cho người Việt`,
+    description: 'CaramOS là Linux miễn phí cho người Việt, có sẵn tiếng Việt và bộ gõ. Bản Cinnamon cho máy từ 4 GB, bản Xfce nhẹ cho máy 2 GB và phòng máy ở trường.',
+    ogAlt: 'CaramOS: App Center và Kiểm tra driver ở lần đăng nhập đầu tiên',
+  },
+  skip: 'Bỏ qua, tới nội dung chính',
+  menu: [['Hai bản', '#editions'], ['Tính năng', '#features'], ['Trường học', '#school'], ['Máy in', '#printers'], ['Nâng cấp', '#ota'], ['Release note', '#release-notes'], ['Hỏi đáp', '#faq']],
+  menuDownload: 'Tải về',
+  otherLanguage: ['English', '/en/', 'en'],
+  heroLine: 'Linux cho',
+  heroTyped: 'người Việt',
+  telex: telexVi,
+  telexNote: 'Gõ Telex được ngay từ lần đầu bật máy: bộ gõ Lotus có sẵn.',
+  heroIntro: 'CaramOS là hệ điều hành miễn phí, mã nguồn mở, dựa trên Linux Mint 22.3 và Ubuntu 24.04 LTS. Tiếng Việt và bộ gõ có sẵn; cài ứng dụng, cài driver và cập nhật máy đều bằng nút bấm, không cần mở Terminal.',
+  heroUpgrade: `Đang dùng CaramOS? Nâng cấp lên ${VERSION} không cần cài lại`,
+  heroShotAlt: 'Màn hình CaramOS ở lần đăng nhập đầu tiên: App Center gợi ý ứng dụng, Kiểm tra driver báo máy đủ driver',
+  heroFacts: [['Miễn phí', 'mã nguồn mở, giấy phép GPL-3.0'], ['Cập nhật bảo mật đến 2029', 'trên nền Ubuntu 24.04 LTS'], [`Bản ${VERSION}`, 'phát hành ngày 19/11/2026']],
+  editions: {
+    title: 'Bản Cinnamon hay bản Xfce?',
+    lead: 'Từ 1.4.0, CaramOS có hai bản. Cả hai có App Center, Kiểm tra driver, bộ gõ tiếng Việt và Trung tâm cập nhật; khác nhau ở độ nhẹ và ngôn ngữ giao diện.',
+    cinnamon: { name: 'Bản Cinnamon', note: 'Bản chính', image: [`${shots}/cinnamon-desktop-140.webp`, 'CaramOS Cinnamon với hình nền Việt Nam mỗi ngày và Control Center mở ở góc phải'] },
+    xfce: { name: 'Bản Xfce', note: 'Mới trong 1.4.0', image: [`${shots}/xfce-desktop-140.webp`, 'CaramOS Xfce với Control Center mở ở góc phải thanh tác vụ'] },
+    rows: [
+      ['Dành cho', 'Máy từ 4 GB RAM', 'Máy 2 GB RAM, máy cũ, phòng máy ở trường'],
+      ['RAM khi vừa bật máy*', 'Khoảng 780 MB', 'Khoảng 610 MB'],
+      ['Giao diện', 'Tiếng Việt', 'Tiếng Anh, đúng chữ trong sách Tin học (New, Folder, Copy, Paste…). Chọn tiếng Việt lúc cài thì có tiếng Việt; gõ tiếng Việt vẫn như thường.'],
+      ['Dung lượng ISO', '2,8 GB', '2,7 GB'],
+    ],
+    download: ['Tải bản Cinnamon', 'Tải bản Xfce'],
+    checksum: 'Mã SHA256',
+    footnote: '* Số Task Manager báo khi vừa bật máy, đo cùng cách trên cùng một máy 2 GB. Máy đang chạy bản Cinnamon không tự chuyển sang Xfce; muốn dùng bản Xfce thì cài mới từ ISO Xfce.',
+  },
+  school: {
+    title: 'Cho phòng máy ở trường',
+    lead: 'Bản 1.4.0 bắt đầu từ góp ý của một thầy dạy Tin học có phòng máy toàn máy RAM 2 GB. Ba thứ dưới đây có trên cả hai bản CaramOS.',
+    items: [
+      {
+        title: 'Phòng máy: giáo viên thấy màn hình học sinh',
+        text: 'Công cụ Phòng máy tự cài và thiết lập Veyon (hoặc Epoptes, nhẹ hơn) để giáo viên xem màn hình, gửi tin nhắn và điều khiển máy học sinh. Máy giáo viên hiện một mã 6 số; máy học sinh tự tìm máy giáo viên trong mạng của trường, nhập mã là vào lớp.',
+        image: [`${shots}/lab-veyon-140.webp`, 'Veyon Master trên máy giáo viên thấy màn hình của máy học sinh', 1072, 670],
+        overlay: [`${shots}/lab-code-140.webp`, 'Mã ghép nối 6 số trên máy giáo viên', 620, 433],
+      },
+      {
+        title: 'Chuột phải, Mới ▸ Thư mục, như trong sách',
+        text: 'Tệp có Mới ▸ Thư mục (bản Xfce tiếng Anh: New ▸ Folder) và sẵn mẫu Word, Excel, PowerPoint. Khung bên trái là cây thư mục mở từng tầng như Windows Explorer, cho bài học về cây thư mục.',
+        image: [`${shots}/cinnamon-files-140.webp`, 'Tệp trên bản Cinnamon: chuột phải chọn Mới ▸ Thư mục, khung trái là cây thư mục', 1280, 800],
+      },
+      {
+        title: 'Phần mềm học tập trong App Center',
+        text: 'Mục Học tập và dạy học có GCompris, Tux Paint, Klavaro (luyện gõ phím), KTurtle, Thonny (học Python), Stellarium, TurboWarp (Scratch 3) và GeoGebra 6. Không có gì chọn sẵn, nên máy ở nhà không phải tải về nếu không cần.',
+        image: [`${shots}/app-center-edu-140.webp`, 'App Center, mục Học tập và dạy học', 1080, 675],
+      },
+    ],
+  },
+  daily: {
+    title: 'Mỗi ngày một ảnh Việt Nam làm hình nền',
+    text: 'Mở Cài đặt hệ thống > Hình nền, bấm thư mục Việt Nam mỗi ngày rồi chọn một ảnh. Từ đó mỗi ngày hình nền là một ảnh mới về thiên nhiên, cảnh đẹp, công trình của Việt Nam: 45 ảnh từ Wikimedia Commons, có ghi tác giả. Chọn hình nền khác là thôi đổi.',
+    link: 'Xem cả 45 ảnh và tác giả',
+    alt: 'Ruộng bậc thang mùa lúa chín ở Hà Giang',
+    credit: (author, license) => `Ruộng bậc thang mùa lúa chín, Hà Giang. Ảnh: ${author}, ${license.toLowerCase() === 'public domain' ? 'thuộc phạm vi công cộng' : license}, Wikimedia Commons.`,
+  },
+  compare: {
+    title: 'CaramOS khác Linux Mint gốc ở đâu?',
+    lead: 'Đo trên cùng một máy ảo (4 nhân, 6 GB RAM), bản Cinnamon của cả hai; RAM đo 5 phút sau khi khởi động.',
+    head: ['', 'CaramOS', 'Linux Mint 22.3'],
+    rows: [
+      ['ISO cài đặt', '2,8 GB', '3,1 GB'],
+      ['RAM khi máy rảnh', '865 MiB', '941 MiB'],
+      ['Khi RAM cạn', 'Không đơ: earlyoom đóng ứng dụng tốn RAM nhất', 'Đơ hơn 30 phút (ổ cứng chậm)'],
+      ['Cập nhật bảo mật', 'Đến 2029, nền Ubuntu 24.04 LTS', 'Đến 2029, nền Ubuntu 24.04 LTS'],
+    ],
+  },
+  extrasLead: 'Những chi tiết nhỏ mà ngày nào cũng gặp.',
+  faq: {
+    title: 'Câu hỏi thường gặp',
+    items: [
+      ['CaramOS là gì?', 'CaramOS là hệ điều hành Linux miễn phí, mã nguồn mở (GPL-3.0) cho người dùng Việt Nam, do cộng đồng Vietnam Linux Family làm. CaramOS dựa trên Linux Mint 22.3 và Ubuntu 24.04 LTS, có sẵn tiếng Việt, bộ gõ Lotus, App Center, Kiểm tra driver và Trung tâm cập nhật.'],
+      ['CaramOS có mất phí không?', 'Không. CaramOS miễn phí và mã nguồn mở theo giấy phép GPL-3.0. Tải ISO, cài đặt và cập nhật đều không mất phí; mã nguồn công khai trên GitHub.'],
+      ['Máy yếu, RAM 2 GB thì dùng bản nào?', 'Dùng bản Xfce. Vừa bật máy, Task Manager báo khoảng 610 MB RAM trên máy 2 GB, so với khoảng 780 MB của bản Cinnamon đo cùng cách. Máy từ 4 GB RAM dùng bản Cinnamon.'],
+      ['Máy cần cấu hình thế nào?', 'Máy 64-bit, khởi động UEFI hoặc BIOS; RAM từ 2 GB với bản Xfce, khuyên dùng 4 GB; ổ đĩa trống từ 20 GB; một USB từ 4 GB để cài.'],
+      ['Có gõ tiếng Việt được ngay không?', 'Được. Fcitx5 với bộ gõ Lotus bật sẵn, mặc định kiểu Telex, có VNI và các kiểu gõ phổ biến khác. Ctrl+Shift chuyển Anh/Việt; ứng dụng cài từ Flathub vẫn gõ tiếng Việt bình thường.'],
+      ['Có dùng được Zalo và Word, Excel không?', 'Được. App Center cài Zalo (gọi thoại, gọi video được), Telegram, Zoom và bộ văn phòng ONLYOFFICE, WPS Office hoặc LibreOffice bằng một nút. Mở tệp Word, Excel khi chưa có bộ văn phòng thì CaramOS gợi ý cài.'],
+      ['Có thử trước khi cài được không?', 'Được. Ghi ISO ra USB rồi chạy thử: Kiểm tra driver cho biết máy có hợp với CaramOS không, trước khi cài. Muốn cài thì bấm biểu tượng Cài đặt CaramOS trên Desktop.'],
+      ['Đang dùng CaramOS bản cũ thì nâng cấp thế nào?', `Máy từ CaramOS 1.0.2 trở lên có Trung tâm cập nhật: khi có bản mới, bấm Cập nhật ngay, không cần cài lại, không mất dữ liệu. Máy còn ở bản 1.0.1 chạy lệnh cài Trung tâm cập nhật một lần.`],
+      ['Máy in Canon có in được không?', 'Máy in laser Canon dùng CAPT như LBP2900, LBP3300, LBP6300dn: cắm vào là Kiểm tra driver tự nhận ra và cài driver. Máy in phun Canon PIXMA và máy in hãng khác dùng driver có sẵn, thêm trong mục Máy in.'],
+    ],
+  },
+  communityTitle: 'Làm cùng cộng đồng',
+  communityLead: 'CaramOS được phát triển công khai trên GitHub. Hỏi đáp, góp ý và báo lỗi ở các kênh của Vietnam Linux Family, hoặc bấm dấu ? ở góc phải thanh tác vụ.',
+  projectTitle: 'Mã nguồn',
+  contributorsCount: (n) => `${n} commit`,
+  starsLabel: 'sao trên GitHub',
+  forksLabel: 'fork',
+  issuesLabel: 'issue đang mở',
+  downloadAll: 'Tất cả tệp của bản phát hành',
+  copyCommand: 'Chép lệnh',
+  copiedCommand: 'Đã chép',
+  footerNote: 'CaramOS là dự án của Vietnam Linux Family. Mã nguồn theo giấy phép GPL-3.0.',
+  footerLinks: [['GitHub', links.repo], ['Báo lỗi', links.issues], ['Ảnh hình nền', '/wallpapers/'], ['Ủng hộ', '/support/']],
+  releaseScrollHint: 'Cuộn trong khung để xem các bản trước.',
+});
 
-    async function loadGithubData() {
-      try {
-        const [repoResponse, contributorsResponse] = await Promise.all([
-          fetch(githubApi.repo, { signal: controller.signal }),
-          fetch(githubApi.contributors, { signal: controller.signal }),
-        ]);
+Object.assign(copy.en, {
+  seo: {
+    title: `CaramOS ${VERSION}: a Linux distribution for Vietnamese users`,
+    description: 'CaramOS is a free Linux for Vietnamese users, with Vietnamese and its input method built in. Cinnamon for 4 GB computers, a light Xfce for 2 GB and school labs.',
+    ogAlt: 'CaramOS: the App Center and Driver Check at the first login',
+  },
+  skip: 'Skip to the main content',
+  menu: [['Editions', '#editions'], ['Features', '#features'], ['Schools', '#school'], ['Printers', '#printers'], ['Upgrade', '#ota'], ['Release notes', '#release-notes'], ['FAQ', '#faq']],
+  menuDownload: 'Download',
+  otherLanguage: ['Tiếng Việt', '/', 'vi'],
+  heroLine: 'Linux that speaks',
+  heroTyped: 'tiếng Việt',
+  telex: telexEn,
+  telexNote: 'Telex typing works from the first boot: the Lotus input method is built in.',
+  heroIntro: 'CaramOS is a free, open-source operating system based on Linux Mint 22.3 and Ubuntu 24.04 LTS. Vietnamese and its input method come built in; installing apps and drivers and updating the computer are done with buttons, without opening a terminal.',
+  heroUpgrade: `Already on CaramOS? Upgrade to ${VERSION} without reinstalling`,
+  heroShotAlt: 'CaramOS at the first login: the App Center suggests apps, and Driver Check says the computer has every driver',
+  heroFacts: [['Free', 'open source, GPL-3.0'], ['Security updates to 2029', 'on Ubuntu 24.04 LTS'], [`Version ${VERSION}`, 'released 19 November 2026']],
+  editions: {
+    title: 'Cinnamon or Xfce?',
+    lead: 'Since 1.4.0, CaramOS comes in two editions. Both have the App Center, Driver Check, Vietnamese typing and the Update Center; they differ in weight and interface language.',
+    cinnamon: { name: 'Cinnamon edition', note: 'The main edition', image: [`${shots}/cinnamon-desktop-140.webp`, 'CaramOS Cinnamon with a Việt Nam mỗi ngày wallpaper and the Control Center open'] },
+    xfce: { name: 'Xfce edition', note: 'New in 1.4.0', image: [`${shots}/xfce-desktop-140.webp`, 'CaramOS Xfce with the Control Center open at the right of the taskbar'] },
+    rows: [
+      ['For', 'Computers with 4 GB of RAM or more', '2 GB computers, older machines, school computer labs'],
+      ['RAM right after boot*', 'About 780 MB', 'About 610 MB'],
+      ['Interface', 'Vietnamese', 'English, with the same words as the Tin học textbooks (New, Folder, Copy, Paste…). Choosing Vietnamese at install gives Vietnamese; Vietnamese typing works as usual.'],
+      ['ISO size', '2.8 GB', '2.7 GB'],
+    ],
+    download: ['Download Cinnamon', 'Download Xfce'],
+    checksum: 'SHA256',
+    footnote: '* What Task Manager shows right after boot, measured the same way on the same 2 GB computer. A computer running the Cinnamon edition does not switch to Xfce by itself; to use Xfce, install it fresh from the Xfce ISO.',
+  },
+  school: {
+    title: 'For school computer labs',
+    lead: '1.4.0 started from the requests of a teacher of Tin học (computing) whose lab has only 2 GB computers. The three things below are in both CaramOS editions.',
+    items: [
+      {
+        title: 'Computer Lab: the teacher sees every pupil\'s screen',
+        text: 'The Computer Lab tool installs and sets up Veyon (or the lighter Epoptes) so the teacher can watch screens, send messages and control the pupils\' computers. The teacher\'s computer shows a 6-digit code; each pupil\'s computer finds the teacher\'s on the school network, and typing the code is all it takes to join.',
+        image: [`${shots}/lab-veyon-140.webp`, 'Veyon Master on the teacher\'s computer showing a pupil\'s screen', 1072, 670],
+        overlay: [`${shots}/lab-code-140.webp`, 'The 6-digit pairing code on the teacher\'s computer', 620, 433],
+      },
+      {
+        title: 'Right-click, New ▸ Folder, as in the textbook',
+        text: 'Files has New ▸ Folder (Mới ▸ Thư mục in Vietnamese) and Word, Excel and PowerPoint templates. The left pane is a folder tree that opens level by level like Windows Explorer, for the lessons on folder trees.',
+        image: [`${shots}/xfce-files-140.webp`, 'Files on the Xfce edition: right-click New ▸ Folder, with the folder tree on the left', 1280, 800],
+      },
+      {
+        title: 'Learning apps in the App Center',
+        text: 'The Learning and teaching section has GCompris, Tux Paint, Klavaro (typing practice), KTurtle, Thonny (Python), Stellarium, TurboWarp (Scratch 3) and GeoGebra 6. Nothing is selected in advance, so home computers download only what they need.',
+        image: [`${shots}/app-center-edu-140.webp`, 'The App Center\'s Learning and teaching section', 1080, 675],
+      },
+    ],
+  },
+  daily: {
+    title: 'A photo of Vietnam as your wallpaper, every day',
+    text: 'Open System Settings > Backgrounds, click the Việt Nam mỗi ngày folder and pick a photo. From then on the wallpaper is a new photo of Vietnam\'s nature, landscapes and landmarks every day: 45 photos from Wikimedia Commons, each credited. Picking another wallpaper turns it off.',
+    link: 'See all 45 photos and their authors',
+    alt: 'Rice terraces at harvest time in Hà Giang',
+    credit: (author, license) => `Rice terraces at harvest time, Hà Giang. Photo: ${author}, ${license.toLowerCase() === 'public domain' ? 'public domain' : license}, Wikimedia Commons.`,
+  },
+  compare: {
+    title: 'How is CaramOS different from stock Linux Mint?',
+    lead: 'Measured on the same virtual machine (4 cores, 6 GB of RAM), the Cinnamon edition of both; RAM 5 minutes after boot.',
+    head: ['', 'CaramOS', 'Linux Mint 22.3'],
+    rows: [
+      ['Installer ISO', '2.8 GB', '3.1 GB'],
+      ['RAM when idle', '865 MiB', '941 MiB'],
+      ['When RAM runs out', 'No freeze: earlyoom closes the hungriest app', 'Froze for over 30 minutes (slow disk)'],
+      ['Security updates', 'Until 2029, on Ubuntu 24.04 LTS', 'Until 2029, on Ubuntu 24.04 LTS'],
+    ],
+  },
+  extrasLead: 'Small things you meet every day.',
+  faq: {
+    title: 'Frequently asked questions',
+    items: [
+      ['What is CaramOS?', 'CaramOS is a free, open-source (GPL-3.0) Linux operating system for Vietnamese users, made by the Vietnam Linux Family community. It is based on Linux Mint 22.3 and Ubuntu 24.04 LTS, with Vietnamese, the Lotus input method, an App Center, Driver Check and an Update Center built in.'],
+      ['Does CaramOS cost anything?', 'No. CaramOS is free and open source under the GPL-3.0. Downloading the ISO, installing and updating cost nothing, and the source code is public on GitHub.'],
+      ['Which edition for an old computer with 2 GB of RAM?', 'The Xfce edition. Right after boot, Task Manager shows about 610 MB of RAM on a 2 GB computer, against about 780 MB for the Cinnamon edition measured the same way. Computers with 4 GB of RAM or more use the Cinnamon edition.'],
+      ['What does the computer need?', 'A 64-bit computer that boots with UEFI or BIOS; 2 GB of RAM for the Xfce edition, 4 GB recommended; 20 GB of free disk space; a USB stick of 4 GB or more to install from.'],
+      ['Can I type Vietnamese right away?', 'Yes. Fcitx5 with the Lotus input method is on by default, with Telex, VNI and the other common layouts. Ctrl+Shift switches between English and Vietnamese, and apps installed from Flathub type Vietnamese as usual.'],
+      ['Do Zalo, Word and Excel files work?', 'Yes. The App Center installs Zalo (with voice and video calls), Telegram, Zoom and the ONLYOFFICE, WPS Office or LibreOffice suite with one click. Opening a Word or Excel file before an office suite is installed offers to install one.'],
+      ['Can I try it before installing?', 'Yes. Write the ISO to a USB stick and try it: Driver Check tells you whether the computer suits CaramOS before you install. To install, click the Install CaramOS icon on the Desktop.'],
+      ['How do I upgrade an older CaramOS?', 'Computers on CaramOS 1.0.2 or later have the Update Center: when a new version is out, click Update now, with no reinstall and no data lost. Computers still on 1.0.1 run the Update Center installer once.'],
+      ['Do Canon printers work?', 'Canon CAPT laser printers such as the LBP2900, LBP3300 and LBP6300dn: plug one in and Driver Check recognizes it and installs the driver. Canon PIXMA inkjets and other brands use the drivers already in CaramOS, added from Printers.'],
+    ],
+  },
+  communityTitle: 'Built with the community',
+  communityLead: 'CaramOS is developed in the open on GitHub. Ask questions, send feedback and report bugs on the Vietnam Linux Family channels, or click the ? at the right of the taskbar.',
+  projectTitle: 'Source code',
+  contributorsCount: (n) => `${n} commits`,
+  starsLabel: 'stars on GitHub',
+  forksLabel: 'forks',
+  issuesLabel: 'open issues',
+  downloadAll: 'All files of this release',
+  copyCommand: 'Copy',
+  copiedCommand: 'Copied',
+  footerNote: 'CaramOS is a Vietnam Linux Family project, licensed under the GPL-3.0.',
+  footerLinks: [['GitHub', links.repo], ['Report a bug', links.issues], ['Wallpaper photos', '/wallpapers/'], ['Support us', '/support/']],
+  releaseScrollHint: 'Scroll inside the list for earlier releases.',
+});
 
-        if (!repoResponse.ok || !contributorsResponse.ok) {
-          throw new Error('GitHub API request failed');
-        }
+// Pixel sizes of the screenshots, so every <img> reserves its space before it loads (no layout shift).
+const imageSizes = {
+  'app-center-edu-140.webp': [1080, 675], 'app-center-remove.webp': [330, 310], 'app-center.webp': [1160, 832],
+  'boot-menu-131.webp': [800, 600], 'cinnamon-desktop-140.webp': [1280, 800], 'cinnamon-files-140.webp': [1280, 800],
+  'control-center-dark.webp': [440, 480], 'control-center-light.webp': [440, 480], 'desktop-dark.webp': [1600, 1000],
+  'driver-check.webp': [1080, 860], 'first-login.webp': [1600, 1000], 'help-form.webp': [1000, 880],
+  'help-menu.webp': [420, 560], 'installer-apps.webp': [752, 555], 'installer-lotus.webp': [752, 555],
+  'island-dock-en.webp': [900, 190], 'island-dock.webp': [900, 190], 'lab-code-140.webp': [620, 433],
+  'lab-veyon-140.webp': [1072, 670], 'printer-canon-driver-check.webp': [1000, 540], 'start-menu-131.webp': [866, 640],
+  'update-available-131.webp': [720, 301], 'update-center-131.webp': [800, 815], 'update-done.webp': [720, 219],
+  'update-progress.webp': [720, 271], 'xfce-desktop-140.webp': [1280, 800], 'xfce-files-140.webp': [1280, 800],
+};
 
-        setRepo(await repoResponse.json());
-        setContributors(await contributorsResponse.json());
-        setGithubError(false);
-      } catch (error) {
-        if (error.name !== 'AbortError') {
-          setGithubError(true);
-        }
-      }
-    }
+export function sizeOf(src) {
+  const size = imageSizes[src.split('/').pop()];
+  return size ? { width: size[0], height: size[1] } : {};
+}
 
-    loadGithubData();
-    return () => controller.abort();
-  }, []);
+// Screenshots with a smaller copy for phones, named <name>-<width>w.webp.
+export const smallCopies = { 'first-login.webp': 800, 'cinnamon-desktop-140.webp': 640, 'xfce-desktop-140.webp': 640 };
 
-  const copyText = async (value) => {
-    try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(value);
-        return true;
-      }
-    } catch {
-      // Fall back to a hidden textarea below.
-    }
-    const textarea = document.createElement('textarea');
-    textarea.value = value;
-    textarea.setAttribute('readonly', '');
-    textarea.style.position = 'fixed';
-    textarea.style.left = '-9999px';
-    textarea.style.top = '0';
-    document.body.appendChild(textarea);
-    textarea.select();
-    const didCopy = document.execCommand('copy');
-    document.body.removeChild(textarea);
-    return didCopy;
-  };
+export function srcSetOf(src) {
+  const name = src.split('/').pop();
+  const small = smallCopies[name];
+  if (!small) return undefined;
+  return `${src.replace(/\.webp$/, `-${small}w.webp`)} ${small}w, ${src} ${imageSizes[name][0]}w`;
+}
 
-  const handleCopyCommand = async (command) => {
-    if (await copyText(command)) {
-      setCopiedCommand(true);
-      window.setTimeout(() => setCopiedCommand(false), 1800);
-    }
-  };
-
-  const handleCopyWallet = async (value) => {
-    if (await copyText(value)) {
-      setCopiedWallet(true);
-      window.setTimeout(() => setCopiedWallet(false), 1800);
-    }
-  };
-
-  if (isSupportPage) {
-    return <SupportPage onCopyWallet={handleCopyWallet} copiedWallet={copiedWallet} />;
+// Typography for every visible string: curly quotes instead of straight ones, and a no-break space between a number
+// and its unit so "2,7 GB" never splits across two lines.
+function typeset(value) {
+  if (typeof value === 'string') {
+    return value.replace(/"([^"]*)"/g, '“$1”').replace(/(\d) (GB|MB|MiB|KB|GHz|giây|phút)(?![\p{L}])/gu, '$1 $2');
   }
-
-  return (
-    <>
-      <Header t={t} onToggle={() => setLang(lang === 'vi' ? 'en' : 'vi')} />
-      <main>
-        <section className="hero" id="overview">
-          <div className="hero-inner">
-            <a className="upgrade-notice" href="#ota">{t.upgradeNotice} →</a>
-            <p className="badge">{t.heroBadge}</p>
-            <h1>{t.heroTitle}</h1>
-            <p className="hero-lead">{t.heroLead}</p>
-            <div className="actions hero-downloads">
-              <a className="button primary download-choice" href={links.download} target="_blank" rel="noopener noreferrer"><span>{t.downloadCinnamon}</span><small>{t.downloadCinnamonNote}</small></a>
-              <a className="button primary download-choice" href={links.downloadXfce} target="_blank" rel="noopener noreferrer"><span>{t.downloadXfce}</span><small>{t.downloadXfceNote}</small></a>
-            </div>
-            <div className="actions hero-links">
-              <a className="button" href="#features">{t.featuresCta}</a>
-              <a className="button" href={links.repo}>{t.source}</a>
-              <a className="button" href={links.facebook}>{t.community}</a>
-              <a className="button support-button" href="/support">{t.supportPage}</a>
-            </div>
-            <div className="stats">{liveStats.map((value, i) => <div key={t.statLabels[i]}><strong>{value}</strong><span>{t.statLabels[i]}</span></div>)}</div>
-          </div>
-          <BannerStack t={t} variant="hero" />
-        </section>
-
-        <XfceSection t={t} />
-
-        <FeatureSection t={t} />
-
-        <PrinterSection t={t} />
-
-        <StatsSection t={t} />
-
-        <CardSection title={t.extrasTitle} items={t.extras} />
-
-        <section className="support-section" id="support">
-          <div className="support-copy">
-            <p className="badge">Unikorn · clap support</p>
-            <h2>{t.supportTitle}</h2>
-            <p>{t.supportLead}</p>
-            <a className="button primary" href={links.unikorn} target="_blank" rel="noopener noreferrer">{t.supportAction}</a>
-          </div>
-          <div className="unikorn-badges" aria-label="CaramOS Unikorn badges">
-            <a href={links.unikorn} target="_blank" rel="noopener noreferrer">
-              <img src="https://unikorn.vn/api/widgets/badge/caramos?theme=light" alt="CaramOS trên Unikorn.vn" width="256" height="64" loading="lazy" />
-            </a>
-            <a href={links.unikorn} target="_blank" rel="noopener noreferrer">
-              <img src="https://unikorn.vn/api/widgets/badge/caramos/rank?theme=light&type=daily" alt="CaramOS - Hàng ngày" width="250" height="64" loading="lazy" />
-            </a>
-            <a href={links.unikorn} target="_blank" rel="noopener noreferrer">
-              <img src="https://unikorn.vn/api/widgets/badge/caramos/rank?theme=light&type=weekly" alt="CaramOS - Hàng tuần" width="250" height="64" loading="lazy" />
-            </a>
-            <a href={links.unikorn} target="_blank" rel="noopener noreferrer">
-              <img src="https://unikorn.vn/api/widgets/badge/caramos/rank?theme=light&type=monthly" alt="CaramOS - Hàng tháng" width="250" height="64" loading="lazy" />
-            </a>
-            <span>{t.supportMeta}</span>
-          </div>
-        </section>
-
-        <section className="ota-section" id="ota">
-          <ol className="ota-visual-stack" aria-label={t.otaFlowLabel}>
-            {t.otaFlow.map(([src, alt, caption]) => <li className="ota-visual" key={src}>
-              <p>{caption}</p>
-              <img src={src} alt={alt} width="720" loading="lazy" decoding="async" />
-            </li>)}
-          </ol>
-          <div className="ota-copy">
-            <p className="badge">{t.otaBadge}</p>
-            <h2>{t.otaTitle}</h2>
-            <p>{t.otaLead}</p>
-            <div className="ota-command-grid">
-              <div className="install-command-card">
-                <strong>{t.otaInstallLabel}</strong>
-                <div className="command-row">
-                  <code>{installCommand}</code>
-                  <button type="button" onClick={() => handleCopyCommand(installCommand)} aria-label={t.otaCopyInstallLabel}>{t.otaCopy}</button>
-                </div>
-                <small>{t.otaInstallHint}</small>
-              </div>
-              <div className="install-command-card upgrade-command-card">
-                <strong>{t.otaUpgradeLabel}</strong>
-                <div className="command-row">
-                  <code>{upgradeCommand}</code>
-                  <button type="button" onClick={() => handleCopyCommand(upgradeCommand)} aria-label={t.otaCopyUpgradeLabel}>{t.otaCopy}</button>
-                </div>
-                <small>{t.otaUpgradeHint}</small>
-              </div>
-            </div>
-            <div className="ota-steps">
-              {t.otaSteps.map(([title, text], index) => <article key={title}><span>{String(index + 1).padStart(2, '0')}</span><strong>{title}</strong><p>{text}</p></article>)}
-            </div>
-
-          </div>
-        </section>
-
-        {copiedCommand && <div className="copy-toast" role="status" aria-live="polite">✓ {t.otaCopied}</div>}
-
-        <ReleaseNotesSection t={t} />
-
-        <section className="wide-section" id="ecosystem">
-          <div className="section-title"><h2>{t.ecosystemTitle}</h2><p>{t.ecosystemLead}</p></div>
-          <div className="ecosystem-grid">
-            {t.ecosystem.map(([icon, name, desc, meta, status, url]) => <EcosystemCard key={name} icon={icon} name={name} desc={desc} meta={meta} status={status} url={url} />)}
-          </div>
-        </section>
-
-        <section className="wide-section open-source" id="opensource">
-          <div className="section-title"><h2>{t.openSourceTitle}</h2><p>{t.openSourceLead}</p></div>
-          <div className="info-grid">{t.openSource.map(([title, text]) => <InfoCard key={title} title={title} text={text} />)}</div>
-        </section>
-
-        <section className="wide-section contributors-section" id="contributors">
-          <div className="section-title"><h2>{t.contributorsTitle}</h2><p>{t.contributorsLead}</p></div>
-          {githubError && <p className="github-warning">{t.contributorsFallback}</p>}
-          <div className="contributors-grid">
-            {contributors.map((person) => <ContributorCard key={person.id} person={person} />)}
-          </div>
-        </section>
-
-        <section className="build-section">
-          <div><p className="badge">extract → customize → OTA bootstrap → repack</p><h2>{t.buildTitle}</h2><p>{t.buildLead}</p></div>
-          <pre>{`make build                      # dev ISO, lz4\nmake release VERSION=x.y.z      # release ISO, xz\nmake docker-build               # containerized build\nmake debug-iso                  # boot branding diagnostics`}</pre>
-        </section>
-
-        <section className="gallery">
-          <div className="section-title"><h2>{t.galleryTitle}</h2></div>
-          <div className="gallery-grid">
-            {t.gallery.map(([src, alt, caption]) => <figure key={src}><img src={src} alt={alt} loading="lazy" decoding="async" /><figcaption>{caption}</figcaption></figure>)}
-          </div>
-        </section>
-
-        <section className="download" id="download">
-          <BannerStack t={t} variant="download" />
-          <div>
-            <h2>{t.downloadTitle}</h2>
-            <p>{t.downloadLead}</p>
-            <ul className="requirements">{t.requirements.map((item) => <li key={item}>{item}</li>)}</ul>
-            <div className="actions download-actions">
-              <a className="button primary" href={links.download} target="_blank" rel="noopener noreferrer">{t.downloadButton}</a>
-              <a className="button primary" href={links.downloadXfce} target="_blank" rel="noopener noreferrer">{t.downloadXfceButton}</a>
-              <a className="button" href={links.checksums} target="_blank" rel="noopener noreferrer">{t.checksums}</a>
-              <a className="button" href={links.checksumsXfce} target="_blank" rel="noopener noreferrer">{t.checksumsXfce}</a>
-              <a className="button" href={links.release} target="_blank" rel="noopener noreferrer">{t.releaseDetails}</a>
-            </div>
-          </div>
-        </section>
-      </main>
-      <footer><div><img src="/assets/CaramOS_logo.png" alt="" /><strong>CaramOS</strong></div><p>{t.footer}</p><a href={links.vnlf}>vietnamlinuxfamily.net</a></footer>
-    </>
-  );
-}
-
-function BannerStack({ t, variant, images, label }) {
-  const [reversed, setReversed] = useState(false);
-  const shown = images || banners.map(([src, altKey]) => [src, t[altKey]]);
-
-  return <button
-    type="button"
-    className={`banner-stack banner-stack-${variant}${reversed ? ' is-reversed' : ''}`}
-    onClick={() => setReversed((current) => !current)}
-    aria-label={label || t.bannerStackLabel}
-    aria-pressed={reversed}
-  >
-    {shown.map(([src, alt], index) => <img
-      key={src}
-      className={`banner-image banner-image-${index + 1}`}
-      src={src}
-      alt={alt}
-      width="1600"
-      height="1000"
-      loading={variant === 'hero' && index === 0 ? 'eager' : 'lazy'}
-      decoding="async"
-    />)}
-  </button>;
-}
-
-function SupportPage({ onCopyWallet, copiedWallet }) {
-  const usdtWallet = 'TCUujuiz26P26oAbuECvqpHUnd2sWudv2G';
-
-  useEffect(() => {
-    document.documentElement.lang = 'vi';
-    document.title = 'Donate cho CaramOS — Vietnam Linux Family';
-    document.querySelector('meta[name="description"]')?.setAttribute('content', 'Donate cho CaramOS qua MoMo, PayPal, Ko-fi, Buy Me a Coffee hoặc USDT TRC20.');
-  }, []);
-
-  const donationCards = [
-    ['paypal', 'PayPal', '', 'paypal.me/mrd900', 'Donate via PayPal', 'https://paypal.me/mrd900'],
-    ['kofi', 'Ko-fi', '0% fee', 'ko-fi.com/mrd900', 'Support on Ko-fi', 'https://ko-fi.com/mrd900'],
-    ['coffee', 'Buy Me a Coffee', '', 'buymeacoffee.com/mrd900', 'Buy a Coffee', 'https://buymeacoffee.com/mrd900'],
-  ];
-
-  return <div className="support-page">
-    <header className="support-page-nav">
-      <a className="brand" href="/"><img src="/assets/CaramOS_logo.png" alt="CaramOS" /><span>CaramOS</span></a>
-      <a className="button" href="/">Về trang chủ</a>
-    </header>
-    <main className="support-page-main">
-      <section className="support-page-hero">
-        <span className="badge">Donate</span>
-        <h1>Fund the Future of CaramOS</h1>
-        <p>CaramOS miễn phí và luôn hướng đến cộng đồng. Sự ủng hộ của bạn giúp chúng tôi duy trì hạ tầng, thử nghiệm ISO, cải thiện tính năng, viết tài liệu và giữ dự án sống lâu dài. Dù nhỏ hay lớn, mọi đóng góp đều rất đáng quý!</p>
-      </section>
-
-      <section className="featured-donation momo-donation">
-        <div className="featured-info">
-          <div className="donation-icon-row">
-            <DonationIcon name="momo" />
-            <div><h2>MoMo</h2><p>Accepts transfers from <strong>all Vietnamese banks</strong></p></div>
-          </div>
-          <p className="featured-recipient">Recipient: <strong>Lê Viết Dũng</strong></p>
-          <a className="donation-card-btn" href="https://nhantien.momo.vn/0947287893" target="_blank" rel="noopener noreferrer">♥ Donate via MoMo</a>
-        </div>
-        <div className="donation-qr-box">
-          <img src="/assets/support/momo-vietqr.png" alt="MoMo VietQR Code" width="180" height="191" loading="lazy" />
-          <span>Scan with MoMo or any banking app</span>
-        </div>
-      </section>
-
-      <section className="donation-grid" aria-label="Online donation methods">
-        {donationCards.map(([icon, title, fee, address, action, url]) => <article className="donation-card" key={title}>
-          <div className="donation-icon-row">
-            <DonationIcon name={icon} />
-            <div><h2>{title}</h2>{fee && <p>{fee}</p>}</div>
-          </div>
-          <p className="donation-link"><code>{address}</code></p>
-          <a className="donation-card-btn" href={url} target="_blank" rel="noopener noreferrer">{action}</a>
-        </article>)}
-      </section>
-
-      <section className="featured-donation">
-        <div className="featured-info">
-          <div className="donation-icon-row">
-            <DonationIcon name="usdt" />
-            <div><h2>USDT (TRC20)</h2><p>Network: Tron TRC20</p></div>
-          </div>
-          <div className="crypto-address"><code>{usdtWallet}</code><button type="button" onClick={() => onCopyWallet(usdtWallet)}>{copiedWallet ? 'Copied' : 'Copy'}</button></div>
-        </div>
-        <div className="donation-qr-box">
-          <img src="/assets/support/usdt-trc20-qr.png" alt="USDT TRC20 Wallet QR Code" width="180" height="180" loading="lazy" />
-          <span>Scan with your crypto wallet</span>
-        </div>
-      </section>
-
-      <section className="support-thanks">
-        <h2>Cảm ơn bạn đã ủng hộ!</h2>
-        <p>Dù bạn donate, chia sẻ dự án hay tham gia hỗ trợ người dùng mới, sự đồng hành của bạn đều giúp CaramOS và cộng đồng VNLF phát triển tốt hơn.</p>
-        <a className="button primary" href={links.discord} target="_blank" rel="noopener noreferrer">Tham gia Discord Community</a>
-      </section>
-    </main>
-  </div>;
-}
-
-function DonationIcon({ name }) {
-  const icons = {
-    paypal: <><rect width="36" height="36" rx="8" fill="#003087" /><path d="M14 10H20C22.5 10 24 11.5 24 14C24 16.5 22.5 18 20 18H17L16 26H12L14 10Z" fill="#fff" /><path d="M16 12H21C23 12 24.5 13.2 24.5 15.5C24.5 17.8 23 19 21 19H18.5L17.5 26" stroke="#009cde" strokeWidth="1.5" fill="none" /></>,
-    kofi: <><rect width="36" height="36" rx="8" fill="#72B3EB" /><rect x="7" y="12" width="17" height="14" rx="4" fill="white" stroke="#1A1A1A" strokeWidth="2" /><path d="M24 15H26C27.7 15 29 16.3 29 18C29 19.7 27.7 21 26 21H24" stroke="#1A1A1A" strokeWidth="2" fill="white" /><path d="M18.5 16.3C18.1 15.7 17.4 15.3 16.6 15.3C15.3 15.3 14.2 16.4 14.2 17.7C14.2 20.3 15.5 21 15.5 21L18.5 23.5L21.5 21C21.5 21 22.8 20.3 22.8 17.7C22.8 16.4 21.7 15.3 20.4 15.3C19.6 15.3 18.9 15.7 18.5 16.3Z" fill="#EF5A29" /></>,
-    coffee: <><rect width="36" height="36" rx="8" fill="#FFDD00" /><ellipse cx="18" cy="10" rx="6" ry="2" stroke="#0D1117" strokeWidth="2.2" fill="none" /><path d="M14 10C14 8 16 7 18 8C20 9 22 8 22 10" stroke="#0D1117" strokeWidth="2.2" strokeLinecap="round" fill="none" /><path d="M12 13L13.5 28H22.5L24 13" stroke="#0D1117" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" /><path d="M14 19L14.5 27H21.5L22 19C20 18 16 18 14 19Z" fill="white" /></>,
-    usdt: <><rect width="36" height="36" rx="8" fill="#26A17B" /><path d="M11 12H25" stroke="white" strokeWidth="2.5" strokeLinecap="round" /><path d="M18 12V27" stroke="white" strokeWidth="2.5" strokeLinecap="round" /><ellipse cx="18" cy="18" rx="6" ry="2" stroke="white" strokeWidth="1.5" fill="none" /></>,
-    momo: <><rect width="36" height="36" rx="8" fill="#A50064" /><path d="M5 17V12C5 9.5 6.5 8 8.2 8C9.9 8 10.5 9.5 10.5 11V17" stroke="white" strokeWidth="2.2" strokeLinecap="round" fill="none" /><path d="M10.5 17V12C10.5 9.5 12 8 13.7 8C15.4 8 16 9.5 16 11V17" stroke="white" strokeWidth="2.2" strokeLinecap="round" fill="none" /><circle cx="24" cy="12.5" r="4.5" stroke="white" strokeWidth="2.2" fill="none" /><path d="M5 29V24C5 21.5 6.5 20 8.2 20C9.9 20 10.5 21.5 10.5 23V29" stroke="white" strokeWidth="2.2" strokeLinecap="round" fill="none" /><path d="M10.5 29V24C10.5 21.5 12 8 13.7 20C15.4 20 16 21.5 16 23V29" stroke="white" strokeWidth="2.2" strokeLinecap="round" fill="none" /><circle cx="24" cy="24.5" r="4.5" stroke="white" strokeWidth="2.2" fill="none" /></>,
-  };
-
-  return <svg className="donation-icon" viewBox="0 0 36 36" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">{icons[name]}</svg>;
-}
-
-function Header({ t, onToggle }) {
-  return <header className="topbar"><a className="brand" href="#overview"><img src="/assets/CaramOS_logo.png" alt="CaramOS" /><span>CaramOS</span></a><nav>{t.nav.map((item, i) => <a key={item} href={navTargets[i]}>{item}</a>)}<a className="nav-support" href="/support">{t.supportPage}</a></nav><button onClick={onToggle}>{t.language}</button></header>;
-}
-
-function XfceSection({ t }) {
-  const x = t.xfce;
-  return <section className="edition-section" id="xfce" aria-labelledby="xfce-title">
-    <div className="edition-intro">
-      <div className="edition-copy">
-        <p className="feature-tag">{x.tag}</p>
-        <h2 id="xfce-title">{x.title}</h2>
-        <p className="edition-lead">{x.lead}</p>
-        <ul className="feature-points">{x.points.map((point) => <li key={point}>{point}</li>)}</ul>
-        <div className="actions">
-          <a className="button primary" href={links.downloadXfce} target="_blank" rel="noopener noreferrer">{x.download}</a>
-          <a className="button" href={links.checksumsXfce} target="_blank" rel="noopener noreferrer">{x.checksums}</a>
-        </div>
-      </div>
-      <BannerStack t={t} variant="edition" images={x.images} label={x.stackLabel} />
-    </div>
-    <div className="school-grid">
-      {x.cards.map(({ title, text, image, overlay }) => <article className="school-card" key={title}>
-        <div className="school-media">
-          <img className="school-shot" src={image[0]} alt={image[1]} width="1072" height="670" loading="lazy" decoding="async" />
-          {overlay && <img className="school-overlay" src={overlay[0]} alt={overlay[1]} width="620" height="433" loading="lazy" decoding="async" />}
-        </div>
-        <h3>{title}</h3>
-        <p>{text}</p>
-      </article>)}
-    </div>
-    <p className="edition-note">{x.note}</p>
-  </section>;
-}
-
-function FeatureSection({ t }) {
-  return <section className="features" id="features">
-    <div className="section-title"><h2>{t.featuresTitle}</h2><p>{t.featuresLead}</p></div>
-    <div className="feature-list">
-      {t.features.map((feature, index) => <FeatureRow key={feature.id} feature={feature} reverse={index % 2 === 1} />)}
-    </div>
-  </section>;
-}
-
-function FeatureRow({ feature, reverse }) {
-  const { id, tag, title, lead, points, media, link, wide } = feature;
-  const layout = wide ? ' is-wide' : reverse ? ' is-reverse' : '';
-  return <article className={`feature-row${layout}`} id={`feature-${id}`}>
-    <FeatureMedia media={media} />
-    <div className="feature-copy">
-      <div>
-        <p className="feature-tag">{tag}</p>
-        <h3>{title}</h3>
-        <p>{lead}</p>
-        {link && <a className="feature-link" href={link[1]} {...(link[1].startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{link[0]} →</a>}
-      </div>
-      <ul className="feature-points">{points.map((point) => <li key={point}>{point}</li>)}</ul>
-    </div>
-  </article>;
-}
-
-function FeatureMedia({ media }) {
-  const [src, alt] = media.main;
-  if (media.type === 'pair') {
-    return <div className="feature-media is-pair">
-      <img src={src} alt={alt} loading="lazy" decoding="async" />
-      <img src={media.second[0]} alt={media.second[1]} loading="lazy" decoding="async" />
-    </div>;
+  if (Array.isArray(value)) return value.map(typeset);
+  if (value && typeof value === 'object') {
+    for (const key of Object.keys(value)) value[key] = typeset(value[key]);
   }
-  const main = <img className="media-main" src={src} alt={alt} loading="lazy" decoding="async" />;
-  return <div className={`feature-media is-${media.type}`}>
-    {media.phone ? <picture><source media="(max-width: 620px)" srcSet={media.phone} />{main}</picture> : main}
-    {media.overlay && <img className="media-overlay" src={media.overlay[0]} alt={media.overlay[1]} loading="lazy" decoding="async" />}
-  </div>;
+  return value;
 }
-
-function PrinterSection({ t }) {
-  const p = t.printers;
-  return <section className="printer-section" id="printers" aria-labelledby="printers-title">
-    <div className="printer-intro">
-      <div className="printer-copy">
-        <p className="feature-tag">{p.tag}</p>
-        <h2 id="printers-title">{p.title}</h2>
-        <p className="printer-lead">{p.lead}</p>
-        <ol className="printer-steps">
-          {p.steps.map(([title, text], index) => <li key={title}><span>{index + 1}</span><strong>{title}</strong><p>{text}</p></li>)}
-        </ol>
-      </div>
-      <img className="printer-shot" src={p.image[0]} alt={p.image[1]} width="1000" height="540" loading="lazy" decoding="async" />
-    </div>
-    <div className="printer-models">
-      <article className="printer-card">
-        <div className="printer-card-head"><h3>{p.usbTitle}</h3><span className="printer-count">{canonUsbPrinters.length + captdriverPrinters.length} {p.models}</span></div>
-        <p className="printer-how">{p.usbHow}</p>
-        <h4>{p.canonGroup}<span className="printer-new">{p.newLabel}</span></h4>
-        <ModelList models={canonUsbPrinters} />
-        <h4>{p.captGroup}<small>{p.captSince}</small></h4>
-        <ModelList models={captdriverPrinters} note={p.experimental} />
-      </article>
-      <article className="printer-card">
-        <div className="printer-card-head"><h3>{p.networkTitle}</h3><span className="printer-new">{p.newLabel}</span><span className="printer-count">{networkPrinters.length} {p.models}</span></div>
-        <p className="printer-how">{p.networkHow}</p>
-        <ModelList models={networkPrinters} />
-      </article>
-    </div>
-    <p className="printer-other"><strong>{p.otherTitle}</strong> {p.other}</p>
-    <p className="printer-note">{p.note}</p>
-  </section>;
-}
-
-function ModelList({ models, note }) {
-  // A break opportunity after each slash: LBP3010/LBP3018/LBP3050 wraps on a phone instead of overflowing.
-  return <ul className="model-list">
-    {models.map(([name, experimental]) => <li key={name}>
-      {name.split('/').map((part, index) => <Fragment key={part}>{index > 0 && <>/<wbr /></>}{part}</Fragment>)}
-      {experimental && <small>{note}</small>}
-    </li>)}
-  </ul>;
-}
-
-function StatsSection({ t }) {
-  return <section className="stats-section" aria-labelledby="stats-title">
-    <div className="section-title"><h2 id="stats-title">{t.statsTitle}</h2><p>{t.statsLead}</p></div>
-    <div className="stat-strip">
-      {t.stats.map(([value, label, compare]) => <article className="stat-card" key={label}><strong>{value}</strong><span>{label}</span><small>{compare}</small></article>)}
-    </div>
-  </section>;
-}
-
-function ReleaseNotesSection({ t }) {
-  const entries = [...t.releaseNotes, t.initialRelease];
-
-  return <section className="release-notes" id="release-notes">
-    <div className="section-title"><h2>{t.releaseNotesTitle}</h2><p>{t.releaseNotesLead}</p></div>
-    <div className="release-scroll">
-      <div className="release-list" role="region" aria-label={t.releaseListLabel} tabIndex={0}>
-        {entries.map(([version, title, items], index) => <article key={version} className={`release-entry${index === 0 ? ' is-current' : ''}`}>
-          <div className="release-version">{version}{index === 0 && <span className="release-badge">{t.releaseCurrent}</span>}</div>
-          <div className="release-content"><h3>{title}</h3><ul>{items.map((item) => <li key={item}>{item}</li>)}</ul></div>
-        </article>)}
-      </div>
-    </div>
-    <p className="release-hint">{t.releaseScrollHint}</p>
-  </section>;
-}
-
-function CardSection({ title, lead, items }) {
-  return <section className="wide-section extras-section"><div className="section-title"><h2>{title}</h2>{lead && <p>{lead}</p>}</div><div className="app-grid">{items.map(([icon, titleText, text, status]) => <AppCard key={titleText} icon={icon} title={titleText} text={text} status={status} />)}</div></section>;
-}
-
-function AppCard({ icon, title, text, status }) {
-  return <article className="app-card"><div className="app-head"><span className="app-icon"><SvgIcon name={icon} /></span><div><h3>{title}</h3></div></div><p>{text}</p><div className="card-meta"><span>{status}</span></div></article>;
-}
-
-function EcosystemCard({ icon, name, desc, meta, status, url }) {
-  return <a className="ecosystem-card" href={url}>
-    <div className="ecosystem-icon"><SvgIcon name={icon} /></div>
-    <div className="ecosystem-content"><h3>{name}</h3><p>{desc}</p><div><span>{meta}</span><strong>{status}</strong></div></div>
-  </a>;
-}
-
-function SvgIcon({ name }) {
-  const paths = {
-    locale: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" /></>,
-    keyboard: <><rect x="3" y="6" width="18" height="12" rx="2" /><path d="M7 10h.01M10 10h.01M13 10h.01M16 10h.01M7 14h10" /></>,
-    browser: <><rect x="4" y="5" width="16" height="14" rx="3" /><path d="M4 9h16M8 13h3M8 16h7" /></>,
-    document: <><path d="M7 3h7l4 4v14H7z" /><path d="M14 3v5h5M9 13h6M9 17h6" /></>,
-    chat: <><path d="M5 6h14v9H9l-4 4z" /><path d="M8 10h8M8 13h5" /></>,
-    palette: <><path d="M12 3a9 9 0 0 0 0 18h1.2a1.8 1.8 0 0 0 1.2-3.1 1.7 1.7 0 0 1 1.1-2.9H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8z" /><path d="M7.5 10h.01M10 7h.01M14 7h.01M16.5 10h.01" /></>,
-    camera: <><path d="M4 8h3l2-2.5h6L17 8h3v11H4z" /><circle cx="12" cy="13" r="3.5" /></>,
-    control: <><rect x="4" y="5" width="16" height="14" rx="3" /><path d="M8 9h8M8 15h8M11 7v4M15 13v4" /></>,
-    dock: <><rect x="3" y="7" width="18" height="10" rx="3" /><path d="M8 11h.01M12 11h.01M16 11h.01M10 15h4" /></>,
-    cleanup: <><path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13" /><path d="M10 11v5M14 11v5" /></>,
-    terminal: <><rect x="4" y="5" width="16" height="14" rx="2" /><path d="m8 10 3 2-3 2M13 15h4" /></>,
-    shield: <><path d="M12 3 5 6v5c0 4.5 3 8.4 7 10 4-1.6 7-5.5 7-10V6z" /><path d="m9 12 2 2 4-5" /></>,
-    website: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" /></>,
-    telegram: <><path d="M21 4 3 11l7 2 2 7z" /><path d="m10 13 4 3 7-12" /></>,
-    discord: <><path d="M7 8c3-2 7-2 10 0l1 8c-4 3-8 3-12 0z" /><path d="M9 15c2 1 4 1 6 0M9.5 12h.01M14.5 12h.01" /></>,
-    facebook: <><path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v5h4v-5h3l1-4h-4V9c0-.6.4-1 1-1z" /></>,
-    apps: <><rect x="4" y="4" width="6" height="6" rx="1.5" /><rect x="14" y="4" width="6" height="6" rx="1.5" /><rect x="4" y="14" width="6" height="6" rx="1.5" /><rect x="14" y="14" width="6" height="6" rx="1.5" /></>,
-    mirror: <><path d="M8 5h8v14H8z" /><path d="M5 8h3M16 8h3M5 16h3M16 16h3" /></>,
-    github: <><path d="M12 2.8a9.2 9.2 0 0 0-2.9 17.9c.46.08.63-.2.63-.44v-1.55c-2.56.56-3.1-1.1-3.1-1.1-.42-1.06-1.02-1.34-1.02-1.34-.84-.57.06-.56.06-.56.93.07 1.42.96 1.42.96.82 1.4 2.15 1 2.68.76.08-.6.32-1 .58-1.23-2.04-.23-4.18-1.02-4.18-4.53 0-1 .36-1.82.95-2.46-.1-.23-.41-1.17.09-2.43 0 0 .78-.25 2.53.94A8.7 8.7 0 0 1 12 6.46c.78 0 1.56.1 2.29.31 1.75-1.19 2.52-.94 2.52-.94.5 1.26.19 2.2.1 2.43.59.64.94 1.46.94 2.46 0 3.52-2.15 4.3-4.2 4.52.33.28.62.84.62 1.7v2.52c0 .24.17.52.64.43A9.2 9.2 0 0 0 12 2.8z" /></>,
-  };
-
-  return <svg className="svg-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{paths[name]}</svg>;
-}
-
-function InfoCard({ title, text }) {
-  return <article className="info-card"><h3>{title}</h3><p>{text}</p></article>;
-}
-
-function ContributorCard({ person }) {
-  return <a className="contributor-card" href={person.html_url} aria-label={`View ${person.login} on GitHub`}>
-    <img src={person.avatar_url} alt={person.login} loading="lazy" />
-    <div><strong>{person.login}</strong><span>{person.contributions} commits</span></div>
-  </a>;
-}
-
-createRoot(document.getElementById('root')).render(<App />);
+typeset(copy.vi);
+typeset(copy.en);

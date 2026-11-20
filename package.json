@@ -8,7 +8,7 @@
     "sync:installer": "node scripts/sync-installer.mjs",
     "dev": "yarn sync:installer && vite --host 0.0.0.0",
     "start": "yarn sync:installer && vite --host 0.0.0.0",
-    "build": "yarn sync:installer && vite build",
+    "build": "yarn sync:installer && vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview --host 0.0.0.0",
     "deploy": "yarn build && npx wrangler pages deploy dist --project-name caramos-landing"
   },

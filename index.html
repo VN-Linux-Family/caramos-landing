@@ -3,124 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CaramOS 1.4.0 — hệ điều hành Linux cho người Việt</title>
-    <meta
-      name="description"
-      content="CaramOS 1.4.0, bản phát hành chính thức dựa trên Linux Mint 22.3 Cinnamon và Ubuntu 24.04 LTS, có thêm bản Xfce cho máy 2 GB và phòng máy ở trường học: tiếng Việt và bộ gõ Lotus có sẵn, App Center cài ứng dụng bằng một nút, Kiểm tra driver, Control Center, Góp ý & hỗ trợ và cập nhật OTA không cần cài lại."
-    />
-    <meta
-      name="keywords"
-      content="CaramOS, CaramOS 1.4.0, CaramOS Xfce, Linux cho người Việt, Linux cho trường học, phòng máy, hệ điều hành Linux tiếng Việt, Vietnamese Linux, Linux Mint 22.3 Cinnamon, Ubuntu 24.04 LTS, App Center, Kiểm tra driver, bộ gõ tiếng Việt, Fcitx5, Lotus, Zalo Linux, OTA updates, Vietnam Linux Family"
-    />
+    <!--head-start-->
+    <title>CaramOS: hệ điều hành Linux cho người Việt</title>
+    <meta name="description" content="CaramOS là Linux miễn phí cho người Việt, có sẵn tiếng Việt và bộ gõ." />
+    <!--head-end-->
     <meta name="author" content="Vietnam Linux Family" />
-    <meta name="creator" content="Vietnam Linux Family" />
-    <meta name="publisher" content="Vietnam Linux Family" />
     <meta name="application-name" content="CaramOS" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="theme-color" content="#1f4f32" />
+    <meta name="theme-color" content="#ffffff" />
     <meta name="color-scheme" content="light" />
-
-    <link rel="canonical" href="https://caramos.vietnamlinuxfamily.net/" />
-    <link rel="alternate" hreflang="vi" href="https://caramos.vietnamlinuxfamily.net/" />
-    <link rel="alternate" hreflang="en" href="https://caramos.vietnamlinuxfamily.net/?lang=en" />
-    <link rel="alternate" hreflang="x-default" href="https://caramos.vietnamlinuxfamily.net/" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="icon" href="/assets/CaramOS_logo.png" />
     <link rel="apple-touch-icon" href="/assets/CaramOS_logo.png" />
-    <link rel="preload" as="image" type="image/webp" href="/assets/screenshots/first-login.webp" fetchpriority="high" />
-
-    <meta property="og:site_name" content="CaramOS" />
-    <meta property="og:title" content="CaramOS 1.4.0 — hệ điều hành Linux cho người Việt" />
-    <meta
-      property="og:description"
-      content="CaramOS 1.4.0, bản phát hành chính thức dựa trên Linux Mint 22.3 Cinnamon và Ubuntu 24.04 LTS, có thêm bản Xfce cho máy 2 GB và phòng máy ở trường học: tiếng Việt và bộ gõ Lotus có sẵn, App Center cài ứng dụng bằng một nút, Kiểm tra driver, Control Center, Góp ý & hỗ trợ và cập nhật OTA không cần cài lại."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://caramos.vietnamlinuxfamily.net/" />
-    <meta property="og:image" content="https://caramos.vietnamlinuxfamily.net/assets/og-caramos-1.4.0-preview.jpg" />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="CaramOS 1.4.0, bản phát hành chính thức: App Center và Kiểm tra driver ở lần đăng nhập đầu tiên" />
-    <meta property="og:locale" content="vi_VN" />
-    <meta property="og:locale:alternate" content="en_US" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CaramOS 1.4.0 — hệ điều hành Linux cho người Việt" />
-    <meta
-      name="twitter:description"
-      content="CaramOS 1.4.0, bản phát hành chính thức dựa trên Linux Mint 22.3 Cinnamon và Ubuntu 24.04 LTS, có thêm bản Xfce cho máy 2 GB và phòng máy ở trường học: tiếng Việt và bộ gõ Lotus có sẵn, App Center cài ứng dụng bằng một nút, Kiểm tra driver, Control Center, Góp ý & hỗ trợ và cập nhật OTA không cần cài lại."
-    />
-    <meta name="twitter:image" content="https://caramos.vietnamlinuxfamily.net/assets/og-caramos-1.4.0-preview.jpg" />
-    <meta name="twitter:image:alt" content="CaramOS 1.4.0, bản phát hành chính thức: App Center và Kiểm tra driver ở lần đăng nhập đầu tiên" />
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Organization",
-            "@id": "https://vietnamlinuxfamily.net/#organization",
-            "name": "Vietnam Linux Family",
-            "url": "https://vietnamlinuxfamily.net/",
-            "sameAs": [
-              "https://github.com/VN-Linux-Family",
-              "https://www.facebook.com/groups/vietnamlinuxcommunity",
-              "https://t.me/vietnamlinuxfamily",
-              "https://discord.gg/gVAJDUMC2n"
-            ]
-          },
-          {
-            "@type": "SoftwareApplication",
-            "@id": "https://caramos.vietnamlinuxfamily.net/#software",
-            "name": "CaramOS",
-            "applicationCategory": "OperatingSystem",
-            "operatingSystem": "Linux",
-            "softwareVersion": "1.4.0",
-            "datePublished": "2026-11-19",
-            "releaseNotes": "https://github.com/VN-Linux-Family/CaramOS/releases/tag/v1.4.0",
-            "license": "https://www.gnu.org/licenses/gpl-3.0.en.html",
-            "codeRepository": "https://github.com/VN-Linux-Family/CaramOS",
-            "downloadUrl": "https://sourceforge.net/projects/caramos/files/v1.4.0/CaramOS-1.4.0-cinnamon-amd64.iso/download",
-            "fileSize": "2.8 GB",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "VND"
-            },
-            "image": "https://caramos.vietnamlinuxfamily.net/assets/og-caramos-1.4.0-preview.jpg",
-            "screenshot": "https://caramos.vietnamlinuxfamily.net/assets/screenshots/first-login.webp",
-            "inLanguage": ["vi-VN", "en-US"],
-            "description": "CaramOS 1.4.0 is the official release of a Linux distribution for Vietnamese users, based on Linux Mint 22.3 Cinnamon and Ubuntu 24.04 LTS, with a new Xfce edition for 2 GB computers and school labs: Vietnamese and the Lotus input method out of the box, a one-click App Center, Driver Check, Control Center, Feedback & Help and OTA updates.",
-            "author": {
-              "@id": "https://vietnamlinuxfamily.net/#organization"
-            }
-          },
-          {
-            "@type": "WebSite",
-            "@id": "https://caramos.vietnamlinuxfamily.net/#website",
-            "url": "https://caramos.vietnamlinuxfamily.net/",
-            "name": "CaramOS",
-            "inLanguage": ["vi-VN", "en-US"],
-            "publisher": {
-              "@id": "https://vietnamlinuxfamily.net/#organization"
-            }
-          }
-        ]
-      }
-    </script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Inter:wght@400;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <div id="root"><!--app--></div>
+    <script type="module" src="/src/entry-client.jsx"></script>
   </body>
 </html>
