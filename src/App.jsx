@@ -1,16 +1,21 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import {
-  VERSION, links, installCommand, upgradeCommand, shots, canonUsbPrinters, captdriverPrinters, networkPrinters,
-  githubApi, fallbackRepo, compactNumber, copy, dailyPhoto, sizeOf, srcSetOf,
+  VERSION, links, installCommand, upgradeCommand, heroShot, canonUsbPrinters, captdriverPrinters, networkPrinters,
+  githubApi, fallbackRepo, compactNumber, copy, dailyPhoto, sizeOf, srcSetOf, SITE,
 } from './content.js';
+import { pathOf } from './routes.js';
+import { diagrams } from './diagrams.js';
+import { FeatureDiagram } from './FeatureDiagram.jsx';
 
 // Downloads open in a new tab, as before the redesign, so the install steps stay open beside them.
 const newTab = { target: '_blank', rel: 'noopener noreferrer' };
 
-// One page per route, rendered at build time (scripts/prerender.mjs) and hydrated in the browser:
-// '/' is Vietnamese, '/en/' English, '/support/' the donation page.
-export function App({ route }) {
-  return route === 'support' ? <SupportPage /> : <Landing lang={route === 'en' ? 'en' : 'vi'} />;
+// One page per route (src/routes.js), rendered at build time (scripts/prerender.mjs) and hydrated in the browser.
+export function App({ page, lang }) {
+  if (page === 'support') return <SupportPage />;
+  if (page === 'education') return <EducationPage lang={lang} />;
+  if (page === 'business') return <BusinessPage lang={lang} />;
+  return <Landing lang={lang} />;
 }
 
 function Landing({ lang }) {
@@ -52,12 +57,13 @@ function Landing({ lang }) {
 
   return <>
     <a className="skip-link" href="#main">{t.skip}</a>
-    <Header t={t} />
+    <Header t={t} page="home" lang={lang} />
     <main id="main">
       <Hero t={t} />
       <Backing t={t} />
+      <WhatsNew t={t} />
       <Editions t={t} />
-      <School t={t} />
+      <Orgs t={t} lang={lang} />
       <Features t={t} />
       <DailyWallpaper t={t} />
       <Printers t={t} />
@@ -77,18 +83,58 @@ function Logo() {
   return <img className="logo" src="/assets/caramos-logo-64.png" alt="" width="32" height="32" />;
 }
 
-function Header({ t }) {
-  const [label, href, hreflang, short] = t.otherLanguage;
-  return <header className="site-header">
+// The same header on every page. Menu anchors (#features) are home page sections, so other pages link to them on
+// the home page; Giáo dục and Doanh nghiệp are pages. Below 1280 px the menu folds behind a Menu button.
+// cta: [label, href, short label for phones]; the home page's is Tải về.
+function Header({ t, page, lang, cta }) {
+  const [label, , hreflang, short] = t.otherLanguage;
+  const home = pathOf('home', lang);
+  const here = pathOf(page, lang);
+  const otherLang = lang === 'vi' ? 'en' : 'vi';
+  const otherHref = pathOf(page, otherLang) || pathOf('home', otherLang);
+  const hrefOf = (target) => (target.startsWith('#') && page !== 'home' ? `${home}${target}` : target);
+  const [ctaLabel, ctaHref, ctaShort] = cta || [t.menuDownload, hrefOf('#download')];
+  const [open, setOpen] = useState(false);
+  const headerRef = useRef(null);
+  const toggleRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (event) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    const onPointer = (event) => { if (!headerRef.current?.contains(event.target)) setOpen(false); };
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('pointerdown', onPointer);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('pointerdown', onPointer);
+    };
+  }, [open]);
+
+  return <header className={`site-header${open ? ' is-open' : ''}`} ref={headerRef}>
     <div className="site-header-inner">
-      <a className="brand" href="#main" translate="no"><Logo /><span>CaramOS</span></a>
-      <nav className="site-nav" aria-label={t.menuDownload === 'Tải về' ? 'Mục chính' : 'Main'}>
-        {t.menu.map(([text, target]) => <a key={target} href={target}>{text}</a>)}
+      <a className="brand" href={page === 'home' ? '#main' : home} translate="no"><Logo /><span>CaramOS</span></a>
+      <nav className="site-nav" id="site-menu" aria-label={t.navLabel}>
+        {t.menu.map(([text, target]) => <a key={target} href={hrefOf(target)} aria-current={target === here ? 'page' : undefined} onClick={() => setOpen(false)}>{text}</a>)}
+        <a className="nav-github" href={links.repo}>GitHub</a>
       </nav>
       <div className="site-header-end">
-        <a className="lang-link" href={href} hrefLang={hreflang} lang={hreflang} aria-label={label}><span className="long">{label}</span><span className="short" aria-hidden="true">{short}</span></a>
+        <a className="github-link" href={links.repo} aria-label={t.githubLabel} title={t.githubLabel}><GithubMark /></a>
+        <a className="lang-link" href={otherHref} hrefLang={hreflang} lang={hreflang} aria-label={label}><span className="long">{label}</span><span className="short" aria-hidden="true">{short}</span></a>
         <a className="btn btn-outline btn-small donate-link" href="/support/">{t.supportPage}</a>
-        <a className="btn btn-amber btn-small" href="#download">{t.menuDownload}</a>
+        <a className="btn btn-amber btn-small header-cta" href={ctaHref}>
+          {ctaShort ? <><span className="long">{ctaLabel}</span><span className="short">{ctaShort}</span></> : ctaLabel}
+        </a>
+        <button type="button" className="menu-toggle" ref={toggleRef} aria-expanded={open} aria-controls="site-menu" aria-label={t.menuLabel} onClick={() => setOpen((value) => !value)}>
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            {open ? <path d="M6 6l12 12M18 6 6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+          </svg>
+          <span className="menu-toggle-text" aria-hidden="true">{t.menuLabel}</span>
+        </button>
       </div>
     </div>
   </header>;
@@ -141,10 +187,10 @@ function Hero({ t }) {
           <span>{t.downloadXfce}</span><small>{t.downloadXfceNote}</small>
         </a>
       </div>
-      <p className="hero-links"><a href="#ota">{t.heroUpgrade}</a><a href="/support/">{t.heroDonate}</a></p>
+      <p className="hero-links"><a href="#whats-new">{t.heroNew}</a><a href="#ota">{t.heroUpgrade}</a><a href="/support/">{t.heroDonate}</a><a href={links.repo}>{t.heroSource}</a></p>
     </div>
     <figure className="hero-shot">
-      <img src={`${shots}/first-login.webp`} srcSet={srcSetOf(`${shots}/first-login.webp`)} sizes="(max-width: 960px) 100vw, 60vw" alt={t.heroShotAlt} width="1600" height="1000" fetchPriority="high" />
+      <img src={heroShot} srcSet={srcSetOf(heroShot)} sizes="(max-width: 960px) 100vw, 60vw" alt={t.heroShotAlt} {...sizeOf(heroShot)} fetchPriority="high" />
     </figure>
     <dl className="hero-facts">
       {t.heroFacts.map(([term, detail]) => <div key={term}><dt>{term}</dt><dd>{detail}</dd></div>)}
@@ -176,6 +222,36 @@ function Backing({ t }) {
       </li>)}
     </ul>
   </section>;
+}
+
+// What the latest version brought (content.js whatsNew), right under the Unikorn band, where a first-time visitor
+// still sees it: blocks like the features further down, then the smaller changes, then the full release notes.
+function WhatsNew({ t }) {
+  const w = t.whatsNew;
+  return <section className="section whats-new" id="whats-new" aria-labelledby="whats-new-title">
+    <SectionHead id="whats-new-title" title={w.title} lead={w.lead} />
+    {w.blocks.map((feature, index) => <Feature key={feature.id} feature={feature} flip={index % 2 === 1} />)}
+    <div className="whats-new-more">
+      <h3>{w.moreTitle}</h3>
+      <ul className="extras-list whats-new-list">
+        {w.more.map(([title, text, href]) => <li key={title}>
+          <h4>{title}</h4>
+          <p>{text}{href && <> <a href={href}>{w.moreLink}</a></>}</p>
+        </li>)}
+      </ul>
+      <a className="text-link" href="#release-notes">{w.allNotes}</a>
+    </div>
+  </section>;
+}
+
+// A sentence with `command` parts, which show as code (the release notes quote commands that way). A command wraps
+// only between its words, never inside --auto-update.
+function Rich({ text }) {
+  const parts = text.split('`');
+  if (parts.length < 3) return text;
+  return parts.map((part, index) => (index % 2
+    ? <code key={index} translate="no">{part.split(' ').map((word, n) => <Fragment key={n}>{n > 0 && ' '}<span>{word}</span></Fragment>)}</code>
+    : <Fragment key={index}>{part}</Fragment>));
 }
 
 function SectionHead({ id, title, lead, children }) {
@@ -223,30 +299,41 @@ function Editions({ t }) {
   </section>;
 }
 
+// eager: the picture is in the first screen, so it loads at once and before the other pictures.
 function Shot({ image, overlay, eager }) {
   const [src, alt, width, height] = image;
+  const size = width ? { width, height } : sizeOf(src);
   return <div className={`shot${overlay ? ' has-overlay' : ''}`}>
-    <img src={src} alt={alt} width={width} height={height} loading={eager ? 'eager' : 'lazy'} decoding="async" />
-    {overlay && <img className="shot-overlay" src={overlay[0]} alt={overlay[1]} width={overlay[2]} height={overlay[3]} loading="lazy" decoding="async" />}
+    <img src={src} alt={alt} {...size} loading={eager ? 'eager' : 'lazy'} decoding="async" fetchPriority={eager ? 'high' : undefined} />
+    {overlay && <img className="shot-overlay" src={overlay[0]} alt={overlay[1]} width={overlay[2]} height={overlay[3]} loading={eager ? 'eager' : 'lazy'} decoding="async" />}
   </div>;
 }
 
-function School({ t }) {
-  const s = t.school;
-  const [lab, ...rest] = s.items;
-  return <section className="section school" id="school" aria-labelledby="school-title">
-    <SectionHead id="school-title" title={s.title} lead={s.lead} />
-    <article className="school-main">
-      <Shot image={lab.image} overlay={lab.overlay} />
-      <div className="school-text"><h3>{lab.title}</h3><p>{lab.text}</p></div>
+// Schools and companies on the home page: the school lab is released, so it shows the real screen; the company
+// manager is in testing, so it is a plain panel that says so. Each links to its own page. id="school" keeps the
+// old #school links working.
+function Orgs({ t, lang }) {
+  const { title, lead, education: e, business: b } = t.orgs;
+  return <section className="section band orgs" id="school" aria-labelledby="orgs-title">
+    <SectionHead id="orgs-title" title={title} lead={lead} />
+    <article className="orgs-edu" aria-labelledby="orgs-edu-title">
+      <Shot image={e.image} overlay={e.overlay} />
+      <div className="orgs-text">
+        <h3 id="orgs-edu-title">{e.title}</h3>
+        <p className="orgs-who">{e.who}</p>
+        <ul className="ticks">{e.points.map((point) => <li key={point}>{point}</li>)}</ul>
+        <a className="btn btn-green orgs-link" href={pathOf('education', lang)}>{e.link}</a>
+      </div>
     </article>
-    <div className="school-pair">
-      {rest.map((item) => <article key={item.title}>
-        <Shot image={item.image} />
-        <h3>{item.title}</h3>
-        <p>{item.text}</p>
-      </article>)}
-    </div>
+    <article className="orgs-biz" id="business" aria-labelledby="orgs-biz-title">
+      <div className="orgs-biz-head">
+        <h3 id="orgs-biz-title">{b.title}</h3>
+        <p className="orgs-who">{b.who}</p>
+        <p className="orgs-status">{b.status}</p>
+        <a className="btn btn-light orgs-link" href={pathOf('business', lang)}>{b.link}</a>
+      </div>
+      <ul className="ticks">{b.points.map((point) => <li key={point}>{point}</li>)}</ul>
+    </article>
   </section>;
 }
 
@@ -272,7 +359,7 @@ function Feature({ feature, flip }) {
     <div className="feature-text">
       <h3>{title}</h3>
       <p className="feature-lead">{lead}</p>
-      <ul className="ticks">{points.map((point) => <li key={point}>{point}</li>)}</ul>
+      <ul className="ticks">{points.map((point) => <li key={point}><Rich text={point} /></li>)}</ul>
       {link && <a className="text-link" href={link[1]}>{link[0]}</a>}
     </div>
     <FeatureMedia media={media} />
@@ -280,6 +367,15 @@ function Feature({ feature, flip }) {
 }
 
 function FeatureMedia({ media }) {
+  if (media.type === 'duo') {
+    // Two pictures side by side with a caption each. Each grows with its pixel width, so both show at one scale.
+    return <div className="feature-media is-duo">
+      {media.items.map(([src, alt, caption]) => <figure key={src} style={{ flexGrow: sizeOf(src).width }}>
+        <img src={src} alt={alt} {...sizeOf(src)} loading="lazy" decoding="async" />
+        <figcaption>{caption}</figcaption>
+      </figure>)}
+    </div>;
+  }
   const [src, alt] = media.main;
   if (media.type === 'pair') {
     return <div className="feature-media is-pair">
@@ -288,7 +384,7 @@ function FeatureMedia({ media }) {
     </div>;
   }
   const main = <img className="media-main" src={src} alt={alt} {...sizeOf(src)} loading="lazy" decoding="async" />;
-  return <div className={`feature-media is-${media.type}`}>
+  return <div className={`feature-media is-${media.type}${media.overlaySize === 'large' ? ' has-large-overlay' : ''}`}>
     {media.phone ? <picture><source media="(max-width: 620px)" srcSet={media.phone} width="400" height="498" />{main}</picture> : main}
     {media.overlay && <img className="media-overlay" src={media.overlay[0]} alt={media.overlay[1]} {...sizeOf(media.overlay[0])} loading="lazy" decoding="async" />}
   </div>;
@@ -422,7 +518,7 @@ function ReleaseNotes({ t }) {
         <p className="release-version">{version}{index === 0 && <span>{t.releaseCurrent}</span>}</p>
         <div>
           <h3>{title}</h3>
-          <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul>
+          <ul>{items.map((item) => <li key={item}><Rich text={item} /></li>)}</ul>
         </div>
       </article>)}
     </div>
@@ -431,10 +527,15 @@ function ReleaseNotes({ t }) {
 }
 
 function Faq({ t }) {
-  return <section className="section faq" id="faq" aria-labelledby="faq-title">
-    <SectionHead id="faq-title" title={t.faq.title} />
+  return <Questions id="faq" title={t.faq.title} items={t.faq.items} />;
+}
+
+// Questions and answers as plain HTML; no FAQ markup for search engines on the Education and Business pages.
+function Questions({ id, title, items }) {
+  return <section className="section faq" id={id} aria-labelledby={`${id}-title`}>
+    <SectionHead id={`${id}-title`} title={title} />
     <div className="faq-list">
-      {t.faq.items.map(([question, answer], index) => <details key={question} open={index === 0}>
+      {items.map(([question, answer], index) => <details key={question} open={index === 0}>
         <summary><h3>{question}</h3></summary>
         <p>{answer}</p>
       </details>)}
@@ -465,6 +566,7 @@ function Community({ t, repo, contributors, githubError }) {
         <h3>{t.projectTitle}</h3>
         <p className="muted">{t.openSourceLead}</p>
         <dl className="project-stats">{stats.map(([value, label]) => <div key={label}><dt>{value}</dt><dd>{label}</dd></div>)}</dl>
+        <p className="project-repo"><a className="text-link" href={links.repo}><GithubMark />{t.projectRepoLink}</a></p>
         <dl className="project-facts">{t.openSource.map(([title, text]) => <div key={title}><dt>{title}</dt><dd>{text}</dd></div>)}</dl>
       </div>
       <div className="project-people">
@@ -520,6 +622,11 @@ function Footer({ t }) {
   </footer>;
 }
 
+// GitHub's mark (octicons mark-github, MIT licence), filled, in the colour of the text around it.
+function GithubMark() {
+  return <svg className="github-mark" viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" /></svg>;
+}
+
 function SvgIcon({ name }) {
   const paths = {
     locale: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" /></>,
@@ -532,8 +639,354 @@ function SvgIcon({ name }) {
     facebook: <><path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v5h4v-5h3l1-4h-4V9c0-.6.4-1 1-1z" /></>,
     apps: <><rect x="4" y="4" width="6" height="6" rx="1.5" /><rect x="14" y="4" width="6" height="6" rx="1.5" /><rect x="4" y="14" width="6" height="6" rx="1.5" /><rect x="14" y="14" width="6" height="6" rx="1.5" /></>,
     mirror: <><path d="M8 5h8v14H8z" /><path d="M5 8h3M16 8h3M5 16h3M16 16h3" /></>,
+    mail: <><rect x="3.5" y="5.5" width="17" height="13" rx="2" /><path d="m4 7 8 6 8-6" /></>,
   };
   return <svg className="icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{paths[name]}</svg>;
+}
+
+// /giao-duc/ and /en/education/: what CaramOS 1.4.0 gives a school computer lab.
+function EducationPage({ lang }) {
+  const t = copy[lang];
+  const e = t.education;
+  const a = t.anchors;
+  return <>
+    <a className="skip-link" href="#main">{t.skip}</a>
+    <Header t={t} page="education" lang={lang} cta={[t.menuDownload, `#${a.start}`]} />
+    <main id="main" className="page-main">
+      <section className="page-hero" aria-labelledby="page-title">
+        <div className="page-hero-copy">
+          <h1 id="page-title" className="page-title">{e.hero.title}</h1>
+          <p className="page-lead">{e.hero.lead}</p>
+          <div className="hero-actions">
+            <a className="btn btn-amber btn-large" href={links.downloadXfce} {...newTab}><span>{e.hero.download}</span><small>{e.hero.downloadNote}</small></a>
+            <a className="btn btn-outline btn-large" href={`#${a.contact}`}><span>{e.hero.contact}</span></a>
+          </div>
+        </div>
+        <div className="page-hero-media"><Shot image={e.hero.image} overlay={e.hero.overlay} eager /></div>
+        <Facts items={e.hero.facts} />
+      </section>
+
+      <MapSection id={a.map} text={e.map} diagram={diagrams.education} lang={lang} words={t.diagramWords} />
+
+      <section className="section lab-section" aria-labelledby="lab-title">
+        <div className="page-split">
+          <div>
+            <h2 id="lab-title" className="page-h2">{e.lab.title}</h2>
+            <p className="page-intro">{e.lab.lead}</p>
+          </div>
+          <div className="lab-actions">
+            <h3 className="list-title">{e.lab.pointsTitle}</h3>
+            <ul className="ticks">{e.lab.points.map((point) => <li key={point}>{point}</li>)}</ul>
+          </div>
+        </div>
+        <div className="lab-choice">
+          <h3 className="list-title">{e.lab.choiceTitle}</h3>
+          <dl>{e.lab.choices.map(([name, note, text]) => <div key={name}><dt>{name} <span>({note})</span></dt><dd>{text}</dd></div>)}</dl>
+          <p className="muted lab-note">{e.lab.note}</p>
+        </div>
+      </section>
+
+      <PageFeature id="old-pcs" block={e.oldPcs} />
+      <PageFeature id="textbook" block={e.textbook} flip />
+
+      <section className="section apps-section" aria-labelledby="apps-title">
+        <div className="apps-head">
+          <div>
+            <h2 id="apps-title" className="page-h2">{e.apps.title}</h2>
+            <p className="page-intro">{e.apps.lead}</p>
+          </div>
+          <img className="framed" src={e.apps.image[0]} alt={e.apps.image[1]} {...sizeOf(e.apps.image[0])} loading="lazy" decoding="async" />
+        </div>
+        <div className="app-groups">
+          {e.apps.groups.map(([group, apps]) => <div key={group}>
+            <h3>{group}</h3>
+            <dl>{apps.map(([name, text]) => <div key={name}><dt>{name}</dt><dd>{text}</dd></div>)}</dl>
+          </div>)}
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="care-title">
+        <h2 id="care-title" className="page-h2 care-title">{e.care.title}</h2>
+        <ul className="extras-list is-three">
+          {e.care.items.map(([title, text]) => <li key={title}><h3>{title}</h3><p>{text}</p></li>)}
+        </ul>
+      </section>
+
+      <StepsSection id={a.start} steps={e.steps}>
+        <div className="steps-downloads">
+          <a className="btn btn-amber" href={links.downloadXfce} {...newTab}>{e.steps.downloads[0]}</a>
+          <a className="btn btn-outline" href={links.download} {...newTab}>{e.steps.downloads[1]}</a>
+        </div>
+      </StepsSection>
+
+      <Questions id={a.faq} title={e.faq.title} items={e.faq.items} />
+      <ContactSection t={t} kind="education" id={a.contact} lang={lang} />
+    </main>
+    <Footer t={t} />
+  </>;
+}
+
+// /doanh-nghiep/ and /en/business/: CaramOS Doanh nghiệp, in testing, with the scope of version 0.2.
+function BusinessPage({ lang }) {
+  const t = copy[lang];
+  const b = t.business;
+  const a = t.anchors;
+  const n = b.hero.notice;
+  return <>
+    <a className="skip-link" href="#main">{t.skip}</a>
+    <Header t={t} page="business" lang={lang} cta={[b.cta, `#${a.contact}`]} />
+    <main id="main" className="page-main">
+      <section className="page-hero is-business" aria-labelledby="page-title">
+        <div className="page-hero-copy">
+          <h1 id="page-title" className="page-title">{b.hero.title}</h1>
+          <p className="page-lead">{b.hero.lead}</p>
+          <p className="status-note"><strong>{b.hero.status[0]}</strong> {b.hero.status[1]}</p>
+          <div className="hero-actions is-single">
+            <a className="btn btn-amber btn-large" href={`#${a.start}`}><span>{b.hero.cta}</span></a>
+            <a className="text-link" href={`#${a.map}`}>{b.hero.mapLink}</a>
+          </div>
+        </div>
+        <figure className="notice page-hero-media">
+          <div className="notice-sheet">
+            <p className="notice-title"><img src="/assets/caramos-logo-64.png" alt="" width="28" height="28" />{n.title}</p>
+            <p className="notice-sub">{n.managedTitle}</p>
+            <dl className="notice-managed">{n.managed.map(([term, text]) => <div key={term}><dt>{term}</dt><dd>{text}</dd></div>)}</dl>
+            <p className="notice-sub">{n.neverTitle}</p>
+            <ul className="notice-never">{n.never.map((item) => <li key={item}>{item}</li>)}</ul>
+          </div>
+          <figcaption>{n.caption}</figcaption>
+        </figure>
+        <Facts items={b.hero.facts} />
+      </section>
+
+      <MapSection id={a.map} text={b.map} diagram={diagrams.business} lang={lang} words={t.diagramWords} />
+
+      <section className="section" aria-labelledby="settings-title">
+        <SectionHead id="settings-title" title={b.settings.title} lead={b.settings.lead} />
+        <table className="settings-table">
+          <thead><tr>{b.settings.head.map((cell) => <th key={cell} scope="col">{cell}</th>)}</tr></thead>
+          <tbody>{b.settings.rows.map(([name, text]) => <tr key={name}><th scope="row">{name}</th><td>{text}</td></tr>)}</tbody>
+        </table>
+      </section>
+
+      <section className="section" aria-labelledby="inventory-title">
+        <SectionHead id="inventory-title" title={b.inventory.title} lead={b.inventory.lead} />
+        <div className="extras-list is-three inventory-cols">
+          {b.inventory.columns.map(([title, items]) => <div key={title}>
+            <h3>{title}</h3>
+            <ul className="plain-list">{items.map((item) => <li key={item}>{item}</li>)}</ul>
+          </div>)}
+        </div>
+      </section>
+
+      <section className="section page-split is-even" aria-labelledby="actions-title">
+        <div>
+          <h2 id="actions-title" className="page-h2">{b.actions.title}</h2>
+          <p className="page-intro">{b.actions.lead}</p>
+          <ul className="ticks">{b.actions.items.map((item) => <li key={item}>{item}</li>)}</ul>
+        </div>
+        <div className="help-flow">
+          <h3 className="list-title">{b.actions.helpTitle}</h3>
+          <ol className="steps">{b.actions.help.map(([title, text]) => <li key={title}><strong>{title}</strong><span>{text}</span></li>)}</ol>
+        </div>
+      </section>
+
+      <section className="section page-split" aria-labelledby="files-title">
+        <div>
+          <h2 id="files-title" className="page-h2">{b.files.title}</h2>
+          <p className="page-intro">{b.files.lead}</p>
+        </div>
+        <ul className="ticks split-list">{b.files.points.map((point) => <li key={point}>{point}</li>)}</ul>
+      </section>
+
+      <section className="privacy" aria-labelledby="privacy-title">
+        <div className="privacy-inner">
+          <div className="privacy-head">
+            <h2 id="privacy-title">{b.privacy.title}</h2>
+            <p>{b.privacy.lead}</p>
+            <p className="privacy-law">{b.privacy.law}</p>
+          </div>
+          <div className="privacy-lists">
+            <div>
+              <h3>{b.privacy.neverTitle}</h3>
+              <ul className="privacy-never">{b.privacy.never.map((item) => <li key={item}>{item}</li>)}</ul>
+            </div>
+            <div>
+              <h3>{b.privacy.alwaysTitle}</h3>
+              <ul className="ticks">{b.privacy.always.map((item) => <li key={item}>{item}</li>)}</ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section page-split" aria-labelledby="security-title">
+        <h2 id="security-title" className="page-h2">{b.security.title}</h2>
+        <dl className="security-list">{b.security.items.map(([title, text]) => <div key={title}><dt>{title}</dt><dd>{text}</dd></div>)}</dl>
+      </section>
+
+      <StepsSection id={a.start} steps={b.steps}>
+        <p className="muted steps-note">{b.steps.note}</p>
+      </StepsSection>
+
+      <Questions id={a.faq} title={b.faq.title} items={b.faq.items} />
+      <ContactSection t={t} kind="business" id={a.contact} lang={lang} />
+    </main>
+    <Footer t={t} />
+  </>;
+}
+
+function Facts({ items }) {
+  return <dl className="hero-facts">{items.map(([term, detail]) => <div key={term}><dt>{term}</dt><dd>{detail}</dd></div>)}</dl>;
+}
+
+// The diagram, on the theme's mist from edge to edge.
+function MapSection({ id, text, diagram, lang, words }) {
+  return <section className="section band map" id={id} aria-labelledby={`${id}-title`}>
+    <SectionHead id={`${id}-title`} title={text.title} lead={text.lead} />
+    <FeatureDiagram diagram={diagram} lang={lang} id={`${id}-diagram`} words={words} />
+  </section>;
+}
+
+// A section with its text on one side and a screenshot on the other, like the home page's features.
+function PageFeature({ id, block, flip }) {
+  return <section className="section" aria-labelledby={`${id}-title`}>
+    <div className={`feature page-feature${flip ? ' is-flipped' : ''}`}>
+      <div className="feature-text">
+        <h2 id={`${id}-title`} className="page-h2">{block.title}</h2>
+        <p className="feature-lead">{block.lead}</p>
+        <ul className="ticks">{block.points.map((point) => <li key={point}>{point}</li>)}</ul>
+      </div>
+      <div className="feature-media">
+        <img className="media-main" src={block.image[0]} srcSet={srcSetOf(block.image[0])} sizes="(max-width: 960px) 100vw, 58vw" alt={block.image[1]} {...sizeOf(block.image[0])} loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </section>;
+}
+
+// "Bắt đầu thế nào": real steps in order, so they are numbered.
+function StepsSection({ id, steps, children }) {
+  return <section className="section page-split steps-section" id={id} aria-labelledby={`${id}-title`}>
+    <div>
+      <h2 id={`${id}-title`} className="page-h2">{steps.title}</h2>
+      <p className="page-intro">{steps.lead}</p>
+      {children}
+    </div>
+    <ol className="steps page-steps">{steps.items.map(([title, text]) => <li key={title}><strong>{title}</strong><span>{text}</span></li>)}</ol>
+  </section>;
+}
+
+// The feedback form (feedback or a feature request). The site is static, so sending opens the visitor's email app
+// with the message written out for links.contactEmail. Nothing is stored and nothing is sent anywhere else.
+function ContactSection({ t, kind, id, lang }) {
+  const c = t[kind].contact;
+  const f = t.contactForm;
+  const [values, setValues] = useState({ type: f.kinds[0], name: '', org: '', message: '' });
+  const [errors, setErrors] = useState({});
+  const [mailText, setMailText] = useState('');
+  const [copied, setCopied] = useState(false);
+  const messageRef = useRef(null);
+  const fieldId = (key) => `${kind}-${key}`;
+
+  const bind = (key) => ({
+    id: fieldId(key),
+    name: key,
+    value: values[key],
+    onChange: (event) => {
+      const value = event.target.value;
+      setValues((old) => ({ ...old, [key]: value }));
+      if (errors[key] && value.trim()) setErrors((old) => ({ ...old, [key]: undefined }));
+    },
+    'aria-invalid': errors[key] ? 'true' : undefined,
+    'aria-describedby': errors[key] ? `${fieldId(key)}-error` : undefined,
+  });
+
+  const submit = (event) => {
+    event.preventDefault();
+    if (!values.message.trim()) {
+      setErrors({ message: f.messageError });
+      messageRef.current?.focus();
+      return;
+    }
+    setErrors({});
+    const org = values.org.trim();
+    const subject = `[${c.subject}] ${values.type}${org ? `: ${org}` : ''}`;
+    const rows = [[f.mail.kind, values.type], [f.mail.name, values.name], [c.orgLabel, values.org]];
+    const body = [
+      ...rows.filter(([, value]) => value.trim()).map(([label, value]) => `${label}: ${value.trim()}`),
+      '',
+      `${f.mail.message}:`,
+      values.message.trim(),
+      '',
+      `${f.mail.from} ${SITE}${pathOf(kind, lang)}`,
+    ].join('\r\n');
+    setMailText(`${subject}\n\n${body.replace(/\r\n/g, '\n')}`);
+    setCopied(false);
+    window.location.href = `mailto:${links.contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
+  const copyMessage = async () => {
+    try {
+      await navigator.clipboard.writeText(`${links.contactEmail}\n\n${mailText}`);
+      setCopied(true);
+    } catch {
+      // Without clipboard access the address stays on the page to write to by hand.
+    }
+  };
+
+  const errorOf = (key) => errors[key] && <p className="field-error" id={`${fieldId(key)}-error`}>{errors[key]}</p>;
+
+  return <section className="contact" id={id} aria-labelledby={`${id}-title`}>
+    <div className="contact-main">
+      <h2 id={`${id}-title`} className="page-h2">{c.title}</h2>
+      <p className="page-intro">{c.lead}</p>
+      {/* Without JavaScript the browser hands the fields to the email app itself. */}
+      <form className="contact-form" action={`mailto:${links.contactEmail}`} method="post" encType="text/plain" noValidate onSubmit={submit}>
+        <fieldset className="field is-wide field-choice">
+          <legend>{f.kind}</legend>
+          <div className="choice-row">
+            {f.kinds.map((label) => <label key={label} className="choice">
+              <input type="radio" name="type" value={label} checked={values.type === label}
+                onChange={() => setValues((old) => ({ ...old, type: label }))} />
+              <span>{label}</span>
+            </label>)}
+          </div>
+        </fieldset>
+        <div className="field is-wide">
+          <label htmlFor={fieldId('message')}>{f.message} <span className="field-required">({f.required})</span></label>
+          <textarea {...bind('message')} ref={messageRef} rows="5" maxLength="3000" placeholder={c.messagePlaceholder} aria-required="true" />
+          {errorOf('message')}
+        </div>
+        <div className="field">
+          <label htmlFor={fieldId('name')}>{f.name}</label>
+          <input {...bind('name')} type="text" autoComplete="name" />
+        </div>
+        <div className="field">
+          <label htmlFor={fieldId('org')}>{c.orgLabel}</label>
+          <input {...bind('org')} type="text" autoComplete="organization" />
+        </div>
+        <div className="contact-submit">
+          <button type="submit" className="btn btn-green">{f.submit}</button>
+          <p className="contact-privacy">{f.privacy}</p>
+        </div>
+      </form>
+      <div className="contact-sent">
+        <p role="status">{mailText && <>{f.opened} <a href={`mailto:${links.contactEmail}`}>{links.contactEmail}</a>.</>}</p>
+        {mailText && <button type="button" className="btn btn-outline btn-small" onClick={copyMessage}>{copied ? f.copied : f.copy}</button>}
+      </div>
+    </div>
+    <div className="contact-channels">
+      <h3>{f.channelsTitle}</h3>
+      <ul>
+        {f.channels.map(([icon, name, meta, href]) => <li key={name}>
+          <a href={href}>
+            <span className="channel-icon"><SvgIcon name={icon} /></span>
+            <span className="channel-name">{name}</span>
+            <span className="channel-meta">{meta}</span>
+          </a>
+        </li>)}
+      </ul>
+    </div>
+  </section>;
 }
 
 function SupportPage() {
