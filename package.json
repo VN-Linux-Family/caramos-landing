@@ -10,6 +10,8 @@
     "start": "yarn sync:installer && vite --host 0.0.0.0",
     "build": "yarn sync:installer && vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview --host 0.0.0.0",
+    "test": "node --test server/*.test.mjs",
+    "dev:api": "yarn build && npx wrangler pages dev dist --port 8788",
     "deploy": "yarn build && npx wrangler pages deploy dist --project-name caramos-landing"
   },
   "dependencies": {

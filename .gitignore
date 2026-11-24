@@ -1,3 +1,7 @@
 node_modules/
 dist/
 dist-ssr/
+
+# Local secrets and state of `wrangler pages dev` (Đồng hành)
+.dev.vars
+.wrangler/

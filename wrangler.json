@@ -1,7 +1,14 @@
 {
-  "buildCommand": "yarn build",
-  "outputDirectory": "dist",
-  "installCommand": "yarn install --frozen-lockfile",
-  "framework": "vite",
-  "compatibilityDate": "2026-05-19"
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "caramos-landing",
+  "pages_build_output_dir": "dist",
+  "compatibility_date": "2026-05-19",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "caramos-dong-hanh",
+      "database_id": "8a231bb0-7a4d-47c2-96ac-fce5983da535",
+      "migrations_dir": "migrations"
+    }
+  ]
 }

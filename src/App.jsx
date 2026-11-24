@@ -6,16 +6,21 @@ import {
 import { pathOf } from './routes.js';
 import { diagrams } from './diagrams.js';
 import { FeatureDiagram } from './FeatureDiagram.jsx';
+import { DongHanhButton, DongHanhHero, DongHanhSection, HERO_ID } from './DongHanh.jsx';
 
 // Downloads open in a new tab, as before the redesign, so the install steps stay open beside them.
 const newTab = { target: '_blank', rel: 'noopener noreferrer' };
 
 // One page per route (src/routes.js), rendered at build time (scripts/prerender.mjs) and hydrated in the browser.
+// Every page but the support page (which has the whole panel) gets the Đồng hành button (src/DongHanh.jsx); on the
+// home page it stays hidden while the hero's Đồng hành card is on screen.
 export function App({ page, lang }) {
   if (page === 'support') return <SupportPage />;
-  if (page === 'education') return <EducationPage lang={lang} />;
-  if (page === 'business') return <BusinessPage lang={lang} />;
-  return <Landing lang={lang} />;
+  const body = page === 'education' ? <EducationPage lang={lang} />
+    : page === 'business' ? <BusinessPage lang={lang} />
+      : <Landing lang={lang} />;
+  const home = page !== 'education' && page !== 'business';
+  return <>{body}<DongHanhButton lang={lang} heroId={home ? HERO_ID : undefined} /></>;
 }
 
 function Landing({ lang }) {
@@ -59,7 +64,7 @@ function Landing({ lang }) {
     <a className="skip-link" href="#main">{t.skip}</a>
     <Header t={t} page="home" lang={lang} />
     <main id="main">
-      <Hero t={t} />
+      <Hero t={t} lang={lang} />
       <Backing t={t} />
       <WhatsNew t={t} />
       <Editions t={t} />
@@ -164,7 +169,7 @@ function useTelex(frames, finalText) {
   return state;
 }
 
-function Hero({ t }) {
+function Hero({ t, lang }) {
   const telex = useTelex(t.telex, t.heroTyped);
   return <section className="hero" id="overview" aria-labelledby="hero-title">
     <div className="hero-copy">
@@ -189,9 +194,12 @@ function Hero({ t }) {
       </div>
       <p className="hero-links"><a href="#whats-new">{t.heroNew}</a><a href="#ota">{t.heroUpgrade}</a><a href="/support/">{t.heroDonate}</a><a href={links.repo}>{t.heroSource}</a></p>
     </div>
-    <figure className="hero-shot">
-      <img src={heroShot} srcSet={srcSetOf(heroShot)} sizes="(max-width: 960px) 100vw, 60vw" alt={t.heroShotAlt} {...sizeOf(heroShot)} fetchPriority="high" />
-    </figure>
+    <div className="hero-side">
+      <figure className="hero-shot">
+        <img src={heroShot} srcSet={srcSetOf(heroShot)} sizes="(max-width: 960px) 100vw, 880px" alt={t.heroShotAlt} {...sizeOf(heroShot)} fetchPriority="high" />
+      </figure>
+      <DongHanhHero lang={lang} />
+    </div>
     <dl className="hero-facts">
       {t.heroFacts.map(([term, detail]) => <div key={term}><dt>{term}</dt><dd>{detail}</dd></div>)}
     </dl>
@@ -1029,6 +1037,8 @@ function SupportPage() {
         <h1>Fund the Future of CaramOS</h1>
         <p>CaramOS miễn phí và luôn hướng đến cộng đồng. Sự ủng hộ của bạn giúp chúng tôi duy trì hạ tầng, thử nghiệm ISO, cải thiện tính năng, viết tài liệu và giữ dự án sống lâu dài. Dù nhỏ hay lớn, mọi đóng góp đều rất đáng quý!</p>
       </section>
+
+      <DongHanhSection lang="vi" />
 
       <section className="featured-donation momo-donation">
         <div className="featured-info">
