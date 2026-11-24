@@ -309,9 +309,19 @@ function Shot({ image, overlay, eager }) {
   </div>;
 }
 
-// Schools and companies on the home page: the school lab is released, so it shows the real screen; the company
-// manager is in testing, so it is a plain panel that says so. Each links to its own page. id="school" keeps the
-// old #school links working.
+// A screenshot with its caption: figure = [src, alt, caption]. A part of a window gets the usual frame; a whole window
+// cut out of the desktop (window: transparent round corners) only gets a shadow, like a window on the screen.
+function Screen({ figure, window: isWindow }) {
+  const [src, alt, caption] = figure;
+  return <figure className={`screen${isWindow ? ' is-window' : ''}`}>
+    <img src={src} alt={alt} {...sizeOf(src)} loading="lazy" decoding="async" />
+    {caption && <figcaption>{caption}</figcaption>}
+  </figure>;
+}
+
+// Schools and companies on the home page, each with its real screen and a link to its own page: the school lab
+// with the picture on the left, the company manager (free trial) with the picture on the right. id="school" keeps
+// the old #school links working.
 function Orgs({ t, lang }) {
   const { title, lead, education: e, business: b } = t.orgs;
   return <section className="section band orgs" id="school" aria-labelledby="orgs-title">
@@ -326,13 +336,14 @@ function Orgs({ t, lang }) {
       </div>
     </article>
     <article className="orgs-biz" id="business" aria-labelledby="orgs-biz-title">
-      <div className="orgs-biz-head">
+      <Shot image={b.image} />
+      <div className="orgs-text">
         <h3 id="orgs-biz-title">{b.title}</h3>
         <p className="orgs-who">{b.who}</p>
         <p className="orgs-status">{b.status}</p>
-        <a className="btn btn-light orgs-link" href={pathOf('business', lang)}>{b.link}</a>
+        <ul className="ticks">{b.points.map((point) => <li key={point}>{point}</li>)}</ul>
+        <a className="btn btn-green orgs-link" href={pathOf('business', lang)}>{b.link}</a>
       </div>
-      <ul className="ticks">{b.points.map((point) => <li key={point}>{point}</li>)}</ul>
     </article>
   </section>;
 }
@@ -726,12 +737,11 @@ function EducationPage({ lang }) {
   </>;
 }
 
-// /doanh-nghiep/ and /en/business/: CaramOS Doanh nghiệp, in testing, with the scope of version 0.2.
+// /doanh-nghiep/ and /en/business/: CaramOS Doanh nghiệp, a free trial, with screenshots of version 0.3.0.
 function BusinessPage({ lang }) {
   const t = copy[lang];
   const b = t.business;
   const a = t.anchors;
-  const n = b.hero.notice;
   return <>
     <a className="skip-link" href="#main">{t.skip}</a>
     <Header t={t} page="business" lang={lang} cta={[b.cta, `#${a.contact}`]} />
@@ -746,15 +756,9 @@ function BusinessPage({ lang }) {
             <a className="text-link" href={`#${a.map}`}>{b.hero.mapLink}</a>
           </div>
         </div>
-        <figure className="notice page-hero-media">
-          <div className="notice-sheet">
-            <p className="notice-title"><img src="/assets/caramos-logo-64.png" alt="" width="28" height="28" />{n.title}</p>
-            <p className="notice-sub">{n.managedTitle}</p>
-            <dl className="notice-managed">{n.managed.map(([term, text]) => <div key={term}><dt>{term}</dt><dd>{text}</dd></div>)}</dl>
-            <p className="notice-sub">{n.neverTitle}</p>
-            <ul className="notice-never">{n.never.map((item) => <li key={item}>{item}</li>)}</ul>
-          </div>
-          <figcaption>{n.caption}</figcaption>
+        <figure className="page-hero-media hero-figure is-bleed">
+          <Shot image={b.hero.image} eager />
+          <figcaption>{b.hero.caption}</figcaption>
         </figure>
         <Facts items={b.hero.facts} />
       </section>
@@ -771,6 +775,7 @@ function BusinessPage({ lang }) {
 
       <section className="section" aria-labelledby="inventory-title">
         <SectionHead id="inventory-title" title={b.inventory.title} lead={b.inventory.lead} />
+        <div className="screens">{b.inventory.figures.map((figure) => <Screen key={figure[0]} figure={figure} />)}</div>
         <div className="extras-list is-three inventory-cols">
           {b.inventory.columns.map(([title, items]) => <div key={title}>
             <h3>{title}</h3>
@@ -784,10 +789,12 @@ function BusinessPage({ lang }) {
           <h2 id="actions-title" className="page-h2">{b.actions.title}</h2>
           <p className="page-intro">{b.actions.lead}</p>
           <ul className="ticks">{b.actions.items.map((item) => <li key={item}>{item}</li>)}</ul>
+          <Screen figure={b.actions.image} />
         </div>
         <div className="help-flow">
           <h3 className="list-title">{b.actions.helpTitle}</h3>
           <ol className="steps">{b.actions.help.map(([title, text]) => <li key={title}><strong>{title}</strong><span>{text}</span></li>)}</ol>
+          <Screen figure={b.actions.helpImage} window />
         </div>
       </section>
 
@@ -801,21 +808,24 @@ function BusinessPage({ lang }) {
 
       <section className="privacy" aria-labelledby="privacy-title">
         <div className="privacy-inner">
-          <div className="privacy-head">
-            <h2 id="privacy-title">{b.privacy.title}</h2>
-            <p>{b.privacy.lead}</p>
-            <p className="privacy-law">{b.privacy.law}</p>
-          </div>
-          <div className="privacy-lists">
-            <div>
-              <h3>{b.privacy.neverTitle}</h3>
-              <ul className="privacy-never">{b.privacy.never.map((item) => <li key={item}>{item}</li>)}</ul>
+          <div className="privacy-main">
+            <div className="privacy-head">
+              <h2 id="privacy-title">{b.privacy.title}</h2>
+              <p>{b.privacy.lead}</p>
+              <p className="privacy-law">{b.privacy.law}</p>
             </div>
-            <div>
-              <h3>{b.privacy.alwaysTitle}</h3>
-              <ul className="ticks">{b.privacy.always.map((item) => <li key={item}>{item}</li>)}</ul>
+            <div className="privacy-lists">
+              <div>
+                <h3>{b.privacy.neverTitle}</h3>
+                <ul className="privacy-never">{b.privacy.never.map((item) => <li key={item}>{item}</li>)}</ul>
+              </div>
+              <div>
+                <h3>{b.privacy.alwaysTitle}</h3>
+                <ul className="ticks">{b.privacy.always.map((item) => <li key={item}>{item}</li>)}</ul>
+              </div>
             </div>
           </div>
+          <Screen figure={b.privacy.image} window />
         </div>
       </section>
 
@@ -826,6 +836,7 @@ function BusinessPage({ lang }) {
 
       <StepsSection id={a.start} steps={b.steps}>
         <p className="muted steps-note">{b.steps.note}</p>
+        <Screen figure={b.steps.image} />
       </StepsSection>
 
       <Questions id={a.faq} title={b.faq.title} items={b.faq.items} />

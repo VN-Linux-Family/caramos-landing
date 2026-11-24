@@ -129,7 +129,7 @@ export const copy = {
         {
           title: 'Phần mềm học tập trong App Center',
           text: 'Mục Học tập và dạy học có GCompris, Tux Paint, Klavaro (luyện gõ phím), KTurtle, Thonny (học Python), Stellarium, TurboWarp (Scratch 3) và GeoGebra 6. Không có gì chọn sẵn, nên máy ở nhà không phải tải về nếu không cần.',
-          image: [`${shots}/app-center-edu-140.webp`, 'App Center, mục Học tập và dạy học'],
+          image: [`${shots}/app-center-edu-150.webp`, 'App Center, mục Học tập và dạy học'],
         },
       ],
       note: 'Phòng máy, phần mềm học tập, Mới ▸ Thư mục và cây thư mục có trên cả hai bản. Máy đang chạy bản Cinnamon không tự chuyển sang Xfce; muốn dùng bản Xfce thì cài mới từ ISO Xfce.',
@@ -303,7 +303,7 @@ export const copy = {
         'Âm lịch trong lịch của thanh tác vụ, trên cả hai bản: bấm vào đồng hồ, dưới mỗi ngày có ngày âm, mùng 1 và rằm tô đỏ, đầu lịch ghi ngày âm hôm nay.',
         'Super+V mở lịch sử clipboard, Super+L khóa máy, Ctrl+Alt+Delete mở hộp đăng xuất, bấm Super rồi gõ là tìm. Trên bản Xfce, tổ hợp có phím Super không còn mở menu Start kèm theo.',
         'Control Center có ô Thanh tác vụ để đặt ứng dụng ở giữa hay bên trái, ô Không làm phiền, và thanh độ sáng cho màn hình rời hỗ trợ DDC/CI; lăn chuột trên biểu tượng của nó để chỉnh âm lượng, mỗi nấc 2, 5 hay 10%. Menu Start và menu chuột phải bo tròn góc.',
-        'Trung tâm cập nhật và App Center có giao diện mới; App Center có mục Doanh nghiệp với CaramOS Doanh nghiệp (đang dùng thử miễn phí) và Remmina. Máy từ 4 GB RAM trở xuống hoặc chưa có driver card đồ họa: App Center, Kiểm tra driver, Góp ý & hỗ trợ và Phòng máy dùng ít hơn 52–79 MB RAM mỗi ứng dụng. Kiểm tra driver có nút Lưu báo cáo.',
+        'Trung tâm cập nhật và App Center có giao diện mới; App Center có bước Dùng cho công ty với CaramOS Doanh nghiệp (đang dùng thử miễn phí) và Remmina. Máy từ 4 GB RAM trở xuống hoặc chưa có driver card đồ họa: App Center, Kiểm tra driver, Góp ý & hỗ trợ và Phòng máy dùng ít hơn 52–79 MB RAM mỗi ứng dụng. Kiểm tra driver có nút Lưu báo cáo.',
       ]],
       ['1.4.0', 'Bản Xfce cho máy 2 GB và phòng máy ở trường học', [
         'Có thêm bản Xfce, nhẹ hơn, cho máy 2 GB và phòng máy: vừa bật máy, Task Manager báo khoảng 610 MB RAM trên máy 2 GB. Vẫn có thanh tác vụ ba đảo, Control Center, App Center, Kiểm tra driver và bộ gõ tiếng Việt. Giao diện mặc định là tiếng Anh cho khớp với sách Tin học; chọn tiếng Việt lúc cài thì có tiếng Việt.',
@@ -504,7 +504,7 @@ export const copy = {
         {
           title: 'Learning apps in the App Center',
           text: 'The Learning and teaching section has GCompris, Tux Paint, Klavaro (typing practice), KTurtle, Thonny (Python), Stellarium, TurboWarp (Scratch 3) and GeoGebra 6. Nothing is selected in advance, so home computers download only what they need.',
-          image: [`${shots}/app-center-edu-140.webp`, 'The App Center\'s Learning and teaching section'],
+          image: [`${shots}/app-center-edu-150.webp`, 'The App Center\'s Learning and teaching section'],
         },
       ],
       note: 'The Computer Lab, the learning apps, New ▸ Folder and the folder tree are in both editions. A computer running the Cinnamon edition does not switch to Xfce by itself; to use Xfce, install it fresh from the Xfce ISO.',
@@ -678,7 +678,7 @@ export const copy = {
         'Lunar dates in the taskbar calendar, on both editions: click the clock, and every day shows its lunar day, the 1st and the 15th in red, with today’s lunar date at the top.',
         'Super+V opens the clipboard history, Super+L locks the screen, Ctrl+Alt+Delete opens the log out dialog, and pressing Super then typing searches. On the Xfce edition, Super key combinations no longer open the Start menu too.',
         'The Control Center has a Taskbar tile that puts your apps in the middle or on the left, a Do not disturb tile, and a brightness slider for external monitors with DDC/CI; scroll over its icon to change the volume, by 2, 5 or 10% a step. The Start menu and right-click menus have round corners.',
-        'The Update Center and the App Center have a new look; the App Center has a Business section with CaramOS Business (free during its trial) and Remmina. With 4 GB of RAM or less, or without a graphics driver, the App Center, Driver Check, Feedback & Help and Computer Lab each use 52–79 MB less RAM. Driver Check has a Save report button.',
+        'The Update Center and the App Center have a new look; the App Center has a “For your company” step with CaramOS Business (free during its trial) and Remmina. With 4 GB of RAM or less, or without a graphics driver, the App Center, Driver Check, Feedback & Help and Computer Lab each use 52–79 MB less RAM. Driver Check has a Save report button.',
       ]],
       ['1.4.0', 'An Xfce edition for 2 GB computers and school computer labs', [
         'A new, lighter Xfce edition for 2 GB computers and school labs: right after boot, Task Manager shows about 610 MB of RAM on a 2 GB computer. It keeps the three-island taskbar, the Control Center, the App Center, Driver Check and Vietnamese typing. Its interface is English by default, to match the Tin học textbooks; choosing Vietnamese at install gives Vietnamese.',
@@ -884,7 +884,7 @@ Object.assign(copy.vi, {
     title: 'Máy bạn hợp bản nào?',
     lead: 'Bản nào cũng có tiếng Việt, App Center, Kiểm tra driver và Trung tâm cập nhật. Bản Cinnamon là bản chính, giao diện tiếng Việt, hợp máy từ 4 GB RAM. Bản Xfce nhẹ hơn khoảng 170 MB RAM, hợp máy cũ 2 GB và phòng máy ở trường.',
     cinnamon: { name: 'Bản Cinnamon', note: 'Bản chính', image: [`${shots}/cinnamon-desktop-140.webp`, 'CaramOS Cinnamon với hình nền Việt Nam mỗi ngày và Control Center mở ở góc phải'] },
-    xfce: { name: 'Bản Xfce', note: 'Nhẹ hơn, cho máy 2 GB', image: [`${shots}/xfce-desktop-140.webp`, 'CaramOS Xfce với Control Center mở ở góc phải thanh tác vụ'] },
+    xfce: { name: 'Bản Xfce', note: 'Nhẹ hơn, cho máy 2 GB', image: [`${shots}/xfce-desktop-150.webp`, 'CaramOS Xfce với Control Center mở ở góc phải thanh tác vụ'] },
     rows: [
       ['Dành cho', 'Máy từ 4 GB RAM', 'Máy 2 GB RAM, máy cũ, phòng máy ở trường'],
       ['RAM khi vừa bật máy*', 'Khoảng 780 MB', 'Khoảng 610 MB'],
@@ -906,7 +906,7 @@ Object.assign(copy.vi, {
         'Phòng máy: giáo viên xem màn hình, khóa máy, điều khiển máy học sinh; học sinh vào lớp bằng mã 6 số.',
         'Bản Xfce chạy trên máy 2 GB: khoảng 610 MB RAM sau khi bật.',
         'Giao diện tiếng Anh đúng chữ trong sách Tin học; chuột phải có New ▸ Folder.',
-        'App Center có mục Giáo dục: GCompris, Scratch 3, Thonny, GeoGebra và bốn phần mềm khác.',
+        'App Center có bước Học tập và dạy học: GCompris, Scratch 3, Thonny, GeoGebra và bốn phần mềm khác.',
       ],
       link: 'Xem trang Giáo dục',
       image: [`${shots}/lab-veyon-140.webp`, 'Veyon Master trên máy giáo viên thấy màn hình của máy học sinh', 1072, 670],
@@ -915,7 +915,7 @@ Object.assign(copy.vi, {
     business: {
       title: 'Máy tính ở công ty',
       who: 'Cho công ty muốn quản lý máy nhân viên chạy CaramOS từ một máy, ngay trong mạng LAN của mình.',
-      status: 'Dùng thử miễn phí: cài từ App Center, mục Doanh nghiệp.',
+      status: 'Dùng thử miễn phí: cài từ App Center, bước Dùng cho công ty.',
       points: [
         'Hình nền, trình duyệt, máy in, Wi-Fi và USB đặt cho cả công ty hoặc từng phòng ban.',
         'Máy tự kiểm kê; người quản trị xuất danh sách tài sản ra Excel.',
@@ -923,6 +923,7 @@ Object.assign(copy.vi, {
         'Chặn, không theo dõi: không chụp màn hình, không ghi phím, không lưu lịch sử web.',
       ],
       link: 'Xem trang Doanh nghiệp',
+      image: [`${shots}/business-overview-030.webp`, 'Trang Tổng quan của CaramOS Doanh nghiệp trên máy quản lý: máy nhân viên đang bật, máy chờ duyệt, nhân viên nhờ hỗ trợ'],
     },
   },
   daily: {
@@ -1007,7 +1008,7 @@ Object.assign(copy.en, {
     title: 'Which edition suits your computer?',
     lead: 'Both editions have Vietnamese typing, the App Center, Driver Check and the Update Center. Cinnamon is the main edition, with a Vietnamese interface, for computers with 4 GB of RAM or more. Xfce uses about 170 MB less RAM, for older 2 GB computers and school labs.',
     cinnamon: { name: 'Cinnamon edition', note: 'The main edition', image: [`${shots}/cinnamon-desktop-140.webp`, 'CaramOS Cinnamon with a Việt Nam mỗi ngày wallpaper and the Control Center open'] },
-    xfce: { name: 'Xfce edition', note: 'Lighter, for 2 GB computers', image: [`${shots}/xfce-desktop-140.webp`, 'CaramOS Xfce with the Control Center open at the right of the taskbar'] },
+    xfce: { name: 'Xfce edition', note: 'Lighter, for 2 GB computers', image: [`${shots}/xfce-desktop-150.webp`, 'CaramOS Xfce with the Control Center open at the right of the taskbar'] },
     rows: [
       ['For', 'Computers with 4 GB of RAM or more', '2 GB computers, older machines, school computer labs'],
       ['RAM right after boot*', 'About 780 MB', 'About 610 MB'],
@@ -1028,7 +1029,7 @@ Object.assign(copy.en, {
         'Computer Lab: the teacher watches, locks and controls the pupils\' screens; pupils join with a 6-digit code.',
         'The Xfce edition runs on 2 GB computers, at about 610 MB of RAM after boot.',
         'An English interface with the words of the Tin học textbooks, and New ▸ Folder on right-click.',
-        'An Education section in the App Center: GCompris, Scratch 3, Thonny, GeoGebra and four more.',
+        'A “Learning and teaching” step in the App Center: GCompris, Scratch 3, Thonny, GeoGebra and four more.',
       ],
       link: 'See the Education page',
       image: [`${shots}/lab-veyon-140.webp`, 'Veyon Master on the teacher\'s computer showing a pupil\'s screen', 1072, 670],
@@ -1037,7 +1038,7 @@ Object.assign(copy.en, {
     business: {
       title: 'Computers at the office',
       who: 'For companies that want to manage staff computers running CaramOS from one computer, on their own network.',
-      status: 'Free during the trial: install it from the App Center’s Business section.',
+      status: 'Free during the trial: install it from the App Center’s “For your company” step.',
       points: [
         'Wallpaper, browsers, printers, Wi-Fi and USB, set for the whole company or one department.',
         'Computers take their own inventory; the asset list exports to Excel.',
@@ -1045,6 +1046,7 @@ Object.assign(copy.en, {
         'Blocks, never watches: no screenshots, no keystrokes, no browsing history.',
       ],
       link: 'See the Business page',
+      image: [`${shots}/business-overview-030.webp`, 'The Overview page of CaramOS Business on the admin computer, in Vietnamese: staff computers that are on, computers waiting for approval, employees asking for help'],
     },
   },
   daily: {
@@ -1130,7 +1132,7 @@ Object.assign(copy.vi, {
           'Lấy từ ổ Windows ngay trên máy này, ổ cứng của máy cũ cắm qua USB, hay thư mục chia sẻ của máy cũ trên mạng.',
           'Màn hình nền, Tài liệu, Ảnh, Tải về, Nhạc, Video và tệp nhận qua Zalo vào đúng thư mục. Tệp trùng tên được thêm “(2)” vào tên, không tệp nào bị ghi đè.',
           'Dấu trang Chrome, Edge, Cốc Cốc gom vào một tệp để nhập vào Firefox; thư Outlook (.pst) mở được bằng Thunderbird; phông chữ bạn tự cài được cài lại. Cuối cùng chọn kiểu gõ quen dùng: Telex hay VNI.',
-          'Phần mềm chỉ có cho Windows như MISA SME, HTKK: cài Remmina trong App Center, mục Doanh nghiệp, để dùng một máy Windows Pro hay Windows Server của công ty ngay từ máy CaramOS.',
+          'Phần mềm chỉ có cho Windows như MISA SME, HTKK: cài Remmina trong App Center, bước Dùng cho công ty, để dùng một máy Windows Pro hay Windows Server của công ty ngay từ máy CaramOS.',
           'Chưa chắc máy văn phòng chạy được CaramOS? Chạy thử từ USB, rồi bấm Lưu báo cáo trong Kiểm tra driver để lưu kết quả thành một trang web.',
         ],
         media: { type: 'single', main: [`${shots}/windows-transfer-150.webp`, 'Chuyển dữ liệu từ Windows: chọn Màn hình nền, Tài liệu, Ảnh, Tải về, Nhạc, Video, tệp nhận qua Zalo và dấu trang trình duyệt để chép sang'] },
@@ -1175,7 +1177,7 @@ Object.assign(copy.vi, {
       ['Menu bo tròn góc', 'Menu Start và menu chuột phải bo tròn góc, theo góp ý của các bạn trong nhóm Việt Nam Linux Family.'],
       ['Trung tâm cập nhật và App Center có giao diện mới', 'Gọn và dễ đọc hơn, giống các ứng dụng khác trong máy. App Center tìm ra ứng dụng cả khi gõ không dấu.'],
       ['Ứng dụng nhẹ hơn trên máy yếu', 'Máy từ 4 GB RAM trở xuống hoặc chưa có driver card đồ họa: App Center, Kiểm tra driver, Góp ý & hỗ trợ và Phòng máy mỗi cái dùng ít hơn 52–79 MB RAM.'],
-      ['App Center có mục Doanh nghiệp', 'CaramOS Doanh nghiệp để quản lý máy nhân viên trong mạng công ty, đang dùng thử miễn phí; và Remmina để dùng máy Windows từ xa.', '/doanh-nghiep/'],
+      ['App Center có bước Dùng cho công ty', 'CaramOS Doanh nghiệp để quản lý máy nhân viên trong mạng công ty, đang dùng thử miễn phí; và Remmina để dùng máy Windows từ xa.', '/doanh-nghiep/'],
     ],
     moreLink: 'Xem trang Doanh nghiệp',
     allNotes: 'Xem mọi thay đổi của bản 1.5.0',
@@ -1210,7 +1212,7 @@ Object.assign(copy.en, {
           'From the Windows disk of this computer, the old computer’s disk on a USB adapter, or a shared folder of the old computer on the network.',
           'Desktop, Documents, Pictures, Downloads, Music, Videos and the files received in Zalo go into the matching folders. A file whose name is taken gets “(2)” in its name; nothing is overwritten.',
           'Chrome, Edge and Cốc Cốc bookmarks come together in one file to import into Firefox; Outlook mail (.pst) opens in Thunderbird; fonts you installed are installed again. Last, pick the typing method you know: Telex or VNI.',
-          'Windows-only software such as MISA SME or HTKK: install Remmina from the App Center’s Business section to use an office computer running Windows Pro or Windows Server from CaramOS.',
+          'Windows-only software such as MISA SME or HTKK: install Remmina from the App Center’s “For your company” step to use an office computer running Windows Pro or Windows Server from CaramOS.',
           'Not sure an office computer runs CaramOS? Try it from the USB stick and click Save report in Driver Check to keep the results as a web page.',
         ],
         media: { type: 'single', main: [`${shots}/windows-transfer-150.webp`, 'Windows Data Transfer: picking Desktop, Documents, Pictures, Downloads, Music, Videos, the Zalo files and the browser bookmarks to copy'] },
@@ -1255,7 +1257,7 @@ Object.assign(copy.en, {
       ['Round menus', 'The Start menu and right-click menus have round corners, as members of the Việt Nam Linux Family group suggested.'],
       ['A new look for the Update Center and the App Center', 'Cleaner and easier to read, in line with the other apps. The App Center finds apps even when you type without accents.'],
       ['Lighter apps on modest computers', 'With 4 GB of RAM or less, or without a graphics driver, the App Center, Driver Check, Feedback & Help and Computer Lab each use 52–79 MB less RAM.'],
-      ['A Business section in the App Center', 'CaramOS Business, free during its trial, to manage staff computers on the office network, and Remmina to use a Windows computer remotely.', '/en/business/'],
+      ['A “For your company” step in the App Center', 'CaramOS Business, free during its trial, to manage staff computers on the office network, and Remmina to use a Windows computer remotely.', '/en/business/'],
     ],
     moreLink: 'See the Business page',
     allNotes: 'Every change in 1.5.0',
@@ -1321,7 +1323,7 @@ Object.assign(copy.vi, {
         'Phòng toàn máy 2 GB thì chọn Epoptes khi thiết lập máy giáo viên: nhẹ hơn Veyon.',
         'Cần máy 64-bit, khởi động UEFI hoặc BIOS, ổ đĩa trống từ 20 GB. Máy từ 4 GB RAM dùng bản Cinnamon.',
       ],
-      image: [`${shots}/xfce-desktop-140.webp`, 'CaramOS Xfce với Control Center mở ở góc phải thanh tác vụ'],
+      image: [`${shots}/xfce-desktop-150.webp`, 'CaramOS Xfce với Control Center mở ở góc phải thanh tác vụ'],
     },
     textbook: {
       title: 'Học sinh nhìn sách là làm theo được',
@@ -1332,11 +1334,11 @@ Object.assign(copy.vi, {
         'Bộ gõ Lotus bật sẵn, mặc định Telex, có VNI; Ctrl+Shift chuyển Anh/Việt.',
         'Mở tệp Word, Excel khi máy chưa có bộ văn phòng: CaramOS gợi ý cài ONLYOFFICE, WPS Office hoặc LibreOffice.',
       ],
-      image: [`${shots}/xfce-files-140.webp`, 'Tệp trên bản Xfce: chuột phải chọn New ▸ Folder, khung trái là cây thư mục'],
+      image: [`${shots}/xfce-files-150.webp`, 'Tệp trên bản Xfce: chuột phải chọn New ▸ Folder, khung trái là cây thư mục'],
     },
     apps: {
       title: 'Phần mềm cho từng\u00a0môn, cài bằng một nút',
-      lead: 'App Center có mục Giáo dục, và lần đầu đăng nhập có bước Học tập và dạy học. Không có gì chọn sẵn: máy nào cần gì thì cài nấy.',
+      lead: 'Mở App Center là thấy bước Học tập và dạy học. Không có gì chọn sẵn: máy nào cần gì thì cài nấy.',
       groups: [
         ['Làm quen với máy tính', [
           ['GCompris', 'Hơn 180 trò chơi học tập cho bé từ 2 đến 10 tuổi: tập dùng chuột, bàn phím, toán, đọc'],
@@ -1353,7 +1355,7 @@ Object.assign(copy.vi, {
           ['Stellarium', 'Bầu trời sao 3D cho Khoa học tự nhiên, Địa lý; cần card đồ họa khá'],
         ]],
       ],
-      image: [`${shots}/app-center-edu-140.webp`, 'App Center, bước Học tập và dạy học với GCompris, Tux Paint, Klavaro, Scratch 3, KTurtle và Thonny'],
+      image: [`${shots}/app-center-edu-150.webp`, 'App Center, bước Học tập và dạy học: đã chọn GCompris, Tux Paint và Klavaro, khoảng 378 MB, nút Cài 3 ứng dụng; bên dưới là Scratch 3 và KTurtle'],
     },
     care: {
       title: 'Cập nhật và hỏi đáp mà không phải cài lại máy',
@@ -1372,7 +1374,7 @@ Object.assign(copy.vi, {
         ['Cài lên máy giáo viên và từng máy học sinh', 'Bấm biểu tượng Cài đặt CaramOS trên Desktop rồi làm theo các bước.'],
         ['Thiết lập máy giáo viên', 'Mở Phòng máy, chọn Máy giáo viên, đặt tên phòng, chọn Veyon hoặc Epoptes. Màn hình hiện mã 6 số; để trang đó mở trong lúc ghép.'],
         ['Cho từng máy học sinh vào lớp', 'Trên mỗi máy học sinh mở Phòng máy, chọn Máy học sinh, chọn phòng và nhập mã 6 số.'],
-        ['Cài phần mềm học tập', 'Mở App Center, mục Giáo dục, cài phần mềm cho môn học trên những máy cần.'],
+        ['Cài phần mềm học tập', 'Mở App Center, ở bước Học tập và dạy học chọn phần mềm cho môn học rồi bấm Cài, trên những máy cần.'],
       ],
       downloads: ['Tải bản Xfce (2,7 GB)', 'Tải bản Cinnamon (2,9 GB)'],
     },
@@ -1406,7 +1408,7 @@ Object.assign(copy.vi, {
     hero: {
       title: 'Quản lý cả văn\u00a0phòng từ một máy',
       lead: 'CaramOS Doanh nghiệp đặt hình nền, trình duyệt, máy in, Wi-Fi và USB cho máy nhân viên theo từng phòng ban, tự kiểm kê tài sản và giúp nhân viên từ xa khi họ đồng ý. Mọi thứ chạy trong mạng LAN của công ty, không qua đám mây.',
-      status: ['Đang dùng thử miễn phí.', 'Cài từ App Center, mục Doanh nghiệp, trên máy quản lý và từng máy nhân viên. Sau giai đoạn dùng thử có thể thu phí; công ty đang dùng sẽ được báo trước.'],
+      status: ['Đang dùng thử miễn phí.', 'Cài từ App Center, bước Dùng cho công ty, trên máy quản lý và từng máy nhân viên. Sau giai đoạn dùng thử có thể thu phí; công ty đang dùng sẽ được báo trước.'],
       cta: 'Xem cách bắt đầu',
       mapLink: 'Xem sơ đồ',
       facts: [
@@ -1414,19 +1416,10 @@ Object.assign(copy.vi, {
         ['Trong mạng của công ty', 'máy quản lý là một máy CaramOS ở văn phòng, không qua đám mây'],
         ['Miễn phí khi dùng thử', 'cho máy chạy CaramOS, bản Cinnamon hoặc Xfce'],
       ],
-      notice: {
-        title: 'Máy này do công ty quản lý',
-        managedTitle: 'Công ty đang quản lý',
-        managed: [
-          ['Hình nền', 'Công ty đặt hình nền; bạn không đổi được.'],
-          ['Trình duyệt', 'Công ty chặn 12 trang web trong giờ làm việc, thứ Hai đến thứ Bảy.'],
-          ['USB lưu trữ', 'USB chỉ đọc được, không chép vào được.'],
-          ['Máy in', 'Máy in của công ty được cài sẵn: Máy in tầng 2.'],
-        ],
-        neverTitle: 'Công ty không xem được',
-        never: ['Màn hình của bạn, trừ khi bạn đồng ý cho hỗ trợ từ xa', 'Những gì bạn gõ', 'Các trang web bạn vào', 'Tin nhắn của bạn', 'Tệp của bạn nằm ngoài thư mục của công ty'],
-        caption: 'Trang “Máy này do công ty quản lý” trên máy nhân viên chỉ liệt kê những gì công ty đã bật. Ví dụ trên là một công ty bật bốn mục.',
-      },
+      // Screenshots of CaramOS Doanh nghiệp 0.3.0 on CaramOS 1.5.0 VMs with a demo company: machine names, logins and
+      // people are made up; the IPs are the test network's.
+      image: [`${shots}/business-overview-030.webp`, 'Trang Tổng quan của CaramOS Doanh nghiệp trên máy quản lý: 2 máy nhân viên đang bật, 1 máy xin vào công ty chờ duyệt, và một nhân viên nhờ hỗ trợ vì máy chạy chậm'],
+      caption: 'Trang Tổng quan trên máy quản lý: máy nào đang bật, máy nào chờ duyệt, nhân viên nào đang nhờ hỗ trợ, máy nào cần xem.',
     },
     map: {
       title: 'Các máy trong văn phòng nối với nhau thế nào',
@@ -1453,6 +1446,10 @@ Object.assign(copy.vi, {
     inventory: {
       title: 'Biết công ty có\u00a0máy\u00a0gì, máy nào sắp hỏng',
       lead: 'Bật kiểm kê tự động, mỗi máy tự gửi cấu hình về máy quản lý. Người quản trị ghi thêm thông tin tài sản, rồi xuất danh sách ra Excel theo kiểu biên bản kiểm kê.',
+      figures: [
+        [`${shots}/business-machines-030.webp`, 'Trang Máy nhân viên: máy le-tan-01 xin vào công ty chờ duyệt, Kiểm kê tự động đang bật, danh sách 2 máy ke-toan-01 (phòng Kế toán) và kinh-doanh-01 (phòng Kinh doanh) đang bật, nút Xuất danh sách tài sản', 'Máy nhân viên: tình trạng từng máy, máy mới chờ duyệt, và nút xuất danh sách tài sản.'],
+        [`${shots}/business-licences-030.webp`, 'Trang Bản quyền phần mềm: phần mềm tự do trên từng máy, kèm giấy phép GPL; WPS Office Business mua cho 1 máy nhưng đang có trên 2 máy, thiếu 1 bản quyền; nút Xuất Excel, Xuất PDF', 'Bản quyền phần mềm: ứng dụng nào nằm trên máy nào, theo loại giấy phép, so với số bản quyền công ty đã mua; xuất được ra Excel, PDF.'],
+      ],
       columns: [
         ['Máy tự gửi', ['Hãng, mẫu máy, số serial', 'CPU, RAM, ổ đĩa và sức khỏe ổ đĩa', 'Pin, màn hình, card mạng', 'Phiên bản CaramOS, ứng dụng đã cài']],
         ['Người quản trị ghi', ['Mã tài sản, ngày mua, giá', 'Hạn bảo hành', 'Người dùng, vị trí đặt máy']],
@@ -1470,6 +1467,8 @@ Object.assign(copy.vi, {
         'Kiểm kê lại.',
         'Mở USB tạm thời cho một máy.',
       ],
+      image: [`${shots}/business-actions-030.webp`, 'Trang của máy ke-toan-01 trên máy quản lý: CaramOS 1.5.0 Cinnamon, phòng Kế toán, lan đang dùng; mục Thao tác: Khóa máy, Gửi tin nhắn, Hỗ trợ từ xa, Khởi động lại, Tắt máy, Cập nhật, Mở USB tạm thời, Kiểm kê lại', 'Trang của một máy trên máy quản lý: mỗi nút là một việc gửi tới máy đó.'],
+      helpImage: [`${shots}/business-consent-030.webp`, 'Cửa sổ trên máy nhân viên: Quang (bộ phận IT) muốn hỗ trợ bạn trên máy này, với ba nút Từ chối, Chỉ cho xem và Cho phép; không ai bấm thì tự từ chối sau một phút', 'Máy nhân viên hỏi trước khi IT hỗ trợ từ xa. Không ai bấm thì sau một phút máy tự từ chối.'],
       helpTitle: 'Khi nhân viên cần IT',
       help: [
         ['Nhân viên bấm Nhờ IT hỗ trợ', 'Ghi vài chữ về việc đang gặp.'],
@@ -1499,6 +1498,7 @@ Object.assign(copy.vi, {
         'Khởi động lại, tắt máy hay đăng xuất từ xa đều có đồng hồ đếm ngược trên màn hình.',
       ],
       law: 'Luật Bảo vệ dữ liệu cá nhân 91/2025/QH15, có hiệu lực từ 1/1/2026, yêu cầu người lao động được biết rõ các biện pháp kỹ thuật công ty dùng trên máy của họ.',
+      image: [`${shots}/business-notice-030.webp`, 'Cửa sổ Máy này do công ty quản lý trên máy nhân viên: công ty quản lý máy từ máy quan-ly và đang bật khóa màn hình sau 10 phút, kiểm kê tự động; công ty không xem được màn hình, những gì bạn gõ, các trang web bạn vào, tin nhắn, tệp ngoài thư mục của công ty', 'Sau khi ghép, máy nhân viên hiện cửa sổ này: công ty đã bật những gì, không xem được những gì. Trong CaramOS Doanh nghiệp, nhân viên xem lại được bất cứ lúc nào.'],
     },
     security: {
       title: 'Máy lạ trong\u00a0mạng không giả được máy quản lý',
@@ -1513,18 +1513,19 @@ Object.assign(copy.vi, {
       title: 'Bắt đầu thế nào',
       lead: 'Nên bắt đầu với vài máy, rồi mở rộng ra cả công ty.',
       items: [
-        ['Cài CaramOS Doanh nghiệp', 'Mở App Center, vào mục Doanh nghiệp và cài CaramOS Doanh nghiệp trên máy quản lý và trên từng máy nhân viên.'],
+        ['Cài CaramOS Doanh nghiệp', 'Mở App Center, ở bước Dùng cho công ty chọn CaramOS Doanh nghiệp rồi bấm Cài, trên máy quản lý và trên từng máy nhân viên.'],
         ['Chọn máy quản lý', 'Một máy CaramOS luôn bật trong giờ làm việc. Máy nhân viên lấy thiết lập từ máy này.'],
         ['Ghép máy nhân viên', 'Máy quản lý hiện mã 6 số trong 10 phút; trên mỗi máy nhân viên chọn máy quản lý và nhập mã.'],
         ['Bật từng tính năng', 'Bật cho cả công ty hoặc từng phòng ban, rồi xem máy nhân viên đã nhận chưa.'],
         ['Báo cho nhân viên', 'Báo bằng văn bản những gì công ty quản lý trên máy, ví dụ trong nội quy lao động.'],
       ],
       note: 'Máy quản lý và máy nhân viên cần chạy CaramOS, bản Cinnamon hoặc Xfce, và cùng mạng nội bộ của công ty.',
+      image: [`${shots}/business-pairing-030.webp`, 'Trang Thêm máy trên máy quản lý: mã ghép máy 251 222, còn dùng được 10 phút, nút Dừng thêm máy, và Duyệt từng máy mới đang bật', 'Bước 3 trên máy quản lý: mã 6 số để gõ trên từng máy nhân viên.'],
     },
     faq: {
       title: 'Doanh nghiệp hay hỏi',
       items: [
-        ['Cài ở đâu?', 'Trong App Center của CaramOS, mục Doanh nghiệp. Cài xong, mở CaramOS Doanh nghiệp và chọn máy này là máy quản lý hay máy nhân viên.'],
+        ['Cài ở đâu?', 'Trong App Center của CaramOS, ở bước Dùng cho công ty. Cài xong, mở CaramOS Doanh nghiệp và chọn máy này là máy quản lý hay máy nhân viên.'],
         ['Có mất phí không?', 'Hiện chưa: CaramOS Doanh nghiệp đang trong giai đoạn dùng thử miễn phí. Sau này có thể thu phí cho doanh nghiệp; nếu có, công ty đang dùng sẽ được báo trước. Bản thân CaramOS vẫn miễn phí.'],
         ['Có cần Internet hay dịch vụ đám mây không?', 'Không cần đám mây. Máy quản lý là một máy CaramOS trong văn phòng; thiết lập, kiểm kê và hỗ trợ từ xa đi trong mạng LAN của công ty. Internet chỉ cần để tải phần mềm và bản cập nhật.'],
         ['Công ty có xem được nhân viên làm gì không?', 'Không. Không chụp màn hình, không ghi phím, không lưu lịch sử web, không định vị. Màn hình chỉ được xem khi nhân viên đồng ý cho hỗ trợ từ xa.'],
@@ -1617,7 +1618,7 @@ Object.assign(copy.en, {
         'For a lab of 2 GB computers, pick Epoptes when you set up the teacher’s computer: it is lighter than Veyon.',
         'It needs a 64-bit computer that boots with UEFI or BIOS and 20 GB of free disk space. Computers with 4 GB of RAM or more use the Cinnamon edition.',
       ],
-      image: [`${shots}/xfce-desktop-140.webp`, 'CaramOS Xfce with the Control Center open at the right of the taskbar'],
+      image: [`${shots}/xfce-desktop-150.webp`, 'CaramOS Xfce with the Control Center open at the right of the taskbar'],
     },
     textbook: {
       title: 'Pupils can follow the textbook on screen',
@@ -1628,11 +1629,11 @@ Object.assign(copy.en, {
         'The Lotus input method is on: Telex by default, with VNI; Ctrl+Shift switches between English and Vietnamese.',
         'Opening a Word or Excel file before an office suite is installed offers ONLYOFFICE, WPS Office or LibreOffice.',
       ],
-      image: [`${shots}/xfce-files-140.webp`, 'Files on the Xfce edition: right-click New ▸ Folder, with the folder tree on the left'],
+      image: [`${shots}/xfce-files-150.webp`, 'Files on the Xfce edition: right-click New ▸ Folder, with the folder tree on the left'],
     },
     apps: {
       title: 'An app for each subject, one click to install',
-      lead: 'The App Center has an Education section, and the first login offers a Learning and teaching step. Nothing is selected in advance: each computer installs only what it needs.',
+      lead: 'The App Center opens with a “Learning and teaching” step. Nothing is selected in advance: each computer installs only what it needs.',
       groups: [
         ['First steps with a computer', [
           ['GCompris', 'Over 180 learning games for ages 2 to 10: mouse and keyboard practice, maths, reading'],
@@ -1649,7 +1650,7 @@ Object.assign(copy.en, {
           ['Stellarium', 'A 3D planetarium for science and geography; needs decent graphics'],
         ]],
       ],
-      image: [`${shots}/app-center-edu-140.webp`, 'The App Center’s Learning and teaching step, with GCompris, Tux Paint, Klavaro, Scratch 3, KTurtle and Thonny'],
+      image: [`${shots}/app-center-edu-150.webp`, 'The App Center’s “Learning and teaching” step, in Vietnamese: GCompris, Tux Paint and Klavaro ticked, about 378 MB, and an Install 3 apps button; Scratch 3 and KTurtle below'],
     },
     care: {
       title: 'Updates and answers, without reinstalling',
@@ -1668,7 +1669,7 @@ Object.assign(copy.en, {
         ['Install it on the teacher’s computer and on each pupil’s', 'Click the Install CaramOS icon on the Desktop and follow the steps.'],
         ['Set up the teacher’s computer', 'Open Computer Lab, choose Teacher’s computer, name the room, pick Veyon or Epoptes. The screen shows a 6-digit code; keep that page open while you pair.'],
         ['Bring each pupil’s computer into the class', 'On each pupil’s computer open Computer Lab, choose Student’s computer, pick the room and type the 6-digit code.'],
-        ['Install the learning apps', 'Open the App Center’s Education section and install the apps each subject needs, on the computers that need them.'],
+        ['Install the learning apps', 'Open the App Center, tick the apps each subject needs at the “Learning and teaching” step and click Install, on the computers that need them.'],
       ],
       downloads: ['Download Xfce (2.7 GB)', 'Download Cinnamon (2.9 GB)'],
     },
@@ -1702,7 +1703,7 @@ Object.assign(copy.en, {
     hero: {
       title: 'Manage the whole office from one computer',
       lead: 'CaramOS Business sets the wallpaper, browsers, printers, Wi-Fi and USB rules of staff computers by department, takes the asset inventory by itself and lets IT help staff remotely once they accept. It all runs on the company’s own network, with no cloud.',
-      status: ['Free during the trial.', 'Install it from the App Center’s Business section, on the admin computer and on each staff computer. After the trial it may become paid; companies using it will be told in advance.'],
+      status: ['Free during the trial.', 'Install it from the App Center’s “For your company” step, on the admin computer and on each staff computer. After the trial it may become paid; companies using it will be told in advance.'],
       cta: 'See how to start',
       mapLink: 'See the diagram',
       facts: [
@@ -1710,19 +1711,8 @@ Object.assign(copy.en, {
         ['On your own network', 'the admin computer is a CaramOS computer in your office, no cloud'],
         ['Free during the trial', 'for computers running CaramOS, Cinnamon or Xfce'],
       ],
-      notice: {
-        title: 'This machine is managed by the company',
-        managedTitle: 'What the company manages',
-        managed: [
-          ['Wallpaper', 'The company sets the wallpaper; you cannot change it.'],
-          ['Browser', 'The company blocks 12 websites during working hours, Monday to Saturday.'],
-          ['USB storage', 'USB drives can be read but not written to.'],
-          ['Printers', 'The company’s printers are set up: Second-floor printer.'],
-        ],
-        neverTitle: 'What the company cannot see',
-        never: ['Your screen, unless you accept remote help', 'What you type', 'The websites you visit', 'Your messages', 'Your files outside the company’s folders'],
-        caption: 'The “This machine is managed by the company” page on each staff computer lists only what the company turned on. The example above is a company with four features on.',
-      },
+      image: [`${shots}/business-overview-030.webp`, 'The Overview page of CaramOS Business on the admin computer, in Vietnamese: 2 staff computers on, 1 new computer waiting for approval, and an employee asking for help because the computer is slow'],
+      caption: 'The Overview on the admin computer, in Vietnamese: which computers are on, which wait for approval, who is asking for help, which need a look.',
     },
     map: {
       title: 'How the office computers connect',
@@ -1749,6 +1739,10 @@ Object.assign(copy.en, {
     inventory: {
       title: 'Know what computers you have, and which will fail',
       lead: 'Turn on the automatic inventory and each computer reports its configuration to the admin computer. The admin adds the asset details, then exports the list to Excel, laid out like an asset count record.',
+      figures: [
+        [`${shots}/business-machines-030.webp`, 'The Employee machines page, in Vietnamese: le-tan-01 asks to join and waits for approval, Automatic inventory is on, and 2 computers, ke-toan-01 (Accounting) and kinh-doanh-01 (Sales), are listed as On, with an Export the asset list button', 'Employee machines: the state of each computer, new ones waiting for approval, and the asset list export.'],
+        [`${shots}/business-licences-030.webp`, 'The Software licences page, in Vietnamese: free software on each computer with its GPL licence; WPS Office Business bought for 1 computer but found on 2, 1 licence short; Export to Excel and PDF buttons', 'Software licences: which app is on which computer, by licence type, against the licences the company bought; exports to Excel and PDF.'],
+      ],
       columns: [
         ['Each computer sends', ['Make, model, serial number', 'CPU, RAM, disks and disk health', 'Battery, monitors, network cards', 'CaramOS version, installed apps']],
         ['The admin adds', ['Asset code, purchase date, price', 'Warranty end', 'User, location']],
@@ -1766,6 +1760,8 @@ Object.assign(copy.en, {
         'Take inventory again.',
         'Unlock USB storage for one computer for a while.',
       ],
+      image: [`${shots}/business-actions-030.webp`, 'The page of the computer ke-toan-01 on the admin computer, in Vietnamese: CaramOS 1.5.0 Cinnamon, Accounting, used by lan; its Actions: Lock, Send a message, Remote help, Restart, Shut down, Update, Allow USB for a while, Take inventory again', 'One computer’s page on the admin computer: each button sends one action to it.'],
+      helpImage: [`${shots}/business-consent-030.webp`, 'A window on the employee’s computer, in Vietnamese: Quang from IT wants to help you on this computer, with three buttons, Refuse, Let them only see and Allow; with no answer it refuses by itself after a minute', 'The employee’s computer asks before IT can help remotely. With no answer, it refuses by itself after a minute.'],
       helpTitle: 'When an employee needs IT',
       help: [
         ['The employee clicks Ask IT for help', 'They write a few words about the problem.'],
@@ -1795,6 +1791,7 @@ Object.assign(copy.en, {
         'A remote restart, shutdown or logout always shows a countdown on screen.',
       ],
       law: 'Vietnam’s Personal Data Protection Law 91/2025/QH15, in force since 1 January 2026, requires employees to be clearly told about the technical measures used on their computers.',
+      image: [`${shots}/business-notice-030.webp`, 'The “This machine is managed by the company” window on an employee’s computer, in Vietnamese: the company manages it from the computer quan-ly and has the screen lock after 10 minutes and the automatic inventory on; the company cannot see the screen, what you type, the websites you visit, your messages or your files outside the company’s folders', 'After pairing, each staff computer shows this window: what the company turned on, and what it cannot see. Staff can read it again at any time in CaramOS Business.'],
     },
     security: {
       title: 'A stranger on the network cannot pose as the admin computer',
@@ -1809,18 +1806,19 @@ Object.assign(copy.en, {
       title: 'How to get started',
       lead: 'Start with a few computers, then roll it out to the whole company.',
       items: [
-        ['Install CaramOS Business', 'Open the App Center, go to the Business section and install CaramOS Business on the admin computer and on each staff computer.'],
+        ['Install CaramOS Business', 'Open the App Center, tick CaramOS Business at the “For your company” step and click Install, on the admin computer and on each staff computer.'],
         ['Pick the admin computer', 'A CaramOS computer that stays on during office hours. Staff computers take their settings from it.'],
         ['Pair the staff computers', 'The admin computer shows a 6-digit code for 10 minutes; on each staff computer pick the admin computer and type the code.'],
         ['Turn features on one by one', 'For the whole company or for a department, then check that the staff computers got them.'],
         ['Tell your staff', 'Tell staff in writing what the company manages on their computers, for example in the internal labour rules.'],
       ],
       note: 'The admin and staff computers need to run CaramOS, Cinnamon or Xfce, on the same company network.',
+      image: [`${shots}/business-pairing-030.webp`, 'The Add machines page on the admin computer, in Vietnamese: the pairing code 251 222, valid for 10 more minutes, a Stop adding button, and Approve each new machine turned on', 'Step 3 on the admin computer: the 6-digit code to type on each staff computer.'],
     },
     faq: {
       title: 'What companies ask',
       items: [
-        ['Where do I install it?', 'From the CaramOS App Center, in the Business section. Once installed, open CaramOS Business and choose whether this is the admin computer or a staff computer.'],
+        ['Where do I install it?', 'From the CaramOS App Center, at its “For your company” step. Once installed, open CaramOS Business and choose whether this is the admin computer or a staff computer.'],
         ['Does it cost anything?', 'Not now: CaramOS Business is free during its trial period. It may become paid for companies later; if so, companies using it will be told in advance. CaramOS itself stays free.'],
         ['Does it need the internet or a cloud service?', 'No cloud. The admin computer is a CaramOS computer in your office; settings, inventory and remote help travel on the company network. The internet is needed only for downloading software and updates.'],
         ['Can the company see what staff do?', 'No. No screenshots, no keystroke logging, no browsing history, no location. A screen is seen only when the employee accepts remote help.'],
@@ -1869,11 +1867,17 @@ const imageSizes = {
   'lab-veyon-140.webp': [1072, 670], 'printer-canon-driver-check.webp': [1000, 540], 'start-menu-131.webp': [866, 640],
   'update-available-131.webp': [720, 301], 'update-center-131.webp': [800, 815], 'update-done.webp': [720, 219],
   'update-progress.webp': [720, 271], 'xfce-desktop-140.webp': [1280, 800], 'xfce-files-140.webp': [1280, 800],
+  'xfce-desktop-150.webp': [1280, 800], 'xfce-files-150.webp': [1280, 800],
   // 1.5.0
   'first-login-150.webp': [1280, 800], 'app-center-store-150.webp': [1280, 800],
   'update-center-auto-150.webp': [600, 727], 'windows-transfer-150.webp': [700, 680],
   'unicode-convert-150.webp': [1002, 594], 'nd30-menu-150.webp': [442, 314], 'lunar-cinnamon-150.webp': [518, 948],
   'lunar-xfce-150.webp': [582, 920],
+  // App Center 0.3.0, as shipped with 1.5.0; CaramOS Doanh nghiệp 0.3.0 on CaramOS 1.5.0 (demo company, demo names)
+  'app-center-edu-150.webp': [800, 575],
+  'business-overview-030.webp': [1280, 752], 'business-machines-030.webp': [768, 652],
+  'business-licences-030.webp': [768, 752], 'business-actions-030.webp': [768, 270],
+  'business-consent-030.webp': [440, 265], 'business-notice-030.webp': [520, 656], 'business-pairing-030.webp': [768, 352],
 };
 
 export function sizeOf(src) {
@@ -1882,7 +1886,8 @@ export function sizeOf(src) {
 }
 
 // Screenshots with a smaller copy for phones, named <name>-<width>w.webp.
-export const smallCopies = { 'first-login.webp': 800, 'first-login-150.webp': 800, 'cinnamon-desktop-140.webp': 640, 'xfce-desktop-140.webp': 640 };
+export const smallCopies = { 'first-login.webp': 800, 'first-login-150.webp': 800, 'cinnamon-desktop-140.webp': 640, 'xfce-desktop-140.webp': 640,
+  'xfce-desktop-150.webp': 640 };
 
 export function srcSetOf(src) {
   const name = src.split('/').pop();

@@ -43,7 +43,7 @@ export const diagrams = {
       },
       {
         id: 'apps', x: 636, y: 24, w: 300,
-        title: { vi: 'App Center, mục Giáo dục', en: 'App Center: Education' },
+        title: { vi: ['App Center,', 'bước Học tập và dạy học'], en: ['App Center:', 'Learning and teaching'] },
         lines: {
           vi: ['GCompris, Tux Paint, Klavaro,', 'KTurtle, Thonny, Scratch 3,', 'GeoGebra, Stellarium'],
           en: ['GCompris, Tux Paint, Klavaro,', 'KTurtle, Thonny, Scratch 3,', 'GeoGebra, Stellarium'],

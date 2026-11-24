@@ -96,7 +96,7 @@ function landingGraph(lang, url) {
         memoryRequirements: lang === 'vi' ? '2 GB RAM (bản Xfce), khuyên dùng 4 GB' : '2 GB of RAM (Xfce edition), 4 GB recommended',
         storageRequirements: lang === 'vi' ? 'Ổ đĩa trống từ 20 GB' : '20 GB of free disk space',
         image: ogImage,
-        screenshot: [`${SITE}${heroShot}`, `${SITE}${shots}/xfce-desktop-140.webp`],
+        screenshot: [`${SITE}${heroShot}`, `${SITE}${shots}/xfce-desktop-150.webp`],
         inLanguage: ['vi-VN', 'en-US'],
         publisher: { '@id': org['@id'] },
         author: { '@id': org['@id'] },
@@ -231,11 +231,12 @@ const heroPreload = [
   `<link rel="preload" as="image" type="image/webp" href="${heroShot}" imagesrcset="${srcSetOf(heroShot)}" imagesizes="(max-width: 960px) 100vw, 60vw" fetchpriority="high" />`,
 ];
 
-// The Education page's first screen is the Computer Lab screenshot; the Business page's is text only.
+// The Education page's first screen is the Computer Lab screenshot; the Business page's is the admin's Overview.
 const fontsPreload = heroPreload.slice(0, 4);
+const imagePreload = (src) => `<link rel="preload" as="image" type="image/webp" href="${src}" fetchpriority="high" />`;
 const pagePreload = {
-  education: [...fontsPreload, `<link rel="preload" as="image" type="image/webp" href="${shots}/lab-veyon-140.webp" fetchpriority="high" />`],
-  business: fontsPreload,
+  education: [...fontsPreload, imagePreload(`${shots}/lab-veyon-140.webp`)],
+  business: [...fontsPreload, imagePreload(`${shots}/business-overview-030.webp`)],
 };
 
 const urlOf = (page, lang) => `${SITE}${pathOf(page, lang)}`;
@@ -355,7 +356,7 @@ ${en.education.lab.lead}
 
 ${[en.education.oldPcs, en.education.textbook].map((block) => `${block.lead}`).join('\n\n')}
 
-Learning apps in the App Center's Education section: ${en.education.apps.groups.flatMap(([, apps]) => apps.map(([name, text]) => `${name} (${text.charAt(0).toLowerCase()}${text.slice(1)})`)).join('; ')}.
+Learning apps in the App Center's "Learning and teaching" step: ${en.education.apps.groups.flatMap(([, apps]) => apps.map(([name, text]) => `${name} (${text.charAt(0).toLowerCase()}${text.slice(1)})`)).join('; ')}.
 
 ## CaramOS Business
 
