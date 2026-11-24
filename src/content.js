@@ -1,6 +1,6 @@
 // Every word and fact on the page, in Vietnamese and English. The page components are in App.jsx.
 
-export const VERSION = '1.5.0';
+export const VERSION = '1.5.1';
 
 export const links = {
   download: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-cinnamon-amd64.iso/download`,
@@ -295,6 +295,16 @@ export const copy = {
     releaseScrollHint: 'Cuộn để xem các bản trước ↓',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
+      ['1.5.1', 'Cập nhật chắc chắn hơn; Thùng rác, Hiện màn hình nền và PrtSc như Windows', [
+        'Mở Trung tâm cập nhật là máy hỏi máy chủ ngay, không cần mật khẩu, rồi mới báo. Không kiểm tra được thì nói rõ lý do (mất mạng, mạng công ty chặn) thay vì báo “đã là bản mới nhất”. Lần kiểm tra hằng ngày bị lỗi thì một giờ sau tự thử lại. Máy từng kẹt ở bản cũ vì một câu hỏi trong lúc cập nhật nay tự cập nhật tiếp.',
+        'Như Windows, trên cả hai bản: bấm vào mép phải thanh tác vụ để hiện màn hình nền; PrtSc chụp cả màn hình vào bộ nhớ tạm, bấm Ctrl+V để dán vào Zalo hay Word (Super+Shift+S vẫn chọn một vùng); Thùng rác nằm sẵn trên màn hình nền. Bản Xfce có thêm Super+D để hiện màn hình nền và Super+E để mở Tệp.',
+        'Khi bật bộ gõ tiếng Việt, mật khẩu không còn hiện ra lúc đang gõ (bản Cinnamon). Tên dưới biểu tượng trên màn hình nền có bóng mờ, đọc rõ cả trên hình nền sáng. Biểu tượng ở khay đổi màu ngay khi bật, tắt Chế độ tối và luôn đứng đúng chỗ.',
+        'Bản Cinnamon: chữ V của bộ gõ hiện ngay khi đăng nhập. Trước đây khay hiện chữ A đến khi bấm vào một ô nhập chữ, dù tiếng Việt đã bật, và bấm vào chữ A đó lại tắt tiếng Việt.',
+        'Tạo lối tắt trên màn hình cho cả thư mục trong Google Drive, thư mục chia sẻ trong mạng và điện thoại.',
+        'Bản Xfce: chép tệp từ màn hình nền rồi dán vào Tệp được; Mở trong Terminal của Tệp chạy; nút Control Center hiện ổ USB đang cắm, kèm nút Tháo an toàn; bật được âm thanh sự kiện trong Appearance.',
+        'Gõ fastfetch trong Terminal để xem logo CaramOS cùng thông tin máy. Máy cài mới có phân vùng hệ thống mang tên CaramOS.',
+        'CaramOS Doanh nghiệp 0.3.1 (đang dùng thử miễn phí): nhân viên thấy thông báo trước khi công ty áp dụng thiết lập; khóa máy, gửi tin nhắn, hỗ trợ từ xa tới máy nhân viên trong vài giây; kết quả cập nhật ghi bằng tiếng Việt; máy nhân bản giữ đúng màn hình nền của người dùng.',
+      ]],
       ['1.5.0', 'Tự động cập nhật, chuyển từ Windows sang dễ hơn, âm lịch trên đồng hồ', [
         'Tự động cập nhật, bật sẵn: bản CaramOS mới tự cài trong lúc bạn làm việc, xong thì báo “CaramOS đã cập nhật lên …”. Máy chờ khi dùng mạng tính theo dung lượng, pin dưới 50% chưa cắm sạc, ổ đĩa sắp đầy hoặc đang cài phần mềm khác. Muốn tự bấm cập nhật như trước: mở Trung tâm cập nhật, tắt Tự động cập nhật (cần mật khẩu quản trị), hoặc chạy `sudo caramos-ota --auto-update off`.',
         'Chuyển dữ liệu từ Windows: chép Màn hình nền, Tài liệu, Ảnh, Tải về, Nhạc, Video, tệp nhận qua Zalo, dấu trang Chrome, Edge, Cốc Cốc, thư Outlook (.pst) và phông chữ từ ổ Windows, ổ cứng của máy cũ hay thư mục chia sẻ trên mạng. Máy Windows không bị thay đổi gì, không tệp nào bị ghi đè.',
@@ -670,6 +680,16 @@ export const copy = {
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
+      ['1.5.1', 'More reliable updates; the Trash, Show desktop and PrtSc as on Windows', [
+        'Opening the Update Center now asks the update server right away, with no password, before it says anything. When it cannot check, it says why (no network, a company network blocking it) instead of “up to date”. A failed daily check tries again an hour later. Computers stuck on an old version by a question during an update now update again.',
+        'As on Windows, in both editions: click the right edge of the taskbar to show the desktop; PrtSc copies the whole screen to the clipboard, ready for Ctrl+V in Zalo or Word (Super+Shift+S still picks a part); the Trash is on the desktop. The Xfce edition also gets Super+D to show the desktop and Super+E to open Files.',
+        'With Vietnamese typing on, passwords no longer show while you type them (Cinnamon edition). The names under desktop icons have a soft shadow and read well on light wallpapers. Tray icons change colour as soon as Dark mode is turned on or off, and keep their places.',
+        'Cinnamon edition: the input method’s V shows as soon as you log in. The tray used to show an A until a text box was clicked, although Vietnamese typing was on, and clicking that A turned it off.',
+        'Desktop shortcuts for folders in Google Drive, shared network folders and phones too.',
+        'Xfce edition: copying files on the desktop and pasting them in Files works; Files’ Open in Terminal works; the Control Center button shows a plugged-in USB drive with Safely remove; event sounds can be turned on in Appearance.',
+        'Type fastfetch in the Terminal to see the CaramOS logo with your computer’s details. New installs name the system partition CaramOS.',
+        'CaramOS Business 0.3.1 (free while in trial): staff see the notice before the company’s settings apply; locking, messages and remote help reach staff computers within seconds; update results read in Vietnamese; cloned disks keep each user’s own desktop.',
+      ]],
       ['1.5.0', 'Automatic updates, an easier move from Windows, lunar dates on the clock', [
         'Automatic updates are on by default: new CaramOS versions install while you work, and a notification says when they are done. To update by hand as before, turn off Automatic updates in the Update Center (needs an administrator password), or run `sudo caramos-ota --auto-update off`.',
         'Windows Data Transfer copies Desktop, Documents, Pictures, Downloads, Music, Videos, the files received in Zalo, Chrome, Edge and Cốc Cốc bookmarks, Outlook mail (.pst) and fonts from the Windows disk, the old computer’s disk or a shared folder on the network. Nothing on the Windows side is changed, and no file is overwritten.',
@@ -825,7 +845,7 @@ export const copy = {
 
 export const SITE = 'https://caramos.vietnamlinuxfamily.net';
 // The day VERSION is released: the JSON-LD's datePublished, llms.txt and the hero's last fact.
-export const RELEASE_DATE = '2026-11-23';
+export const RELEASE_DATE = '2026-11-25';
 const [releaseYear, releaseMonth, releaseDay] = RELEASE_DATE.split('-').map(Number);
 const monthsEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
   'November', 'December'];
@@ -855,7 +875,7 @@ Object.assign(copy.vi, {
     title: `CaramOS ${VERSION}: hệ điều hành Linux cho người Việt`,
     description: 'CaramOS là Linux miễn phí cho người Việt, có sẵn tiếng Việt và bộ gõ. Bản Cinnamon cho máy từ 4 GB, bản Xfce nhẹ cho máy 2 GB và phòng máy ở trường.',
     // The link preview (scripts/prerender.mjs ogImage) of every page.
-    ogAlt: 'CaramOS 1.5.0, Linux cho người Việt: máy tự cập nhật, có âm lịch, chuyển từ Windows sang dễ hơn; bên cạnh là App Center ở lần đăng nhập đầu tiên',
+    ogAlt: 'CaramOS 1.5.1, Linux cho người Việt: máy tự cập nhật, có âm lịch, chuyển từ Windows sang dễ hơn; bên cạnh là App Center ở lần đăng nhập đầu tiên',
   },
   skip: 'Bỏ qua, tới nội dung chính',
   // Anchors (#…) are sections of the home page; paths are pages of their own.
@@ -980,7 +1000,7 @@ Object.assign(copy.en, {
   seo: {
     title: `CaramOS ${VERSION}: a Linux distribution for Vietnamese users`,
     description: 'CaramOS is a free Linux for Vietnamese users, with Vietnamese and its input method built in. Cinnamon for 4 GB computers, a light Xfce for 2 GB and school labs.',
-    ogAlt: 'CaramOS 1.5.0, Linux for Vietnamese users: it updates itself, shows lunar dates and makes moving from Windows easier; beside it, the App Center at the first login',
+    ogAlt: 'CaramOS 1.5.1, Linux for Vietnamese users: it updates itself, shows lunar dates and makes moving from Windows easier; beside it, the App Center at the first login',
   },
   skip: 'Skip to the main content',
   menu: [['Which edition', '#editions'], ['Features', '#features'], ['Education', '/en/education/'], ['Business', '/en/business/'], ['Printers', '#printers'], ['Upgrade', '#ota'], ['What’s new', '#release-notes'], ['FAQ', '#faq']],
