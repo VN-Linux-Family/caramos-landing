@@ -110,6 +110,9 @@ code, kbd, pre { font-family: ui-monospace, 'JetBrains Mono', 'SFMono-Regular', 
 .hero-intro { max-width: 34em; margin-top: 26px; color: var(--ink-2); font-size: 18.5px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 .hero-links { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 18px; font-size: 15.5px; }
+/* The SourceForge backup links under the download buttons, quiet: the buttons serve the file from Cloudflare. */
+.hero-mirror { margin-top: 12px; color: var(--ink-2); font-size: 14.5px; }
+.hero-mirror a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 2px; }
 .hero-side { grid-area: shot; display: grid; min-width: 0; }
 /* The first-login screenshot, smaller since the Đồng hành card sits on its corner, and zoomed under the pointer. */
 .hero-shot { position: relative; z-index: 2; justify-self: end; width: min(100%, 560px); margin: 0; }
@@ -150,6 +153,7 @@ code, kbd, pre { font-family: ui-monospace, 'JetBrains Mono', 'SFMono-Regular', 
 .editions-get td > * { vertical-align: middle; }
 .editions-get .btn { margin-right: 16px; }
 .editions-get .quiet-link { white-space: nowrap; }
+.editions-get .quiet-link + .quiet-link { margin-left: 16px; }
 
 /* Mist from edge to edge: schools and companies on the home page, the diagrams on their pages. */
 .band { margin-top: clamp(72px, 9vw, 128px); padding-top: clamp(64px, 8vw, 112px); padding-bottom: clamp(72px, 9vw, 120px); background: var(--mist); box-shadow: 0 0 0 100vmax var(--mist); clip-path: inset(0 -100vmax); }

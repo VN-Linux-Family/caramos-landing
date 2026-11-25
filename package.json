@@ -12,7 +12,8 @@
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test server/*.test.mjs",
     "dev:api": "yarn build && npx wrangler pages dev dist --port 8788",
-    "deploy": "yarn build && npx wrangler pages deploy dist --project-name caramos-landing"
+    "deploy": "yarn build && npx wrangler pages deploy dist --project-name caramos-landing",
+    "stats:active": "npx wrangler d1 execute caramos-dong-hanh --remote --command \"SELECT day, COUNT(*) AS machines, SUM(edition = 'cinnamon') AS cinnamon, SUM(edition = 'xfce') AS xfce FROM active_machines GROUP BY day ORDER BY day DESC LIMIT 30\""
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",

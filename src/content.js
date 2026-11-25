@@ -1,12 +1,22 @@
 // Every word and fact on the page, in Vietnamese and English. The page components are in App.jsx.
 
-export const VERSION = '1.5.1';
+// The release offered is in server/release.js, which the download counter (functions/tai) reads too.
+import { VERSION, r2Url } from '../server/release.js';
+
+export { VERSION };
 
 export const links = {
-  download: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-cinnamon-amd64.iso/download`,
+  // The download buttons count the click (functions/tai) and send the browser to the ISO on Cloudflare R2; the backup
+  // links go the same way to SourceForge. ?from=<place> on a button says where the click came from.
+  download: '/tai/cinnamon',
+  downloadXfce: '/tai/xfce',
+  mirrorCinnamon: '/tai/cinnamon?mirror=sourceforge',
+  mirrorXfce: '/tai/xfce?mirror=sourceforge',
+  // The files themselves, for search engines and llms.txt (not counted).
+  isoCinnamon: r2Url('cinnamon'),
+  isoXfce: r2Url('xfce'),
   release: `https://github.com/VN-Linux-Family/CaramOS/releases/tag/v${VERSION}`,
   checksums: `https://github.com/VN-Linux-Family/CaramOS/releases/download/v${VERSION}/SHA256SUMS`,
-  downloadXfce: `https://sourceforge.net/projects/caramos/files/v${VERSION}/CaramOS-${VERSION}-xfce-amd64.iso/download`,
   checksumsXfce: `https://github.com/VN-Linux-Family/CaramOS/releases/download/v${VERSION}/SHA256SUMS-xfce`,
   repo: 'https://github.com/VN-Linux-Family/CaramOS',
   org: 'https://github.com/VN-Linux-Family',
@@ -82,6 +92,9 @@ export const copy = {
     downloadCinnamonNote: '2,9 GB · máy từ 4 GB RAM',
     downloadXfce: 'Tải bản Xfce',
     downloadXfceNote: '2,7 GB · máy 2 GB, phòng máy',
+    mirrorLead: 'Không tải được? Thử link dự phòng trên SourceForge:',
+    mirrorCinnamon: 'bản Cinnamon',
+    mirrorXfce: 'bản Xfce',
     featuresCta: 'Xem tính năng',
     checksums: 'SHA256 bản Cinnamon',
     releaseDetails: 'Chi tiết phát hành',
@@ -92,7 +105,7 @@ export const copy = {
     otaFlowLabel: 'Ba bước nâng cấp trong Trung tâm cập nhật',
     otaFlow: [
       [`${shots}/update-available-131.webp`, 'Trung tâm cập nhật báo có bản 1.3.1', 'Trung tâm cập nhật tự báo khi có bản mới.'],
-      [`${shots}/update-progress.webp`, 'Trung tâm cập nhật đang cập nhật CaramOS', 'Bấm Cập nhật ngay, nhập mật khẩu: CaramOS tự làm từng bước.'],
+      [`${shots}/update-progress.webp`, 'Trung tâm cập nhật đang cập nhật CaramOS', 'Bấm Cập nhật, nhập mật khẩu: CaramOS tự làm từng bước.'],
       [`${shots}/update-done.webp`, 'Cập nhật CaramOS thành công', 'Xong là dùng tiếp: không cài lại, không mất dữ liệu.'],
     ],
     source: 'Mã nguồn',
@@ -273,7 +286,7 @@ export const copy = {
       'Build flow sử dụng phương pháp ISO remaster: giải nén ISO gốc, tùy biến root filesystem bằng packages, overlay và chuỗi OTA migration, sau đó đóng gói lại bằng squashfs và xorriso.',
     otaTitle: `Nâng cấp lên CaramOS ${VERSION} không cần cài lại`,
     otaLead:
-      `Máy đang chạy CaramOS 1.0.2 trở lên đã có Trung tâm cập nhật: nó tự kiểm tra mỗi ngày và báo bản ${VERSION}, bạn chỉ cần bấm Cập nhật ngay. Máy còn ở bản 1.0.1 thì chạy lệnh cài Trung tâm cập nhật một lần. Từ bản 1.5.0, các bản sau tự cài trong lúc bạn làm việc, trừ khi bạn tắt Tự động cập nhật.`,
+      `Máy đang chạy CaramOS 1.0.2 trở lên đã có Trung tâm cập nhật: nó tự kiểm tra mỗi ngày và báo bản ${VERSION}, bạn chỉ cần bấm Cập nhật. Máy còn ở bản 1.0.1 thì chạy lệnh cài Trung tâm cập nhật một lần. Từ bản 1.5.0, các bản sau tự cài trong lúc bạn làm việc, trừ khi bạn tắt Tự động cập nhật.`,
     otaInstallLabel: 'Máy CaramOS 1.0.1 (chưa có Trung tâm cập nhật):',
     otaInstallHint: 'Chạy một lần, rồi mở “Trung tâm cập nhật CaramOS” từ Start Menu.',
     otaUpgradeLabel: 'Muốn nâng cấp ngay, không chờ thông báo:',
@@ -283,7 +296,7 @@ export const copy = {
     otaCopyUpgradeLabel: 'Chép lệnh nâng cấp ngay',
     otaCopied: 'Đã copy',
     otaSteps: [
-      ['Máy 1.0.2 trở lên', 'Chờ thông báo của Trung tâm cập nhật rồi bấm Cập nhật ngay.'],
+      ['Máy 1.0.2 trở lên', 'Chờ thông báo của Trung tâm cập nhật rồi bấm Cập nhật.'],
       ['Máy 1.0.1', 'Chạy lệnh cài Trung tâm cập nhật một lần duy nhất.'],
       ['Cần nâng cấp ngay', 'Chạy sudo caramos-ota --upgrade --yes trong Terminal.'],
     ],
@@ -467,6 +480,9 @@ export const copy = {
     downloadCinnamonNote: '2.9 GB · 4 GB of RAM or more',
     downloadXfce: 'Download Xfce',
     downloadXfceNote: '2.7 GB · 2 GB computers, school labs',
+    mirrorLead: 'Download not working? Try the SourceForge mirror:',
+    mirrorCinnamon: 'Cinnamon',
+    mirrorXfce: 'Xfce',
     featuresCta: 'See the features',
     checksums: 'Cinnamon SHA256',
     releaseDetails: 'Release details',
@@ -477,7 +493,7 @@ export const copy = {
     otaFlowLabel: 'The three steps of an upgrade in the Update Center',
     otaFlow: [
       [`${shots}/update-available-131.webp`, 'The Update Center offers 1.3.1', 'The Update Center tells you when a new release is out.'],
-      [`${shots}/update-progress.webp`, 'The Update Center updating CaramOS', 'Click Update now and enter your password: CaramOS does each step.'],
+      [`${shots}/update-progress.webp`, 'The Update Center updating CaramOS', 'Click Update and enter your password: CaramOS does each step.'],
       [`${shots}/update-done.webp`, 'CaramOS updated successfully', 'Done, keep working: no reinstall, no lost data.'],
     ],
     source: 'Source code',
@@ -658,7 +674,7 @@ export const copy = {
       'The build flow uses an ISO remaster method: extract the upstream ISO, customize the root filesystem with packages, overlays, and the OTA migration chain, then repack it with squashfs and xorriso.',
     otaTitle: `Upgrade to CaramOS ${VERSION} without reinstalling`,
     otaLead:
-      `Machines on CaramOS 1.0.2 or later already have the Update Center: it checks every day and offers ${VERSION}; just click Update now. Machines still on 1.0.1 run the Update Center installer once. From 1.5.0 on, the versions after it install themselves while you work, unless you turn Automatic updates off.`,
+      `Machines on CaramOS 1.0.2 or later already have the Update Center: it checks every day and offers ${VERSION}; just click Update. Machines still on 1.0.1 run the Update Center installer once. From 1.5.0 on, the versions after it install themselves while you work, unless you turn Automatic updates off.`,
     otaInstallLabel: 'CaramOS 1.0.1 (no Update Center yet):',
     otaInstallHint: 'Run it once, then open “CaramOS Update Center” from the Start Menu.',
     otaUpgradeLabel: 'Upgrade right away, without waiting for the notification:',
@@ -668,7 +684,7 @@ export const copy = {
     otaCopyUpgradeLabel: 'Copy immediate upgrade command',
     otaCopied: 'Copied',
     otaSteps: [
-      ['1.0.2 or later', 'Wait for the Update Center notification and click Update now.'],
+      ['1.0.2 or later', 'Wait for the Update Center notification and click Update.'],
       ['On 1.0.1', 'Run the Update Center installer command once.'],
       ['Need it now', 'Run sudo caramos-ota --upgrade --yes in a terminal.'],
     ],
@@ -913,6 +929,7 @@ Object.assign(copy.vi, {
     ],
     download: ['Tải bản Cinnamon', 'Tải bản Xfce'],
     checksum: 'Mã SHA256',
+    mirror: 'Link dự phòng',
     footnote: '* Số Task Manager báo khi vừa bật máy, đo cùng cách trên cùng một máy 2 GB. Máy đang chạy bản Cinnamon không tự chuyển sang Xfce; muốn dùng bản Xfce thì cài mới từ ISO Xfce.',
   },
   // The home page's section for schools and companies, each with a link to its own page.
@@ -977,7 +994,7 @@ Object.assign(copy.vi, {
       ['Từ Windows chuyển sang có mang theo dữ liệu được không?', 'Được. Mở menu, tìm Chuyển dữ liệu từ Windows: ứng dụng chép tài liệu, ảnh, tệp nhận qua Zalo, dấu trang trình duyệt, thư Outlook và phông chữ từ ổ Windows, ổ cứng của máy cũ hay thư mục chia sẻ trên mạng, không đổi gì trên máy Windows. Văn bản cũ gõ bằng phông TCVN3 hay VNI thì bấm chuột phải vào tệp, chọn Chuyển mã sang Unicode.'],
       ['Có thử trước khi cài được không?', 'Được. Ghi ISO ra USB rồi chạy thử: Kiểm tra driver cho biết máy có hợp với CaramOS không, trước khi cài. Muốn cài thì bấm biểu tượng Cài đặt CaramOS trên Desktop.'],
       ['CaramOS có tự cập nhật không?', 'Có, từ bản 1.5.0: mỗi ngày máy kiểm tra bản CaramOS mới, có thì tự cài trong lúc bạn làm việc rồi báo khi xong. Máy chờ khi dùng mạng tính theo dung lượng, pin dưới 50% chưa cắm sạc, ổ đĩa sắp đầy hoặc đang cài phần mềm khác. Muốn tự bấm cập nhật như trước thì mở Trung tâm cập nhật, tắt Tự động cập nhật (cần mật khẩu quản trị). Bản vá của Ubuntu và Linux Mint vẫn cài trong Trình quản lý cập nhật như trước.'],
-      ['Đang dùng CaramOS bản cũ thì nâng cấp thế nào?', 'Máy từ CaramOS 1.0.2 trở lên có Trung tâm cập nhật: khi có bản mới, bấm Cập nhật ngay, không cần cài lại, không mất dữ liệu. Từ bản 1.5.0, các bản sau tự cài. Máy còn ở bản 1.0.1 chạy lệnh cài Trung tâm cập nhật một lần.'],
+      ['Đang dùng CaramOS bản cũ thì nâng cấp thế nào?', 'Máy từ CaramOS 1.0.2 trở lên có Trung tâm cập nhật: khi có bản mới, bấm Cập nhật, không cần cài lại, không mất dữ liệu. Từ bản 1.5.0, các bản sau tự cài. Máy còn ở bản 1.0.1 chạy lệnh cài Trung tâm cập nhật một lần.'],
       ['Máy in Canon có in được không?', 'Máy in laser Canon dùng CAPT như LBP2900, LBP3300, LBP6300dn: cắm vào là Kiểm tra driver tự nhận ra và cài driver. Máy in phun Canon PIXMA và máy in hãng khác dùng driver có sẵn, thêm trong mục Máy in.'],
     ],
   },
@@ -1037,6 +1054,7 @@ Object.assign(copy.en, {
     ],
     download: ['Download Cinnamon', 'Download Xfce'],
     checksum: 'SHA256',
+    mirror: 'Mirror',
     footnote: '* What Task Manager shows right after boot, measured the same way on the same 2 GB computer. A computer running the Cinnamon edition does not switch to Xfce by itself; to use Xfce, install it fresh from the Xfce ISO.',
   },
   orgs: {
@@ -1100,7 +1118,7 @@ Object.assign(copy.en, {
       ['Can I bring my files over from Windows?', 'Yes. Open the menu and look for Windows Data Transfer: it copies documents, pictures, the files received in Zalo, browser bookmarks, Outlook mail and fonts from the Windows disk, the old computer’s disk or a shared folder on the network, and changes nothing on the Windows side. For old documents typed in TCVN3 or VNI fonts, right-click the file and choose Convert to Unicode.'],
       ['Can I try it before installing?', 'Yes. Write the ISO to a USB stick and try it: Driver Check tells you whether the computer suits CaramOS before you install. To install, click the Install CaramOS icon on the Desktop.'],
       ['Does CaramOS update itself?', 'Yes, since 1.5.0: the computer checks for a new CaramOS version every day, installs it while you work and tells you when it is done. It waits on a metered connection, on battery under 50% without the charger, when the disk is almost full, or while another program installs software. To update by hand as before, open the Update Center and turn off Automatic updates (needs an administrator password). Ubuntu and Linux Mint fixes still install from the Update Manager as before.'],
-      ['How do I upgrade an older CaramOS?', 'Computers on CaramOS 1.0.2 or later have the Update Center: when a new version is out, click Update now, with no reinstall and no data lost. From 1.5.0 on, the versions after it install themselves. Computers still on 1.0.1 run the Update Center installer once.'],
+      ['How do I upgrade an older CaramOS?', 'Computers on CaramOS 1.0.2 or later have the Update Center: when a new version is out, click Update, with no reinstall and no data lost. From 1.5.0 on, the versions after it install themselves. Computers still on 1.0.1 run the Update Center installer once.'],
       ['Do Canon printers work?', 'Canon CAPT laser printers such as the LBP2900, LBP3300 and LBP6300dn: plug one in and Driver Check recognizes it and installs the driver. Canon PIXMA inkjets and other brands use the drivers already in CaramOS, added from Printers.'],
     ],
   },

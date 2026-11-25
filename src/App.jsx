@@ -10,6 +10,8 @@ import { DongHanhButton, DongHanhHero, DongHanhSection, HERO_ID } from './DongHa
 
 // Downloads open in a new tab, as before the redesign, so the install steps stay open beside them.
 const newTab = { target: '_blank', rel: 'noopener noreferrer' };
+// A download link with the place it sits on the page, which the download counter keeps (functions/tai).
+const from = (href, place) => `${href}${href.includes('?') ? '&' : '?'}from=${place}`;
 
 // One page per route (src/routes.js), rendered at build time (scripts/prerender.mjs) and hydrated in the browser.
 // Every page but the support page (which has the whole panel) gets the Đồng hành button (src/DongHanh.jsx); on the
@@ -185,13 +187,14 @@ function Hero({ t, lang }) {
       </div>
       <p className="hero-intro">{t.heroIntro}</p>
       <div className="hero-actions">
-        <a className="btn btn-amber btn-large" href={links.download} {...newTab}>
+        <a className="btn btn-amber btn-large" href={from(links.download, 'hero')}>
           <span>{t.downloadCinnamon}</span><small>{t.downloadCinnamonNote}</small>
         </a>
-        <a className="btn btn-green btn-large" href={links.downloadXfce} {...newTab}>
+        <a className="btn btn-green btn-large" href={from(links.downloadXfce, 'hero')}>
           <span>{t.downloadXfce}</span><small>{t.downloadXfceNote}</small>
         </a>
       </div>
+      <p className="hero-mirror">{t.mirrorLead} <a href={from(links.mirrorCinnamon, 'hero')}>{t.mirrorCinnamon}</a>, <a href={from(links.mirrorXfce, 'hero')}>{t.mirrorXfce}</a>.</p>
       <p className="hero-links"><a href="#whats-new">{t.heroNew}</a><a href="#ota">{t.heroUpgrade}</a><a href="/support/">{t.heroDonate}</a><a href={links.repo}>{t.heroSource}</a></p>
     </div>
     <div className="hero-side">
@@ -273,8 +276,8 @@ function SectionHead({ id, title, lead, children }) {
 function Editions({ t }) {
   const e = t.editions;
   const columns = [
-    ['cinnamon', e.cinnamon, links.download, links.checksums, 'btn-amber'],
-    ['xfce', e.xfce, links.downloadXfce, links.checksumsXfce, 'btn-green'],
+    ['cinnamon', e.cinnamon, links.download, links.checksums, 'btn-amber', links.mirrorCinnamon],
+    ['xfce', e.xfce, links.downloadXfce, links.checksumsXfce, 'btn-green', links.mirrorXfce],
   ];
   return <section className="section editions" id="editions" aria-labelledby="editions-title">
     <SectionHead id="editions-title" title={e.title} lead={e.lead} />
@@ -296,9 +299,10 @@ function Editions({ t }) {
         </tr>)}
         <tr className="editions-get">
           <th scope="row">{t.menuDownload}</th>
-          {columns.map(([key, edition, download, checksum, tone], index) => <td key={key} data-edition={edition.name}>
-            <a className={`btn ${tone}`} href={download} {...newTab}>{e.download[index]}</a>
+          {columns.map(([key, edition, download, checksum, tone, mirror], index) => <td key={key} data-edition={edition.name}>
+            <a className={`btn ${tone}`} href={from(download, 'editions')}>{e.download[index]}</a>
             <a className="quiet-link" href={checksum} {...newTab}>{e.checksum}</a>
+            <a className="quiet-link" href={from(mirror, 'editions')}>{e.mirror}</a>
           </td>)}
         </tr>
       </tbody>
@@ -618,11 +622,11 @@ function Download({ t }) {
       </div>
       <div className="download-choices">
         <div className="download-choice">
-          <a className="btn btn-amber btn-large" href={links.download} {...newTab}><span>{t.downloadCinnamon}</span><small>{t.downloadCinnamonNote}</small></a>
+          <a className="btn btn-amber btn-large" href={from(links.download, 'download')}><span>{t.downloadCinnamon}</span><small>{t.downloadCinnamonNote}</small></a>
           <a className="quiet-link" href={links.checksums} {...newTab}>{t.checksums}</a>
         </div>
         <div className="download-choice">
-          <a className="btn btn-light btn-large" href={links.downloadXfce} {...newTab}><span>{t.downloadXfce}</span><small>{t.downloadXfceNote}</small></a>
+          <a className="btn btn-light btn-large" href={from(links.downloadXfce, 'download')}><span>{t.downloadXfce}</span><small>{t.downloadXfceNote}</small></a>
           <a className="quiet-link" href={links.checksumsXfce} {...newTab}>{t.checksumsXfce}</a>
         </div>
         <a className="quiet-link" href={links.release} {...newTab}>{t.downloadAll}</a>
@@ -677,7 +681,7 @@ function EducationPage({ lang }) {
           <h1 id="page-title" className="page-title">{e.hero.title}</h1>
           <p className="page-lead">{e.hero.lead}</p>
           <div className="hero-actions">
-            <a className="btn btn-amber btn-large" href={links.downloadXfce} {...newTab}><span>{e.hero.download}</span><small>{e.hero.downloadNote}</small></a>
+            <a className="btn btn-amber btn-large" href={from(links.downloadXfce, 'edu')}><span>{e.hero.download}</span><small>{e.hero.downloadNote}</small></a>
             <a className="btn btn-outline btn-large" href={`#${a.contact}`}><span>{e.hero.contact}</span></a>
           </div>
         </div>
@@ -733,8 +737,8 @@ function EducationPage({ lang }) {
 
       <StepsSection id={a.start} steps={e.steps}>
         <div className="steps-downloads">
-          <a className="btn btn-amber" href={links.downloadXfce} {...newTab}>{e.steps.downloads[0]}</a>
-          <a className="btn btn-outline" href={links.download} {...newTab}>{e.steps.downloads[1]}</a>
+          <a className="btn btn-amber" href={from(links.downloadXfce, 'edu-steps')}>{e.steps.downloads[0]}</a>
+          <a className="btn btn-outline" href={from(links.download, 'edu-steps')}>{e.steps.downloads[1]}</a>
         </div>
       </StepsSection>
 

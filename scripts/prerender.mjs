@@ -92,7 +92,7 @@ function landingGraph(lang, url) {
         license: 'https://www.gnu.org/licenses/gpl-3.0.html',
         isAccessibleForFree: true,
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'VND' },
-        downloadUrl: [links.download, links.downloadXfce],
+        downloadUrl: [links.isoCinnamon, links.isoXfce],
         memoryRequirements: lang === 'vi' ? '2 GB RAM (bản Xfce), khuyên dùng 4 GB' : '2 GB of RAM (Xfce edition), 4 GB recommended',
         storageRequirements: lang === 'vi' ? 'Ổ đĩa trống từ 20 GB' : '20 GB of free disk space',
         image: ogImage,
@@ -101,8 +101,8 @@ function landingGraph(lang, url) {
         publisher: { '@id': org['@id'] },
         author: { '@id': org['@id'] },
         hasPart: [
-          { '@type': 'SoftwareApplication', name: 'CaramOS Cinnamon', softwareVersion: VERSION, operatingSystem: 'Linux', applicationCategory: 'OperatingSystem', downloadUrl: links.download, fileSize: '2.9 GB', memoryRequirements: '4 GB RAM' },
-          { '@type': 'SoftwareApplication', name: 'CaramOS Xfce', softwareVersion: VERSION, operatingSystem: 'Linux', applicationCategory: 'OperatingSystem', downloadUrl: links.downloadXfce, fileSize: '2.7 GB', memoryRequirements: '2 GB RAM' },
+          { '@type': 'SoftwareApplication', name: 'CaramOS Cinnamon', softwareVersion: VERSION, operatingSystem: 'Linux', applicationCategory: 'OperatingSystem', downloadUrl: links.isoCinnamon, fileSize: '2.9 GB', memoryRequirements: '4 GB RAM' },
+          { '@type': 'SoftwareApplication', name: 'CaramOS Xfce', softwareVersion: VERSION, operatingSystem: 'Linux', applicationCategory: 'OperatingSystem', downloadUrl: links.isoXfce, fileSize: '2.7 GB', memoryRequirements: '2 GB RAM' },
         ],
       },
       {
@@ -331,8 +331,8 @@ const llms = `# CaramOS
 
 - Version: ${VERSION}, released ${RELEASE_DATE}. Website: ${SITE}/ (Vietnamese), ${SITE}/en/ (English).
 - For schools: ${urlOf('education', 'en')}. For companies: ${urlOf('business', 'en')}.
-- Download the Cinnamon edition (2.9 GB, computers with 4 GB of RAM or more): ${links.download}
-- Download the Xfce edition (2.7 GB, 2 GB computers and school labs): ${links.downloadXfce}
+- Download the Cinnamon edition (2.9 GB, computers with 4 GB of RAM or more): ${links.isoCinnamon}
+- Download the Xfce edition (2.7 GB, 2 GB computers and school labs): ${links.isoXfce}
 - Checksums: ${links.checksums} and ${links.checksumsXfce}
 - Release notes: ${links.release}
 - Source code (GPL-3.0): ${links.repo}
