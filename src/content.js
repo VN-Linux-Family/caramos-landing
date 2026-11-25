@@ -309,6 +309,15 @@ export const copy = {
     releaseScrollHint: 'Cuộn để xem các bản trước ↓',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
+      ['1.5.2', 'Cài ứng dụng từ trang web bằng một nút, Phòng máy ổn định, Zalo và Lark không tự đăng xuất', [
+        'Trên apps.vietnamlinuxfamily.net, bấm Cài trên CaramOS là App Center mở đúng ứng dụng đó để cài, không phải gõ lệnh. App Center 0.4.0 có thêm nhóm Tin học cho các em (Tux Typing, KTouch, KolourPaint, Klickety và trang tập dùng chuột không quảng cáo), nhóm Lập trình, Toán, Khoa học và soạn bài giảng (eXeLearning, LeoCAD, Polypad), nhóm Phim, nhạc, ảnh và thiết kế (VLC, Spotify, OBS, Kdenlive, GIMP, Inkscape), cùng Obsidian, RustDesk, AnyDesk và OpenConnect cho VPN công ty.',
+        'Phòng máy: máy học sinh không tự khóa, tắt màn hình hay ngủ trong giờ học; Veyon tự chạy lại khi bị tắt, nên Veyon Master không còn ô màu cam. Khóa màn hình và Trình chiếu toàn màn hình hiện đúng trên máy học sinh. Máy đã rời phòng máy không tự bật Veyon nữa.',
+        'Máy tự đăng nhập, không gõ mật khẩu: Zalo, Lark và trình duyệt giữ đăng nhập, không còn hỏi “Hãy chọn mật khẩu cho chùm chìa khóa mới” hay mật khẩu chùm chìa khóa. Chùm chìa khóa cũ có mật khẩu được cất sang một thư mục riêng, không xóa gì.',
+        'Màn hình vẫn tối sau 15 phút không dùng, nhưng khoảng nửa tiếng mới khóa: đi uống nước về không phải gõ lại mật khẩu.',
+        'Tự động cập nhật cài được cả lúc bạn đang dùng máy: phần đổi thanh tác vụ hay màn hình nền chờ lần đăng nhập sau mới hiện, không có gì nhảy trên màn hình khi bạn đang làm việc.',
+        'Thêm tài khoản Google, Microsoft trong Tài khoản trực tuyến không còn dừng giữa chừng ở Firefox. Góp ý & hỗ trợ gửi kèm thông tin máy (dòng máy, linh kiện, driver, máy in, cách máy khóa và ngủ), nên nhóm hỗ trợ trả lời được ngay mà không phải hỏi lại. Chuyển dữ liệu từ Windows báo rõ khi ổ bị BitLocker khóa và chỉ cách tắt. Màn hình khóa và màn hình đăng nhập dùng phông Be Vietnam Pro.',
+        'Mỗi ngày một lần, máy báo cho trang CaramOS rằng máy đang được dùng, kèm phiên bản, bản Cinnamon hay Xfce, và một mã đổi mỗi ngày nên không lần ra được máy nào; ngoài ra không gửi gì. Muốn tắt: chạy `sudo caramos-ota --stats off`.',
+      ]],
       ['1.5.1', 'Cập nhật chắc chắn hơn; Thùng rác, Hiện màn hình nền và PrtSc như Windows', [
         'Mở Trung tâm cập nhật là máy hỏi máy chủ ngay, không cần mật khẩu, rồi mới báo. Không kiểm tra được thì nói rõ lý do (mất mạng, mạng công ty chặn) thay vì báo “đã là bản mới nhất”. Lần kiểm tra hằng ngày bị lỗi thì một giờ sau tự thử lại. Máy từng kẹt ở bản cũ vì một câu hỏi trong lúc cập nhật nay tự cập nhật tiếp.',
         'Như Windows, trên cả hai bản: bấm vào mép phải thanh tác vụ để hiện màn hình nền; PrtSc chụp cả màn hình vào bộ nhớ tạm, bấm Ctrl+V để dán vào Zalo hay Word (Super+Shift+S vẫn chọn một vùng); Thùng rác nằm sẵn trên màn hình nền. Bản Xfce có thêm Super+D để hiện màn hình nền và Super+E để mở Tệp.',
@@ -698,6 +707,15 @@ export const copy = {
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
+      ['1.5.2', 'One-button installs from the apps website, a steady Computer Lab, Zalo and Lark stay signed in', [
+        'On apps.vietnamlinuxfamily.net, Install on CaramOS opens the App Center on that app, with no command to type. App Center 0.4.0 adds a Computer skills for children step (Tux Typing, KTouch, KolourPaint, Klickety and ad-free mouse practice websites), a Programming, maths, science and lessons step (eXeLearning, LeoCAD, Polypad) and a Video, music, photos and design step (VLC, Spotify, OBS, Kdenlive, GIMP, Inkscape), plus Obsidian, RustDesk, AnyDesk and OpenConnect for company VPNs.',
+        'Computer Lab: students’ computers no longer lock, blank or sleep during the lesson; Veyon starts again when it stops, so Veyon Master no longer shows orange tiles. Lock and the full-screen Demo show on the students’ computers. A computer that left the lab no longer starts Veyon.',
+        'Computers that log in by themselves, without a password: Zalo, Lark and browsers stay signed in, and no longer ask to “Choose password for new keyring” or for a keyring’s password. An older keyring with a password is moved to a folder of its own; nothing is deleted.',
+        'The screen still goes dark after 15 minutes without use, but locks only after about half an hour: no password again after a coffee break.',
+        'Automatic updates install while you use the computer too: what changes on your taskbar or desktop waits for your next login, so nothing moves on the screen while you work.',
+        'Adding a Google or Microsoft account in Online Accounts no longer stops halfway in Firefox. Feedback & Help sends the computer’s details along (model, parts, drivers, printers, how it locks and sleeps), so the team can answer without asking again. Windows Data Transfer says when BitLocker locks a disk and how to turn it off. The lock and login screens use Be Vietnam Pro.',
+        'Once a day the computer tells the CaramOS site that it is in use, with its version, its edition and an id that changes every day, so no computer can be traced; nothing else is sent. To turn it off, run `sudo caramos-ota --stats off`.',
+      ]],
       ['1.5.1', 'More reliable updates; the Trash, Show desktop and PrtSc as on Windows', [
         'Opening the Update Center now asks the update server right away, with no password, before it says anything. When it cannot check, it says why (no network, a company network blocking it) instead of “up to date”. A failed daily check tries again an hour later. Computers stuck on an old version by a question during an update now update again.',
         'As on Windows, in both editions: click the right edge of the taskbar to show the desktop; PrtSc copies the whole screen to the clipboard, ready for Ctrl+V in Zalo or Word (Super+Shift+S still picks a part); the Trash is on the desktop. The Xfce edition also gets Super+D to show the desktop and Super+E to open Files.',
@@ -893,7 +911,7 @@ Object.assign(copy.vi, {
     title: `CaramOS ${VERSION}: hệ điều hành Linux cho người Việt`,
     description: 'CaramOS là Linux miễn phí cho người Việt, có sẵn tiếng Việt và bộ gõ. Bản Cinnamon cho máy từ 4 GB, bản Xfce nhẹ cho máy 2 GB và phòng máy ở trường.',
     // The link preview (scripts/prerender.mjs ogImage) of every page.
-    ogAlt: 'CaramOS 1.5.1, Linux cho người Việt: máy tự cập nhật, có âm lịch, chuyển từ Windows sang dễ hơn; bên cạnh là App Center ở lần đăng nhập đầu tiên',
+    ogAlt: 'CaramOS 1.5.2, Linux cho người Việt: máy tự cập nhật, có âm lịch, chuyển từ Windows sang dễ hơn; bên cạnh là App Center ở lần đăng nhập đầu tiên',
   },
   skip: 'Bỏ qua, tới nội dung chính',
   // Anchors (#…) are sections of the home page; paths are pages of their own.
@@ -1019,7 +1037,7 @@ Object.assign(copy.en, {
   seo: {
     title: `CaramOS ${VERSION}: a Linux distribution for Vietnamese users`,
     description: 'CaramOS is a free Linux for Vietnamese users, with Vietnamese and its input method built in. Cinnamon for 4 GB computers, a light Xfce for 2 GB and school labs.',
-    ogAlt: 'CaramOS 1.5.1, Linux for Vietnamese users: it updates itself, shows lunar dates and makes moving from Windows easier; beside it, the App Center at the first login',
+    ogAlt: 'CaramOS 1.5.2, Linux for Vietnamese users: it updates itself, shows lunar dates and makes moving from Windows easier; beside it, the App Center at the first login',
   },
   skip: 'Skip to the main content',
   menu: [['Which edition', '#editions'], ['Features', '#features'], ['Education', '/en/education/'], ['Business', '/en/business/'], ['Printers', '#printers'], ['Upgrade', '#ota'], ['What’s new', '#release-notes'], ['FAQ', '#faq']],

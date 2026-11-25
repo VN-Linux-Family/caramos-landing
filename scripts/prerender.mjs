@@ -37,7 +37,7 @@ const template = builtTemplate.replace(cssLink[0], () => `<style>${css}</style>`
 const today = new Date().toISOString().slice(0, 10);
 // The link preview of every page. It names the version, so each release draws a new one under a new name
 // (/assets is cached for a year); its description is copy[lang].seo.ogAlt.
-const ogImage = `${SITE}/assets/og-caramos-1.5.1.jpg`;
+const ogImage = `${SITE}/assets/og-caramos-1.5.2.jpg`;
 const org = {
   '@type': 'Organization',
   '@id': 'https://vietnamlinuxfamily.net/#organization',
