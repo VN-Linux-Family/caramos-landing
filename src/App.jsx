@@ -624,10 +624,12 @@ function Download({ t }) {
         <div className="download-choice">
           <a className="btn btn-amber btn-large" href={from(links.download, 'download')}><span>{t.downloadCinnamon}</span><small>{t.downloadCinnamonNote}</small></a>
           <a className="quiet-link" href={links.checksums} {...newTab}>{t.checksums}</a>
+          <a className="quiet-link" href={from(links.mirrorCinnamon, 'download')}>{t.mirrorLink}</a>
         </div>
         <div className="download-choice">
           <a className="btn btn-light btn-large" href={from(links.downloadXfce, 'download')}><span>{t.downloadXfce}</span><small>{t.downloadXfceNote}</small></a>
           <a className="quiet-link" href={links.checksumsXfce} {...newTab}>{t.checksumsXfce}</a>
+          <a className="quiet-link" href={from(links.mirrorXfce, 'download')}>{t.mirrorLink}</a>
         </div>
         <a className="quiet-link" href={links.release} {...newTab}>{t.downloadAll}</a>
       </div>
