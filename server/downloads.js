@@ -80,13 +80,32 @@ function redirect(location) {
   return new Response(null, { status: 302, headers: { Location: location, 'Cache-Control': 'no-store' } });
 }
 
+// Whether R2 has this edition's ISO. Only the newest release is kept there: when a release's CI uploads one edition,
+// it deletes that edition's older ISO, before this site names the new version (and the editions are built one after
+// the other). Asked at most once a minute per data centre (cacheTtl), and taken as there when R2 does not answer.
+export async function onR2(edition, fetchImpl = fetch) {
+  try {
+    const response = await fetchImpl(r2Url(edition), {
+      method: 'HEAD',
+      cf: { cacheTtl: 60, cacheEverything: true },
+      signal: AbortSignal.timeout(3000),
+    });
+    return response.status !== 404;
+  } catch {
+    return true;
+  }
+}
+
 export async function handleDownload(request, db, edition, options = {}) {
   if (!EDITIONS.includes(edition)) return new Response('Not found', { status: 404 });
   if (request.method !== 'GET' && request.method !== 'HEAD') {
     return new Response('Method not allowed', { status: 405, headers: { Allow: 'GET, HEAD' } });
   }
-  const mirror = new URL(request.url).searchParams.get('mirror') === 'sourceforge' ? 'sourceforge' : 'r2';
+  let mirror = new URL(request.url).searchParams.get('mirror') === 'sourceforge' ? 'sourceforge' : 'r2';
+  // Not on R2 (yet, or any more): SourceForge keeps every release.
+  if (mirror === 'r2' && !(await onR2(edition, options.fetch))) mirror = 'sourceforge';
   const row = downloadRow(request, edition, options);
+  if (row) row.mirror = mirror;
   if (row && db) {
     try {
       await db.prepare(

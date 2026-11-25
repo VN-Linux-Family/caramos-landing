@@ -1,10 +1,14 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { downloadRow, handleDownload, isBot, osOf, sourceOf, vietnamDay } from './downloads.js';
+import { downloadRow, handleDownload, isBot, onR2, osOf, sourceOf, vietnamDay } from './downloads.js';
 import { VERSION, r2Url, sourceforgeUrl } from './release.js';
 
 const FIREFOX_LINUX = 'Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0';
 const CHROME_WINDOWS = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0 Safari/537.36';
+
+// R2 as the download function asks it (HEAD), without the network: the ISO is there, or not (404).
+const R2_HAS_IT = async () => ({ status: 200 });
+const R2_LACKS_IT = async () => ({ status: 404 });
 
 function fakeDb({ fail = false } = {}) {
   const rows = [];
@@ -61,7 +65,7 @@ test('a click is counted with its place and sent to R2', async () => {
   const db = fakeDb();
   const now = new Date('2026-11-25T03:04:05Z');
   const response = await handleDownload(get('/tai/cinnamon?from=hero', { cf: { country: 'VN', region: 'Hanoi', city: 'Hanoi' } }),
-    db, 'cinnamon', { now });
+    db, 'cinnamon', { now, fetch: R2_HAS_IT });
   assert.equal(response.status, 302);
   assert.equal(response.headers.get('Location'), r2Url('cinnamon'));
   assert.equal(response.headers.get('Location'), `https://download.caramos.vietnamlinuxfamily.net/CaramOS-${VERSION}-cinnamon-amd64.iso`);
@@ -71,7 +75,8 @@ test('a click is counted with its place and sent to R2', async () => {
 
 test('the backup link is counted as SourceForge and sent there', async () => {
   const db = fakeDb();
-  const response = await handleDownload(get('/tai/xfce?mirror=sourceforge&from=editions', { ua: CHROME_WINDOWS }), db, 'xfce');
+  const response = await handleDownload(get('/tai/xfce?mirror=sourceforge&from=editions', { ua: CHROME_WINDOWS }), db, 'xfce',
+    { fetch: R2_HAS_IT });
   assert.equal(response.headers.get('Location'), sourceforgeUrl('xfce'));
   assert.equal(db.rows[0][4], 'sourceforge');
   assert.equal(db.rows[0][8], 'editions');
@@ -80,17 +85,33 @@ test('the backup link is counted as SourceForge and sent there', async () => {
 
 test('HEAD, bots and unknown editions are not counted', async () => {
   const db = fakeDb();
-  assert.equal((await handleDownload(get('/tai/xfce', { method: 'HEAD' }), db, 'xfce')).status, 302);
-  assert.equal((await handleDownload(get('/tai/xfce', { ua: 'Googlebot/2.1' }), db, 'xfce')).status, 302);
+  assert.equal((await handleDownload(get('/tai/xfce', { method: 'HEAD' }), db, 'xfce', { fetch: R2_HAS_IT })).status, 302);
+  assert.equal((await handleDownload(get('/tai/xfce', { ua: 'Googlebot/2.1' }), db, 'xfce', { fetch: R2_HAS_IT })).status, 302);
   assert.equal((await handleDownload(get('/tai/kde'), db, 'kde')).status, 404);
   assert.equal((await handleDownload(get('/tai/xfce', { method: 'POST' }), db, 'xfce')).status, 405);
   assert.equal(db.rows.length, 0);
 });
 
 test('a broken database never stops the download', async () => {
-  const response = await handleDownload(get('/tai/cinnamon'), fakeDb({ fail: true }), 'cinnamon');
+  const response = await handleDownload(get('/tai/cinnamon'), fakeDb({ fail: true }), 'cinnamon', { fetch: R2_HAS_IT });
   assert.equal(response.status, 302);
-  assert.equal((await handleDownload(get('/tai/cinnamon'), undefined, 'cinnamon')).status, 302);
+  assert.equal((await handleDownload(get('/tai/cinnamon'), undefined, 'cinnamon', { fetch: R2_HAS_IT })).status, 302);
+});
+
+test('an ISO that R2 no longer (or not yet) has is fetched from SourceForge, and counted so', async () => {
+  // A release's CI deletes an edition's older ISO from R2 as soon as it uploads the new one, before the site names it.
+  const db = fakeDb();
+  const response = await handleDownload(get('/tai/cinnamon?from=hero'), db, 'cinnamon', { fetch: R2_LACKS_IT });
+  assert.equal(response.headers.get('Location'), sourceforgeUrl('cinnamon'));
+  assert.equal(db.rows[0][4], 'sourceforge');
+});
+
+test('R2 is asked with HEAD, and taken as there when it does not answer', async () => {
+  const asked = [];
+  assert.equal(await onR2('xfce', async (url, init) => { asked.push([url, init.method]); return { status: 200 }; }), true);
+  assert.deepEqual(asked, [[r2Url('xfce'), 'HEAD']]);
+  assert.equal(await onR2('xfce', R2_LACKS_IT), false);
+  assert.equal(await onR2('xfce', async () => { throw new Error('timeout'); }), true);
 });
 
 test('long or missing location fields are kept short or empty', () => {
