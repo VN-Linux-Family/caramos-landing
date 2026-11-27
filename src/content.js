@@ -340,7 +340,7 @@ export const copy = {
         'Tạo lối tắt trên màn hình cho cả thư mục trong Google Drive, thư mục chia sẻ trong mạng và điện thoại.',
         'Bản Xfce: chép tệp từ màn hình nền rồi dán vào Tệp được; Mở trong Terminal của Tệp chạy; nút Control Center hiện ổ USB đang cắm, kèm nút Tháo an toàn; bật được âm thanh sự kiện trong Appearance.',
         'Gõ fastfetch trong Terminal để xem logo CaramOS cùng thông tin máy. Máy cài mới có phân vùng hệ thống mang tên CaramOS.',
-        'CaramOS Doanh nghiệp 0.3.1 (đang dùng thử miễn phí): nhân viên thấy thông báo trước khi công ty áp dụng thiết lập; khóa máy, gửi tin nhắn, hỗ trợ từ xa tới máy nhân viên trong vài giây; kết quả cập nhật ghi bằng tiếng Việt; máy nhân bản giữ đúng màn hình nền của người dùng.',
+        'CaramOS Doanh nghiệp 0.3.1 (miễn phí): nhân viên thấy thông báo trước khi công ty áp dụng thiết lập; khóa máy, gửi tin nhắn, hỗ trợ từ xa tới máy nhân viên trong vài giây; kết quả cập nhật ghi bằng tiếng Việt; máy nhân bản giữ đúng màn hình nền của người dùng.',
       ]],
       ['1.5.0', 'Tự động cập nhật, chuyển từ Windows sang dễ hơn, âm lịch trên đồng hồ', [
         'Tự động cập nhật, bật sẵn: bản CaramOS mới tự cài trong lúc bạn làm việc, xong thì báo “CaramOS đã cập nhật lên …”. Máy chờ khi dùng mạng tính theo dung lượng, pin dưới 50% chưa cắm sạc, ổ đĩa sắp đầy hoặc đang cài phần mềm khác. Muốn tự bấm cập nhật như trước: mở Trung tâm cập nhật, tắt Tự động cập nhật (cần mật khẩu quản trị), hoặc chạy `sudo caramos-ota --auto-update off`.',
@@ -350,7 +350,7 @@ export const copy = {
         'Âm lịch trong lịch của thanh tác vụ, trên cả hai bản: bấm vào đồng hồ, dưới mỗi ngày có ngày âm, mùng 1 và rằm tô đỏ, đầu lịch ghi ngày âm hôm nay.',
         'Super+V mở lịch sử clipboard, Super+L khóa máy, Ctrl+Alt+Delete mở hộp đăng xuất, bấm Super rồi gõ là tìm. Trên bản Xfce, tổ hợp có phím Super không còn mở menu Start kèm theo.',
         'Control Center có ô Thanh tác vụ để đặt ứng dụng ở giữa hay bên trái, ô Không làm phiền, và thanh độ sáng cho màn hình rời hỗ trợ DDC/CI; lăn chuột trên biểu tượng của nó để chỉnh âm lượng, mỗi nấc 2, 5 hay 10%. Menu Start và menu chuột phải bo tròn góc.',
-        'Trung tâm cập nhật và App Center có giao diện mới; App Center có bước Dùng cho công ty với CaramOS Doanh nghiệp (đang dùng thử miễn phí) và Remmina. Máy từ 4 GB RAM trở xuống hoặc chưa có driver card đồ họa: App Center, Kiểm tra driver, Góp ý & hỗ trợ và Phòng máy dùng ít hơn 52–79 MB RAM mỗi ứng dụng. Kiểm tra driver có nút Lưu báo cáo.',
+        'Trung tâm cập nhật và App Center có giao diện mới; App Center có bước Dùng cho công ty với CaramOS Doanh nghiệp (miễn phí) và Remmina. Máy từ 4 GB RAM trở xuống hoặc chưa có driver card đồ họa: App Center, Kiểm tra driver, Góp ý & hỗ trợ và Phòng máy dùng ít hơn 52–79 MB RAM mỗi ứng dụng. Kiểm tra driver có nút Lưu báo cáo.',
       ]],
       ['1.4.0', 'Bản Xfce cho máy 2 GB và phòng máy ở trường học', [
         'Có thêm bản Xfce, nhẹ hơn, cho máy 2 GB và phòng máy: vừa bật máy, Task Manager báo khoảng 610 MB RAM trên máy 2 GB. Vẫn có thanh tác vụ ba đảo, Control Center, App Center, Kiểm tra driver và bộ gõ tiếng Việt. Giao diện mặc định là tiếng Anh cho khớp với sách Tin học; chọn tiếng Việt lúc cài thì có tiếng Việt.',
@@ -751,7 +751,7 @@ export const copy = {
         'Desktop shortcuts for folders in Google Drive, shared network folders and phones too.',
         'Xfce edition: copying files on the desktop and pasting them in Files works; Files’ Open in Terminal works; the Control Center button shows a plugged-in USB drive with Safely remove; event sounds can be turned on in Appearance.',
         'Type fastfetch in the Terminal to see the CaramOS logo with your computer’s details. New installs name the system partition CaramOS.',
-        'CaramOS Business 0.3.1 (free while in trial): staff see the notice before the company’s settings apply; locking, messages and remote help reach staff computers within seconds; update results read in Vietnamese; cloned disks keep each user’s own desktop.',
+        'CaramOS Business 0.3.1 (free): staff see the notice before the company’s settings apply; locking, messages and remote help reach staff computers within seconds; update results read in Vietnamese; cloned disks keep each user’s own desktop.',
       ]],
       ['1.5.0', 'Automatic updates, an easier move from Windows, lunar dates on the clock', [
         'Automatic updates are on by default: new CaramOS versions install while you work, and a notification says when they are done. To update by hand as before, turn off Automatic updates in the Update Center (needs an administrator password), or run `sudo caramos-ota --auto-update off`.',
@@ -761,7 +761,7 @@ export const copy = {
         'Lunar dates in the taskbar calendar, on both editions: click the clock, and every day shows its lunar day, the 1st and the 15th in red, with today’s lunar date at the top.',
         'Super+V opens the clipboard history, Super+L locks the screen, Ctrl+Alt+Delete opens the log out dialog, and pressing Super then typing searches. On the Xfce edition, Super key combinations no longer open the Start menu too.',
         'The Control Center has a Taskbar tile that puts your apps in the middle or on the left, a Do not disturb tile, and a brightness slider for external monitors with DDC/CI; scroll over its icon to change the volume, by 2, 5 or 10% a step. The Start menu and right-click menus have round corners.',
-        'The Update Center and the App Center have a new look; the App Center has a “For your company” step with CaramOS Business (free during its trial) and Remmina. With 4 GB of RAM or less, or without a graphics driver, the App Center, Driver Check, Feedback & Help and Computer Lab each use 52–79 MB less RAM. Driver Check has a Save report button.',
+        'The Update Center and the App Center have a new look; the App Center has a “For your company” step with CaramOS Business (free) and Remmina. With 4 GB of RAM or less, or without a graphics driver, the App Center, Driver Check, Feedback & Help and Computer Lab each use 52–79 MB less RAM. Driver Check has a Save report button.',
       ]],
       ['1.4.0', 'An Xfce edition for 2 GB computers and school computer labs', [
         'A new, lighter Xfce edition for 2 GB computers and school labs: right after boot, Task Manager shows about 610 MB of RAM on a 2 GB computer. It keeps the three-island taskbar, the Control Center, the App Center, Driver Check and Vietnamese typing. Its interface is English by default, to match the Tin học textbooks; choosing Vietnamese at install gives Vietnamese.',
@@ -982,7 +982,7 @@ Object.assign(copy.vi, {
   // The home page's section for schools and companies, each with a link to its own page.
   orgs: {
     title: 'Cho cả phòng\u00a0máy, cả văn\u00a0phòng',
-    lead: 'Phòng máy ở trường dùng được CaramOS từ bản 1.4.0. Công ty dùng thử miễn phí CaramOS Doanh nghiệp để quản lý máy nhân viên, cài từ App Center.',
+    lead: 'Phòng máy ở trường dùng được CaramOS từ bản 1.4.0. Công ty dùng CaramOS Doanh nghiệp miễn phí để quản lý máy nhân viên, cài từ App Center.',
     education: {
       title: 'Phòng máy ở trường',
       who: 'Cho giáo viên Tin học và người lo phòng máy, kể cả phòng toàn máy cũ RAM 2 GB.',
@@ -999,7 +999,7 @@ Object.assign(copy.vi, {
     business: {
       title: 'Máy tính ở công ty',
       who: 'Cho công ty muốn quản lý máy nhân viên chạy CaramOS từ một máy, ngay trong mạng LAN của mình.',
-      status: 'Dùng thử miễn phí: cài từ App Center, bước Dùng cho công ty.',
+      status: 'Miễn phí: cài từ App Center, bước Dùng cho công ty.',
       points: [
         'Hình nền, trình duyệt, máy in, Wi-Fi và USB đặt cho cả công ty hoặc từng phòng ban.',
         'Máy tự kiểm kê; người quản trị xuất danh sách tài sản ra Excel.',
@@ -1123,7 +1123,7 @@ Object.assign(copy.en, {
     business: {
       title: 'Computers at the office',
       who: 'For companies that want to manage staff computers running CaramOS from one computer, on their own network.',
-      status: 'Free during the trial: install it from the App Center’s “For your company” step.',
+      status: 'Free: install it from the App Center’s “For your company” step.',
       points: [
         'Wallpaper, browsers, printers, Wi-Fi and USB, set for the whole company or one department.',
         'Computers take their own inventory; the asset list exports to Excel.',
@@ -1262,7 +1262,7 @@ Object.assign(copy.vi, {
       ['Menu bo tròn góc', 'Menu Start và menu chuột phải bo tròn góc, theo góp ý của các bạn trong nhóm Việt Nam Linux Family.'],
       ['Trung tâm cập nhật và App Center có giao diện mới', 'Gọn và dễ đọc hơn, giống các ứng dụng khác trong máy. App Center tìm ra ứng dụng cả khi gõ không dấu.'],
       ['Ứng dụng nhẹ hơn trên máy yếu', 'Máy từ 4 GB RAM trở xuống hoặc chưa có driver card đồ họa: App Center, Kiểm tra driver, Góp ý & hỗ trợ và Phòng máy mỗi cái dùng ít hơn 52–79 MB RAM.'],
-      ['App Center có bước Dùng cho công ty', 'CaramOS Doanh nghiệp để quản lý máy nhân viên trong mạng công ty, đang dùng thử miễn phí; và Remmina để dùng máy Windows từ xa.', '/doanh-nghiep/'],
+      ['App Center có bước Dùng cho công ty', 'CaramOS Doanh nghiệp để quản lý máy nhân viên trong mạng công ty, miễn phí; và Remmina để dùng máy Windows từ xa.', '/doanh-nghiep/'],
     ],
     moreLink: 'Xem trang Doanh nghiệp',
     allNotes: 'Xem mọi thay đổi của bản 1.5.0',
@@ -1342,7 +1342,7 @@ Object.assign(copy.en, {
       ['Round menus', 'The Start menu and right-click menus have round corners, as members of the Việt Nam Linux Family group suggested.'],
       ['A new look for the Update Center and the App Center', 'Cleaner and easier to read, in line with the other apps. The App Center finds apps even when you type without accents.'],
       ['Lighter apps on modest computers', 'With 4 GB of RAM or less, or without a graphics driver, the App Center, Driver Check, Feedback & Help and Computer Lab each use 52–79 MB less RAM.'],
-      ['A “For your company” step in the App Center', 'CaramOS Business, free during its trial, to manage staff computers on the office network, and Remmina to use a Windows computer remotely.', '/en/business/'],
+      ['A “For your company” step in the App Center', 'CaramOS Business, free, to manage staff computers on the office network, and Remmina to use a Windows computer remotely.', '/en/business/'],
     ],
     moreLink: 'See the Business page',
     allNotes: 'Every change in 1.5.0',
@@ -1486,20 +1486,20 @@ Object.assign(copy.vi, {
   business: {
     seo: {
       title: 'CaramOS Doanh nghiệp: quản lý máy văn phòng trong mạng công ty',
-      description: 'Một máy quản lý đặt thiết lập cho máy nhân viên theo phòng ban, kiểm kê tài sản ra Excel, hỗ trợ từ xa khi nhân viên đồng ý. Đang dùng thử miễn phí, cài từ App Center, không qua đám mây.',
+      description: 'Một máy quản lý đặt thiết lập cho máy nhân viên theo phòng ban, kiểm kê tài sản ra Excel, hỗ trợ từ xa khi nhân viên đồng ý. Miễn phí, cài từ App Center, không qua đám mây.',
       ogAlt: 'CaramOS Doanh nghiệp: một máy quản lý cho cả văn phòng',
     },
     cta: 'Góp ý',
     hero: {
       title: 'Quản lý cả văn\u00a0phòng từ một máy',
       lead: 'CaramOS Doanh nghiệp đặt hình nền, trình duyệt, máy in, Wi-Fi và USB cho máy nhân viên theo từng phòng ban, tự kiểm kê tài sản và giúp nhân viên từ xa khi họ đồng ý. Mọi thứ chạy trong mạng LAN của công ty, không qua đám mây.',
-      status: ['Đang dùng thử miễn phí.', 'Cài từ App Center, bước Dùng cho công ty, trên máy quản lý và từng máy nhân viên. Sau giai đoạn dùng thử có thể thu phí; công ty đang dùng sẽ được báo trước.'],
+      status: ['Miễn phí.', 'Cài từ App Center, bước Dùng cho công ty, trên máy quản lý và từng máy nhân viên.'],
       cta: 'Xem cách bắt đầu',
       mapLink: 'Xem sơ đồ',
       facts: [
         ['Tắt cho đến khi bạn bật', 'người quản trị bật từng tính năng, cho cả công ty hoặc một phòng ban'],
         ['Trong mạng của công ty', 'máy quản lý là một máy CaramOS ở văn phòng, không qua đám mây'],
-        ['Miễn phí khi dùng thử', 'cho máy chạy CaramOS, bản Cinnamon hoặc Xfce'],
+        ['Miễn phí', 'cho máy chạy CaramOS, bản Cinnamon hoặc Xfce'],
       ],
       // Screenshots of CaramOS Doanh nghiệp 0.3.0 on CaramOS 1.5.0 VMs with a demo company: machine names, logins and
       // people are made up; the IPs are the test network's.
@@ -1611,7 +1611,7 @@ Object.assign(copy.vi, {
       title: 'Doanh nghiệp hay hỏi',
       items: [
         ['Cài ở đâu?', 'Trong App Center của CaramOS, ở bước Dùng cho công ty. Cài xong, mở CaramOS Doanh nghiệp và chọn máy này là máy quản lý hay máy nhân viên.'],
-        ['Có mất phí không?', 'Hiện chưa: CaramOS Doanh nghiệp đang trong giai đoạn dùng thử miễn phí. Sau này có thể thu phí cho doanh nghiệp; nếu có, công ty đang dùng sẽ được báo trước. Bản thân CaramOS vẫn miễn phí.'],
+        ['Có mất phí không?', 'Không. CaramOS Doanh nghiệp miễn phí, như chính CaramOS. Dự án sống nhờ tiền Đồng hành của người dùng; công ty thấy CaramOS có ích thì có thể góp qua nút Đồng hành ở góc dưới bên phải trang.'],
         ['Có cần Internet hay dịch vụ đám mây không?', 'Không cần đám mây. Máy quản lý là một máy CaramOS trong văn phòng; thiết lập, kiểm kê và hỗ trợ từ xa đi trong mạng LAN của công ty. Internet chỉ cần để tải phần mềm và bản cập nhật.'],
         ['Công ty có xem được nhân viên làm gì không?', 'Không. Không chụp màn hình, không ghi phím, không lưu lịch sử web, không định vị. Màn hình chỉ được xem khi nhân viên đồng ý cho hỗ trợ từ xa.'],
         ['Có quản lý được máy Windows không?', 'Không. CaramOS Doanh nghiệp chỉ quản lý máy chạy CaramOS, bản Cinnamon hoặc Xfce.'],
@@ -1781,20 +1781,20 @@ Object.assign(copy.en, {
   business: {
     seo: {
       title: 'CaramOS Business: manage office computers on your own network',
-      description: 'One admin computer sets up staff computers by department, keeps the asset list in Excel and gives remote help when staff accept. Free during the trial, installed from the App Center, no cloud.',
+      description: 'One admin computer sets up staff computers by department, keeps the asset list in Excel and gives remote help when staff accept. Free, installed from the App Center, no cloud.',
       ogAlt: 'CaramOS Business: one admin computer for the whole office',
     },
     cta: 'Feedback',
     hero: {
       title: 'Manage the whole office from one computer',
       lead: 'CaramOS Business sets the wallpaper, browsers, printers, Wi-Fi and USB rules of staff computers by department, takes the asset inventory by itself and lets IT help staff remotely once they accept. It all runs on the company’s own network, with no cloud.',
-      status: ['Free during the trial.', 'Install it from the App Center’s “For your company” step, on the admin computer and on each staff computer. After the trial it may become paid; companies using it will be told in advance.'],
+      status: ['Free.', 'Install it from the App Center’s “For your company” step, on the admin computer and on each staff computer.'],
       cta: 'See how to start',
       mapLink: 'See the diagram',
       facts: [
         ['Off until you turn it on', 'the admin turns each feature on, for the whole company or one department'],
         ['On your own network', 'the admin computer is a CaramOS computer in your office, no cloud'],
-        ['Free during the trial', 'for computers running CaramOS, Cinnamon or Xfce'],
+        ['Free', 'for computers running CaramOS, Cinnamon or Xfce'],
       ],
       image: [`${shots}/business-overview-030.webp`, 'The Overview page of CaramOS Business on the admin computer, in Vietnamese: 2 staff computers on, 1 new computer waiting for approval, and an employee asking for help because the computer is slow'],
       caption: 'The Overview on the admin computer, in Vietnamese: which computers are on, which wait for approval, who is asking for help, which need a look.',
@@ -1904,7 +1904,7 @@ Object.assign(copy.en, {
       title: 'What companies ask',
       items: [
         ['Where do I install it?', 'From the CaramOS App Center, at its “For your company” step. Once installed, open CaramOS Business and choose whether this is the admin computer or a staff computer.'],
-        ['Does it cost anything?', 'Not now: CaramOS Business is free during its trial period. It may become paid for companies later; if so, companies using it will be told in advance. CaramOS itself stays free.'],
+        ['Does it cost anything?', 'No. CaramOS Business is free, like CaramOS itself. The project lives on donations from its users; if CaramOS helps your company, you can chip in with the Support button at the bottom right of the page.'],
         ['Does it need the internet or a cloud service?', 'No cloud. The admin computer is a CaramOS computer in your office; settings, inventory and remote help travel on the company network. The internet is needed only for downloading software and updates.'],
         ['Can the company see what staff do?', 'No. No screenshots, no keystroke logging, no browsing history, no location. A screen is seen only when the employee accepts remote help.'],
         ['Can it manage Windows computers?', 'No. CaramOS Business manages computers running CaramOS, Cinnamon or Xfce, only.'],

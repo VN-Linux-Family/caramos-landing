@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+# Download links: each one sends a 3 GB ISO and counts a click.
+Disallow: /tai/
 
 Sitemap: https://caramos.vietnamlinuxfamily.net/sitemap.xml

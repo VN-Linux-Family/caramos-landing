@@ -7,6 +7,7 @@ export function sqliteD1(migrations) {
   const db = new DatabaseSync(':memory:');
   for (const name of migrations) db.exec(readFileSync(new URL(`../migrations/${name}`, import.meta.url), 'utf8'));
   const statement = (sql, values = []) => ({
+    sql,
     bind: (...next) => statement(sql, next),
     run: async () => {
       const result = db.prepare(sql).run(...values);
@@ -20,9 +21,10 @@ export function sqliteD1(migrations) {
   });
   return {
     prepare: (sql) => statement(sql),
+    // Like D1: each statement's rows (a SELECT) or its meta (a write).
     batch: async (statements) => {
       const results = [];
-      for (const item of statements) results.push(await item.run());
+      for (const item of statements) results.push(/^\s*SELECT/i.test(item.sql) ? await item.all() : await item.run());
       return results;
     },
     sqlite: db,

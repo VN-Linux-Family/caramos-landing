@@ -362,7 +362,7 @@ Learning apps in the App Center's "Learning and teaching" step: ${en.education.a
 
 ${urlOf('business', 'en')} (English), ${urlOf('business', 'vi')} (Vietnamese). ${en.business.hero.status.join(' ')}
 
-${en.business.hero.lead} Every feature is off until the admin turns it on, for the whole company or one department. It is free during the trial period and may become paid later.
+${en.business.hero.lead} Every feature is off until the admin turns it on, for the whole company or one department. It is free.
 
 ${en.business.settings.rows.map(([name, text]) => `- ${name}: ${text}`).join('\n')}
 

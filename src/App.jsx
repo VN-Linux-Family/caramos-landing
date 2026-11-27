@@ -332,7 +332,7 @@ function Screen({ figure, window: isWindow }) {
 }
 
 // Schools and companies on the home page, each with its real screen and a link to its own page: the school lab
-// with the picture on the left, the company manager (free trial) with the picture on the right. id="school" keeps
+// with the picture on the left, the company manager (free) with the picture on the right. id="school" keeps
 // the old #school links working.
 function Orgs({ t, lang }) {
   const { title, lead, education: e, business: b } = t.orgs;
@@ -751,7 +751,7 @@ function EducationPage({ lang }) {
   </>;
 }
 
-// /doanh-nghiep/ and /en/business/: CaramOS Doanh nghiệp, a free trial, with screenshots of version 0.3.0.
+// /doanh-nghiep/ and /en/business/: CaramOS Doanh nghiệp (free), with screenshots of version 0.3.0.
 function BusinessPage({ lang }) {
   const t = copy[lang];
   const b = t.business;

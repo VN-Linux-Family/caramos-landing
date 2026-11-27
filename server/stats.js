@@ -6,6 +6,16 @@ import { vietnamDay } from './downloads.js';
 import { utcDay } from './active.js';
 
 const DAYS = 30;
+// Rows that are not a person's click (server/downloads.js, migrations/0005_download_kinds.sql), in words.
+const REASON = {
+  'may-chu': 'Máy chủ trong trung tâm dữ liệu (Amazon, Google, Microsoft…)',
+  'khong-ngon-ngu': 'Chương trình tự động: không gửi ngôn ngữ như trình duyệt',
+  'dot-loat': 'Bấm từ ba nút trở lên trong một phút',
+  'bam-lai': 'Cùng người bấm lại cùng bản trong ngày',
+  'cu-may-chu': 'Trước khi có bộ lọc: máy chủ ở Mỹ và các đợt bấm hàng loạt',
+  'cu-bam-lai': 'Trước khi có bộ lọc: cùng nơi, cùng loại máy bấm lại cùng bản trong nửa giờ',
+};
+const KIND = { nguoi: 'Có', bot: 'Không: máy', lap: 'Không: bấm lại' };
 const COUNTRY = { VN: 'Việt Nam', US: 'Mỹ', JP: 'Nhật Bản', KR: 'Hàn Quốc', SG: 'Singapore', DE: 'Đức', FR: 'Pháp',
   AU: 'Úc', CA: 'Canada', GB: 'Anh', TW: 'Đài Loan', CN: 'Trung Quốc', TH: 'Thái Lan', KH: 'Campuchia', LA: 'Lào' };
 const OS = { windows: 'Windows', linux: 'Linux', mac: 'macOS', android: 'Android', ios: 'iPhone, iPad',
@@ -41,17 +51,20 @@ export async function readStats(db, now = new Date()) {
   const from7 = dayBefore(today, 6);
   const from30 = dayBefore(today, DAYS - 1);
   const activeFrom = dayBefore(utcDay(now), DAYS - 1);
+  const people = "kind = 'nguoi'";
   const queries = {
     totals: db.prepare('SELECT COUNT(*) AS total, COALESCE(SUM(day = ?1), 0) AS today, COALESCE(SUM(day >= ?2), 0) AS week, '
-      + 'COALESCE(SUM(day >= ?3), 0) AS month FROM downloads').bind(today, from7, from30),
-    editions: db.prepare('SELECT edition, mirror, COUNT(*) AS n FROM downloads GROUP BY edition, mirror ORDER BY n DESC'),
-    versions: db.prepare('SELECT version, COUNT(*) AS n FROM downloads GROUP BY version ORDER BY n DESC LIMIT 10'),
-    daily: db.prepare('SELECT day, edition, COUNT(*) AS n FROM downloads WHERE day >= ?1 GROUP BY day, edition').bind(from30),
-    places: db.prepare('SELECT country, region, city, COUNT(*) AS n FROM downloads GROUP BY country, region, city '
+      + `COALESCE(SUM(day >= ?3), 0) AS month FROM downloads WHERE ${people}`).bind(today, from7, from30),
+    editions: db.prepare(`SELECT edition, mirror, COUNT(*) AS n FROM downloads WHERE ${people} GROUP BY edition, mirror ORDER BY n DESC`),
+    versions: db.prepare(`SELECT version, COUNT(*) AS n FROM downloads WHERE ${people} GROUP BY version ORDER BY n DESC LIMIT 10`),
+    daily: db.prepare(`SELECT day, edition, COUNT(*) AS n FROM downloads WHERE ${people} AND day >= ?1 GROUP BY day, edition`).bind(from30),
+    places: db.prepare(`SELECT country, region, city, COUNT(*) AS n FROM downloads WHERE ${people} GROUP BY country, region, city `
       + 'ORDER BY n DESC LIMIT 20'),
-    sources: db.prepare('SELECT source, COUNT(*) AS n FROM downloads GROUP BY source ORDER BY n DESC LIMIT 15'),
-    systems: db.prepare('SELECT os, COUNT(*) AS n FROM downloads GROUP BY os ORDER BY n DESC'),
-    recent: db.prepare('SELECT at, edition, version, mirror, country, region, city, source, os FROM downloads '
+    sources: db.prepare(`SELECT source, COUNT(*) AS n FROM downloads WHERE ${people} GROUP BY source ORDER BY n DESC LIMIT 15`),
+    systems: db.prepare(`SELECT os, COUNT(*) AS n FROM downloads WHERE ${people} GROUP BY os ORDER BY n DESC`),
+    filtered: db.prepare(`SELECT reason, COUNT(*) AS n, COALESCE(SUM(day >= ?1), 0) AS month FROM downloads WHERE NOT (${people}) `
+      + 'GROUP BY reason ORDER BY n DESC').bind(from30),
+    recent: db.prepare('SELECT at, edition, version, mirror, country, region, city, source, os, kind, reason FROM downloads '
       + 'ORDER BY id DESC LIMIT 50'),
     active: db.prepare('SELECT day, COUNT(*) AS total, SUM(edition = \'cinnamon\') AS cinnamon, SUM(edition = \'xfce\') AS xfce '
       + 'FROM active_machines WHERE day >= ?1 GROUP BY day ORDER BY day DESC').bind(activeFrom),
@@ -137,6 +150,7 @@ tr:last-child td{border-bottom:0}.grid{display:grid;grid-template-columns:repeat
 <h1>Thống kê CaramOS</h1>
 <p class="dim">Cập nhật lúc ${escapeHtml(vietnamTime(now.toISOString()))}. Ngày tính theo giờ Việt Nam. Trang này không có trên Google; đừng chia sẻ đường dẫn.</p>
 <h2>Lượt tải ISO</h2>
+<p class="dim">Chỉ tính người bấm tải. Máy chủ, chương trình tự động và lượt bấm lại cùng bản trong ngày vẫn được ghi nhưng không tính (bảng Không tính bên dưới).</p>
 <div class="cards">${cards}</div>
 <h2>Lượt tải ${DAYS} ngày qua</h2>
 ${dailyChart(stats)}
@@ -146,9 +160,10 @@ ${dailyChart(stats)}
 <section><h2>Nơi tải</h2>${table(['Nơi', 'Lượt'], stats.places.map((r) => [place(r), r.n]))}</section>
 <section><h2>Đến từ</h2>${table(['Nguồn', 'Lượt'], stats.sources.map((r) => [SOURCE[r.source] || r.source, r.n]))}</section>
 <section><h2>Hệ điều hành của máy tải</h2>${table(['Hệ điều hành', 'Lượt'], stats.systems.map((r) => [OS[r.os] || r.os, r.n]))}</section>
+<section><h2>Không tính</h2>${table(['Lý do', '30 ngày', 'Tất cả'], (stats.filtered || []).map((r) => [REASON[r.reason] || r.reason || 'Không rõ', r.month, r.n]))}</section>
 </div>
-<h2>50 lượt tải gần nhất</h2>
-<div class="scroll">${table(['Lúc', 'Bản', 'Tải từ', 'Nơi', 'Nguồn', 'Máy'], stats.recent.map((r) => [vietnamTime(r.at), `${EDITION[r.edition] || r.edition} ${r.version}`, MIRROR[r.mirror] || r.mirror, place(r), SOURCE[r.source] || r.source, OS[r.os] || r.os]))}</div>
+<h2>50 lượt bấm gần nhất</h2>
+<div class="scroll">${table(['Lúc', 'Bản', 'Tải từ', 'Nơi', 'Nguồn', 'Máy', 'Tính'], stats.recent.map((r) => [vietnamTime(r.at), `${EDITION[r.edition] || r.edition} ${r.version}`, MIRROR[r.mirror] || r.mirror, place(r), SOURCE[r.source] || r.source, OS[r.os] || r.os, KIND[r.kind] || 'Có']))}</div>
 <h2>Máy đang dùng CaramOS mỗi ngày</h2>
 <p class="dim">Mỗi máy báo một lần một ngày (ngày theo giờ UTC) bằng một mã đổi mỗi ngày; máy tắt thống kê thì không báo.${lastActive ? ` Ngày gần nhất: ${escapeHtml(lastActive.total)} máy.` : ''}</p>
 <div class="grid">
