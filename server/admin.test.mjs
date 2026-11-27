@@ -19,9 +19,10 @@ async function environment() {
   };
 }
 
-function request(path, { method = 'GET', form, cookie, origin = ORIGIN, ip = '203.0.113.9' } = {}) {
+function request(path, { method = 'GET', form, cookie, origin = ORIGIN, fetchSite, ip = '203.0.113.9' } = {}) {
   const headers = { 'CF-Connecting-IP': ip };
   if (method === 'POST' && origin !== null) headers.Origin = origin;
+  if (fetchSite) headers['Sec-Fetch-Site'] = fetchSite;
   if (cookie) headers.Cookie = `${COOKIE}=${cookie}`;
   let body;
   if (form) {
@@ -77,6 +78,10 @@ test('signing in: the form, a wrong password, the cookie', async () => {
   assert.match(html, /<form class="card" method="post" action="\/quan-tri\/dang-nhap">/);
   assert.match(page.headers.get('Content-Security-Policy'), /frame-ancestors 'none'/);
   assert.equal(page.headers.get('X-Robots-Tag'), 'noindex, nofollow, noarchive');
+  // no-referrer made browsers send "Origin: null" with this very form (the sign-in answered Forbidden, 2026-11-27).
+  assert.equal(page.headers.get('Referrer-Policy'), 'same-origin');
+  assert.match(html, /<meta name="referrer" content="same-origin">/);
+  assert.doesNotMatch(html, /no-referrer/);
   const wrong = await handleAdmin(request('dang-nhap', { method: 'POST', form: { user: 'caramos', password: 'sai' } }), env,
     'dang-nhap', NOW);
   assert.equal(wrong.status, 401);
@@ -119,6 +124,25 @@ test('a POST from another site is refused, signed in or not', async () => {
     assert.equal(r.status, 403);
   }
   assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM notices').first()).n, 0);
+});
+
+test('a browser\'s own form counts by Sec-Fetch-Site, even with "Origin: null"; other sites stay out', async () => {
+  const env = await environment();
+  // What Chrome sent from a page with the old no-referrer policy (still open in a tab after the fix).
+  const browser = await handleAdmin(request('dang-nhap', { method: 'POST', origin: 'null', fetchSite: 'same-origin',
+    form: { user: 'caramos', password: PASSWORD } }), env, 'dang-nhap', NOW);
+  assert.equal(browser.status, 303);
+  const cookie = cookieValue(browser.headers.get('Set-Cookie'));
+  const saved = await handleAdmin(request('luu', { method: 'POST', cookie, origin: ORIGIN, fetchSite: 'same-origin',
+    form: { level: 'info', title_vi: 'x', body_vi: 'y' } }), env, 'luu', NOW);
+  assert.equal(saved.status, 303);
+  for (const [origin, fetchSite] of [['https://evil.example', 'cross-site'], ['null', 'cross-site'],
+    ['https://apps.vietnamlinuxfamily.net', 'same-site'], [ORIGIN, 'cross-site'], [null, 'none']]) {
+    const r = await handleAdmin(request('luu', { method: 'POST', cookie, origin, fetchSite,
+      form: { level: 'info', title_vi: 'z', body_vi: 'z' } }), env, 'luu', NOW);
+    assert.equal(r.status, 403, `${origin} ${fetchSite}`);
+  }
+  assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM notices').first()).n, 1);
 });
 
 test('without a session: the sign-in form, and nothing is changed', async () => {

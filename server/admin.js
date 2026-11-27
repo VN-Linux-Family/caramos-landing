@@ -4,8 +4,8 @@
 // <salt>$<hash>", made by scripts/admin-password.mjs), as is ADMIN_SESSION_SECRET, which signs the session cookie;
 // nothing of it is in this public repository, and without them /quan-tri answers 404. A session lasts 12 hours. Eight
 // failed sign-ins from one address in 15 minutes close the door for that address for 15 minutes; the address itself is
-// not stored, only an HMAC of it. Every POST must come from this site (Origin), and the cookie is SameSite=Strict. The
-// pages have no script, no outside resource, and cannot be framed.
+// not stored, only an HMAC of it. Every POST must come from this site (fromThisSite), and the cookie is SameSite=Strict.
+// The pages have no script, no outside resource, and cannot be framed.
 import { escapeHtml } from './stats.js';
 import {
   CONDITIONS, EDITIONS, LEVELS, LIMITS, deleteNotice, getNotice, listNotices, parseForm, saveNotice, vietnamFromUtc,
@@ -118,7 +118,9 @@ async function recordFailure(db, who, now = new Date()) {
 const HEADERS = {
   'Cache-Control': 'no-store',
   'X-Robots-Tag': 'noindex, nofollow, noarchive',
-  'Referrer-Policy': 'no-referrer',
+  // Not no-referrer: under it a browser sends "Origin: null" with the page's own forms, and fromThisSite refuses them.
+  // same-origin still sends nothing to other sites (a notice's link).
+  'Referrer-Policy': 'same-origin',
   'X-Frame-Options': 'DENY',
   'X-Content-Type-Options': 'nosniff',
   'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'",
@@ -127,7 +129,7 @@ const HEADERS = {
 function page(title, body, status = 200, extra = {}) {
   const html = `<!doctype html>
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="same-origin">
 <title>${escapeHtml(title)}</title>
 <style>
 :root{--bg:#f7f8f6;--fg:#1d2420;--dim:#5e6862;--line:#dfe4e0;--card:#fff;--accent:#2f7d4f;--warn:#b7791f;--bad:#b42318}
@@ -246,6 +248,15 @@ function sessionCookie(value, maxAge) {
   return `${COOKIE}=${value}; Path=/quan-tri; Max-Age=${maxAge}; HttpOnly; Secure; SameSite=Strict`;
 }
 
+// A POST sent by a page of this site. Browsers say so in Sec-Fetch-Site, which no page script can set, and in Origin
+// unless the sending page's referrer policy is no-referrer: then Origin is "null" (a page opened before the policy
+// changed). Another site's form or script gets Sec-Fetch-Site cross-site or same-site and its own Origin.
+export function fromThisSite(request, url) {
+  const site = request.headers.get('Sec-Fetch-Site');
+  if (site) return site === 'same-origin';
+  return request.headers.get('Origin') === url.origin;
+}
+
 function idFrom(form) {
   const id = Number(form.get('id'));
   return Number.isInteger(id) && id > 0 ? id : null;
@@ -256,7 +267,7 @@ export async function handleAdmin(request, env, path, now = new Date()) {
   if (!configured(env)) return notFound();
   const url = new URL(request.url);
   const method = request.method.toUpperCase();
-  if (method === 'POST' && request.headers.get('Origin') !== url.origin) {
+  if (method === 'POST' && !fromThisSite(request, url)) {
     return new Response('Forbidden', { status: 403, headers: { ...HEADERS, 'Content-Type': 'text/plain; charset=utf-8' } });
   }
   const db = env.DB;
