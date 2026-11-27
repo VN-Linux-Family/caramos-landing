@@ -535,7 +535,7 @@ function Upgrade({ t, copied, onCopy }) {
 function ReleaseNotes({ t }) {
   const entries = [...t.releaseNotes, t.initialRelease];
   return <section className="section release-notes" id="release-notes" aria-labelledby="release-title">
-    <SectionHead id="release-title" title={t.releaseNotesTitle} lead={t.releaseNotesLead} />
+    <SectionHead id="release-title" title={t.releaseNotesTitle} lead={t.releaseNotesLead(entries[0][0])} />
     <div className="release-list" role="region" aria-label={t.releaseListLabel} tabIndex={0}>
       {entries.map(([version, title, items], index) => <article key={version} className={`release${index === 0 ? ' is-latest' : ''}`}>
         <p className="release-version">{version}{index === 0 && <span>{t.releaseCurrent}</span>}</p>

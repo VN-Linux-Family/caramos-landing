@@ -303,12 +303,18 @@ export const copy = {
     ],
     releaseNotesTitle: 'Có gì mới qua từng bản',
     releaseNotesLead:
-      `${VERSION} là bản mới nhất. 1.3.0 là bản phát hành chính thức đầu tiên của CaramOS; các bản 1.0.x trước đó là Open Beta. Cuộn danh sách để xem những thay đổi đáng chú ý của từng bản.`,
+      (latest) => `${latest} là bản mới nhất. 1.3.0 là bản phát hành chính thức đầu tiên của CaramOS; các bản 1.0.x trước đó là Open Beta. Cuộn danh sách để xem những thay đổi đáng chú ý của từng bản.`,
     releaseListLabel: 'Danh sách các bản phát hành, cuộn để xem thêm',
     releaseCurrent: 'Mới nhất',
     releaseScrollHint: 'Cuộn để xem các bản trước ↓',
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
+      // A hotfix: CaramOS's own programs only, no ISO (docs/release-version-tracking.md); VERSION stays the ISO's.
+      ['1.5.2.1', 'Máy dùng bản cũ tự lên bản mới; máy Cinnamon không còn thấy mục cập nhật của Xfce', [
+        'Máy còn ở CaramOS 1.3.3 trở về trước (các bản 1.0.x, 1.3.0 đến 1.3.3) trước giờ gần như không tự lên bản mới, vì các bản cập nhật cũ chỉ được tự cài khi không ai đăng nhập. Giờ máy cài bản đó ở lần khởi động sau, trước màn hình đăng nhập; màn hình khởi động ghi “Đang cập nhật CaramOS” kèm số bước đã xong, thường mất vài phút.',
+        'Việc này chỉ diễn ra một lần duy nhất với mỗi máy dùng bản cũ. Sau đó máy tự cập nhật ngầm trong lúc bạn làm việc như các bản mới.',
+        'Máy Cinnamon không còn thấy mục “Thông báo hiện ở góc dưới bên phải”, vốn chỉ dành cho bản Xfce.',
+      ]],
       ['1.5.2', 'Cài ứng dụng từ trang web bằng một nút, Phòng máy ổn định, Zalo và Lark không tự đăng xuất', [
         'Trên apps.vietnamlinuxfamily.net, bấm Cài trên CaramOS là App Center mở đúng ứng dụng đó để cài, không phải gõ lệnh. App Center 0.4.0 có thêm nhóm Tin học cho các em (Tux Typing, KTouch, KolourPaint, Klickety và trang tập dùng chuột không quảng cáo), nhóm Lập trình, Toán, Khoa học và soạn bài giảng (eXeLearning, LeoCAD, Polypad), nhóm Phim, nhạc, ảnh và thiết kế (VLC, Spotify, OBS, Kdenlive, GIMP, Inkscape), cùng Obsidian, RustDesk, AnyDesk và OpenConnect cho VPN công ty.',
         'Phòng máy: máy học sinh không tự khóa, tắt màn hình hay ngủ trong giờ học; Veyon tự chạy lại khi bị tắt, nên Veyon Master không còn ô màu cam. Khóa màn hình và Trình chiếu toàn màn hình hiện đúng trên máy học sinh. Máy đã rời phòng máy không tự bật Veyon nữa.',
@@ -701,12 +707,17 @@ export const copy = {
     ],
     releaseNotesTitle: 'Release notes',
     releaseNotesLead:
-      `${VERSION} is the latest release. 1.3.0 was the first official CaramOS release; the 1.0.x releases before it were Open Beta. Scroll the list for the notable changes of each release.`,
+      (latest) => `${latest} is the latest release. 1.3.0 was the first official CaramOS release; the 1.0.x releases before it were Open Beta. Scroll the list for the notable changes of each release.`,
     releaseListLabel: 'Releases, scroll for more',
     releaseCurrent: 'Latest',
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
+      ['1.5.2.1', 'Older computers update themselves; Cinnamon no longer lists an Xfce update', [
+        'Computers on CaramOS 1.3.3 or older (the 1.0.x releases and 1.3.0 to 1.3.3) almost never updated by themselves, because their older updates only install when nobody is logged in. They now install that update at the next start, before the login screen, with “Updating CaramOS” and the steps done on the start-up screen; it usually takes a few minutes.',
+        'This happens only once on each older computer. After it, updates install in the background while you work, as on the newer versions.',
+        'Cinnamon computers no longer list “Notifications at the bottom right”, which is only for the Xfce edition.',
+      ]],
       ['1.5.2', 'One-button installs from the apps website, a steady Computer Lab, Zalo and Lark stay signed in', [
         'On apps.vietnamlinuxfamily.net, Install on CaramOS opens the App Center on that app, with no command to type. App Center 0.4.0 adds a Computer skills for children step (Tux Typing, KTouch, KolourPaint, Klickety and ad-free mouse practice websites), a Programming, maths, science and lessons step (eXeLearning, LeoCAD, Polypad) and a Video, music, photos and design step (VLC, Spotify, OBS, Kdenlive, GIMP, Inkscape), plus Obsidian, RustDesk, AnyDesk and OpenConnect for company VPNs.',
         'Computer Lab: students’ computers no longer lock, blank or sleep during the lesson; Veyon starts again when it stops, so Veyon Master no longer shows orange tiles. Lock and the full-screen Demo show on the students’ computers. A computer that left the lab no longer starts Veyon.',
