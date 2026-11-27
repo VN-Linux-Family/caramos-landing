@@ -310,6 +310,14 @@ export const copy = {
     initialRelease: ['1.0.1', 'Phát hành đầu tiên', ['Bản Open Beta đầu tiên của CaramOS dành cho người dùng Việt Nam.', 'Cung cấp nền tảng Linux Mint 22.3 Cinnamon với cấu hình tiếng Việt, branding CaramOS và bộ ứng dụng cơ bản.']],
     releaseNotes: [
       // A hotfix: CaramOS's own programs only, no ISO (docs/release-version-tracking.md); VERSION stays the ISO's.
+      ['1.5.2.3', 'Máy kiểm tra cập nhật sau mỗi lần mở máy', [
+        'Ngoài lần kiểm tra lúc nửa đêm, máy kiểm tra cập nhật khoảng 15 phút sau mỗi lần mở máy. Máy văn phòng hay phòng máy tắt trước nửa đêm giờ nhận bản sửa ngay trong ngày được dùng, không phải chờ tới lần mở máy sau.',
+        'Lịch mới có hiệu lực từ lần mở máy đầu tiên sau khi cập nhật.',
+      ]],
+      ['1.5.2.2', 'Thanh âm lượng bản Xfce hiện đúng sau khi máy tự cập nhật', [
+        'Bản Xfce: máy tự cập nhật trong lúc bạn đang dùng thì thanh âm lượng hiện trong một khung cao, thay vì thanh dẹt có số phần trăm, cho tới lần đăng nhập sau. Giờ thanh âm lượng hiện đúng ngay, không cần đăng xuất.',
+        'Bản cập nhật nào đổi Trung tâm điều khiển thì Trung tâm điều khiển khởi động lại ngay sau khi cài: đồng hồ và nút Trung tâm điều khiển trên thanh tác vụ tắt đi vài giây rồi hiện lại.',
+      ]],
       ['1.5.2.1', 'Máy dùng bản cũ tự lên bản mới; máy Cinnamon không còn thấy mục cập nhật của Xfce', [
         'Máy còn ở CaramOS 1.3.3 trở về trước (các bản 1.0.x, 1.3.0 đến 1.3.3) trước giờ gần như không tự lên bản mới, vì các bản cập nhật cũ chỉ được tự cài khi không ai đăng nhập. Giờ máy cài bản đó ở lần khởi động sau, trước màn hình đăng nhập; màn hình khởi động ghi “Đang cập nhật CaramOS” kèm số bước đã xong, thường mất vài phút.',
         'Việc này chỉ diễn ra một lần duy nhất với mỗi máy dùng bản cũ. Sau đó máy tự cập nhật ngầm trong lúc bạn làm việc như các bản mới.',
@@ -713,6 +721,14 @@ export const copy = {
     releaseScrollHint: 'Scroll for earlier releases ↓',
     initialRelease: ['1.0.1', 'First release', ['The first CaramOS Open Beta for Vietnamese users.', 'Provided a Linux Mint 22.3 Cinnamon base with Vietnamese defaults, CaramOS branding, and essential applications.']],
     releaseNotes: [
+      ['1.5.2.3', 'The computer checks for updates after each start', [
+        'Besides the check at midnight, the computer checks for updates about 15 minutes after each start. Office and school computers that are off before midnight now get fixes on the day they are used, instead of at their next start.',
+        'The new schedule applies from the first start after the update.',
+      ]],
+      ['1.5.2.2', 'The Xfce sound level looks right after an automatic update', [
+        'Xfce edition: when the computer updated itself while you worked, the sound level showed in a tall box instead of the slim bar with the percentage, until the next login. It now looks right at once, without logging out.',
+        'An update that changes the Control Center starts it again as soon as it is installed: the clock and the Control Center button on the taskbar go away for a few seconds, then come back.',
+      ]],
       ['1.5.2.1', 'Older computers update themselves; Cinnamon no longer lists an Xfce update', [
         'Computers on CaramOS 1.3.3 or older (the 1.0.x releases and 1.3.0 to 1.3.3) almost never updated by themselves, because their older updates only install when nobody is logged in. They now install that update at the next start, before the login screen, with “Updating CaramOS” and the steps done on the start-up screen; it usually takes a few minutes.',
         'This happens only once on each older computer. After it, updates install in the background while you work, as on the newer versions.',
