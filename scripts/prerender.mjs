@@ -42,9 +42,58 @@ const org = {
   '@type': 'Organization',
   '@id': 'https://vietnamlinuxfamily.net/#organization',
   name: 'Vietnam Linux Family',
+  alternateName: 'VNLF',
   url: 'https://vietnamlinuxfamily.net/',
+  email: links.contactEmail,
+  areaServed: { '@type': 'Country', name: 'Vietnam' },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    email: links.contactEmail,
+    availableLanguage: ['vi', 'en'],
+  },
   sameAs: [links.org, links.facebook, links.telegram, links.discord],
 };
+
+// What each page answers, in the words people search with (2026-11-28: "Linux cho người Việt", "Linux cho doanh
+// nghiệp", "Linux cho trường học"). One owning page per group, so the pages do not compete with each other. They go
+// into the pages' JSON-LD `keywords`; the visible copy (src/content.js) carries the same words in its titles.
+const keywordsOf = {
+  home: {
+    vi: ['Linux cho người Việt', 'hệ điều hành Linux tiếng Việt', 'Linux tiếng Việt', 'hệ điều hành miễn phí',
+      'thay thế Windows', 'Linux Mint tiếng Việt', 'gõ tiếng Việt trên Linux', 'Zalo trên Linux', 'máy tính cũ'],
+    en: ['Linux for Vietnamese users', 'Vietnamese Linux distribution', 'free operating system', 'Windows alternative',
+      'Linux Mint', 'Vietnamese typing on Linux', 'Zalo on Linux'],
+  },
+  education: {
+    vi: ['Linux cho trường học', 'Linux cho giáo dục', 'phòng máy Tin học', 'quản lý phòng máy',
+      'phần mềm học tập miễn phí', 'máy tính cũ cho trường học', 'Veyon', 'Epoptes'],
+    en: ['Linux for schools', 'Linux for education', 'school computer lab', 'computer lab management',
+      'free learning apps', 'Veyon', 'Epoptes'],
+  },
+  business: {
+    vi: ['Linux cho doanh nghiệp', 'hệ điều hành miễn phí cho doanh nghiệp', 'phần mềm hợp pháp',
+      'thay Windows không bản quyền', 'quản lý máy tính văn phòng', 'kiểm kê máy tính', 'hỗ trợ từ xa',
+      'bộ văn phòng miễn phí'],
+    en: ['Linux for business', 'Linux for companies in Vietnam', 'free operating system for companies',
+      'office computer management', 'IT asset inventory', 'remote support', 'free office suite'],
+  },
+};
+const keywords = (page, lang) => keywordsOf[page][lang].join(', ');
+
+// The visible questions of a page, as FAQPage. Google stopped showing FAQ rich results in 2026; other search
+// engines and AI assistants still read the markup.
+const faqNode = (url, inLanguage, items) => ({
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  inLanguage,
+  isPartOf: { '@id': `${url}#webpage` },
+  mainEntity: items.map(([question, answer]) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+});
 
 // Head tags and JSON-LD are read by machines: no word joiners from typeset (src/content.js) in them.
 const escape = (text) => String(text).replace(/\u2060/g, '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -76,6 +125,7 @@ function landingGraph(lang, url) {
         inLanguage,
         isPartOf: { '@id': `${SITE}/#website` },
         about: { '@id': software },
+        keywords: keywords('home', lang),
         primaryImageOfPage: ogImage,
         dateModified: today,
       },
@@ -83,9 +133,14 @@ function landingGraph(lang, url) {
         '@type': 'SoftwareApplication',
         '@id': software,
         name: 'CaramOS',
+        alternateName: 'CaramOS Linux',
         description: t.seo.description,
         applicationCategory: 'OperatingSystem',
+        applicationSubCategory: lang === 'vi' ? 'Bản phân phối Linux dựa trên Linux Mint' : 'Linux distribution based on Linux Mint',
         operatingSystem: 'Linux',
+        countriesSupported: 'VN',
+        keywords: keywords('home', lang),
+        featureList: t.features.map((feature) => feature.title),
         softwareVersion: VERSION,
         datePublished: RELEASE_DATE,
         releaseNotes: links.release,
@@ -113,27 +168,36 @@ function landingGraph(lang, url) {
         license: 'https://www.gnu.org/licenses/gpl-3.0.html',
         targetProduct: { '@id': software },
       },
-      {
-        // Describes the visible questions below; Google no longer shows FAQ rich results, other engines read it.
-        '@type': 'FAQPage',
-        '@id': `${url}#faq`,
-        inLanguage,
-        mainEntity: t.faq.items.map(([question, answer]) => ({
-          '@type': 'Question',
-          name: question,
-          acceptedAnswer: { '@type': 'Answer', text: answer },
-        })),
-      },
+      faqNode(url, inLanguage, t.faq.items),
     ],
   };
 }
 
-// The Education and Business pages: a WebPage in the same graph as the home page, with its audience and a
-// breadcrumb back home. Their questions are plain HTML, without FAQPage markup.
+// The Education and Business pages: a WebPage in the same graph as the home page, with its audience, its
+// questions as FAQPage and a breadcrumb back home. The Business page also describes CaramOS Doanh nghiệp itself;
+// the Education page names the two classroom tools it sets up (Veyon, Epoptes).
 function pageGraph(lang, url, page) {
   const t = copy[lang];
   const p = t[page];
   const home = `${SITE}${pathOf('home', lang)}`;
+  const inLanguage = lang === 'vi' ? 'vi-VN' : 'en-US';
+  const businessApp = `${SITE}/doanh-nghiep/#software`;
+  const extra = page === 'business'
+    ? [{
+      '@type': 'SoftwareApplication',
+      '@id': businessApp,
+      name: lang === 'vi' ? 'CaramOS Doanh nghiệp' : 'CaramOS Business',
+      description: p.seo.description,
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'CaramOS (Linux)',
+      isAccessibleForFree: true,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'VND' },
+      featureList: p.settings.rows.map(([name]) => name),
+      inLanguage: ['vi-VN', 'en-US'],
+      isPartOf: { '@id': `${SITE}/#software` },
+      publisher: { '@id': org['@id'] },
+    }]
+    : [];
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -152,16 +216,25 @@ function pageGraph(lang, url, page) {
         url,
         name: p.seo.title,
         description: p.seo.description,
-        inLanguage: lang === 'vi' ? 'vi-VN' : 'en-US',
+        inLanguage,
         isPartOf: { '@id': `${SITE}/#website` },
-        about: { '@id': `${SITE}/#software` },
+        about: page === 'business' ? [{ '@id': businessApp }, { '@id': `${SITE}/#software` }] : { '@id': `${SITE}/#software` },
         audience: page === 'education'
           ? { '@type': 'EducationalAudience', educationalRole: 'teacher' }
           : { '@type': 'BusinessAudience' },
+        ...(page === 'education' ? {
+          mentions: [
+            { '@type': 'SoftwareApplication', name: 'Veyon', url: 'https://veyon.io/', applicationCategory: 'EducationalApplication' },
+            { '@type': 'SoftwareApplication', name: 'Epoptes', url: 'https://epoptes.org/', applicationCategory: 'EducationalApplication' },
+          ],
+        } : {}),
+        keywords: keywords(page, lang),
         breadcrumb: { '@id': `${url}#breadcrumb` },
         primaryImageOfPage: ogImage,
         dateModified: today,
       },
+      ...extra,
+      faqNode(url, inLanguage, p.faq.items),
       {
         '@type': 'BreadcrumbList',
         '@id': `${url}#breadcrumb`,
@@ -179,6 +252,8 @@ function headFor(page) {
     `<title>${escape(page.title)}</title>`,
     `<meta name="description" content="${escape(page.description)}" />`,
     `<meta http-equiv="content-language" content="${page.lang}" />`,
+    // Let search engines show a large picture and a full-length snippet of the page.
+    `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />`,
     `<link rel="canonical" href="${page.url}" />`,
   ];
   if (page.alternates) {
@@ -261,7 +336,7 @@ for (const { page, lang, path } of routes) {
   } else if (page === 'support') {
     build({
       lang, file, url,
-      title: 'Ủng hộ CaramOS — Vietnam Linux Family',
+      title: 'Ủng hộ CaramOS, Linux cho người Việt | Vietnam Linux Family',
       description: 'Ủng hộ CaramOS qua MoMo, PayPal, Ko-fi, Buy Me a Coffee hoặc USDT TRC20, để dự án Linux cho người Việt sống lâu dài.',
       ogAlt: copy.vi.seo.ogAlt,
       body: render(page, lang),
@@ -289,7 +364,7 @@ writeFileSync(join(dist, '404.html'), `<!doctype html>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
-    <title>Không tìm thấy trang — CaramOS</title>
+    <title>Không tìm thấy trang | CaramOS</title>
     <link rel="icon" href="/assets/CaramOS_logo.png" />
     <style>
       body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #fff; color: #15291d; font: 17px/1.6 system-ui, sans-serif; }
@@ -338,6 +413,12 @@ const llms = `# CaramOS
 - Source code (GPL-3.0): ${links.repo}
 - Community: ${links.facebook}, ${links.telegram}, ${links.discord}
 
+## Linux cho người Việt (Linux for Vietnamese users)
+
+${vi.seo.description}
+
+${en.seo.description}
+
 ## ${news.title}
 
 ${news.lead}
@@ -348,9 +429,11 @@ ${news.blocks.map((block) => `### ${block.title}\n\n${block.lead}\n\n${block.poi
 
 ${news.more.map(([title, text]) => `- **${title}.** ${text}`).join('\n')}
 
-## CaramOS for schools
+## Linux for schools: CaramOS in school computer labs (Linux cho trường học)
 
 ${urlOf('education', 'en')} (English), ${urlOf('education', 'vi')} (Vietnamese). ${en.education.seo.description}
+
+${vi.education.seo.description}
 
 ${en.education.lab.lead}
 
@@ -358,15 +441,33 @@ ${[en.education.oldPcs, en.education.textbook].map((block) => `${block.lead}`).j
 
 Learning apps in the App Center's "Learning and teaching" step: ${en.education.apps.groups.flatMap(([, apps]) => apps.map(([name, text]) => `${name} (${text.charAt(0).toLowerCase()}${text.slice(1)})`)).join('; ')}.
 
-## CaramOS Business
+### ${en.education.faq.title}
+
+${en.education.faq.items.map(([question, answer]) => `- **${question}** ${answer}`).join('\n')}
+
+### ${vi.education.faq.title}
+
+${vi.education.faq.items.map(([question, answer]) => `- **${question}** ${answer}`).join('\n')}
+
+## Linux for companies: CaramOS Business (Linux cho doanh nghiệp)
 
 ${urlOf('business', 'en')} (English), ${urlOf('business', 'vi')} (Vietnamese). ${en.business.hero.status.join(' ')}
+
+${vi.business.seo.description}
 
 ${en.business.hero.lead} Every feature is off until the admin turns it on, for the whole company or one department. It is free.
 
 ${en.business.settings.rows.map(([name, text]) => `- ${name}: ${text}`).join('\n')}
 
 ${en.business.privacy.title}: ${en.business.privacy.lead} Never: ${en.business.privacy.never.join(', ').toLowerCase()}. ${en.business.privacy.law}
+
+### ${en.business.faq.title}
+
+${en.business.faq.items.map(([question, answer]) => `- **${question}** ${answer}`).join('\n')}
+
+### ${vi.business.faq.title}
+
+${vi.business.faq.items.map(([question, answer]) => `- **${question}** ${answer}`).join('\n')}
 
 Feedback and feature requests: ${links.contactEmail}.
 
