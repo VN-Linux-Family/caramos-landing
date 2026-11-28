@@ -553,7 +553,8 @@ function Faq({ t }) {
   return <Questions id="faq" title={t.faq.title} items={t.faq.items} />;
 }
 
-// Questions and answers as plain HTML; no FAQ markup for search engines on the Education and Business pages.
+// Questions and answers as plain HTML. scripts/prerender.mjs describes the same items as FAQPage JSON-LD on the
+// home, Education and Business pages.
 function Questions({ id, title, items }) {
   return <section className="section faq" id={id} aria-labelledby={`${id}-title`}>
     <SectionHead id={`${id}-title`} title={title} />
@@ -1040,8 +1041,8 @@ function SupportPage() {
     </header>
     <main className="support-page-main">
       <section className="support-page-hero">
-        <h1>Fund the Future of CaramOS</h1>
-        <p>CaramOS miễn phí và luôn hướng đến cộng đồng. Sự ủng hộ của bạn giúp chúng tôi duy trì hạ tầng, thử nghiệm ISO, cải thiện tính năng, viết tài liệu và giữ dự án sống lâu dài. Dù nhỏ hay lớn, mọi đóng góp đều rất đáng quý!</p>
+        <h1>Ủng hộ CaramOS</h1>
+        <p>CaramOS miễn phí cho mọi người. Tiền ủng hộ giúp bọn mình duy trì hạ tầng, thử từng bản ISO, làm tiếp tính năng và viết tài liệu. Bao nhiêu cũng quý.</p>
       </section>
 
       <DongHanhSection lang="vi" />
@@ -1050,14 +1051,14 @@ function SupportPage() {
         <div className="featured-info">
           <div className="donation-icon-row">
             <DonationIcon name="momo" />
-            <div><h2>MoMo</h2><p>Accepts transfers from <strong>all Vietnamese banks</strong></p></div>
+            <div><h2>MoMo</h2><p>Nhận chuyển khoản từ <strong>mọi ngân hàng Việt Nam</strong></p></div>
           </div>
-          <p className="featured-recipient">Recipient: <strong>Lê Viết Dũng</strong></p>
-          <a className="btn btn-green" href="https://nhantien.momo.vn/0947287893" {...newTab}>Donate via MoMo</a>
+          <p className="featured-recipient">Người nhận: <strong>Lê Viết Dũng</strong></p>
+          <a className="btn btn-green" href="https://nhantien.momo.vn/0947287893" {...newTab}>Donate qua MoMo</a>
         </div>
         <div className="donation-qr-box">
-          <img src="/assets/support/momo-vietqr.png" alt="MoMo VietQR Code" width="180" height="191" loading="lazy" />
-          <span>Scan with MoMo or any banking app</span>
+          <img src="/assets/support/momo-vietqr.png" alt="Mã VietQR để chuyển tiền qua MoMo" width="180" height="191" loading="lazy" />
+          <span>Quét bằng MoMo hoặc ứng dụng ngân hàng</span>
         </div>
       </section>
 
@@ -1087,9 +1088,9 @@ function SupportPage() {
       </section>
 
       <section className="support-thanks">
-        <h2>Cảm ơn bạn đã ủng hộ!</h2>
-        <p>Dù bạn donate, chia sẻ dự án hay tham gia hỗ trợ người dùng mới, sự đồng hành của bạn đều giúp CaramOS và cộng đồng VNLF phát triển tốt hơn.</p>
-        <a className="btn btn-green" href={links.discord} {...newTab}>Tham gia Discord Community</a>
+        <h2>Cảm ơn bạn đã ủng hộ</h2>
+        <p>Donate, giới thiệu CaramOS cho bạn bè hay trả lời câu hỏi của người mới trong nhóm đều giúp CaramOS và cộng đồng VNLF đi tiếp.</p>
+        <a className="btn btn-green" href={links.discord} {...newTab}>Vào Discord của cộng đồng</a>
       </section>
     </main>
   </div>;

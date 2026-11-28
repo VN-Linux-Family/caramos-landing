@@ -26,8 +26,8 @@ export const diagrams = {
       en: 'Diagram of a CaramOS computer lab',
     },
     summary: {
-      vi: 'Máy giáo viên và máy học sinh cùng mạng của trường, nối với nhau qua công cụ Phòng máy. App Center cài phần mềm học tập lên máy học sinh, bản cập nhật CaramOS về qua mạng, bản Xfce chạy trên máy 2 GB, và Góp ý & hỗ trợ gửi câu hỏi tới cộng đồng Vietnam Linux Family.',
-      en: 'The teacher’s and the pupils’ computers share the school network and connect through the Computer Lab tool. The App Center installs learning apps on the pupils’ computers, CaramOS updates arrive over the network, the Xfce edition runs on 2 GB computers, and Feedback & Help sends questions to the Vietnam Linux Family community.',
+      vi: 'Máy giáo viên và máy học sinh cùng mạng LAN của trường, nối với nhau qua công cụ Phòng máy. App Center cài phần mềm học tập lên máy học sinh. Bản cập nhật CaramOS về qua mạng. Bản Xfce chạy trên máy 2 GB. Góp ý & hỗ trợ gửi câu hỏi tới cộng đồng Vietnam Linux Family.',
+      en: 'The teacher’s and the pupils’ computers share the school network and connect through the Computer Lab tool. The App Center installs learning apps on the pupils’ computers. CaramOS updates arrive over the network. The Xfce edition runs on 2 GB computers. Feedback & Help sends questions to the Vietnam Linux Family community.',
     },
     groups: [
       {
@@ -115,8 +115,8 @@ export const diagrams = {
       en: 'Diagram of CaramOS Business in an office',
     },
     summary: {
-      vi: 'Người quản trị bật các nhóm thiết lập trên máy quản lý. Thiết lập có chữ ký tới máy nhân viên, cho cả công ty hoặc từng phòng ban; máy quản lý còn gửi lệnh tức thì và hỗ trợ từ xa khi nhân viên đồng ý. Máy nhân viên gửi lại kiểm kê, tình trạng máy và yêu cầu Nhờ IT hỗ trợ, và lưu Desktop, Tài liệu, ổ dùng chung trên máy chủ hoặc NAS của công ty. Máy quản lý cho ra danh sách tài sản dạng Excel, nhật ký thao tác và bản sao lưu.',
-      en: 'The admin turns settings groups on at the admin computer. Signed settings reach the staff computers, for the whole company or one department; the admin computer also sends instant actions, and remote help once the employee accepts. Staff computers send back their inventory, their health and Ask IT for help requests, and keep Desktop, Documents and shared drives on the company’s server or NAS. The admin computer gives an asset list in Excel, an activity log and a backup.',
+      vi: 'Người quản trị bật các nhóm thiết lập trên máy quản lý. Thiết lập có chữ ký tới máy nhân viên, cho cả công ty hoặc từng phòng ban. Máy quản lý còn gửi lệnh tức thì, và hỗ trợ từ xa khi nhân viên đồng ý. Máy nhân viên gửi lại kiểm kê, tình trạng máy và yêu cầu Nhờ IT hỗ trợ. Desktop, Tài liệu và ổ dùng chung nằm trên máy chủ hoặc NAS của công ty. Máy quản lý xuất danh sách tài sản ra Excel, giữ nhật ký thao tác và bản sao lưu.',
+      en: 'The admin turns settings groups on at the admin computer. Signed settings reach the staff computers, for the whole company or one department. The admin computer also sends instant actions, and remote help once the employee accepts. Staff computers send back their inventory, their health and Ask IT for help requests. Desktop, Documents and shared drives live on the company’s server or NAS. The admin computer exports an asset list to Excel and keeps an activity log and a backup.',
     },
     groups: [
       { id: 'staff', x: 684, y: 296, w: 252, h: 283, label: { vi: 'Máy nhân viên', en: 'Staff computers' } },

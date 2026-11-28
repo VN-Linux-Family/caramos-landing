@@ -439,7 +439,7 @@ ${en.education.lab.lead}
 
 ${[en.education.oldPcs, en.education.textbook].map((block) => `${block.lead}`).join('\n\n')}
 
-Learning apps in the App Center's "Learning and teaching" step: ${en.education.apps.groups.flatMap(([, apps]) => apps.map(([name, text]) => `${name} (${text.charAt(0).toLowerCase()}${text.slice(1)})`)).join('; ')}.
+Learning apps in the App Center's "Computer skills for children" and "Programming, maths, science and lessons" steps: ${en.education.apps.groups.flatMap(([, apps]) => apps.map(([name, text]) => `${name} (${text.charAt(0).toLowerCase()}${text.slice(1)})`)).join('; ')}.
 
 ### ${en.education.faq.title}
 
