@@ -234,7 +234,7 @@ export const copy = {
           'Ứng dụng cài từ Flathub vẫn gõ được tiếng Việt và dùng phông hệ thống như thường.',
           'Đổi sang ngôn ngữ khác trong Cài đặt thì cả hệ thống đổi theo.',
         ],
-        media: { type: 'single', main: [`${shots}/installer-lotus.webp`, 'Trang giới thiệu bộ gõ Fcitx5 Lotus trong trình chiếu hiện ra lúc đang cài CaramOS'] },
+        media: { type: 'single', main: [`${shots}/go-tieng-viet-150.webp`, 'Gõ tiếng Việt trong trình soạn thảo ngay sau khi cài CaramOS 1.5.2; khay hệ thống hiện chữ V'] },
       },
     ],
     printers: {
@@ -458,7 +458,6 @@ export const copy = {
     galleryTitle: 'Từ menu khởi động đến màn hình chính',
     gallery: [
       [`${shots}/boot-menu-131.webp`, 'Menu khởi động CaramOS', 'Menu khởi động cho chọn chạy thử hay cài CaramOS.'],
-      [`${shots}/installer-apps.webp`, 'Trình chiếu lúc cài CaramOS, trang giới thiệu bộ văn phòng, trình duyệt và Zalo trong App Center', 'Trong lúc cài, trình cài đặt giới thiệu những ứng dụng bạn chọn được ở lần đăng nhập đầu tiên.'],
       [`${shots}/start-menu-131.webp`, 'Start Menu CaramOS', 'Start Menu tìm ứng dụng bằng tiếng Việt, gõ không dấu cũng ra.'],
     ],
     downloadTitle: `Tải CaramOS ${VERSION}`,
@@ -646,7 +645,7 @@ export const copy = {
           'Apps installed from Flathub type Vietnamese and use the system fonts as usual.',
           'Pick another language in Settings and the whole system follows.',
         ],
-        media: { type: 'single', main: [`${shots}/installer-lotus.webp`, 'The installer slideshow’s page about the Fcitx5 Lotus input method, shown while CaramOS installs'] },
+        media: { type: 'single', main: [`${shots}/go-tieng-viet-150.webp`, 'Typing Vietnamese in the text editor right after installing CaramOS 1.5.2; the tray shows V'] },
       },
     ],
     printers: {
@@ -869,7 +868,6 @@ export const copy = {
     galleryTitle: 'From the boot menu to the desktop',
     gallery: [
       [`${shots}/boot-menu-131.webp`, 'The CaramOS boot menu', 'The boot menu lets you try CaramOS or install it.'],
-      [`${shots}/installer-apps.webp`, 'The installer slideshow while CaramOS installs, on its page about office suites, browsers and Zalo in the App Center', 'While it installs, the installer shows the apps you can pick at the first login.'],
       [`${shots}/start-menu-131.webp`, 'The CaramOS Start Menu', 'The Start Menu finds apps in Vietnamese, even typed without accents.'],
     ],
     downloadTitle: `Download CaramOS ${VERSION}`,
@@ -1973,7 +1971,7 @@ const imageSizes = {
   'boot-menu-131.webp': [800, 600], 'cinnamon-desktop-140.webp': [1280, 800], 'cinnamon-files-140.webp': [1280, 800],
   'control-center-dark.webp': [440, 480], 'control-center-light.webp': [440, 480], 'desktop-dark.webp': [1600, 1000],
   'driver-check.webp': [1080, 860], 'first-login.webp': [1600, 1000], 'help-form.webp': [1000, 880],
-  'help-menu.webp': [420, 560], 'installer-apps.webp': [752, 555], 'installer-lotus.webp': [752, 555],
+  'help-menu.webp': [420, 560], 'go-tieng-viet-150.webp': [752, 555],
   'island-dock-en.webp': [900, 190], 'island-dock.webp': [900, 190], 'lab-code-140.webp': [620, 433],
   'lab-veyon-140.webp': [1072, 670], 'printer-canon-driver-check.webp': [1000, 540], 'start-menu-131.webp': [866, 640],
   'update-available-131.webp': [720, 301], 'update-center-131.webp': [800, 815], 'update-done.webp': [720, 219],
